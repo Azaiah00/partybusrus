@@ -212,7 +212,30 @@ input[type="checkbox"], input[type="radio"] {
   }
 
   /* HERO — bulletproof */
-  .hero { padding: 60px 0 70px !important; min-height: auto !important; }
+  .hero { padding: 60px 0 70px !important; min-height: 78vh !important; }
+  /* Guarantee the hero background image actually renders on mobile —
+     some iOS Safari versions collapse position:absolute children when
+     parent has min-height:auto. Lock a real height. */
+  .hero-bg {
+    height: 100% !important;
+    min-height: 78vh !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  /* iOS Safari does NOT support background-attachment:fixed — image
+     either vanishes, stretches, or pins weirdly. Override to scroll. */
+  .final-cta {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  /* Defensive: ensure ALL background-image divs have a real size on
+     mobile, since some inline styles may compete with mobile rules. */
+  .showcase-tile, .bus-card .img, .led-tile, .gw-card .img,
+  .hero-bg, .page-hero-bg, .final-cta {
+    background-repeat: no-repeat !important;
+  }
+
   .hero, .hero-inner, .hero .container {
     padding-left: 20px !important;
     padding-right: 20px !important;

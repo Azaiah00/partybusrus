@@ -1,7 +1,7 @@
 ﻿// Party Bus R Us — Service Worker
 // Strategy: network-first for HTML (always fresh), cache-first for assets
 
-const CACHE_VERSION = 'pbru-v6-2026-05-28-logo3';
+const CACHE_VERSION = 'pbru-v7-2026-05-28-photos-fix';
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
