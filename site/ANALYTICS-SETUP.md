@@ -79,7 +79,7 @@ CallRail provides dynamic number insertion (DNI), which swaps the displayed phon
 
 If/when ready:
 1. Sign up at https://www.callrail.com (Lite plan is $45/mo, includes 10 tracking numbers).
-2. Create your first **Source > Online** with a "swap target" set to your main displayed number (`703-991-3500`).
+2. Create your first **Source > Online** with a "swap target" set to your main displayed number (`703-399-4394`).
 3. After setup, go to **Settings > Integrations > JavaScript snippet** to get the swap script URL. It looks like `//cdn.callrail.com/companies/123456789/abc...jk/12/swap.js`.
 4. The two ID strings in our placeholder represent the company ID (first segment) and script ID (second segment).
 

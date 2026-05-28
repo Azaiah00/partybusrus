@@ -24,7 +24,7 @@ Make **partybusrus.vercel.app** the **best party bus website in the DC / MD / VA
 **Live URL**: https://partybusrus.vercel.app
 
 **Business basics**
-- Phone: **(703) 991-3500** (used in `tel:`, `sms:`, WhatsApp links)
+- Phone: **(703) 399-4394** (used in `tel:`, `sms:`, WhatsApp links)
 - Address: **6601 Stonecrest Lane, Fairfax VA**
 - Email (form recipient until proper email is set up): **hello@realestateadvancement.com**
 - Fleet: 7 buses, 20–35 passengers (Imperial 35, Empire 32, Signature 30, Cavalier 28, Bridal 25, Diamond 24, Midnight 20)
@@ -256,7 +256,7 @@ Replace placeholder analytics IDs once Frederick provides:
 Do NOT change:
 - Dark theme (`--bg: #14101c`, body text `#faf6ec`)
 - Gold accent (`#d4af37`)
-- Phone number `(703) 991-3500`
+- Phone number `(703) 399-4394`
 - Business address `6601 Stonecrest Lane, Fairfax VA` (NOT the old 1107 Treeside Lane)
 - Form action — stays on FormSubmit.co (do not migrate to Netlify Forms)
 - The owner is Robert Eljeily — never identify Frederick as the owner

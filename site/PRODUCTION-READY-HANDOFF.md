@@ -108,7 +108,7 @@ Open `index.html`, `quote.html`, `fleet/bus-30pax.html`, `services/weddings.html
 - [ ] Connect / claim Google Business Profile at https://business.google.com — make sure website field points to `https://www.partybusrus.com`
 - [ ] Set up `info@partybusrus.com` email forwarding (Cloudflare Email Routing or registrar mail forwarding -> forwards to a real inbox)
 - [ ] Test the quote form end-to-end: submit a fake quote, confirm it lands in Netlify Forms dashboard AND triggers the GA4 `lead_confirmed` event AND lands on the thank-you page
-- [ ] Test `tel:+17039913500` on a real mobile phone — should open the dialer
+- [ ] Test `tel:+17033994394` on a real mobile phone — should open the dialer
 - [ ] Test on iPhone Safari + Android Chrome + desktop Chrome + desktop Safari — basic visual sanity
 - [ ] Test the Spanish home page `/es/index.html` loads correctly
 

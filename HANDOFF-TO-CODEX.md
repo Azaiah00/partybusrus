@@ -91,7 +91,7 @@ Takes ~10-20 seconds. Result will be live at `https://partybusrus.vercel.app` im
 - Do NOT switch back to Netlify Forms (the site is on Vercel now)
 
 ## Phone number
-**(703) 991-3500** — used in `tel:`, `sms:`, and WhatsApp links throughout
+**(703) 399-4394** — used in `tel:`, `sms:`, and WhatsApp links throughout
 
 ## Email (for FormSubmit until proper email is set up)
 **hello@realestateadvancement.com**

@@ -52,7 +52,7 @@ The 5 selected competitors represent the most relevant direct competitors visibl
 
 ## Competitor 3: Party Bus R Us (partylimobusdc.com) — **BRAND CONFUSION RISK**
 
-**Critical flag:** This competitor operates under the title "Limo Bus Rental | Washington, D.C. - Party Bus R Us" — i.e., they use **the exact same brand name** as our site. Google's AI summary even surfaces phone (703) 991-3500 attributed to them — which is also our phone number. This is the partylimobusdc.com brand Robert specifically asked to keep separate; in practice, search visitors looking for "Party Bus R Us" can land on either site, and lead attribution is muddy. Surface this to Robert before any further competitive work.
+**Critical flag (partial mitigation 2026-05-28):** This competitor operates under the title "Limo Bus Rental | Washington, D.C. - Party Bus R Us" — i.e., they use **the exact same brand name** as our site. At the time of this benchmark, Google's AI summary attributed our former phone (703) 991-3500 to them — i.e., we shared a phone number too. **Frederick changed our phone to (703) 399-4394 on 2026-05-28 to sever the lead-attribution confusion.** Call routing is now clean. The brand-name overlap remains a strategic issue — search visitors looking for "Party Bus R Us" can still land on either site — and Robert should still weigh in on trademark/rebrand/out-market, but it's no longer urgent.
 
 **Hero positioning:** "Limo Bus Rental | Washington, D.C."
 **Fleet:** Mentions "many vehicles" without enumerating; fleet page exists at `/fleet.html`. Limo buses positioned as "luxury, comfort, entertainment."
