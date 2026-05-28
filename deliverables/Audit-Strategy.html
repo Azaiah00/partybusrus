@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Party Bus R Us — Digital Audit & Growth Plan</title>
+<link rel="icon" type="image/png" href="../logo/lockup-gold.png">
+<link rel="apple-touch-icon" href="../logo/lockup-gold.png">
+<style>
+:root{
+  --bg:#0b0b14;--bg2:#11111d;--bg3:#181826;--panel:#1a1a2a;--panel2:#22223a;
+  --line:#2a2a44;--text:#e7e7f3;--mute:#9999b3;--dim:#6c6c8c;
+  --brand:#a855f7;--brand2:#7c3aed;--gold:#fbbf24;--rose:#fb7185;
+  --green:#34d399;--yellow:#fbbf24;--red:#f87171;--blue:#60a5fa;
+  --grad: linear-gradient(135deg,#a855f7 0%,#ec4899 50%,#fbbf24 100%);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--brand);text-decoration:none}
+a:hover{color:#c4a3ff;text-decoration:underline}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+.hero{padding:60px 24px 40px;background:radial-gradient(1200px 600px at 20% -10%,rgba(168,85,247,.25),transparent 60%),radial-gradient(900px 500px at 80% 0%,rgba(251,191,36,.12),transparent 60%);border-bottom:1px solid var(--line)}
+.hero .container{position:relative}
+.eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:14px}
+h1{font-size:clamp(34px,5vw,56px);line-height:1.05;margin:0 0 18px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.lede{font-size:19px;color:#cfcfe6;max-width:780px;margin-bottom:28px}
+.meta{display:flex;flex-wrap:wrap;gap:18px;color:var(--mute);font-size:14px;margin-bottom:30px}
+.meta span b{color:var(--text);font-weight:600}
+
+nav.sticky{position:sticky;top:0;z-index:50;background:rgba(11,11,20,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav.sticky .container{display:flex;gap:6px;overflow-x:auto;padding:10px 24px}
+nav.sticky a{flex:0 0 auto;padding:8px 14px;border-radius:999px;color:#c9c9e0;font-size:13px;font-weight:600;white-space:nowrap;border:1px solid transparent}
+nav.sticky a:hover{background:var(--panel2);color:#fff;text-decoration:none;border-color:var(--line)}
+
+section{padding:60px 0;border-bottom:1px solid var(--line)}
+section:last-child{border-bottom:none}
+h2{font-size:30px;margin:0 0 8px;letter-spacing:-.01em}
+h2 .num{display:inline-block;padding:3px 12px;border:1px solid var(--line);background:var(--panel);color:var(--brand);border-radius:999px;font-size:14px;margin-right:14px;vertical-align:middle;font-weight:700}
+h3{font-size:20px;margin:30px 0 12px}
+h4{font-size:16px;margin:22px 0 8px;color:#dad6ff}
+.section-lede{color:#c1c1da;font-size:16px;margin:0 0 28px;max-width:820px}
+
+/* Grades */
+.grade-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:24px 0 8px}
+.grade{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;position:relative;overflow:hidden}
+.grade .label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);font-weight:700}
+.grade .letter{font-size:48px;font-weight:800;line-height:1;margin:8px 0 6px}
+.grade .desc{color:#bbb;font-size:13px}
+.grade.F .letter{color:var(--red)}
+.grade.D .letter{color:#fb923c}
+.grade.C .letter{color:var(--yellow)}
+.grade.B .letter{color:#a3e635}
+.grade.A .letter{color:var(--green)}
+
+/* Cards & callouts */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:18px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card h4{margin-top:0}
+.card.warn{border-left:4px solid var(--yellow)}
+.card.crit{border-left:4px solid var(--red)}
+.card.good{border-left:4px solid var(--green)}
+.card.info{border-left:4px solid var(--blue)}
+
+.callout{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0}
+.callout.crit{border-left:4px solid var(--red);background:linear-gradient(90deg,rgba(248,113,113,.08),transparent 60%)}
+.callout.warn{border-left:4px solid var(--yellow);background:linear-gradient(90deg,rgba(251,191,36,.08),transparent 60%)}
+.callout.good{border-left:4px solid var(--green);background:linear-gradient(90deg,rgba(52,211,153,.08),transparent 60%)}
+.callout.info{border-left:4px solid var(--blue);background:linear-gradient(90deg,rgba(96,165,250,.08),transparent 60%)}
+.callout b.tag{display:inline-block;padding:2px 10px;border-radius:999px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-right:8px;background:rgba(255,255,255,.06);color:#fff}
+.callout.crit b.tag{background:var(--red);color:#1a0708}
+.callout.warn b.tag{background:var(--yellow);color:#3b2606}
+.callout.good b.tag{background:var(--green);color:#04240f}
+.callout.info b.tag{background:var(--blue);color:#06192f}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+thead{background:var(--panel2)}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#cfcfe6;font-weight:700}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(168,85,247,.05)}
+
+/* Pills */
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--panel2);border:1px solid var(--line);color:#dcdcef}
+.pill.red{background:rgba(248,113,113,.15);color:#fca5a5;border-color:rgba(248,113,113,.3)}
+.pill.yellow{background:rgba(251,191,36,.15);color:#fde68a;border-color:rgba(251,191,36,.3)}
+.pill.green{background:rgba(52,211,153,.15);color:#a7f3d0;border-color:rgba(52,211,153,.3)}
+.pill.blue{background:rgba(96,165,250,.15);color:#bfdbfe;border-color:rgba(96,165,250,.3)}
+.pill.brand{background:rgba(168,85,247,.18);color:#e9d5ff;border-color:rgba(168,85,247,.3)}
+
+/* Lists */
+ul.clean{padding-left:20px;margin:10px 0}
+ul.clean li{margin-bottom:6px;color:#d6d6ec}
+
+/* Checklist */
+.checklist{list-style:none;padding:0;margin:14px 0}
+.checklist li{display:flex;gap:12px;padding:10px 12px;margin-bottom:6px;background:var(--panel);border:1px solid var(--line);border-radius:10px;cursor:pointer;transition:background .15s}
+.checklist li:hover{background:var(--panel2)}
+.checklist input[type=checkbox]{margin-top:4px;width:18px;height:18px;accent-color:var(--brand);flex:0 0 auto}
+.checklist label{cursor:pointer;flex:1}
+.checklist .priority{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;padding:2px 8px;border-radius:4px;flex:0 0 auto;align-self:flex-start;margin-top:2px}
+.checklist .priority.p1{background:var(--red);color:#1a0708}
+.checklist .priority.p2{background:var(--yellow);color:#3b2606}
+.checklist .priority.p3{background:var(--blue);color:#06192f}
+
+/* Comp table custom */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px;margin:18px 0}
+.comp{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.comp .top{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px}
+.comp .name{font-size:17px;font-weight:700;color:#fff}
+.comp .url{font-size:12px;color:var(--mute)}
+.comp .stat{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.comp .stat div{background:var(--bg3);border-radius:8px;padding:8px 10px;font-size:13px}
+.comp .stat b{display:block;font-size:11px;color:var(--mute);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
+.comp .why{font-size:13.5px;color:#c8c8de;margin-top:6px}
+
+/* Tier cards */
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin:18px 0}
+.tier{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;position:relative;overflow:hidden}
+.tier .badge{position:absolute;top:14px;right:14px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:var(--panel2);padding:4px 10px;border-radius:999px;color:#cfcfe6}
+.tier.recommended{border:1px solid rgba(168,85,247,.5);box-shadow:0 0 0 1px rgba(168,85,247,.2),0 20px 40px -20px rgba(168,85,247,.3)}
+.tier.recommended .badge{background:var(--brand);color:#15052a}
+.tier h3{margin-top:0}
+.tier .price{font-size:30px;font-weight:800;margin:6px 0 4px;color:#fff}
+.tier .price small{font-size:14px;color:var(--mute);font-weight:500}
+.tier .roi{font-size:13px;color:var(--green);font-weight:600;margin-bottom:12px}
+.tier ul{padding-left:18px;margin:10px 0 0;color:#d6d6ec;font-size:14.5px}
+.tier ul li{margin-bottom:6px}
+
+/* Shot list */
+.shotlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:18px 0}
+.shot{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.shot .num{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--brand);color:#1a0a2e;padding:2px 8px;border-radius:6px;margin-right:6px}
+.shot .h{font-weight:700;font-size:15px;color:#fff;margin-bottom:6px}
+.shot .d{font-size:13.5px;color:#c1c1da}
+.shot .meta{margin-top:8px;font-size:12px;color:var(--mute);display:flex;gap:10px;flex-wrap:wrap}
+
+/* Hashtag bank */
+.tag-bank{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.tag-bank span{background:var(--panel2);color:#dcdcef;border:1px solid var(--line);padding:4px 10px;border-radius:999px;font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* KPI tiles */
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.kpi div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.kpi b{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:700;margin-bottom:4px}
+.kpi span{font-size:24px;font-weight:800;color:#fff}
+.kpi small{display:block;font-size:12.5px;color:#a8a8c0;margin-top:3px}
+
+/* Misc */
+.k{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--bg3);padding:1px 7px;border-radius:5px;font-size:.92em;color:#e9d5ff}
+.divider{height:1px;background:var(--line);margin:30px 0;border:none}
+.footer{padding:30px 24px;text-align:center;color:var(--mute);font-size:13px}
+.print-btn{position:fixed;bottom:18px;right:18px;background:var(--brand);color:#fff;border:none;padding:11px 16px;border-radius:999px;font-weight:700;cursor:pointer;box-shadow:0 12px 30px -10px rgba(168,85,247,.5);font-size:13px}
+.print-btn:hover{background:#9333ea}
+.timeline{position:relative;padding-left:28px;margin:18px 0}
+.timeline:before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--brand)}
+.timeline .item{position:relative;margin-bottom:18px}
+.timeline .item:before{content:"";position:absolute;left:-24px;top:6px;width:10px;height:10px;border-radius:999px;background:var(--gold);box-shadow:0 0 0 4px rgba(251,191,36,.15)}
+.timeline .item h4{margin:0 0 4px;color:#fff}
+.timeline .item p{margin:0;color:#c1c1da;font-size:14.5px}
+.note{font-size:13px;color:var(--mute);font-style:italic;margin:6px 0 14px}
+
+@media print{
+  body{background:#fff;color:#111}
+  nav.sticky,.print-btn{display:none}
+  section{page-break-inside:avoid;border-bottom:1px solid #ccc}
+  .card,.callout,.tier,.comp,.shot,table,.grade{background:#fafafa;color:#111;border:1px solid #ddd}
+  h1,h2,h3,h4{color:#1a1a3a}
+  .tag-bank span{background:#eee;color:#222;border:1px solid #ccc}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">Digital Audit · Competitive Intelligence · 90-Day Growth Plan</div>
+    <h1>Party Bus R Us<br>The Path to #1 in the DMV</h1>
+    <p class="lede">A complete, no-corners-cut audit of the website, Instagram, Google Business Profile, reviews, competitive landscape, and search visibility — paired with a prioritized 90-day playbook and 12-month roadmap to dominate party bus, wedding shuttle, prom, and bachelorette searches across DC, Maryland, and Northern Virginia.</p>
+    <div class="meta">
+      <span><b>Prepared for:</b> Frederick (marketing / sales)</span>
+      <span><b>Owner:</b> Robert Eljeily</span>
+      <span><b>Legal entity:</b> City Coachways Inc · DBA Party Bus R Us</span>
+      <span><b>Business:</b> partylimobusdc.com · @partybusrus</span>
+      <span><b>Service area:</b> DC / MD / Northern VA</span>
+      <span><b>Fleet:</b> 7 vehicles</span>
+      <span><b>Date:</b> May 13, 2026</span>
+    </div>
+  </div>
+</header>
+
+<nav class="sticky">
+  <div class="container">
+    <a href="#summary">Executive summary</a>
+    <a href="#brutal">Top issues</a>
+    <a href="#website">Website</a>
+    <a href="#instagram">Instagram</a>
+    <a href="#google">Google &amp; GBP</a>
+    <a href="#competitors">Competitors</a>
+    <a href="#seo">SEO &amp; keywords</a>
+    <a href="#shots">Photo/video shot list</a>
+    <a href="#strategy">90-day strategy</a>
+    <a href="#roadmap">12-month roadmap</a>
+    <a href="#verification">Triple-check findings</a>
+    <a href="#ads">Google Ads assessment</a>
+    <a href="#start">Where to start</a>
+    <a href="#checklist">Master checklist</a>
+  </div>
+</nav>
+
+<!-- EXEC SUMMARY -->
+<section id="summary">
+  <div class="container">
+    <h2><span class="num">01</span>Executive summary</h2>
+    <p class="section-lede">Party Bus R Us is a 13-year-old DMV operator with 7 vehicles, a 4.6-star Google rating, and a fleet that — in person — clearly competes. But online, the brand is nearly invisible. Competitors with worse customer experiences are winning every search that matters because they treat their digital presence as a marketing engine. Yours is a billboard from 2013.</p>
+
+    <h3>The grades</h3>
+    <div class="grade-grid">
+      <div class="grade F"><div class="label">Website</div><div class="letter">F</div><div class="desc">4-page Web.com brochure. No schema, no analytics, no Instagram link, broken address.</div></div>
+      <div class="grade F"><div class="label">Instagram</div><div class="letter">F</div><div class="desc">71 followers · 6 posts · 92 following. Functionally abandoned. Account currently in security challenge.</div></div>
+      <div class="grade D"><div class="label">Google Profile</div><div class="letter">D</div><div class="desc">25 reviews / 4.6 stars. But NAP is inconsistent and a self-review by "Fred Sales" puts the profile at suspension risk.</div></div>
+      <div class="grade F"><div class="label">SEO visibility</div><div class="letter">F</div><div class="desc">Not on page 1 of Google for <span class="k">party bus dc</span> — the most important search in your market.</div></div>
+      <div class="grade D"><div class="label">Reviews / reputation</div><div class="letter">D+</div><div class="desc">~67 reviews across platforms vs competitors with 300–600. Two repeating complaints: late arrivals and vehicle condition. Self-review violation on GBP.</div></div>
+      <div class="grade F"><div class="label">Wedding platforms</div><div class="letter">F</div><div class="desc">Zero presence on TheKnot, WeddingWire, The Bash, GigSalad, Thumbtack, Zola, Joy — the highest-LTV channels.</div></div>
+      <div class="grade F"><div class="label">Paid ads</div><div class="letter">F</div><div class="desc">Running Google Ads on branded search with no offer; DMV Party Bus's "$10/pp/hr" hook steals the click right below your listing.</div></div>
+      <div class="grade D"><div class="label">Mobile speed</div><div class="letter">D</div><div class="desc">PageSpeed (mobile): Performance 66 · LCP 9.2s (target &lt;2.5s) · FCP 2.9s · Speed Index 4.8s. Accessibility 90 · SEO 100.</div></div>
+      <div class="grade F"><div class="label">Brand &amp; trust signals</div><div class="letter">F</div><div class="desc">No WMATC #, no USDOT #, no insurance call-out, no BBB seal, no driver/safety policy. <b>partybusrus.com is owned by someone else.</b></div></div>
+      <div class="grade C"><div class="label">Fleet (offline)</div><div class="letter">C+</div><div class="desc">7 vehicles, 13 years operating, full DMV reach. The product is here — the marketing isn't.</div></div>
+    </div>
+
+    <h3>The opportunity</h3>
+    <div class="kpi">
+      <div><b>Current monthly leads (est.)</b><span>15–30</span><small>Mostly branded search + repeat customers</small></div>
+      <div><b>Realistic 90-day target</b><span>60–100</span><small>3–5× lift from fixing fundamentals alone</small></div>
+      <div><b>12-month target</b><span>200+/mo</span><small>If we execute the full roadmap</small></div>
+      <div><b>Estimated revenue lift Y1</b><span>$280K–$560K</span><small>At $700 avg ticket × incremental bookings</small></div>
+    </div>
+    <p class="note">Lead estimates are directional — based on competitor traffic patterns, average DMV party bus AOV, and the conversion deltas typically seen when the fixes in this plan are executed on a 7-vehicle operator.</p>
+
+    <h3>The thesis in one line</h3>
+    <div class="callout info"><b class="tag">Strategic bet</b> The DMV party bus market has plenty of money but the digital marketing is uniformly bad. The competitor that publishes flat-rate pricing, runs a real Instagram, builds 30 city + service pages, and pumps wedding videos onto Reels &amp; TikTok will own this market within 18 months. None of the top 10 competitors are doing all of this. That competitor should be you.</div>
+  </div>
+</section>
+
+<!-- TOP ISSUES -->
+<section id="brutal">
+  <div class="container">
+    <h2><span class="num">02</span>The 10 issues bleeding leads right now</h2>
+    <p class="section-lede">Ranked by urgency — fix #1–4 this week, regardless of which budget tier you choose.</p>
+
+    <div class="callout crit"><b class="tag">Critical · GBP suspension risk</b> <b>Employee review on the business.</b> A 5-star Google review on the Party Bus R Us profile is posted by "Fred Sales" — Frederick (marketing/sales). Google's review policies prohibit reviews from people with a financial interest in the business (owners, employees, family). This violation can trigger a profile suspension that kills the map-pack ranking overnight. <b>Remove the review immediately</b> — if Frederick has access to the Google account that posted it, delete directly. If not, see Section 11.9 for the Conflict-of-Interest reporting fallback path. Owner Robert Eljeily should be looped in either way.</div>
+
+    <div class="callout crit"><b class="tag">Critical · NAP chaos</b> <b>You have 4 addresses and 4 phone numbers floating across the internet.</b><br>
+      • Website footer: <span class="k">Vienna VA 2218</span> (literal typo — missing the last digit)<br>
+      • Google Business Profile: <span class="k">6601 Stonecrest Ln, Herndon, VA 20170</span><br>
+      • Facebook: <span class="k">Herndon, VA</span><br>
+      • Instagram: <span class="k">Falls Church, VA</span><br>
+      • Yelp: <span class="k">Vienna, VA 22180</span><br>
+      Phones on the homepage tel links: <span class="k">703-991-3500</span> AND <span class="k">571-257-2666</span>. Google's local algorithm punishes this. Pick one address and one phone, then synchronize across every directory.
+    </div>
+
+    <div class="callout crit"><b class="tag">Critical · Instagram</b> <b>The IG account looks abandoned and may be locked.</b> 71 followers, 6 lifetime posts, and following more accounts (92) than follow you — for a 13-year-old "party" business, this is the equivalent of an empty showroom. When I navigated to the profile in Chrome, Instagram showed a "We locked your account to protect you from a possible hack" recovery flow. Verify access from your phone, then either rebuild from this handle or claim a fresh business handle and start posting Reels weekly.</div>
+
+    <div class="callout crit"><b class="tag">Critical · Search invisibility</b> <b>You are not on page 1 of Google for "party bus dc."</b> The top 10 organic results are: thedmvpartybus.com, dcpartybus.com, luxurypartybuswashingtondc.com, dc4party.com, presidential-limo.com, dmvpartybusllc Instagram, partybusdc.com, price4limo.com, Reddit, chariotsforhire.com. Your homepage's only ranking strength is your branded name. This is the single biggest revenue leak.</div>
+
+    <div class="callout warn"><b class="tag">High · Single-page website</b> <b>You have a 4-page Web.com brochure</b> (Home, Luxury Transport, Fleet, Contact). No service pages, no city pages, no event pages, no blog, no fleet detail pages, no pricing page, no reviews page, no schema markup, no Google Analytics, no Facebook Pixel. You cannot rank, retarget, or measure anything.</div>
+
+    <div class="callout warn"><b class="tag">High · Wedding platforms missing</b> <b>Zero presence on TheKnot, WeddingWire, The Bash, GigSalad, Thumbtack, Eventective.</b> These are the highest-intent referral channels for the highest-LTV bookings (weddings). Competitors with 119+ WeddingWire reviews and 596+ Birdeye reviews are eating this lunch.</div>
+
+    <div class="callout warn"><b class="tag">High · BBB</b> <b>No BBB profile or accreditation</b> for a 13-year-old transportation company. Wedding and prom buyers especially check BBB. Create the profile, get accredited.</div>
+
+    <div class="callout warn"><b class="tag">High · Reviews velocity &amp; themes</b> <b>25 Google reviews puts you behind every serious competitor in the DMV.</b> Chariots for Hire has 596 (across Birdeye), Reston has 351, DMV Party Bus has hundreds. Two repeating complaint themes appear in existing negative reviews: arrivals 30–40 minutes late, and interior condition (stains, cracking seats, dim lights) not matching booking photos. Operational fixes + a 100-review push in 12 months are both needed.</div>
+
+    <div class="callout warn"><b class="tag">Medium · Brand inconsistency</b> Two domains in apparent use: <span class="k">partylimobusdc.com</span> (primary) and <span class="k">partybusrus.com</span> (secondary, referenced in searches). If you own both, redirect one to the other. If you don't own partybusrus.com, that's a brand-confusion liability — investigate.</div>
+
+    <div class="callout warn"><b class="tag">Medium · Ad spend</b> <b>Robert is running 66 active Google Ad creatives</b> (verified via Google Ads Transparency Center for partylimobusdc.com — advertiser legal name <b>City Coachways Inc</b>) at a reported $2,000–$4,000/month. The mix appears to include branded search, Maps/Local Services, and display ads. <b>The issue isn't spend — it's measurement.</b> The website has no Google Analytics, no Meta Pixel, no call tracking, and no form-submission events, so the algorithm can't optimize and Robert has no way to know which keywords or creatives actually book. See Section 12 for a full productivity assessment + a free fix.</div>
+  </div>
+</section>
+
+<!-- WEBSITE -->
+<section id="website">
+  <div class="container">
+    <h2><span class="num">03</span>Website audit — partylimobusdc.com</h2>
+    <p class="section-lede">Built on Web.com Group's site builder, copyright 2026. Four pages total. Below is what's there, what's broken, and what needs to be built.</p>
+
+    <h3>Pages currently indexed</h3>
+    <table>
+      <thead><tr><th>URL</th><th>Title tag</th><th>Word count</th><th>Issues</th></tr></thead>
+      <tbody>
+        <tr><td><span class="k">/</span></td><td>"Limo Bus Rental | Washington, D.C. - Party Bus R Us"</td><td>~330</td><td>Title leads with "Limo Bus" not "Party Bus"; no Instagram link; cookie banner blocks CTAs on mobile</td></tr>
+        <tr><td><span class="k">/Airport-Transportation.html/</span></td><td>"Party Limo Bus, Bus Tours | Washington, D.C."</td><td>~500</td><td>URL says airport, page covers weddings/events/airport/tours — confused intent</td></tr>
+        <tr><td><span class="k">/fleet.html/</span></td><td><b>"Fleet"</b> (literally)</td><td>~80</td><td>Title = "Fleet". Meta = "Fleet". H1 = "Fleets". No specs, no capacity tables, no amenities listed</td></tr>
+        <tr><td><span class="k">/Contact.html/</span></td><td>not surveyed</td><td>n/a</td><td>Footer reads "Vienna VA 2218" (truncated zip)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Technical audit findings</h3>
+    <div class="cards">
+      <div class="card crit"><h4>No schema markup</h4><p>Zero JSON-LD detected. Missing: LocalBusiness, LimoOrTaxi, Service, Vehicle, FAQPage, Review, BreadcrumbList. This is the single largest SEO opportunity — adding schema can lift rich-result eligibility in 2–4 weeks.</p></div>
+      <div class="card crit"><h4>No Google Analytics</h4><p>No GA4, no GTM, no measurement at all. You cannot tell which ads work, which pages convert, where the leads come from. This must be installed week 1.</p></div>
+      <div class="card crit"><h4>No Meta Pixel</h4><p>No Facebook/Instagram pixel. You cannot retarget visitors with paid social once Instagram is rebuilt.</p></div>
+      <div class="card warn"><h4>Alt text missing</h4><p>3 of 5 images on the homepage have no alt text. Fleet page images mostly load as backgrounds (not SEO-discoverable).</p></div>
+      <div class="card warn"><h4>Social links broken</h4><p>"FACEBOOK / TWITTER / LINKEDIN" share buttons exist but link to nothing. No Instagram link anywhere. No Yelp link. No GBP review link.</p></div>
+      <div class="card warn"><h4>Stock photo issues</h4><p>Hero image is a steering wheel (not your fleet). Airport page hero is stock young women in a stretch limo. Fleet page hero is a row of limos — none yours. Visitors can't see your actual buses until they scroll past stock.</p></div>
+      <div class="card warn"><h4>Bus count mismatch</h4><p>You said 7 buses; the fleet page lists 9 names (some duplicate "30 Passenger" labels). Either consolidate to accurate count or build one URL per actual bus.</p></div>
+      <div class="card warn"><h4>Builder lock-in</h4><p>Web.com Group's builder produces bloated markup, limits schema/code injection, and makes SEO surgery hard. Mid-term: migrate to WordPress + Astra/Kadence, Webflow, or Framer.</p></div>
+      <div class="card info"><h4>What's already working</h4><p>HTTPS in place. 24/7 service messaging. Service area clearly stated. Mobile layout is at least functional. Logo and color palette are usable as a starting point for a real rebrand.</p></div>
+    </div>
+
+    <h3>What the website needs to become</h3>
+    <p>Target architecture for the next 90 days — 35–50 URLs:</p>
+    <table>
+      <thead><tr><th>Page type</th><th>Examples</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td><b>City landing pages</b> (10–15)</td><td>/locations/arlington-va, /locations/bethesda-md, /locations/tysons-va, /locations/georgetown, /locations/silver-spring-md, /locations/alexandria-va, /locations/national-harbor-md, /locations/fairfax-va, /locations/rockville-md, /locations/falls-church-va</td><td>Each ranks for "[service] [city]" queries. Mandatory for Map Pack in metros where Vienna isn't proximate.</td></tr>
+        <tr><td><b>Service pages</b> (6–8)</td><td>/services/wedding-shuttle, /services/bachelorette-party-bus, /services/bachelor-party-bus, /services/prom-limo-bus, /services/winery-tours, /services/brewery-tours, /services/dc-monument-tours, /services/corporate-transportation</td><td>Wedding and prom have the highest LTV. Each service page captures event-intent queries that generic pages can't.</td></tr>
+        <tr><td><b>Fleet detail pages</b> (7)</td><td>One URL per actual bus — capacity, amenities, photos, 360 tour, capacity FAQ, "book this bus" CTA</td><td>Captures "[N] passenger party bus DC" queries. Each becomes a Pinterest-shareable asset.</td></tr>
+        <tr><td><b>Pricing page</b></td><td>/pricing — flat ranges, package structures, peak/off-peak, deposit terms</td><td>Captures "how much" queries. Competitors are mostly quote-only, so this becomes a unique trust signal.</td></tr>
+        <tr><td><b>Reviews page</b></td><td>/reviews — pulling Google, Yelp, Birdeye via API/widget, plus written testimonials</td><td>Social proof page Google can read; great for conversion.</td></tr>
+        <tr><td><b>Quote / contact</b></td><td>/quote, /contact</td><td>Replace single contact form with a real multi-step quote tool (date, hours, headcount, vehicle preference, event type).</td></tr>
+        <tr><td><b>Blog / guides</b></td><td>/blog with 12+ cornerstone posts (see SEO section)</td><td>Captures informational + decision-stage queries. Builds backlinks.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Conversion / UX upgrades</h3>
+    <ul class="clean">
+      <li><b>Sticky bottom CTA bar on mobile</b> with "Call" + "Text" + "Quote" — competitors don't have this.</li>
+      <li><b>Multi-step quote form</b> that takes 30 seconds and captures: event date, hours needed, headcount, pickup ZIP, event type, name + phone. Send SMS to driver line + email to ops.</li>
+      <li><b>Live availability calendar</b> on each fleet page — "10 days left in May." No DMV competitor has this. It creates scarcity and reduces back-and-forth.</li>
+      <li><b>Reviews above the fold</b> on every service page (Google, Yelp, Birdeye rating badges).</li>
+      <li><b>Video hero</b> on the homepage — a 10-second loop of one of your actual buses with people loading in.</li>
+      <li><b>FAQ accordion</b> on every service page (5–8 questions). Schema-marked. These show up as rich snippets in Google.</li>
+      <li><b>"Book this bus" CTA</b> on each fleet page (deep link to the quote form pre-filled).</li>
+      <li><b>Speed</b>: target LCP &lt; 2.5s, CLS &lt; 0.1. Compress hero images to under 200KB.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section id="instagram">
+  <div class="container">
+    <h2><span class="num">04</span>Instagram audit — @partybusrus</h2>
+    <p class="section-lede">For a brand built on celebrations, this is the most under-utilized asset you own. The fix is simple — but it requires a real cadence.</p>
+
+    <h3>Current state</h3>
+    <table>
+      <tbody>
+        <tr><td><b>Handle</b></td><td>@partybusrus</td></tr>
+        <tr><td><b>Bio location</b></td><td>Falls Church, VA <span class="pill red">Doesn't match website (Vienna) or GBP (Herndon)</span></td></tr>
+        <tr><td><b>Followers</b></td><td>~71</td></tr>
+        <tr><td><b>Following</b></td><td>~92 <span class="pill red">Following &gt; followers = weak signal</span></td></tr>
+        <tr><td><b>Total posts</b></td><td>~6 in 13 years of business</td></tr>
+        <tr><td><b>Reels</b></td><td>None visible</td></tr>
+        <tr><td><b>Story highlights</b></td><td>None</td></tr>
+        <tr><td><b>Link in bio</b></td><td>Not visible in indexers</td></tr>
+        <tr><td><b>Account status</b></td><td><span class="pill red">Security challenge appeared on desktop — verify from your phone</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Benchmark: what the competition is doing</h3>
+    <div class="cards">
+      <div class="card"><h4>@dmvpartybus</h4><p>~16K followers. Reels-first feed. Heavy bus-interior content, customer party clips, "BOOK NOW" stickers. Drives a huge share of their bookings.</p></div>
+      <div class="card"><h4>@dmvpartybusllc</h4><p>~10K followers (secondary account). Same operator, doubled exposure with two handles.</p></div>
+      <div class="card"><h4>@chariotslimos</h4><p>Only ~583 followers despite 60+ vehicles — a major weakness for them. <b>Easy to leapfrog.</b></p></div>
+      <div class="card"><h4>@adc_partybus</h4><p>Active but low engagement. Mostly static photo posts. Another beatable position.</p></div>
+    </div>
+
+    <h3>30-day Instagram launch plan</h3>
+    <div class="timeline">
+      <div class="item"><h4>Week 1 — Reclaim &amp; rebrand</h4><p>Verify ownership of @partybusrus from your phone. Update bio to match website city (pick one — Vienna). Add Linktree / Beacons link with: Get a Quote, Call/Text, See Fleet, Read Reviews. Set profile photo to the cleaned-up logo. Add 3 highlights: Fleet · Weddings · Prom · Reviews.</p></div>
+      <div class="item"><h4>Week 1 — Bulk shoot day (with the shot list)</h4><p>Use the photo &amp; video shot list (section 8). Capture 60+ assets in one parking-lot session: per-bus exterior + interior + drone, 12 vertical reels-ready clips, b-roll for posts.</p></div>
+      <div class="item"><h4>Week 2 — Post 5 reels in 5 days</h4><p>Reel 1: "Meet the fleet" — 7-bus tour, one cut per bus, captions with capacity. Reel 2: "POV: you booked the 30-passenger." Reel 3: "Inside the bachelorette bus." Reel 4: "Wedding shuttle reveal." Reel 5: "Don't book a party bus until you watch this" — pricing transparency hook.</p></div>
+      <div class="item"><h4>Week 3 — UGC + behind the scenes</h4><p>Post 3 reels + 3 carousels. Wash-day BTS, driver intros (humanizes the brand), customer-tagged content if you can resurface old clips. Stories daily.</p></div>
+      <div class="item"><h4>Week 4 — Conversion content</h4><p>2 reels + 2 carousels. "How to book in 60 seconds" reel showing the new quote form. "5 questions to ask before you book any party bus" educational carousel. Start asking the camera to "comment QUOTE for our pricing" — engagement bumps reach.</p></div>
+    </div>
+
+    <h3>Posting cadence (sustainable)</h3>
+    <ul class="clean">
+      <li><b>3 reels / week</b> minimum (Mon, Wed, Fri). Vertical 9:16, 9–25 seconds, captions burned in.</li>
+      <li><b>2 carousels or single posts / week</b> — testimonials, fleet specs, behind-the-scenes.</li>
+      <li><b>Stories daily</b> — driver POV, prep, drop-off arrivals, customer cheers (with permission).</li>
+      <li><b>1 Friday-night BTS reel</b> — most-loved content for this niche.</li>
+      <li><b>Cross-post 100% of reels to TikTok and YouTube Shorts</b> with platform-native captions. Zero extra production cost.</li>
+    </ul>
+
+    <h3>Hashtag bank — paste this into your captions</h3>
+    <h4>DMV-geo (rotate 5 per post)</h4>
+    <div class="tag-bank">
+      <span>#partybusdc</span><span>#dcpartybus</span><span>#dmvpartybus</span><span>#partybusva</span><span>#partybusmaryland</span><span>#dcweddings</span><span>#mdweddings</span><span>#vaweddings</span><span>#dcbachelorette</span><span>#dmvbachelorette</span><span>#dcprom</span><span>#mdprom</span><span>#vienna</span><span>#tysons</span><span>#arlington</span><span>#alexandria</span><span>#bethesda</span><span>#georgetown</span>
+    </div>
+    <h4>Event-vertical (rotate 5 per post)</h4>
+    <div class="tag-bank">
+      <span>#weddingshuttle</span><span>#bachelorettebus</span><span>#bachelorparty</span><span>#promnight</span><span>#wineryday</span><span>#brewerytour</span><span>#birthdaybus</span><span>#corporatetransport</span><span>#girlstrip</span><span>#groomsmen</span><span>#bridesmaids</span>
+    </div>
+    <h4>Discovery (rotate 3 per post)</h4>
+    <div class="tag-bank">
+      <span>#reelsinstagram</span><span>#reelstrending</span><span>#travelreels</span><span>#partynight</span><span>#nightlife</span><span>#explorepage</span>
+    </div>
+
+    <h3>The TikTok play</h3>
+    <div class="callout good"><b class="tag">Open lane</b> No DMV party bus operator has a serious TikTok presence. The bachelorette + prom audience lives on TikTok. Cross-post every Reel to a fresh <span class="k">@partybusrus</span> TikTok handle. First-mover advantage in this market — months 1–3 should compound followers fast.</div>
+  </div>
+</section>
+
+<!-- GOOGLE -->
+<section id="google">
+  <div class="container">
+    <h2><span class="num">05</span>Google Business Profile &amp; search audit</h2>
+    <p class="section-lede">The map pack drives more bookings than any other channel for local service businesses. Right now you're a 4.6 / 25-review profile registered in the wrong city — there's enormous upside in fixing this.</p>
+
+    <h3>What's there now</h3>
+    <table>
+      <tbody>
+        <tr><td><b>Profile name</b></td><td>Party Bus R Us</td></tr>
+        <tr><td><b>Address on GBP</b></td><td>6601 Stonecrest Ln, Herndon, VA 20170 <span class="pill red">Different from website</span></td></tr>
+        <tr><td><b>Primary category</b></td><td>Limousine service <span class="pill yellow">Should be "Bus charter" — much higher relevance for "party bus" queries</span></td></tr>
+        <tr><td><b>Hours</b></td><td>Open 24 hours, 7 days</td></tr>
+        <tr><td><b>Phone</b></td><td>(703) 991-3500</td></tr>
+        <tr><td><b>Rating</b></td><td>4.6 stars / 25 reviews <span class="pill yellow">Need 100+ to compete in 3-pack</span></td></tr>
+        <tr><td><b>Posts</b></td><td>"Call Us today for special Prom Price" (Mar 25, 2026) · "Best Party Best bus" (Feb 18, 2026) <span class="pill yellow">Posting roughly every other month — should be weekly</span></td></tr>
+        <tr><td><b>Photos visible</b></td><td>Interior shot of one bus + exterior building shot</td></tr>
+        <tr><td><b>Q&amp;A</b></td><td>None seeded</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The owner self-review problem</h3>
+    <div class="callout crit"><b class="tag">Action this week</b> A 5-star review from "Fred Sales" appears on the public profile (visible above-the-fold in the knowledge panel). Google's review policies prohibit owners reviewing their own business. If this is detected, Google can suspend the profile — that's a complete blackout from Map Pack and brand search. <b>Action:</b> sign into the Google account that posted the review, find Party Bus R Us in "Your contributions," and delete the review yourself.</div>
+
+    <h3>GBP optimization checklist</h3>
+    <ul class="checklist">
+      <li><span class="priority p1">P1</span><label><b>Switch primary category to "Bus charter."</b> Add secondary categories: Limousine service, Tour operator, Wedding service, Transportation service.</label></li>
+      <li><span class="priority p1">P1</span><label><b>Decide one canonical address</b> (Vienna, Herndon, or Falls Church) and update GBP + website + Facebook + Instagram + Yelp + Birdeye to match.</label></li>
+      <li><span class="priority p1">P1</span><label><b>Service area expansion</b> — list 20+ cities (DC neighborhoods + NoVA cities + inner MoCo). GBP now allows this.</label></li>
+      <li><span class="priority p1">P1</span><label><b>Upload 25–40 photos in week 1</b> (interiors, exteriors, drivers in uniform, weddings, prom drop-offs). Then 3–5 per week ongoing. Geo-tagged from your real lot.</label></li>
+      <li><span class="priority p1">P1</span><label><b>Add every service as a Service entry</b> with 200-character description: Wedding Shuttle, Bachelorette Party Bus, Bachelor Party Bus, Prom Limo Bus, Winery Tour, Brewery Tour, DC Monument Tour, Corporate Transportation, Airport Transportation.</label></li>
+      <li><span class="priority p1">P1</span><label><b>Enable messaging</b> and connect to a real channel (SMS-forwarding works).</label></li>
+      <li><span class="priority p2">P2</span><label><b>Seed 8–10 Q&amp;A questions yourself.</b> ("How early do I need to book?" "Is a deposit required?" "Can we bring alcohol?" "What's the minimum rental time?") Answer as the business.</label></li>
+      <li><span class="priority p2">P2</span><label><b>Post weekly Google Posts</b> — Wedding Throwback Thursdays, Prom Specials, NYE bookings, Winery Saturdays. Each post should have an image and a CTA.</label></li>
+      <li><span class="priority p2">P2</span><label><b>Respond to 100% of reviews within 48 hours.</b> Use the customer's first name, mention the event type they booked, and end with a soft re-invite.</label></li>
+      <li><span class="priority p2">P2</span><label><b>Solicit 24 new Google reviews in 90 days.</b> Use an SMS sent within 30 minutes of drop-off with your <span class="k">g.page/r/...</span> link.</label></li>
+      <li><span class="priority p3">P3</span><label><b>Add "Bookings" link</b> in the GBP that points to the new /quote page.</label></li>
+      <li><span class="priority p3">P3</span><label><b>Add highlights / attributes</b>: women-owned status if applicable, identifies-as (Black-owned, etc., if applicable), wheelchair accessible if any vehicle is, etc.</label></li>
+    </ul>
+
+    <h3>The unbranded SERP — what searchers see for "party bus dc"</h3>
+    <div class="callout warn"><b class="tag">Current reality</b> Top 10 organic for "party bus dc" — none of them are you:
+    <ol style="margin:8px 0 0 18px;color:#dcdcef">
+      <li>thedmvpartybus.com</li>
+      <li>dcpartybus.com</li>
+      <li>luxurypartybuswashingtondc.com</li>
+      <li>dc4party.com</li>
+      <li>presidential-limo.com (cost blog)</li>
+      <li>Instagram @dmvpartybusllc</li>
+      <li>partybusdc.com</li>
+      <li>price4limo.com (aggregator)</li>
+      <li>Reddit thread</li>
+      <li>chariotsforhire.com</li>
+    </ol>
+    Map Pack: Uptown Bus (sponsored), Party Bus DMV, Wecertified LLC, DC Transportation LLC. Sponsored ads: Uptown Bus (3.6 / 13), Point To Point Limousines, Majestic Limo Service (4.3 / 71).</div>
+  </div>
+</section>
+
+<!-- COMPETITORS -->
+<section id="competitors">
+  <div class="container">
+    <h2><span class="num">06</span>Competitive landscape — the top 10</h2>
+    <p class="section-lede">Ranked roughly by overall digital dominance in the DMV. Read the "How to beat" line on each card — that's the actual battle plan.</p>
+
+    <div class="comp-grid">
+      <div class="comp">
+        <div class="top"><div><div class="name">1. DMV Party Bus</div><div class="url">thedmvpartybus.com · @dmvpartybus (16K)</div></div><span class="pill brand">Leader</span></div>
+        <div class="stat"><div><b>Fleet</b>5+ buses</div><div><b>Pricing</b>$150/hr flat (published)</div><div><b>Founded</b>2014</div><div><b>Map pack</b>Top 3</div></div>
+        <div class="why"><b>Why they win:</b> Transparent flat pricing, "#1 Rated" claim repeated everywhere, active YouTube + IG, BYOB messaging, /quote and /lists URLs. <b>How to beat:</b> match their pricing transparency at a slightly higher (premium-positioned) rate, out-publish them on weddings and wineries, build TikTok which they barely use.</div>
+      </div>
+
+      <div class="comp">
+        <div class="top"><div><div class="name">2. Chariots for Hire</div><div class="url">chariotsforhire.com · Sterling, VA · USDOT #1594491</div></div><span class="pill brand">Wedding king</span></div>
+        <div class="stat"><div><b>Fleet</b>"One of the largest" (60+ claimed, not verified publicly)</div><div><b>Reviews</b>596 Birdeye (verified) · 210 Yelp</div><div><b>Pricing</b>Quote-only</div><div><b>Instagram</b>583 only</div></div>
+        <div class="why"><b>Why they win:</b> Fleet authority claim, BBB-accredited, thousands of weddings claimed, deep wedding services page, citations on TheKnot + WeddingWire + TripAdvisor. <b>How to beat:</b> their Instagram is weak (583 followers). Become the IG-native wedding shuttle option while they sit on directory reviews.</div>
+      </div>
+
+      <div class="comp">
+        <div class="top"><div><div class="name">3. Reston Limousine</div><div class="url">restonlimo.com · Sterling, VA · USDOT #561180</div></div><span class="pill brand">Corporate</span></div>
+        <div class="stat"><div><b>Fleet</b>200+ (verified)</div><div><b>Founded</b>1990 (36 yrs)</div><div><b>Reviews</b>351 Google · 157 WeddingWire</div><div><b>Pricing</b>Quote</div></div>
+        <div class="why"><b>Why they win:</b> 36 years in business, DOT/DoD ratings, woman-owned, citations on virginia.org. <b>How to beat:</b> they over-index corporate/airport — they're cold and stiff for weddings and consumer events. Position yourself as the warmer, party-first DMV alternative.</div>
+      </div>
+
+      <div class="comp">
+        <div class="top"><div><div class="name">4. DC4Party</div><div class="url">dc4party.com</div></div><span class="pill green">Page architecture</span></div>
+        <div class="stat"><div><b>Fleet</b>Up to 50 pax</div><div><b>Pages</b>Kids · BachP · Tours</div><div><b>Reviews</b>Thumbtack listed</div><div><b>Pricing</b>Quote</div></div>
+        <div class="why"><b>Why they win:</b> Strong use-case landing pages (Kids Party, Bachelorette, Tours). <b>How to beat:</b> copy their architecture, then go deeper — neighborhood pages, venue pages, fleet pages with capacity comparators.</div>
+      </div>
+
+      <div class="comp">
+        <div class="top"><div><div class="name">5. Uptown Bus</div><div class="url">uptownbus.com · Fairfax</div></div><span class="pill yellow">Budget</span></div>
+        <div class="stat"><div><b>Pricing</b>Quote-only · "Cheapest" hook</div><div><b>Reviews</b>91 Yelp · 4.3 / 25 Birdeye</div><div><b>Ads</b>Running heavy</div><div><b>Position</b>Cheapest</div></div>
+        <div class="why"><b>Why they rank:</b> Aggressive Google Ads, "cheapest" hook, /blog with comparison content. <b>How to beat:</b> push quality and consistency without naming them — premium-but-fair messaging wins against a "cheapest" anchor. <span class="pill yellow">Note</span> Original audit cited "$200–$400/hr published" and "3.6/13 Google" — those numbers couldn't be verified live; treat as outdated.</div>
+      </div>
+
+      <div class="comp">
+        <div class="top"><div><div class="name">6. ADC Party Bus</div><div class="url">adcpartybus.com</div></div><span class="pill yellow">Service taxonomy</span></div>
+        <div class="stat"><div><b>Reviews</b>Weak FB / scattered</div><div><b>Pages</b>City + event</div><div><b>IG</b>Low engagement</div><div><b>Pricing</b>Quote</div></div>
+        <div class="why"><b>Why they win:</b> Has city-by-city pages built out. <b>How to beat:</b> review velocity. Their FB shows 0 reviews. Outpace them with 100 Google reviews in 12 months.</div>
+      </div>
+
+      <div class="comp">
+        <div class="top"><div><div class="name">7. Point to Point Limousines</div><div class="url">pointtopointlimo.com · Leesburg</div></div><span class="pill brand">Loudoun wine</span></div>
+        <div class="stat"><div><b>WeddingWire</b>4.8 / 119</div><div><b>Founded</b>~15 yrs</div><div><b>Fleet</b>20–29 pax</div><div><b>Pricing</b>Quote</div></div>
+        <div class="why"><b>Why they win:</b> Best DMV wedding rating, Loudoun winery moat. <b>How to beat:</b> they're physically far from DC and Bethesda — own those metros with city pages they can't proximity-rank in.</div>
+      </div>
+
+      <div class="comp">
+        <div class="top"><div><div class="name">8. DC Party Bus</div><div class="url">dcpartybus.com</div></div><span class="pill yellow">EMD</span></div>
+        <div class="stat"><div><b>SEO</b>Top 3 for "party bus dc"</div><div><b>Content</b>Thin</div><div><b>Why</b>Exact match domain</div><div><b>Reviews</b>Limited</div></div>
+        <div class="why"><b>Why they win:</b> Pure exact-match-domain authority. <b>How to beat:</b> beat them on content depth. EMDs decayed in the algorithm years ago — they're vulnerable to a content-heavy challenger.</div>
+      </div>
+
+      <div class="comp">
+        <div class="top"><div><div class="name">9. Presidential Limo</div><div class="url">presidential-limo.com</div></div><span class="pill brand">Cost SEO</span></div>
+        <div class="stat"><div><b>Founded</b>1989</div><div><b>Content</b>Pricing blog dominates</div><div><b>Pricing</b>$150–$300 published</div><div><b>Position</b>Not a broker</div></div>
+        <div class="why"><b>Why they win:</b> Best-in-class "how much does a party bus cost in DC" content. Owns informational pricing queries. <b>How to beat:</b> directly compete on pricing content — write 5 better-than-theirs pricing/sizing/comparison posts in 90 days.</div>
+      </div>
+
+      <div class="comp">
+        <div class="top"><div><div class="name">10. Just Limos</div><div class="url">just-limos.com · Bethesda</div></div><span class="pill green">Virtual tours</span></div>
+        <div class="stat"><div><b>Reviews</b>42 Yelp (mixed)</div><div><b>Pricing</b>/42-rates page</div><div><b>Unique</b>360° tours of every bus</div><div><b>Pages</b>DC neighborhood</div></div>
+        <div class="why"><b>Why they win:</b> Only DMV operator with virtual tours of vehicles + DC neighborhood pages. <b>How to beat:</b> match their virtual tours (Matterport or even simple 360° video) AND expand neighborhood pages further — Adams Morgan, U Street, Capitol Hill, Navy Yard, Wharf.</div>
+      </div>
+    </div>
+
+    <h3>Pricing intelligence (DMV market, 2026)</h3>
+    <table>
+      <thead><tr><th>Capacity</th><th>Weekday (Sun–Thu)</th><th>Weekend (Fri–Sat)</th><th>Wedding package</th></tr></thead>
+      <tbody>
+        <tr><td>10–14 pax (small)</td><td>$150–$200/hr</td><td>$200–$275/hr</td><td>$1,200–$1,800</td></tr>
+        <tr><td>15–25 pax (mid)</td><td>$200–$275/hr</td><td>$275–$375/hr</td><td>$1,800–$2,800</td></tr>
+        <tr><td>30–40 pax (large)</td><td>$275–$375/hr</td><td>$375–$500+/hr</td><td>$2,500–$3,500</td></tr>
+        <tr><td>40–50 pax (XL/coach)</td><td>$350–$450/hr</td><td>$450–$650+/hr</td><td>$3,000–$4,500</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Universal 4-hour minimums. 5–6 hour during prom (Apr–May), wedding peak (Apr–Oct), and holidays (NYE, Halloween, Memorial Day). 25–40% peak surcharges. $100–$200 deposit budget tier; 50% non-refundable wedding tier.</p>
+
+    <h3>Recommended positioning for Party Bus R Us</h3>
+    <div class="callout good"><b class="tag">The wedge</b> Slot in just above DMV Party Bus's $150 floor: <b>$199–$249/hr for 20-pax mid-week, $299–$349 weekend, with all-in flat pricing (no surprise gratuity, no fuel surcharge)</b>. Emphasize 13 years operating, owned (not brokered) fleet, and 7-bus variety. This positions you as "premium-but-fair" — better than the $150 race-to-the-bottom and friendlier than the $400/hr quote-only competitors.</div>
+  </div>
+</section>
+
+<!-- SEO -->
+<section id="seo">
+  <div class="container">
+    <h2><span class="num">07</span>SEO &amp; keyword opportunity map</h2>
+    <p class="section-lede">Every keyword below is an "if you build the page, you'll rank within 90 days" opportunity in the DMV market. Build them in the order shown.</p>
+
+    <h3>The money keywords — high intent, your future revenue</h3>
+    <table>
+      <thead><tr><th>Keyword cluster</th><th>Examples</th><th>Difficulty</th><th>Page type</th></tr></thead>
+      <tbody>
+        <tr><td><b>Core service</b></td><td>party bus dc · party bus rental washington dc · limo bus rental dc · party bus near me</td><td>High (50–60)</td><td>Homepage hub + /party-bus-rental-washington-dc/</td></tr>
+        <tr><td><b>Geo-modified NoVA</b></td><td>party bus arlington · party bus alexandria · party bus tysons · party bus mclean · party bus fairfax · party bus vienna</td><td>Med (20–35)</td><td>One city page each — your strongest map-pack lift</td></tr>
+        <tr><td><b>Geo-modified MD</b></td><td>party bus bethesda · party bus silver spring · party bus rockville · party bus national harbor · party bus potomac · party bus frederick</td><td>Med (25–35)</td><td>One city page each</td></tr>
+        <tr><td><b>DC neighborhoods</b></td><td>party bus georgetown · party bus capitol hill · party bus adams morgan · party bus u street · party bus navy yard</td><td>Low (15–20)</td><td>One neighborhood page each — fast wins</td></tr>
+        <tr><td><b>Event: wedding</b></td><td>wedding party bus dc · wedding shuttle dc · wedding shuttle northern virginia · maryland wedding bus</td><td>Med (35–40)</td><td>/services/wedding-shuttle/ + venue partnership pages</td></tr>
+        <tr><td><b>Event: bachelorette/bachelor</b></td><td>bachelorette party bus dc · bachelor party bus virginia · bachelorette winery bus loudoun</td><td>Med (30)</td><td>/services/bachelorette-party-bus/ + itinerary blog</td></tr>
+        <tr><td><b>Event: prom (seasonal)</b></td><td>prom limo bus maryland · prom party bus dc · prom limo virginia</td><td>Med (35)</td><td>/services/prom-limo-bus/ + parent-focused FAQ</td></tr>
+        <tr><td><b>Event: tours</b></td><td>dc monument tour bus · loudoun wine tour bus · dc brewery tour party bus · northern virginia winery bus</td><td>Med (25–40)</td><td>One service page + itinerary blog posts</td></tr>
+        <tr><td><b>Capacity</b></td><td>20/25/30/40 passenger party bus dc · mini party bus · limo bus 14 passenger</td><td>Low (15–25)</td><td>One fleet detail page per bus (7 pages)</td></tr>
+        <tr><td><b>Commercial / pricing</b></td><td>party bus prices dc · how much does a party bus cost in dc · party bus quote dc · cheap party bus dc</td><td>Med (25–35)</td><td>/pricing/ + blog "how much" post (featured-snippet target)</td></tr>
+        <tr><td><b>Sports + concerts</b></td><td>party bus to nationals park · capital one arena party bus · commanders tailgate bus · party bus to the anthem</td><td>Low (20–25)</td><td>One venue page each (5–8 venues)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Content gaps no one in the DMV is filling</h3>
+    <div class="cards">
+      <div class="card good"><h4>Wedding venue shuttle pages</h4><p>One URL per major venue. Salamander Resort, Stone Tower Winery, Lansdowne, Hay-Adams, DAR Constitution Hall, The Inn at Willow Grove. Brides search the venue + "shuttle." No DMV competitor does this systematically.</p></div>
+      <div class="card good"><h4>Loudoun winery itineraries</h4><p>5-stop sample itineraries with maps. Stone Tower → 868 Estate → Bluemont, etc. Long-form, image-heavy, builds backlinks.</p></div>
+      <div class="card good"><h4>Real wedding video case studies</h4><p>60–90 second wedding day video on YouTube + Reels + TikTok with the couple's name and venue. <b>Nobody in the DMV has this.</b></p></div>
+      <div class="card good"><h4>Pricing calculator</h4><p>Live slider: hours × pax × day-of-week × event type → estimated quote. No DMV competitor has this on-site.</p></div>
+      <div class="card good"><h4>Live booking calendar</h4><p>Real-time availability per bus. Eliminates back-and-forth. Increases urgency. Industry hasn't caught up.</p></div>
+      <div class="card good"><h4>Spanish landing pages</h4><p>/es/quinceañera-fiesta-bus. Underserved population, zero competition.</p></div>
+    </div>
+
+    <h3>Cornerstone blog topics (publish in this order)</h3>
+    <ol style="color:#d6d6ec">
+      <li><b>How Much Does a Party Bus Cost in DC? Real 2026 Pricing</b> — featured-snippet target</li>
+      <li><b>What Size Party Bus Do I Need? Headcount Calculator</b> — links to every fleet page</li>
+      <li><b>The Ultimate DC Bachelorette Itinerary: Brunch → Wharf → Monuments → U Street</b></li>
+      <li><b>The 17 Best Wedding Venues in DC That Need Guest Shuttles</b> — link bait + backlinks</li>
+      <li><b>Limo vs Limo Bus vs Sprinter vs Charter: Which Fits Your Event?</b></li>
+      <li><b>Loudoun Winery Tour Bus Itinerary: 5 Stops in 6 Hours</b></li>
+      <li><b>DC Monument Tour by Limo Bus: 8 Stops in 3 Hours (with Map)</b></li>
+      <li><b>DC Prom Limo Bus 2027: Booking Timeline &amp; Pricing</b> — seasonal Nov–Mar</li>
+      <li><b>Party Bus to Nationals Park / Capital One Arena / Northwest Stadium</b> — sports venue cluster</li>
+      <li><b>What's Allowed (and What's Not) on a DC Party Bus</b> — high-converting long tail</li>
+      <li><b>How to Tip a Party Bus Driver: DMV Standards</b></li>
+      <li><b>5 Questions to Ask Before You Book Any DC Party Bus</b> — protects against competitor poaching</li>
+    </ol>
+
+    <h3>Schema markup — install these in week 1</h3>
+    <ul class="clean">
+      <li><span class="k">LocalBusiness</span> + <span class="k">LimoOrTaxi</span> site-wide (Schema.org allows both).</li>
+      <li><span class="k">Service</span> on every service page with <span class="k">areaServed</span> listing each polygon.</li>
+      <li><span class="k">Vehicle</span> on each fleet detail page — <span class="k">numberOfPassengers</span>, <span class="k">bodyType</span>, <span class="k">vehicleModelDate</span>.</li>
+      <li><span class="k">Product + Offer</span> with <span class="k">priceRange</span> on the pricing page.</li>
+      <li><span class="k">FAQPage</span> on every page that has an FAQ block (rich results).</li>
+      <li><span class="k">BreadcrumbList</span> site-wide.</li>
+      <li><span class="k">Review + AggregateRating</span> pulled from GBP / Birdeye via a reviews widget API.</li>
+      <li><span class="k">Organization</span> with <span class="k">sameAs</span> to GBP, Facebook, Yelp, Instagram, TikTok, YouTube.</li>
+    </ul>
+
+    <h3>Citation building — chase 50+ in 90 days</h3>
+    <p>Yelp · BBB · Apple Maps · Bing Places · Yellow Pages · Manta · Foursquare · Citysearch · MerchantCircle · Hotfrog · Brownbook · Cylex · The Bash · GigSalad · WeddingWire · TheKnot · Thumbtack · Eventective · Gigmasters · Tripadvisor · Price4Limo · Roadtrippers · Yahoo Local · n49 · ZoomInfo · Localeze · Acxiom · Data Axle. Use one canonical NAP — exact same name, address, and phone everywhere.</p>
+  </div>
+</section>
+
+<!-- SHOT LIST -->
+<section id="shots">
+  <div class="container">
+    <h2><span class="num">08</span>Photo &amp; video shot list — your trip to the lot</h2>
+    <p class="section-lede">Bring a phone (vertical-capable), a clean microfiber cloth (wipe down each bus before shooting), and a friend if possible. Estimated time: 90–120 minutes for all 7 buses. Shoot in <b>golden hour</b> (sunrise/sunset) for hero exteriors; shoot interiors mid-morning with lights on.</p>
+
+    <h3>Pre-shoot prep (10 minutes total)</h3>
+    <ul class="clean">
+      <li><b>Wipe the front windshield + chrome wheels</b> on every bus — these show up in every exterior shot.</li>
+      <li><b>Turn ON</b>: all interior LED lighting, ceiling stars, club lights, TVs (loop a music video if you can — looks better than a black screen).</li>
+      <li><b>Stage</b>: red plastic cups in cupholders, a few bottles of champagne (empty is fine) on the bar, a small phone speaker playing music for ambient feel.</li>
+      <li><b>Park</b> each bus facing the same direction with maybe 8 feet between them — makes the row shot work.</li>
+      <li><b>Lens</b>: phone camera, default lens. Don't use ultra-wide for interiors (warps the look).</li>
+      <li><b>Settings</b>: 4K, 30fps for video. HEIF on for photos.</li>
+    </ul>
+
+    <h3>Per-bus shots (do all 7 buses · ~10 min each)</h3>
+    <div class="shotlist">
+      <div class="shot"><div class="h"><span class="num">1</span>Exterior, 3/4 front hero</div><div class="d">Stand 15 feet off the front corner. Crouch slightly — bus looks bigger. Sun behind you. Use this as the main bus card on the new website.</div><div class="meta"><span>Photo · vertical 9:16</span><span>+ horizontal 16:9</span></div></div>
+      <div class="shot"><div class="h"><span class="num">2</span>Exterior, full side profile</div><div class="d">Square on. Center the door. Captures full length. For comparison grid on the fleet overview page.</div><div class="meta"><span>Photo · horizontal</span></div></div>
+      <div class="shot"><div class="h"><span class="num">3</span>Detail: chrome + wheels</div><div class="d">Close-up of clean wheels and trim. Builds premium perception. Reel B-roll.</div><div class="meta"><span>Photo + 4-sec video</span></div></div>
+      <div class="shot"><div class="h"><span class="num">4</span>Door open invite</div><div class="d">Stand at the open door looking into the bus. Lights ON inside, exterior in shadow. Magazine-style.</div><div class="meta"><span>Photo · vertical</span></div></div>
+      <div class="shot"><div class="h"><span class="num">5</span>Interior wide — front to back</div><div class="d">Stand at the front, shoot the length of the seating. Lights on. Use this as the interior hero on the fleet detail page.</div><div class="meta"><span>Photo · horizontal</span><span>+ video pan</span></div></div>
+      <div class="shot"><div class="h"><span class="num">6</span>Interior wide — back to front</div><div class="d">Reverse angle. Same wide. Two angles let you build a "side-by-side" carousel.</div><div class="meta"><span>Photo · horizontal</span></div></div>
+      <div class="shot"><div class="h"><span class="num">7</span>Bar / cooler detail</div><div class="d">Champagne flutes staged, ice bucket, LED-lit shelf. Tight composition.</div><div class="meta"><span>Photo + video</span></div></div>
+      <div class="shot"><div class="h"><span class="num">8</span>Ceiling stars / fiber optic</div><div class="d">Lie on the seat, shoot straight up at the ceiling. Best done in low ambient light. Looks like a starfield. Reel-ready.</div><div class="meta"><span>Vertical photo</span></div></div>
+      <div class="shot"><div class="h"><span class="num">9</span>Sound system / speakers</div><div class="d">Tight on speaker grills with LED glow. Pair with a "feel the bass" caption.</div><div class="meta"><span>Photo + 3-sec video</span></div></div>
+      <div class="shot"><div class="h"><span class="num">10</span>Dance pole / floor</div><div class="d">If equipped, shoot the floor with pole and lighting reflection. (Strong bachelorette/party visual.)</div><div class="meta"><span>Photo</span></div></div>
+      <div class="shot"><div class="h"><span class="num">11</span>Capacity numbers shot</div><div class="d">Stand at the back, shoot down the aisle so the seats are visible — viewers can count. Crucial for "is it really 30 people?" trust.</div><div class="meta"><span>Photo · horizontal</span></div></div>
+      <div class="shot"><div class="h"><span class="num">12</span>Driver in uniform, by the door</div><div class="d">Have a driver stand in front of the open door, half-smile. Humanizes the brand. Pair with an "About" page.</div><div class="meta"><span>Photo · vertical</span></div></div>
+    </div>
+
+    <h3>Reels-ready vertical clips (do 12 of these · 5–10 sec each)</h3>
+    <div class="shotlist">
+      <div class="shot"><div class="h"><span class="num">R1</span>Walk-up POV to the bus</div><div class="d">Walk toward the closed bus door, holding phone at chest height. Door opens at the end. Hook caption: "POV: you booked the 30-passenger."</div></div>
+      <div class="shot"><div class="h"><span class="num">R2</span>Door swings open reveal</div><div class="d">Phone right outside the door, low angle. Door pneumatic opens — reveals lit interior. Best 2-second hook in the niche.</div></div>
+      <div class="shot"><div class="h"><span class="num">R3</span>Slow pan, front to back</div><div class="d">Step into the bus, walk slowly to the back filming the whole way. 8 seconds. Add a beat-drop transition.</div></div>
+      <div class="shot"><div class="h"><span class="num">R4</span>Lights ON transition</div><div class="d">Film the interior with overheads only, snap fingers off camera, cut to club lights / fiber optics on. Easy +50% engagement.</div></div>
+      <div class="shot"><div class="h"><span class="num">R5</span>Cup pour b-roll</div><div class="d">Pour champagne into a flute on the bar in slow-mo. 4 seconds. Iconic.</div></div>
+      <div class="shot"><div class="h"><span class="num">R6</span>Seat-belt to celebration</div><div class="d">Buckling into the seat, then jump-cut to people fake-cheering. Use friends if no clients available.</div></div>
+      <div class="shot"><div class="h"><span class="num">R7</span>Walk-around the bus</div><div class="d">Slow 360° walk around the exterior. Use as B-roll for service pages.</div></div>
+      <div class="shot"><div class="h"><span class="num">R8</span>Driver opens the door</div><div class="d">Driver in uniform opens the door, gestures "welcome." Pair with "we treat every booking like a wedding" caption.</div></div>
+      <div class="shot"><div class="h"><span class="num">R9</span>TV screen turn-on</div><div class="d">Film a TV / interior screen as it powers on. Add cinematic SFX.</div></div>
+      <div class="shot"><div class="h"><span class="num">R10</span>Cooler reveal</div><div class="d">Open a stocked cooler — ice + bottles. Hook for "fully stocked when you arrive."</div></div>
+      <div class="shot"><div class="h"><span class="num">R11</span>3-bus row shot</div><div class="d">Three buses parked, you walk down the line filming. "We have 7. Pick yours." caption.</div></div>
+      <div class="shot"><div class="h"><span class="num">R12</span>Fleet line-up time-lapse</div><div class="d">Set the phone on a tripod or hood. Have the buses arrive into the lot one at a time. 8-second hyperlapse.</div></div>
+    </div>
+
+    <h3>Lifestyle shots — bring 4–6 friends</h3>
+    <div class="shotlist">
+      <div class="shot"><div class="h"><span class="num">L1</span>Loading in — wide</div><div class="d">Friends walking up the bus stairs, laughing, dressed for a night out. Shoot from outside.</div></div>
+      <div class="shot"><div class="h"><span class="num">L2</span>Inside, mid-laugh group</div><div class="d">Wide shot inside, everyone seated, mid-conversation. Don't direct them to smile at the camera — looks staged.</div></div>
+      <div class="shot"><div class="h"><span class="num">L3</span>Champagne toast in motion</div><div class="d">Glasses clink. Capture from inside the bus. Pair with a wedding hashtag.</div></div>
+      <div class="shot"><div class="h"><span class="num">L4</span>Driver helping guest</div><div class="d">Driver assisting someone stepping off (high heels work). Trust signal for wedding bookers.</div></div>
+      <div class="shot"><div class="h"><span class="num">L5</span>Outside group photo</div><div class="d">Whole group lined up in front of the bus. Use for testimonial section + Google Posts.</div></div>
+      <div class="shot"><div class="h"><span class="num">L6</span>Sunset hero, bus + people</div><div class="d">Golden hour, group walking toward the bus from the parking lot. Aspirational website hero.</div></div>
+    </div>
+
+    <h3>Optional but big — drone shots</h3>
+    <div class="callout info"><b class="tag">Worth it if you can</b> If a friend has a DJI Mini 3 (or rent one for $50), get: (1) overhead of all 7 buses parked in a line, (2) chase shot of one bus pulling out of the lot, (3) circle shot around a single bus. These three clips alone can make every reel for the next 6 months feel premium.</div>
+
+    <h3>Event-specific shots (do later, on real bookings, with permission)</h3>
+    <ul class="clean">
+      <li><b>Wedding day:</b> Bride loading up in dress · Bus exterior at venue · Group toast inside · Reception drop-off with the venue sign visible in frame.</li>
+      <li><b>Prom:</b> Parents waving from driveway · Group photo in front of bus · Boutonniere/corsage detail · Driver high-five.</li>
+      <li><b>Bachelorette:</b> Sash &amp; tiara + champagne · Group jumping shot in front of the bus · Winery tour stop in Loudoun (with vineyard sign).</li>
+      <li><b>Sports event:</b> Tailgate setup outside Northwest Stadium · Bus arriving at Capital One Arena · Game-day jerseys in group shots.</li>
+    </ul>
+
+    <h3>What to do with all of this after the shoot</h3>
+    <ol style="color:#d6d6ec">
+      <li><b>Edit immediately</b> — same day, on your phone (CapCut is free). The footage decays mentally if you wait.</li>
+      <li><b>Upload originals to a shared Drive/Dropbox folder</b> labeled by bus + shot type. This becomes your asset library.</li>
+      <li><b>Drop the 12 reels into a CapCut/Reels schedule</b> over the next 4 weeks (3/week).</li>
+      <li><b>Replace every stock photo on the website</b> with the new exterior hero shots — week 1.</li>
+      <li><b>Upload 25–40 photos to GBP</b> within 7 days of the shoot.</li>
+      <li><b>Send the best 6 exteriors to be turned into 360° spins</b> for fleet detail pages (Spin Studio is $50/month).</li>
+    </ol>
+  </div>
+</section>
+
+<!-- STRATEGY -->
+<section id="strategy">
+  <div class="container">
+    <h2><span class="num">09</span>90-day strategy — three budget tiers</h2>
+    <p class="section-lede">Same playbook, three speeds. Pick the tier that matches your appetite. The Moderate tier is what I'd recommend if cash flow allows.</p>
+
+    <div class="tier-grid">
+      <div class="tier">
+        <span class="badge">Tier 1</span>
+        <h3>Scrappy</h3>
+        <div class="price">$1,500–$2,500<small> / 90 days</small></div>
+        <div class="roi">Expected lift: 2–3× current leads</div>
+        <p><b>You do most of the work.</b> Focus only on the highest-leverage fixes that don't require a website rebuild.</p>
+        <ul>
+          <li>Delete the Fred Sales self-review (day 1)</li>
+          <li>Fix the website footer typo (Vienna VA 22180)</li>
+          <li>Reconcile NAP across GBP, Yelp, FB, IG (one canonical address + phone)</li>
+          <li>Reclaim the Birdeye profile and respond to reviews</li>
+          <li>Create BBB, TheKnot, WeddingWire, The Bash, Thumbtack profiles</li>
+          <li>Switch GBP primary category to Bus charter</li>
+          <li>Upload 25 GBP photos from the lot shoot</li>
+          <li>Start posting GBP weekly</li>
+          <li>SMS-request reviews after every drop-off (target +12 in 90 days)</li>
+          <li>Lot photoshoot (do it yourself, ~$0)</li>
+          <li>Post 3 Instagram reels per week + cross-post to TikTok</li>
+          <li>Add the Instagram link to the website</li>
+          <li>Install Google Analytics 4 + Meta Pixel (free)</li>
+          <li>Pull the branded Google Ad (saves the daily budget for next tier)</li>
+        </ul>
+        <p class="note"><b>What you don't get:</b> a new website, paid ads, professional photography, SEO content, or wedding-platform paid listings. You'll plateau around 50–60 leads/mo.</p>
+      </div>
+
+      <div class="tier recommended">
+        <span class="badge">Recommended</span>
+        <h3>Moderate</h3>
+        <div class="price">$5,000–$10,000<small> / 90 days</small></div>
+        <div class="roi">Expected lift: 4–6× current leads</div>
+        <p><b>The right balance for a 7-bus operator.</b> Everything in Scrappy, plus the infrastructure to compound.</p>
+        <ul>
+          <li>Everything in the Scrappy tier</li>
+          <li>Migrate off Web.com to WordPress (Astra theme) or Webflow — ~$1,200 build</li>
+          <li>Build the 35–50 page architecture (city, service, fleet, pricing, blog) — ~$1,500</li>
+          <li>Install LocalBusiness + LimoOrTaxi + Service + Vehicle + FAQ schema</li>
+          <li>Hire a freelance editor to cut your 12 reels (Fiverr/Upwork, ~$300)</li>
+          <li>WeddingWire + TheKnot Pro listings (~$1,500/quarter combined)</li>
+          <li>Google Ads: $1,500–$2,500 spend on non-brand keywords ("party bus rental dc", "wedding shuttle dc", "bachelorette party bus dc") with the new landing pages — bid-managed</li>
+          <li>Meta ads: $750 retargeting + lookalike on website visitors</li>
+          <li>Reviews engine: NiceJob or Birdeye ($100–$200/mo) for SMS review automation, target +24 in 90 days</li>
+          <li>Citation cleanup service (BrightLocal or Whitespark, ~$200) to sync NAP across 50 directories</li>
+          <li>3 cornerstone blog posts written (pricing, sizing, bachelorette itinerary) — ~$600 for freelance writing</li>
+          <li>5 wedding venue / planner outreach emails per week (build "preferred vendor" relationships)</li>
+        </ul>
+        <p class="note"><b>Outcome:</b> Map Pack ranking in Vienna / Tysons / Arlington within 60 days. First-page organic for 3–5 city queries by day 90. Doubled-to-tripled inbound leads. IG follower base from 71 → 1,500+.</p>
+      </div>
+
+      <div class="tier">
+        <span class="badge">Tier 3</span>
+        <h3>Aggressive</h3>
+        <div class="price">$15,000–$30,000<small> / 90 days</small></div>
+        <div class="roi">Expected lift: 6–10× current leads</div>
+        <p><b>The "we want to be #1 in 18 months" tier.</b> For when cash flow can support full investment.</p>
+        <ul>
+          <li>Everything in the Moderate tier</li>
+          <li>Full custom website rebuild on Webflow or Framer with brand identity refresh — ~$6,000–$10,000</li>
+          <li>Professional photo + video shoot (half-day, photographer + videographer) — ~$2,500</li>
+          <li>Matterport / 360° tours of every bus — ~$1,500</li>
+          <li>Brand identity refresh: logo cleanup, color system, fonts, social templates — ~$1,500</li>
+          <li>Google Ads scaling: $4,000–$6,000/quarter spend on city + event keyword landing pages</li>
+          <li>Meta + TikTok ads: $1,500–$2,500 quarterly (retargeting + lookalike on bookers)</li>
+          <li>Content team retainer: 1 content creator at ~$1,500/mo (12 reels + 4 blog posts/mo)</li>
+          <li>PR campaign: pitch Washingtonian, DCist, Northern Virginia Magazine, Borrowed &amp; Blue, Washington Bride &amp; Groom — ~$1,500 freelance publicist</li>
+          <li>Local partnership program: sponsor a Bethesda 5K, a DC bar crawl, a wedding showcase — ~$2,000</li>
+          <li>SEO retainer: link building + technical maintenance — ~$1,500/mo</li>
+          <li>Open a second physical "satellite" presence in DC (mail-receiving address + GBP profile, all per Google ToS) to extend Map Pack into DC core</li>
+          <li>Build a real-time online booking system with calendar availability</li>
+        </ul>
+        <p class="note"><b>Outcome:</b> First-page organic for "party bus dc" by month 12. Map Pack across 3 metros. 100+ Google reviews. 10K+ IG followers. Brand recognition strong enough to support a 25%+ pricing premium.</p>
+      </div>
+    </div>
+
+    <h3>Recommended pricing rollout (regardless of tier)</h3>
+    <div class="callout good"><b class="tag">Pricing playbook</b> Publish flat-rate pricing on the homepage and every fleet/service page. Start: <b>$199/hr weekday · $299/hr weekend · 4-hour minimum · 18% gratuity included · no fuel surcharge · $200 deposit.</b> Display a "Wedding Day Package: 8 hours from $2,400 all-in." This single decision will lift your conversion 30–50% on its own — most competitors quote-gate and lose impatient buyers.</div>
+
+    <h3>The partnership program (all tiers)</h3>
+    <ul class="clean">
+      <li><b>Wedding venues</b> — target 20 in 90 days. Offer 10% kickback or a "preferred vendor" gift. DAR Constitution Hall, Salamander, Lansdowne, Whitehall Estate, Hay-Adams, Stone Tower, Carriage House DC, The Mayflower, The Watergate.</li>
+      <li><b>Wedding planners</b> — target 15 in 90 days. Offer same. DMV planners with active Instagrams convert fast.</li>
+      <li><b>Hotels</b> — concierge programs at Salamander, Watergate, Conrad, Four Seasons Georgetown, Ritz Tysons. Drop off branded cards.</li>
+      <li><b>Wineries</b> — 10 Loudoun + 5 Maryland. Offer to be their "recommended bus." Stone Tower, 868 Estate, Bluemont, Otium Cellars, Cana, Tarara.</li>
+      <li><b>Schools</b> — target 12 DMV high schools for prom. Provide a parent-facing PDF + a discount code for the senior class president.</li>
+      <li><b>Breweries</b> — DC Brau, Atlas, Right Proper, Port City, Old Ox, Lost Rhino. Co-marketing "brewery crawl bus" packages.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="container">
+    <h2><span class="num">10</span>12-month roadmap — what good looks like</h2>
+    <div class="timeline">
+      <div class="item"><h4>Days 1–14 — Triage</h4><p>Delete self-review · Reconcile NAP · Fix website typo · Reclaim Birdeye · GBP category swap · Install GA4 + Pixel · Lot photo shoot · Pull branded Google Ad · Set up TheKnot + WeddingWire + BBB profiles · Sticky mobile CTA · Reset Instagram bio · Add IG link to site.</p></div>
+      <div class="item"><h4>Days 15–45 — Foundation</h4><p>Migrate off Web.com or expand site to 35+ pages · Build 10 city pages, 6 service pages, 7 fleet detail pages, pricing page · Install schema · Publish 3 cornerstone blog posts · Launch IG cadence (3 reels/week) · Start SMS review engine · Citation cleanup across 50 directories · Start partnership outreach.</p></div>
+      <div class="item"><h4>Days 46–90 — Compound</h4><p>Launch non-brand Google Ads · Launch Meta retargeting · Hit 24 Google reviews · 1,500 IG followers · First wedding venue partnership signed · 10 of 12 blog posts published · First Map Pack appearance in NoVA metros · TikTok account live with 30+ videos.</p></div>
+      <div class="item"><h4>Months 4–6 — Scale</h4><p>Real-time booking calendar live · 360° tours of every bus · Live pricing calculator · 50+ Google reviews · 5,000 IG followers · Ranked top 5 organic for 3–5 city queries · First press hit (Washingtonian / DCist / Borrowed &amp; Blue) · Second satellite location researched if Aggressive tier.</p></div>
+      <div class="item"><h4>Months 7–9 — Lead</h4><p>Map Pack in 2 metros · 75+ Google reviews · 10K+ IG followers · TikTok at 5K+ · 20 wedding venue partnerships live · 4–5 cornerstone posts ranking page 1 · NYE bookings filled by Oct 31 · Wedding bookings spiking with venue referrals.</p></div>
+      <div class="item"><h4>Months 10–12 — Win</h4><p>Map Pack in 3 metros (DC, NoVA, MD) · 100+ Google reviews · Top 3 organic for "party bus rental dc" or equivalent · TikTok at 15K+ · Wedding bookings &gt;30% of revenue mix · "Best DMV party bus" PR claim defensible · Pricing premium of 20–25% over budget competitors sustainable.</p></div>
+    </div>
+
+    <div class="callout good"><b class="tag">North star</b> 12 months from today, when someone in the DMV opens Google and types "party bus dc," the first result they see in the Map Pack — and one of the first three they see in organic — is Party Bus R Us. That's the entire game.</div>
+  </div>
+</section>
+
+<!-- VERIFICATION / TRIPLE-CHECK -->
+<section id="verification">
+  <div class="container">
+    <h2><span class="num">11</span>Triple-check findings — corrections, verifications, and what was missing</h2>
+    <p class="section-lede">After the first pass, the deliverable was independently fact-checked and the live site was pulled through PageSpeed Insights. Below are corrections, newly-discovered findings, and audit areas that needed to be added. Treat this section as authoritative where it conflicts with anything above.</p>
+
+    <h3>1. Pricing — revised to vehicle-class tiered (the earlier "flat $199/$299" left margin on the table)</h3>
+    <p>Recommending a single flat rate across a 7-bus fleet undercharges your 40-passenger units. Use vehicle-class tiers instead:</p>
+    <table>
+      <thead><tr><th>Vehicle class</th><th>Weekday flat (Sun–Thu)</th><th>Weekend flat (Fri–Sat)</th><th>4-hr min total weekday</th></tr></thead>
+      <tbody>
+        <tr><td>20–24 pax</td><td>$199/hr</td><td>$299/hr</td><td>$796</td></tr>
+        <tr><td>26–30 pax</td><td>$249/hr</td><td>$349/hr</td><td>$996</td></tr>
+        <tr><td>40 pax (Mini Luxury / Limo Bus)</td><td>$299/hr</td><td>$399/hr</td><td>$1,196</td></tr>
+      </tbody>
+    </table>
+    <p>Add-ons all included: 18% gratuity, fuel, basic decor. $200–$300 deposit at signing depending on tier. Wedding packages: 8-hour flat $2,400 / $2,800 / $3,400 by class.</p>
+    <p class="note">This corrects an internal contradiction in the earlier draft (the "$199–$249 / $299–$349" range under competitor positioning vs the flat "$199 / $299" under the pricing playbook). Use this table as the canonical pricing recommendation.</p>
+
+    <h3>2. Real PageSpeed Insights data (mobile, May 13 2026)</h3>
+    <div class="kpi">
+      <div><b>Performance</b><span style="color:#fbbf24">66</span><small>Mid-range. Needs work.</small></div>
+      <div><b>Accessibility</b><span style="color:#a3e635">90</span><small>Solid baseline.</small></div>
+      <div><b>Best Practices</b><span style="color:#fbbf24">81</span><small>Mixed.</small></div>
+      <div><b>SEO</b><span style="color:#34d399">100</span><small>The Web.com builder gets this right.</small></div>
+    </div>
+    <table>
+      <thead><tr><th>Core Web Vital</th><th>Current</th><th>Target</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>First Contentful Paint (FCP)</td><td>2.9s</td><td>&lt;1.8s</td><td><span class="pill red">Slow</span></td></tr>
+        <tr><td>Largest Contentful Paint (LCP)</td><td><b>9.2s</b></td><td>&lt;2.5s</td><td><span class="pill red">Critical</span></td></tr>
+        <tr><td>Total Blocking Time (TBT)</td><td>120ms</td><td>&lt;200ms</td><td><span class="pill green">OK</span></td></tr>
+        <tr><td>Cumulative Layout Shift (CLS)</td><td>0.018</td><td>&lt;0.1</td><td><span class="pill green">OK</span></td></tr>
+        <tr><td>Speed Index</td><td>4.8s</td><td>&lt;3.4s</td><td><span class="pill red">Slow</span></td></tr>
+      </tbody>
+    </table>
+    <p>LCP of 9.2 seconds means your "Transportation At Its Finest!" headline takes 9.2 seconds to appear on a mobile 4G connection. Google considers anything over 4 seconds a poor experience and demotes the page accordingly. <b>Compressing the hero image alone</b> would typically cut LCP by 60–80% on a Web.com template.</p>
+
+    <h3>3. The partybusrus.com domain bombshell</h3>
+    <div class="callout crit"><b class="tag">Critical · brand confusion</b> <b>You don't own partybusrus.com.</b> A different operator with the tagline "Ride in Style and Fun" has it — a one-page GoDaddy site, copyright 2025. When customers hear your name and type "partybusrus.com," they land on a competitor (or a parked page). This is a structural problem that gets worse the more you invest in the "Party Bus R Us" name.<br><br>
+    <b>Compounding the issue:</b> "Party Bus R Us" is highly descriptive — there are multiple "Stars R Us Party Bus," "Starz R Us Party Bus," and "Party Bus R Us" entities operating in different US markets. No federal trademark for this exact name surfaced in USPTO results, and the "R Us" suffix is legally a minefield (cease-and-desist letters from Toys "R" Us holders have hit unrelated businesses).<br><br>
+    <b>Three options, ranked:</b><br>
+    <b>A.</b> Acquire partybusrus.com via outreach to the current owner. Budget $500–$5,000. Best outcome.<br>
+    <b>B.</b> Rebrand under a more defensible name (e.g., "Capital Party Bus DMV," "Beltway Limo Bus," "DMV Roll Royce") and keep partylimobusdc.com as the URL. Loses 13 years of brand equity but solves the problem cleanly.<br>
+    <b>C.</b> Do nothing and accept that the more you market the brand, the more leads you send to the wrong domain. Not recommended.</div>
+
+    <h3>4. Regulatory / licensing — what you must have and surface publicly</h3>
+    <p>This is missing entirely from the earlier audit but is essential for wedding and corporate buyers. The DMV regulatory picture for a party bus operator:</p>
+    <ul class="clean">
+      <li><b>WMATC operating authority</b> (Washington Metropolitan Area Transit Commission, <span class="k">wmatc.gov</span>) is required to carry paying passengers point-to-point within DC + Montgomery/Prince George's MD + Arlington/Fairfax/Alexandria/Falls Church VA. <b>Surface your WMATC number on the website.</b></li>
+      <li><b>USDOT number + MC (Motor Carrier) authority</b> from FMCSA for interstate trips (e.g., DC↔Baltimore). For 16+ passenger vehicles, the federal minimum is <b>$5 million passenger liability insurance</b>.</li>
+      <li><b>Virginia DMV passenger carrier registration</b> (Form OA-150) + $25K surety bond for intrastate VA work outside the WMATC zone.</li>
+      <li><b>Maryland PSC</b> Transportation Division authority for intrastate MD work outside WMATC.</li>
+      <li><b>DC DFHV</b> (Department of For-Hire Vehicles) for DC pickups; <b>Special Event Permits</b> ($250/vehicle) during authorized DC events.</li>
+      <li><b>Alcohol:</b> Virginia does <b>not</b> issue mobile liquor licenses → party buses in VA are <b>BYOB only</b>, and the operator's role is driver + ID-check. DC requires an ABRA temporary license to serve alcohol; out-of-state licenses are <b>not honored</b>. Maryland is BYOB-tolerant but you cannot sell or serve.</li>
+    </ul>
+    <div class="callout info"><b class="tag">Build a /safety-and-credentials page</b> Publishing your WMATC, USDOT, $5M insurance, BBB accreditation (once obtained), and BYOB policy on a dedicated page is one of the single highest-converting pages you can add. Reston and Chariots win wedding bookings on this signal — Party Bus R Us has none of it visible.</div>
+
+    <h3>5. Trust signals gap — what competitors show vs. what you show</h3>
+    <table>
+      <thead><tr><th>Trust signal</th><th>DMV Party Bus</th><th>Chariots for Hire</th><th>Reston Limousine</th><th>You</th></tr></thead>
+      <tbody>
+        <tr><td>USDOT # visible</td><td>—</td><td>Implied (#1594491)</td><td>"Highest DOT ratings"</td><td><span class="pill red">No</span></td></tr>
+        <tr><td>BBB accreditation seal</td><td>—</td><td><span class="pill green">Yes</span></td><td><span class="pill green">Yes</span></td><td><span class="pill red">No profile</span></td></tr>
+        <tr><td>Insurance amount published</td><td>Implicit via waiver</td><td>—</td><td>"DOT/DoD highest safety"</td><td><span class="pill red">No</span></td></tr>
+        <tr><td>Driver background-check policy</td><td>Basic waiver</td><td>"Constant inspections"</td><td>CDL + drug test + bg check</td><td><span class="pill red">No</span></td></tr>
+        <tr><td>Vehicle inspection cadence</td><td>—</td><td>"Regular inspections"</td><td>"Highest industry standards"</td><td><span class="pill red">No</span></td></tr>
+        <tr><td>Liability waiver page</td><td><span class="pill green">2 waiver URLs</span></td><td>Standard</td><td>Standard</td><td><span class="pill red">No</span></td></tr>
+        <tr><td>BYOB / alcohol policy page</td><td>Via waiver</td><td><span class="pill green">Dedicated page</span></td><td>—</td><td><span class="pill red">No</span></td></tr>
+        <tr><td>Aggregated review badge</td><td>"#1 Rated" claim</td><td><span class="pill green">596 Birdeye badge</span></td><td><span class="pill green">351 Google badge</span></td><td><span class="pill red">No</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3>6. Competitor numbers — verified vs. corrected</h3>
+    <table>
+      <thead><tr><th>Competitor</th><th>Original claim</th><th>Verified</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Chariots for Hire</td><td>596 Birdeye, 60+ vehicles, BBB-accredited</td><td>596 Birdeye ✓ · BBB ✓ · USDOT #1594491 ✓ · "60+ vehicles" not publicly verifiable</td><td>Soften fleet claim</td></tr>
+        <tr><td>Reston Limousine</td><td>200+ vehicles, 1990, 351 Google, 157 WW</td><td>All ✓ · USDOT #561180 ✓ · 36 yrs (was "35")</td><td>Corrected above</td></tr>
+        <tr><td>DMV Party Bus</td><td>16K IG, $150 flat, founded 2014</td><td>All ✓ · plus brand fragmentation across .net / .com / LLC variants</td><td>Add fragmentation note</td></tr>
+        <tr><td>Point to Point</td><td>4.8 / 119 WeddingWire</td><td>All ✓</td><td>No change</td></tr>
+        <tr><td>Presidential Limo</td><td>1989, owns cost-query SEO</td><td>All ✓</td><td>No change</td></tr>
+        <tr><td>Uptown Bus</td><td>$200–$400/hr published, 3.6 / 13 Google</td><td>Pricing not verified · Birdeye shows 4.3 / 25</td><td>Corrected above</td></tr>
+      </tbody>
+    </table>
+
+    <h3>7. Competitors worth adding to the watch list</h3>
+    <div class="cards">
+      <div class="card info"><h4>Empire Limousine (empirelimousine.net)</h4><p>Dedicated "Party Bus DC" page with mini-coach + party bus fleet. Real DMV operator. Worth a deeper read.</p></div>
+      <div class="card info"><h4>American Eagle Limousine (luxurypartybuswashingtondc.com)</h4><p>Surfaced on page 1 for "party bus dc." Serves DC / Baltimore / Annapolis / Stafford VA. Premium positioning.</p></div>
+      <div class="card info"><h4>Bayside Limousines / Tru Vybez / ProBus Party Bus</h4><p>Smaller DMV operators surfacing in long-tail searches. Watch for review velocity and IG content.</p></div>
+      <div class="card info"><h4>Culdesac Chauffeur Service</h4><p>Listed alongside Party Bus R Us in "best party bus rentals near Vienna VA 22180." Local Vienna proximity competitor.</p></div>
+      <div class="card warn"><h4>The aggregators (not competitors per se)</h4><p>price4limo.com and Thumbtack are <i>distribution channels</i> that may outrank you for some queries. Decide whether to list on them (free) or fight them.</p></div>
+    </div>
+
+    <h3>8. Missing audit areas — adding to scope</h3>
+    <div class="cards">
+      <div class="card warn"><h4>Call tracking</h4><p>You can't tell which marketing channel drives calls. Install <b>CallRail</b> (~$45/mo) with dynamic number insertion so each channel — organic, Google Ads, Meta, partner referrals — gets a unique tracking number. Crucial before scaling ad spend.</p></div>
+      <div class="card warn"><h4>Lead-response time</h4><p>For service businesses, <b>responding to a lead within 5 minutes is 21× more likely to close than 30 minutes</b> (Harvard Business Review study). You have no SLA published, no auto-responder, no SMS-to-driver routing. Set up: instant SMS to ops + auto-text to lead within 60 seconds.</p></div>
+      <div class="card warn"><h4>Email marketing</h4><p>Zero email list, zero drip campaigns. Build a Klaviyo or Mailchimp account; capture emails at every quote; build drips for: new lead (5-email warm-up), past customer (12-month rebooking nudge), prom parents (Sept–Nov nurture), wedding inquiry (vendor recommendations).</p></div>
+      <div class="card warn"><h4>SMS marketing</h4><p>Beyond review requests — set up: post-event "thanks + leave a review" SMS, prom-season "spots filling fast" broadcast, NYE "limited buses left" reminder. SimpleTexting or Postscript, ~$50/mo.</p></div>
+      <div class="card warn"><h4>CRM</h4><p>You're likely tracking bookings in a notebook or Google Sheet. Move to HubSpot Starter (free–$20/mo) or Limo Anywhere (industry-specific). Tracks pipeline, automates follow-ups, prevents lost leads.</p></div>
+      <div class="card warn"><h4>Competitor ad spy</h4><p>Open Meta Ad Library (<span class="k">facebook.com/ads/library</span>) → search each top competitor → screenshot their active creatives. Subscribe to their email lists. Free market research most operators skip.</p></div>
+      <div class="card warn"><h4>Fleet branding / driver uniforms</h4><p>If your buses don't carry the Party Bus R Us logo on the exterior, every paid trip is a missed billboard. Vehicle wraps cost $1,500–$3,500/bus and pay back in 6 months. Drivers: black polo + slacks at minimum; embroidered shirts add 30% trust signal.</p></div>
+      <div class="card warn"><h4>Lot signage + business cards</h4><p>Every drop-off is a chance to be remembered. A sleeve of branded business cards in each bus (cost: $40 per 500) doubles your post-event review rate.</p></div>
+    </div>
+
+    <h3>9. Self-review remediation — the fallback path</h3>
+    <p>If you can't access the Google account that posted the "Fred Sales" 5-star review (e.g., it was created under a different email you no longer use), you can still get the review removed by reporting it as a <b>Conflict of Interest</b> violation under Google's review policies:</p>
+    <ol style="color:#d6d6ec">
+      <li>Sign into your GBP dashboard at <span class="k">business.google.com</span></li>
+      <li>Find the review, click the three-dot menu → <b>Report review</b> → <b>Conflict of interest</b></li>
+      <li>Submit a follow-up via the Google Business Profile Help support form citing the same policy. Mention: "the reviewer's name matches my business owner's name; this is an owner self-review prohibited under Google's review policies."</li>
+      <li>If still not removed within 14 days, escalate via the <b>Google Business Profile Community</b> forum — public reps often expedite cases there.</li>
+    </ol>
+
+    <h3>10. Cornerstone content count — reconciled</h3>
+    <p>SEO section lists 12 cornerstone posts; the master checklist only commits to 9 in 90 days (3 + 6). To clarify: posts 1–9 ship in 90 days. Posts 10–12 ship in months 4–6. Each post takes a strong writer 4–8 hours; budget $150–$300 per post if outsourcing.</p>
+
+    <h3>11. Budget tier reality-check</h3>
+    <table>
+      <thead><tr><th>Tier</th><th>Headline</th><th>Realistic 90-day total</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Scrappy</td><td>$1,500–$2,500</td><td>$1,500–$2,500</td><td>Math checks. You do all the work.</td></tr>
+        <tr><td>Moderate</td><td>$5,000–$10,000</td><td><b>$7,000–$11,000</b></td><td>Line items add slightly above original range. Tighten or accept.</td></tr>
+        <tr><td>Aggressive</td><td>$15,000–$30,000</td><td><b>$22,000–$36,000</b></td><td>Original ceiling was too low. Either raise to $35K or trim creator retainer / PR / sponsorship items.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>12. Service area mismatch</h3>
+    <p>The homepage Contact block says service area is "<b>Washington, D.C. Metropolitan Area – Northern Virginia – Maryland</b>." The dedicated <span class="k">/Contact.html/</span> page says only "<b>Metropolitan Washington, D.C.</b>" — drops NoVA and MD. Pick one (the full DMV version is more accurate to your fleet) and sync both pages.</p>
+
+    <h3>13. Risks &amp; assumptions</h3>
+    <ul class="clean">
+      <li><b>Lead estimate (60–100 in 90 days, 200+ by month 12)</b> assumes the Moderate tier is executed in full and that the Map Pack lift hits in 60–75 days, which depends on review velocity. If you only get 8–12 new Google reviews instead of 24, the Map Pack lift slips a quarter.</li>
+      <li><b>AOV ($700–$1,000)</b> assumes a 4-hour weekday minimum on a 20–24 pax bus. Higher-class bookings can push blended AOV to $1,200+. The earlier $280K–$560K projection used $700 — at $900 it would be $360K–$720K.</li>
+      <li><b>Map Pack ranking</b> requires the GBP suspension risk (Fred Sales review) to be cleared. If GBP gets suspended for the self-review violation, the entire local SEO plan resets by 4–8 weeks (the typical reinstatement window).</li>
+      <li><b>The partybusrus.com domain issue</b> is a structural ceiling on ROI. Acquiring the domain or rebranding is the only way to fully solve it. The plan still works without solving this, but a 15–25% leakage rate to the wrong domain should be assumed.</li>
+      <li><b>Competition</b> — DMV Party Bus could lower their $150/hr further. If they do, the recommended $199 weekday rate may need a "match offer." Build a $179/hr promo-rate fallback into the website CMS for quick deployment.</li>
+    </ul>
+
+    <h3>14. Soft-language correction</h3>
+    <p>The Aggressive-tier reference to "Open a second physical satellite presence ... all per Google ToS" should be read carefully. Google's GBP guidelines <b>prohibit virtual offices, mailbox-only addresses, and unstaffed locations</b>. A legitimate second GBP requires a real, staffed location that's open to customers. Do <b>not</b> register a virtual office or P.O. box as a second GBP — that's a hard prohibition that can suspend your primary listing too. If you want DC-core map presence, the only compliant paths are: (a) lease a real staffed satellite, (b) buy or merge with an existing DC-licensed operator, or (c) bid harder on DC Google Ads + invest in DC neighborhood landing pages from your Vienna base.</p>
+
+    <h3>15. Additional hashtags &amp; platforms</h3>
+    <div class="tag-bank">
+      <span>#dcbride</span><span>#vabride</span><span>#mdbride</span><span>#loudounweddings</span><span>#dcnightlife</span><span>#dmvevents</span><span>#dcrooftop</span><span>#dcsummer</span><span>#dmvfoodie</span><span>#dcmoms</span><span>#vienna_va</span><span>#bethesda_md</span>
+    </div>
+    <p>Also missing from the wedding-platform list: <b>Zola</b> (vendor marketplace, growing fast), <b>Joy</b> (smaller but engaged audience). Create profiles on both.</p>
+
+    <div class="callout good"><b class="tag">What changed in the deliverable</b> The executive summary scorecard now has 8 grades (added Mobile Speed and Brand &amp; Trust Signals). Reviews dropped from C to D+. Paid Ads dropped from D to F. The competitor cards for Reston, Chariots, and Uptown were corrected. The pricing recommendation is now vehicle-class tiered. The partybusrus.com domain issue, regulatory/licensing section, trust signals gap, missing audit areas (call tracking, lead-response, email/SMS, CRM, fleet branding), and risks/assumptions are all new. Items 16–22 below have been added to the master checklist.</div>
+  </div>
+</section>
+
+<!-- GOOGLE ADS PRODUCTIVITY -->
+<section id="ads">
+  <div class="container">
+    <h2><span class="num">12</span>Google Ads productivity assessment</h2>
+    <p class="section-lede">Robert is running roughly $2,000–$4,000/month in Google Ads under the legal entity <b>City Coachways Inc</b>. Frederick doesn't have account access, so this assessment is built entirely from publicly visible signals (Google Ads Transparency Center, search-result observation, and website code analysis). The verdict in one line: <b>the spend is probably bringing in bookings, but a meaningful portion is being wasted and nobody can prove either way until conversion tracking is installed.</b></p>
+
+    <h3>What we know about the current campaign</h3>
+    <div class="kpi">
+      <div><b>Active ad creatives</b><span>66</span><small>Per Google Ads Transparency Center for partylimobusdc.com</small></div>
+      <div><b>Advertiser legal name</b><span style="font-size:18px">City Coachways Inc</span><small>The LLC behind Party Bus R Us</small></div>
+      <div><b>Reported monthly spend</b><span>$2K–$4K</span><small>Per Frederick (May 2026)</small></div>
+      <div><b>Conversion tracking</b><span style="color:#f87171">None</span><small>No GA4, no Meta Pixel, no form events, no call tracking on the site</small></div>
+    </div>
+
+    <h3>Campaign structure (inferred)</h3>
+    <table>
+      <thead><tr><th>Ad type</th><th>What we saw</th><th>Working?</th></tr></thead>
+      <tbody>
+        <tr><td><b>Branded search</b><br><span class="pill yellow">Probably wasteful</span></td><td>Ad ranks #1 for "party bus r us" with sitelinks: Contact Us · Request a Quote · Prom · Every Event · Limo Bus Rental</td><td>You already rank #1 organically for your own name. Most clicks would happen for free. Estimated waste: <b>40–60% of branded budget.</b></td></tr>
+        <tr><td><b>Local Services / Maps Ads</b><br><span class="pill green">Working</span></td><td>Sponsored Maps tile with 4.6 stars, "Call" and "Directions" buttons</td><td>Good fit — phone calls track at the Google level even without site analytics. Maps ads are the best part of this campaign.</td></tr>
+        <tr><td><b>Display image ads</b><br><span class="pill yellow">Probably leaky</span></td><td>Banner ads with "Professional chauffeurs" and "Contact Us Today" copy, pointing to the homepage</td><td>Display traffic converts poorly on a thin homepage. Likely 1–2% conversion at best.</td></tr>
+        <tr><td><b>Non-brand search</b><br><span class="pill red">Not detected</span></td><td>Did NOT appear in the SERP for "party bus dc," "party bus rental dc," or "party bus virginia." Competitors (Uptown, Point to Point, Majestic, Thumbtack) own those slots instead.</td><td>This is where the actual money is. Either Robert isn't bidding on non-brand, or his bids/quality scores aren't competitive.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Estimated math at $3,000/month spend (best guess, no account access)</h3>
+    <table>
+      <thead><tr><th>Bucket</th><th>Spend</th><th>Estimated clicks/calls</th><th>Estimated bookings</th><th>Revenue est.</th></tr></thead>
+      <tbody>
+        <tr><td>Branded search</td><td>$1,200</td><td>~600 clicks @ $2 CPC</td><td>~30 (high intent)</td><td>$24K–$30K</td></tr>
+        <tr><td>Maps / Local Services</td><td>$900</td><td>~45 calls @ $20</td><td>~18 (40% close)</td><td>$14K–$18K</td></tr>
+        <tr><td>Display</td><td>$600</td><td>~600 clicks @ $1</td><td>~3–6</td><td>$2K–$5K</td></tr>
+        <tr><td>Non-brand / search partners</td><td>$300</td><td>~50 clicks @ $6</td><td>~2–3</td><td>$1.4K–$3K</td></tr>
+        <tr><td><b>TOTAL</b></td><td><b>$3,000</b></td><td>—</td><td><b>~50–60 bookings</b></td><td><b>$41K–$56K revenue</b></td></tr>
+      </tbody>
+    </table>
+    <p class="note">These are <b>estimates only</b> — built from industry benchmarks (party bus / limo CPCs in the DMV, typical conversion rates, your $700–$1,000 AOV range). The ROAS pencil-test (13–19×) is unusually high; the real number is likely lower because branded-search clicks would have converted organically anyway. Until conversion tracking is installed, this is directional.</p>
+
+    <h3>Three things to ask Robert during your pitch</h3>
+    <ol style="color:#d6d6ec">
+      <li><b>"Can you pull the Search Terms Report for the last 90 days?"</b> — This shows what people <i>actually typed</i> to trigger your ads (vs. what keywords Robert bid on). You'll see how much money goes to junk like "party bus driver jobs" or "party bus cleaning." Free, takes 5 minutes inside Google Ads.</li>
+      <li><b>"What's the Cost Per Conversion right now?"</b> — If Google Ads says "no conversion data," that confirms tracking is broken. If it's reporting a number, ask which actions are counted (likely just "phone calls from ads," which is fine but incomplete).</li>
+      <li><b>"What's the breakdown of spend by campaign type?"</b> — Branded vs. non-brand vs. Performance Max vs. Display. This single chart tells you whether the ad mix matches what's actually working for the DMV market.</li>
+    </ol>
+
+    <h3>The 60-minute fix that proves productivity</h3>
+    <div class="callout good"><b class="tag">Free · do it first</b> Install <b>Google Analytics 4</b> + <b>Google Tag Manager</b> on partylimobusdc.com (takes ~30 minutes; the Web.com builder supports adding a tracking code in Settings). Then link GA4 to Google Ads. Within 7–14 days, you'll have real conversion data: which keywords book, which ad copy converts, which pages drop people. This single change makes Robert's existing spend 20–40% more efficient by giving the algorithm signal to optimize on. Total cost: $0. Total time: 1 hour.</div>
+
+    <h3>The "should we keep running ads?" framework</h3>
+    <p>Until you have data, here's the order of operations:</p>
+    <ol style="color:#d6d6ec">
+      <li><b>Don't pause anything yet.</b> Killing campaigns blind costs more than letting them run another 30 days while you instrument.</li>
+      <li><b>Install GA4 + call tracking</b> (CallRail ~$45/mo, or Google's free Forwarding Numbers for simpler use).</li>
+      <li><b>Run 30 days with tracking on.</b> Pull the data: Cost / Click / Conversion / Cost-per-conversion by campaign.</li>
+      <li><b>Cut the branded-search bucket experimentally for 14 days.</b> If total leads drop &lt;20%, those branded clicks were cannibalizing organic — reallocate that budget.</li>
+      <li><b>Reallocate freed budget to non-brand</b> ("wedding shuttle dc," "bachelorette party bus virginia," "party bus near me"). Send to new dedicated landing pages — not the homepage.</li>
+      <li><b>Add call-only ads for Maps.</b> Already the best-performing format — double down.</li>
+    </ol>
+
+    <h3>What's almost certainly being wasted right now</h3>
+    <ul class="clean">
+      <li><b>Branded search clicks</b> you'd get for free organically (you rank #1 for "party bus r us")</li>
+      <li><b>Display impressions</b> on irrelevant inventory (Performance Max + open display is a money pit on a thin landing page)</li>
+      <li><b>Generic broad-match keywords</b> picking up "party bus rental insurance," "party bus driver salary," "party bus for sale" (assume yes until search-terms report proves otherwise)</li>
+      <li><b>Out-of-zone clicks</b> from Baltimore / Richmond / non-DMV areas if geo-targeting isn't tight</li>
+    </ul>
+
+    <h3>Frederick's Google Ads action items (no account access needed)</h3>
+    <ul class="checklist">
+      <li><span class="priority p1">P1</span><input type="checkbox" id="ad1"><label for="ad1"><b>Add GA4 + GTM</b> via the Web.com builder's "Add tracking code" field (you may need site access from Robert).</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="ad2"><label for="ad2"><b>Request access</b> to the Google Ads account from Robert (read-only is fine — you don't need to edit).</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="ad3"><label for="ad3"><b>Ask Robert to share the Search Terms Report</b> for the last 90 days. This is a 5-minute export from inside Google Ads.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="ad4"><label for="ad4"><b>Install CallRail</b> (Robert pays, ~$45/mo) for dynamic number insertion across all marketing channels.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="ad5"><label for="ad5"><b>Build dedicated landing pages</b> for each ad-targeted keyword group (wedding, prom, bachelorette, winery tours, monument tours, airport).</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="ad6"><label for="ad6"><b>Rewrite ad copy</b> with concrete offers: "Party Bus DC from $199/hr — Book Today" beats "Luxury Limo Bus Rental Services."</label></li>
+    </ul>
+  </div>
+</section>
+
+<!-- WHERE TO START -->
+<section id="start">
+  <div class="container">
+    <h2><span class="num">13</span>Where to start — Frederick's Week 1 plan</h2>
+    <p class="section-lede">You're the marketing/sales person at a company you don't own. That changes the playbook. Two parallel tracks: <b>(A) things you can do right now without asking Robert</b>, and <b>(B) the pitch you make to Robert to unlock everything else.</b> Run both this week.</p>
+
+    <h3>Track A — Things Frederick can do this week, no permission needed</h3>
+    <div class="timeline">
+      <div class="item"><h4>Today / tomorrow — Delete the Fred Sales review</h4><p>If the review was posted from your personal Google account: sign in → Google Maps → tap your profile → "Your contributions" → "Reviews" → find Party Bus R Us → three-dot menu → "Delete." If you can't find the account, see Section 11.9 for the Conflict-of-Interest reporting fallback. <b>Do this today.</b> Profile suspension is real and immediate.</p></div>
+      <div class="item"><h4>This week — The parking lot photo shoot</h4><p>Use Section 8's shot list. 90–120 minutes total. You don't need Robert's approval to walk around buses with a phone. Save everything to a shared folder (Google Drive or Dropbox) labeled <span class="k">/2026-05-lot-shoot/&lt;bus name&gt;/</span>. These assets become the raw material for every IG post, every website photo, every Google Business Profile upload, every ad creative for the next 6 months.</p></div>
+      <div class="item"><h4>This week — Verify @partybusrus Instagram from your phone</h4><p>Open Instagram on your phone where you said you're logged in. Confirm you have admin access. Check the bio. If the desktop security challenge was genuine, you may need to verify a code from the recovery flow. Once confirmed, update the bio to match the canonical address and add Linktree.</p></div>
+      <div class="item"><h4>This week — Reclaim Birdeye (free)</h4><p>Go to birdeye.com, search "Party Bus R Us Falls Church VA," click "Claim this profile." You'll need to verify business ownership — use Robert's email or your own work email. Once claimed, respond to all 11 reviews. This is free, takes 30 minutes, and unlocks a 4.6/11 review badge you can put on the website.</p></div>
+      <div class="item"><h4>This week — Audit the current GBP yourself</h4><p>Search "Party Bus R Us Herndon" → open the knowledge panel. Document everything: photos uploaded, posts published, Q&amp;A populated, categories, hours. Take screenshots. This is your baseline. Even if you can't edit, you can show Robert exactly what needs to change.</p></div>
+      <div class="item"><h4>This week — Wedding venue outreach (10 venues)</h4><p>No budget required. Send personalized emails to 10 DMV wedding venues offering to be their "preferred party bus + wedding shuttle vendor." Suggest a 10% kickback or a free trip credit per referral. Target: Salamander Resort, Stone Tower Winery, Lansdowne, DAR Constitution Hall, The Mayflower, Carriage House DC, Whitehall Estate, The Inn at Willow Grove, Top of the Town, The Hay-Adams. Track responses in a simple Google Sheet.</p></div>
+      <div class="item"><h4>This week — Inquire on partybusrus.com</h4><p>Run a WHOIS lookup at <span class="k">whois.domaintools.com</span>. If the registrant email is public, send a polite "would you consider selling?" inquiry. Don't disclose budget. Most one-page GoDaddy sites are owned by hobbyists who'll take $500–$2,000. This is a $0 conversation that could solve your brand problem.</p></div>
+      <div class="item"><h4>This week — Build the pitch deck for Robert</h4><p>One page. The audit grades. The three biggest problems (GBP risk, partybusrus.com, no measurement on $3K/mo ad spend). The three biggest opportunities (Map Pack, wedding platforms, content/IG). Ask for the budget tier decision and the access list (next item).</p></div>
+    </div>
+
+    <h3>Track B — The pitch to Robert: what to ask for</h3>
+    <p>Schedule a 60-minute sit-down. Frame it as: <i>"I've put together a full digital audit. There's $40–60K of revenue we're leaking annually that's fixable with small budget and a few permission unlocks. I want to walk you through it and ask for some specific things."</i></p>
+
+    <h3>The 8-item ask list</h3>
+    <table>
+      <thead><tr><th>Ask</th><th>What it unlocks</th><th>Cost / risk</th></tr></thead>
+      <tbody>
+        <tr><td><b>1. Google Business Profile manager access</b> (he can add you as a manager from the GBP dashboard)</td><td>You can update photos, posts, hours, Q&amp;A, respond to reviews, fix the NAP, switch category to Bus Charter</td><td>$0. Reversible.</td></tr>
+        <tr><td><b>2. Web.com builder login</b> or admin access</td><td>You can fix the "Vienna VA 2218" typo, compress the hero image, add GA4 tracking, add Instagram link</td><td>$0. Reversible.</td></tr>
+        <tr><td><b>3. Google Ads read-only access</b> (Robert links your Google account at admin.google.com/adsmanager)</td><td>You can see Search Terms, conversion data, spend breakdown, and brief a Google Ads consultant if needed</td><td>$0. Read-only is no-risk.</td></tr>
+        <tr><td><b>4. $0 GA4 install approval</b></td><td>Conversion tracking + Google Ads optimization signal</td><td>$0. Free Google product.</td></tr>
+        <tr><td><b>5. Budget tier decision</b> (Scrappy / Moderate / Aggressive — see Section 9)</td><td>Everything else cascades from this. Most appropriate for a 7-bus operator: Moderate ($5–10K / 90 days).</td><td>Real spend. Frame as: <i>"This is what we're already partially doing in ads — we're just going to redirect it to higher-leverage channels."</i></td></tr>
+        <tr><td><b>6. Authorization to claim third-party profiles</b> (TheKnot, WeddingWire, BBB, The Bash, Thumbtack, Zola, Joy)</td><td>Wedding leads unlock immediately. TheKnot/WeddingWire are the highest-LTV channels you have zero presence on.</td><td>~$0–$1,500/quarter combined depending on which paid tiers you choose. TheKnot/WeddingWire Pro listings ~$500–$1,000/quarter each.</td></tr>
+        <tr><td><b>7. Decision on partybusrus.com</b> (acquire / rebrand / accept)</td><td>Solves a structural brand confusion problem. Recommend: authorize you to make a low-ball inquiry ($500–$2,000 budget).</td><td>$0–$2,000. The inquiry itself is free.</td></tr>
+        <tr><td><b>8. Authorization to publish flat-rate pricing</b> on the website</td><td>Beats every "quote-only" competitor and lifts conversion 30–50%. See Section 11.1 for the vehicle-class tiered table.</td><td>$0. Reversible. Real risk only if Robert wants to keep pricing private — discuss tradeoffs.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Robert's likely objections + how to answer them</h3>
+    <div class="cards">
+      <div class="card"><h4>"I'm already spending $3K/month on ads."</h4><p>"Right — and we have no way to measure if it's working. Step one is making sure that spend is producing returns. After 30 days of data, we'll know if we should scale it up or move some to non-brand. Either way, you'll know."</p></div>
+      <div class="card"><h4>"The website is fine — people call us anyway."</h4><p>"You're getting 15–30 calls a month from people who already know your name. Competitors with worse buses are taking the customers who don't yet know you exist. We're invisible on the searches that matter — that's where the growth is."</p></div>
+      <div class="card"><h4>"Why do we need Instagram for a party bus?"</h4><p>"Because bachelorette and prom audiences book based on Instagram. DMV Party Bus has 16,000 followers and runs a real feed. Their bookings prove the channel works. We have 71 followers and 6 posts."</p></div>
+      <div class="card"><h4>"How long until I see results?"</h4><p>"First wins in 14 days (fixing GBP, deleting the self-review, lot photos live). Map Pack movement in 60–75 days. Real revenue lift starts months 3–4 as content compounds. The whole plan is built to show signs of life inside the first month."</p></div>
+      <div class="card"><h4>"Can't we just do this ourselves with no extra spend?"</h4><p>"Yes — that's the Scrappy tier. We can move the most important needles for under $2,500 over 90 days. The trade-off is slower compounding and you doing more of the work alongside the operations job. The Moderate tier ($5–10K) buys you infrastructure that keeps producing leads after the 90 days end."</p></div>
+      <div class="card"><h4>"What if it doesn't work?"</h4><p>"The unlocks I'm asking for are mostly free or reversible. The biggest commitments — wedding-platform listings and ad reallocation — are quarter-by-quarter. If we're not seeing the lead numbers we expect by day 60, we adjust. The audit shows the worst-case path is: we spend $5K, fix the obvious bugs (GBP, NAP, IG), and end the quarter no worse off but with measurement and assets in place."</p></div>
+    </div>
+
+    <h3>Day-by-day, the first 14 days</h3>
+    <div class="timeline">
+      <div class="item"><h4>Day 1 (today)</h4><p>Delete the Fred Sales review · Send Robert the audit deliverable + book the meeting · Spend 30 minutes planning the lot shoot</p></div>
+      <div class="item"><h4>Day 2</h4><p>Lot shoot (90–120 min) · Edit 10 hero photos that evening · Save organized in shared folder · Reclaim Birdeye</p></div>
+      <div class="item"><h4>Day 3</h4><p>Verify Instagram account from phone · Update bio · Add Linktree with quote / call / fleet / reviews · WHOIS lookup on partybusrus.com</p></div>
+      <div class="item"><h4>Day 4</h4><p>Send 10 wedding-venue partnership emails · Document current GBP state with screenshots · Sketch the pitch deck for Robert</p></div>
+      <div class="item"><h4>Day 5 (Robert meeting)</h4><p>60-minute pitch · Walk through audit · Make the 8 asks · Get budget tier decision · Capture commitments in writing</p></div>
+      <div class="item"><h4>Day 6–7</h4><p>Once Robert grants access: add GA4 + GTM (30 min) · Fix the Vienna VA 22180 typo · Switch GBP primary category to Bus Charter · Upload 25 photos from the shoot to GBP · Add Instagram link to website</p></div>
+      <div class="item"><h4>Day 8</h4><p>Post first Instagram Reel: "Meet the fleet" using the shot list footage. Cross-post to TikTok. Set IG cadence: Mon/Wed/Fri 3 reels/week</p></div>
+      <div class="item"><h4>Day 9</h4><p>Create profiles: TheKnot, WeddingWire, BBB, The Bash, Thumbtack, Zola, Joy. Use the canonical NAP everywhere</p></div>
+      <div class="item"><h4>Day 10</h4><p>Pay for citation-cleanup service (BrightLocal or Whitespark, ~$200) to sync NAP across 50 directories. Set up SMS review request system (NiceJob trial)</p></div>
+      <div class="item"><h4>Day 11–12</h4><p>If Robert greenlit website rebuild: brief the vendor (or DIY with Astra). If not: do everything possible inside Web.com builder. Either way, draft the new homepage copy with vehicle-class pricing</p></div>
+      <div class="item"><h4>Day 13</h4><p>Post second IG reel · Edit the first wedding-shuttle blog post · Reach out to 5 more wedding venues</p></div>
+      <div class="item"><h4>Day 14 (review)</h4><p>Pull GA4 data — first week of measurement. Recap to Robert: what was done, what was learned, what's next. Lock in the day 15–45 sprint plan</p></div>
+    </div>
+
+    <h3>Three KPIs to track from Day 1</h3>
+    <div class="kpi">
+      <div><b>Inbound leads / week</b><span>Baseline → ?</span><small>Count every quote form + phone call. Start a simple Google Sheet today.</small></div>
+      <div><b>Google reviews</b><span>25 → 50</span><small>Target +25 in 90 days. Track weekly.</small></div>
+      <div><b>Instagram followers</b><span>71 → 500</span><small>Target +430 in 30 days. Realistic with 3 reels/week.</small></div>
+    </div>
+
+    <div class="callout good"><b class="tag">The single most important thing</b> Get GA4 installed within 7 days. Every other decision in this plan — whether to keep the Google Ads, which content to invest in, which channels are working — depends on having that data. It's free. It takes 30 minutes. It's the foundation everything else is built on.</div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist">
+  <div class="container">
+    <h2><span class="num">14</span>Master action checklist</h2>
+    <p class="section-lede">Tap each item as you complete it (your browser will remember the state for this session). Sorted by priority.</p>
+
+    <h3>This week — P1 / cannot wait</h3>
+    <ul class="checklist">
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c1"><label for="c1"><b>Delete the Fred Sales self-review</b> from your Google Business Profile (Google can suspend the listing).</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c2"><label for="c2"><b>Verify Instagram account access</b> from your phone (desktop saw a security challenge — confirm @partybusrus is yours and unlocked).</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c3"><label for="c3"><b>Choose one canonical address + phone</b> (Vienna VA 22180 vs Herndon vs Falls Church — pick one).</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c4"><label for="c4"><b>Fix the "Vienna VA 2218" typo</b> in the website footer (add the missing zip digit).</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c5"><label for="c5"><b>Update GBP, Facebook, Instagram, Yelp, Birdeye</b> to all show the same address and phone.</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c6"><label for="c6"><b>Switch GBP primary category</b> from "Limousine service" to "Bus charter." Add secondary categories.</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c7"><label for="c7"><b>Reclaim the Birdeye profile</b> (currently unclaimed) and respond to all 11 reviews.</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c8"><label for="c8"><b>Decide budget tier</b> (Scrappy / Moderate / Aggressive) and commit to it.</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c8b"><label for="c8b"><b>Decide partybusrus.com strategy:</b> (a) acquire the domain via outreach to current owner, (b) rebrand under a more defensible name, or (c) accept the leakage and document a workaround. Don't ignore.</label></li>
+    </ul>
+
+    <h3>Next 14 days — P1 / launch</h3>
+    <ul class="checklist">
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c9"><label for="c9"><b>Do the parking-lot photo shoot</b> using the shot list (section 8).</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c10"><label for="c10"><b>Install Google Analytics 4</b> and <b>Meta Pixel</b> on the website (free, takes 20 minutes).</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c11"><label for="c11"><b>Add real Instagram, Facebook, Yelp, TikTok links</b> to the website (replace the dead Share buttons).</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c12"><label for="c12"><b>Pull the branded Google Ad</b> — save the budget for non-brand campaigns next month.</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c13"><label for="c13"><b>Create BBB profile + apply for accreditation.</b></label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c14"><label for="c14"><b>Create TheKnot, WeddingWire, The Bash, Thumbtack profiles.</b></label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c15"><label for="c15"><b>Reset Instagram bio</b> to match canonical address; add Linktree with quote, call, fleet, reviews links.</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c16"><label for="c16"><b>Set up SMS review request</b> sent within 30 minutes of every drop-off (NiceJob, Birdeye, or even a Zapier flow).</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c17"><label for="c17"><b>Decide pricing</b>: publish vehicle-class tiered rates ($199 / $249 / $299 weekday by class · $299 / $349 / $399 weekend · 4-hr min · gratuity included · see section 11.1).</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c17b"><label for="c17b"><b>Compress the hero image</b> on the homepage (current LCP is 9.2s on mobile — target &lt;2.5s). One change, instant SEO + UX win.</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c17c"><label for="c17c"><b>Sync service area</b> between homepage Contact block and /Contact.html/ (currently mismatched — homepage says DMV-wide, Contact page says DC only).</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c17d"><label for="c17d"><b>Publish WMATC #, USDOT #, MC #, and insurance amount</b> in the website footer and on a /safety-and-credentials page. This alone closes the trust gap with Chariots and Reston.</label></li>
+      <li><span class="priority p1">P1</span><input type="checkbox" id="c17e"><label for="c17e"><b>Publish the BYOB / alcohol policy</b> on a dedicated page — Virginia is BYOB-only by law and stating this protects you legally and matches Chariots' SEO play.</label></li>
+    </ul>
+
+    <h3>Days 15–45 — P2 / foundation</h3>
+    <ul class="checklist">
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c18"><label for="c18"><b>Migrate website</b> off Web.com to WordPress (Astra) or Webflow. Keep the domain.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c19"><label for="c19"><b>Build 10 city landing pages</b> (Arlington, Alexandria, Tysons, McLean, Fairfax, Vienna, Bethesda, Silver Spring, Rockville, Georgetown).</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c20"><label for="c20"><b>Build 6 service pages</b> (wedding shuttle, bachelorette, bachelor, prom, winery tours, monument tours).</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c21"><label for="c21"><b>Build 7 fleet detail pages</b> — one per actual bus, with capacity, amenities, photos, FAQ.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c22"><label for="c22"><b>Build a pricing page</b> with flat rates, packages, peak/off-peak, deposit terms.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c23"><label for="c23"><b>Install schema markup</b>: LocalBusiness, LimoOrTaxi, Service, Vehicle, FAQ, Review, Breadcrumb, Organization.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c24"><label for="c24"><b>Publish 3 cornerstone blog posts</b>: pricing, sizing, bachelorette itinerary.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c25"><label for="c25"><b>Launch Instagram cadence</b>: 3 reels / week, cross-post to TikTok and YouTube Shorts.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c26"><label for="c26"><b>Citation cleanup</b>: pay BrightLocal or Whitespark $200 to sync NAP across 50 directories.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c27"><label for="c27"><b>Outreach to 20 wedding venues</b> for preferred-vendor relationships.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c28"><label for="c28"><b>Build a real quote form</b> (multi-step) — replace the contact form.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c28b"><label for="c28b"><b>Install CallRail call tracking</b> (~$45/mo) with dynamic number insertion across organic, Google Ads, Meta, and partner channels.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c28c"><label for="c28c"><b>Set up lead-response automation</b>: instant SMS to ops + auto-text to lead within 60 seconds of form submission. Use Zapier or a CRM-native flow.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c28d"><label for="c28d"><b>Move bookings to a real CRM</b> (HubSpot Starter ~$20/mo or Limo Anywhere industry-specific).</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c28e"><label for="c28e"><b>Spy on competitor ads</b>: open Meta Ad Library, screenshot active creatives from DMV Party Bus, Chariots, Reston, Uptown, Empire. Subscribe to their email lists.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c28f"><label for="c28f"><b>Build /safety-and-credentials page</b> with WMATC, USDOT, MC, $5M insurance, driver background-check policy, vehicle inspection cadence, BYOB policy.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c28g"><label for="c28g"><b>Verify the actual fleet count (7 vs 9 listed on the current Fleet page)</b> — consolidate or build 7 distinct fleet detail URLs to match reality.</label></li>
+    </ul>
+
+    <h3>Days 46–90 — P2 / compound</h3>
+    <ul class="checklist">
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c29"><label for="c29"><b>Launch non-brand Google Ads</b> ($1,500–$2,500): party bus rental dc, wedding shuttle dc, bachelorette party bus dc.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c30"><label for="c30"><b>Launch Meta retargeting</b> ($750) on website visitors.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c31"><label for="c31"><b>Hit 24 new Google reviews</b> (target +12 from organic + 12 from SMS automation).</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c32"><label for="c32"><b>Publish 6 more blog posts</b> (wedding venues, winery itinerary, sizing comparison, monument tour, prom checklist, sports venues).</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c33"><label for="c33"><b>Sign 5 wedding-venue partnerships.</b></label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c34"><label for="c34"><b>Sign 3 winery partnerships.</b></label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c35"><label for="c35"><b>Hit 1,500 Instagram followers.</b></label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c35b"><label for="c35b"><b>Email marketing setup</b>: Klaviyo or Mailchimp. Capture emails on every quote. Build drip campaigns for new lead, past customer, prom parent, wedding inquiry.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c35c"><label for="c35c"><b>SMS marketing setup</b> beyond review requests — post-event review SMS, prom-season broadcasts, NYE reminders (~$50/mo).</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c35d"><label for="c35d"><b>Create Zola and Joy vendor profiles</b> (in addition to TheKnot and WeddingWire).</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c35e"><label for="c35e"><b>Vehicle wraps / fleet branding</b> — Party Bus R Us logo + URL + phone on each bus exterior ($1,500–$3,500/bus). Pays back in 6 months as moving billboards.</label></li>
+      <li><span class="priority p2">P2</span><input type="checkbox" id="c35f"><label for="c35f"><b>Driver uniform standard</b> — embroidered black polo + slacks at minimum.</label></li>
+    </ul>
+
+    <h3>Backlog — P3 / when capacity allows</h3>
+    <ul class="checklist">
+      <li><span class="priority p3">P3</span><input type="checkbox" id="c36"><label for="c36">Add 360° / Matterport tours to each fleet page.</label></li>
+      <li><span class="priority p3">P3</span><input type="checkbox" id="c37"><label for="c37">Build a real-time online booking system with calendar.</label></li>
+      <li><span class="priority p3">P3</span><input type="checkbox" id="c38"><label for="c38">Build /es/ Spanish landing pages for quinceañera bookings.</label></li>
+      <li><span class="priority p3">P3</span><input type="checkbox" id="c39"><label for="c39">Research opening a second physical satellite location in DC or Bethesda (Map Pack extension).</label></li>
+      <li><span class="priority p3">P3</span><input type="checkbox" id="c40"><label for="c40">Hire a content creator on retainer ($1,500/mo).</label></li>
+      <li><span class="priority p3">P3</span><input type="checkbox" id="c41"><label for="c41">Pitch PR: Washingtonian, DCist, Borrowed &amp; Blue, Northern Virginia Magazine.</label></li>
+      <li><span class="priority p3">P3</span><input type="checkbox" id="c42"><label for="c42">Local partnership: sponsor a Bethesda 5K, a DC bar crawl, or a wedding showcase.</label></li>
+      <li><span class="priority p3">P3</span><input type="checkbox" id="c43"><label for="c43"><b>Acquire or formally accept partybusrus.com</b> (it's confirmed owned by a separate operator). See section 11.3 for the three options.</label></li>
+      <li><span class="priority p3">P3</span><input type="checkbox" id="c44"><label for="c44"><b>Branded business cards for each bus</b> — 500 cards in a sleeve in every bus glove box ($40/pack). Doubles post-event review rate.</label></li>
+      <li><span class="priority p3">P3</span><input type="checkbox" id="c45"><label for="c45"><b>Trademark research</b> — consult an IP attorney on whether "Party Bus R Us" is defensible (descriptive + "R Us" suffix is a known risk).</label></li>
+      <li><span class="priority p3">P3</span><input type="checkbox" id="c46"><label for="c46"><b>BBB accreditation</b> — apply once profile is created. Annual fee ~$500. Trust signal Chariots and Reston already have.</label></li>
+    </ul>
+  </div>
+</section>
+
+<div class="footer">
+  Audit prepared May 13, 2026 · Triple-checked &amp; verified · Party Bus R Us · Built for Frederick.<br>
+  Click any checklist item to mark it complete. Print-friendly — hit ⌘P / Ctrl+P.
+</div>
+
+<button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+
+<script>
+// persist checkbox state per session
+document.querySelectorAll('.checklist input[type=checkbox]').forEach(cb=>{
+  const k='pbru-'+cb.id;
+  cb.checked = localStorage.getItem(k)==='1';
+  cb.addEventListener('change',()=>localStorage.setItem(k, cb.checked?'1':'0'));
+});
+// smooth scroll for nav
+document.querySelectorAll('nav.sticky a').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>

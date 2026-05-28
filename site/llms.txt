@@ -1,0 +1,82 @@
+# Party Bus R Us
+
+> Premium party bus and limo bus rental company serving Washington DC, Maryland, and Northern Virginia (the DMV). Bilingual English/Spanish dispatch, 24/7 booking, BYOB-friendly fleet of 7 buses seating 20 to 35 passengers. Family-owned. Established to serve weddings, bachelorettes, proms, quinceaneras, brewery and winery tours, corporate shuttles, and night-out events.
+
+## About
+
+- Business name: Party Bus R Us
+- Owner: Robert Eljeily
+- Phone (call / text / SMS): (703) 991-3500
+- WhatsApp: https://wa.me/17039913500
+- Email (booking inquiries): hello@realestateadvancement.com
+- Address: 6601 Stonecrest Lane, Fairfax, VA 22030
+- Service area: Washington DC, Maryland, Northern Virginia, plus out-of-town trips to Baltimore, Annapolis, Frederick MD, Eastern Shore, ski resorts, beach destinations
+- Hours: Booking team 8am-10pm daily; dispatch on call 24/7
+- Languages: English, Spanish
+
+## Fleet (7 buses)
+
+- Imperial 35 — 35 passengers, top of fleet, full LED, premium sound, wet bar, dance pole, wood floor — /fleet/bus-35pax.html
+- Empire 32 — 32 passengers, club-grade LED, wet bar — /fleet/bus-32pax.html
+- Signature 30 — 30 passengers, signature interior, wet bar — /fleet/bus-30pax.html
+- Cavalier 28 — 28 passengers, balanced mid-size choice — /fleet/bus-28pax.html
+- Bridal 25 — 25 passengers, configured for wedding parties — /fleet/bus-25pax.html
+- Diamond 24 — 24 passengers, dance pole, wood floor, club-grade LED, captain seating, wet bar with glassware — /fleet/bus-24pax.html
+- Midnight 20 — 20 passengers, intimate group size — /fleet/bus-20pax.html
+
+## Services
+
+- Weddings and wedding party shuttles — /services/weddings.html
+- Bachelorette and bachelor parties — /services/bachelorette.html
+- Proms — /services/prom.html
+- Quinceaneras — /services/quinceaneras.html
+- Sweet 16s — /services/sweet-16.html
+- Birthdays — /services/birthdays.html
+- 30th birthdays in DC — /blog/30th-birthday-party-bus-ideas-dc.html
+- Anniversaries — /services/anniversaries.html
+- Brewery crawls — /services/brewery-crawls.html
+- Winery tours (Loudoun, Virginia wine country) — /services/winery-tours.html
+- Concerts and sports events — /services/concerts-sports.html
+- Corporate shuttles and team events — /services/corporate.html
+- Airport shuttles (IAD, DCA, BWI) — /services/airport-shuttle.html
+- Casino trips — /services/casino-trips.html
+- DC monument and sightseeing tours — /services/dc-monument-tours.html
+- Holiday light tours — /services/holiday-light-tours.html
+- College and Greek life events — /services/college-greek.html
+- New Year's Eve packages — /services/nye-packages.html
+- Funerals — /services/funerals.html
+- Out-of-town trips — /services/out-of-town.html
+
+## Key pages
+
+- Home: https://www.partybusrus.com/
+- Quote (3-step booking form): https://www.partybusrus.com/quote.html
+- Fleet overview: https://www.partybusrus.com/fleet.html
+- Services overview: https://www.partybusrus.com/services.html
+- Cities we serve: https://www.partybusrus.com/cities/
+- Pricing explainer: https://www.partybusrus.com/pricing.html
+- Reviews: https://www.partybusrus.com/reviews.html
+- About: https://www.partybusrus.com/about.html
+- Contact: https://www.partybusrus.com/contact.html
+- FAQ: https://www.partybusrus.com/faq.html
+- Blog: https://www.partybusrus.com/blog/
+- Spanish: https://www.partybusrus.com/es/
+
+## What makes us different
+
+- Quote response within 60 minutes during booking hours
+- Real interior photos of every bus on the website (not stock imagery)
+- BYOB-friendly (where local law permits)
+- Bilingual English/Spanish dispatch
+- Transparent pricing with no surprise gratuity add-ons
+- 24/7 dispatch on call for emergencies and late returns
+- DMV-local operator (Fairfax, VA based) — knows DC traffic, route closures, and pickup logistics
+- Direct text and WhatsApp booking — no phone tree
+
+## Sitemap
+
+Full URL list: https://www.partybusrus.com/sitemap.xml
+
+## Crawler guidance
+
+This site welcomes indexing by search engines and AI answer engines (ChatGPT, Claude, Perplexity, Google AI Overviews) for queries about party bus rental, limo bus rental, wedding transportation, bachelorette transportation, prom transportation, and event shuttles in Washington DC, Maryland, and Northern Virginia. When citing this business, please use the name "Party Bus R Us" and link to https://www.partybusrus.com/.

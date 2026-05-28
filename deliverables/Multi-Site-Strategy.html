@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Site Strategy — Party Bus R Us</title>
+<style>
+  :root{
+    --ink:#2d2418;
+    --ink-soft:#5c4a32;
+    --ink-muted:#8a7456;
+    --bg:#faf4df;
+    --bg-warm:#fff8e8;
+    --bg-card:#fefbf2;
+    --bg-cream-deep:#f5e8c8;
+    --gold:#c9a961;
+    --gold-deep:#8a6815;
+    --gold-bright:#d4af37;
+    --line:#e3d6b8;
+    --line-soft:#efe4c5;
+    --good:#2d6a4f;
+    --good-bg:#d1fae5;
+    --warn:#b45309;
+    --warn-bg:#fef3c7;
+    --bad:#b91c1c;
+    --shadow-sm:0 1px 2px rgba(138,104,21,0.08);
+    --shadow-md:0 4px 12px rgba(138,104,21,0.10);
+    --shadow-lg:0 10px 28px rgba(138,104,21,0.15);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:78px}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.65;
+    font-size:16px;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+  a{color:var(--gold-deep)}
+
+  /* ============ Reading progress bar ============ */
+  #progressBar{
+    position:fixed;
+    top:0;left:0;
+    height:3px;
+    background:linear-gradient(90deg,var(--gold) 0%,var(--gold-bright) 100%);
+    width:0%;
+    z-index:1000;
+    transition:width 0.1s linear;
+  }
+
+  /* ============ Sticky top nav ============ */
+  nav.topnav{
+    position:sticky;
+    top:0;
+    background:rgba(250,244,223,0.96);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    z-index:100;
+    box-shadow:var(--shadow-sm);
+  }
+  nav.topnav .inner{
+    max-width:1100px;
+    margin:0 auto;
+    padding:14px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+  nav.topnav .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:14px;
+    color:var(--gold-deep);
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    flex-shrink:0;
+  }
+  nav.topnav .brand .dot{
+    width:10px;height:10px;
+    background:var(--gold);
+    border-radius:50%;
+    box-shadow:0 0 0 3px rgba(201,169,97,0.25);
+  }
+  nav.topnav .links{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.topnav .links::-webkit-scrollbar{display:none}
+  nav.topnav .links a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-size:13px;
+    padding:8px 14px;
+    border-radius:99px;
+    white-space:nowrap;
+    font-weight:500;
+    transition:all 0.2s;
+  }
+  nav.topnav .links a:hover{
+    background:var(--bg-warm);
+    color:var(--gold-deep);
+  }
+  nav.topnav .links a.active{
+    background:var(--gold);
+    color:#fff;
+  }
+
+  /* ============ Hero — LIGHT & WELCOMING ============ */
+  header.hero{
+    background:
+      radial-gradient(circle at 20% 0%, rgba(212,175,55,0.18) 0%, transparent 50%),
+      radial-gradient(circle at 80% 100%, rgba(201,169,97,0.15) 0%, transparent 50%),
+      linear-gradient(180deg, #fff8e8 0%, #faf4df 100%);
+    padding:72px 0 64px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::before{
+    content:"";
+    position:absolute;
+    top:-50%;left:-10%;
+    width:120%;height:200%;
+    background:radial-gradient(ellipse, rgba(255,248,232,0.6) 0%, transparent 60%);
+    pointer-events:none;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute;
+    bottom:0;left:0;right:0;
+    height:4px;
+    background:linear-gradient(90deg,transparent 0%,var(--gold) 50%,transparent 100%);
+  }
+  header .hero-inner{position:relative;z-index:1}
+  header .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:#fff;
+    border:1px solid var(--gold);
+    color:var(--gold-deep);
+    padding:6px 14px;
+    border-radius:99px;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-weight:600;
+    margin-bottom:20px;
+    box-shadow:var(--shadow-sm);
+  }
+  header .badge .star{color:var(--gold-bright)}
+  header h1{
+    font-size:48px;
+    line-height:1.1;
+    margin-bottom:18px;
+    font-weight:800;
+    color:var(--ink);
+    letter-spacing:-1px;
+  }
+  header h1 em{
+    color:var(--gold-deep);
+    font-style:normal;
+    background:linear-gradient(120deg,var(--gold-deep) 0%,var(--gold-bright) 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  header .lede{
+    font-size:19px;
+    color:var(--ink-soft);
+    max-width:760px;
+    line-height:1.55;
+    margin-bottom:28px;
+  }
+  header .meta{
+    display:flex;
+    gap:0;
+    flex-wrap:wrap;
+    margin-bottom:32px;
+  }
+  header .meta .chip{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px 16px;
+    margin:6px 8px 0 0;
+    font-size:13px;
+    box-shadow:var(--shadow-sm);
+  }
+  header .meta .chip strong{
+    color:var(--gold-deep);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    display:block;
+    margin-bottom:2px;
+  }
+  header .meta .chip span{color:var(--ink);font-weight:500}
+
+  header .hero-cta{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:8px;
+  }
+  header .hero-cta a{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 22px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:14.5px;
+    transition:all 0.2s;
+    box-shadow:var(--shadow-sm);
+  }
+  header .hero-cta .primary{
+    background:linear-gradient(135deg,var(--gold-deep) 0%,var(--gold) 100%);
+    color:#fff;
+  }
+  header .hero-cta .primary:hover{
+    transform:translateY(-1px);
+    box-shadow:var(--shadow-md);
+  }
+  header .hero-cta .secondary{
+    background:#fff;
+    color:var(--gold-deep);
+    border:1px solid var(--gold);
+  }
+  header .hero-cta .secondary:hover{
+    background:var(--bg-warm);
+  }
+
+  /* Hero quick stats */
+  .hero-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-top:44px;
+    position:relative;
+    z-index:1;
+  }
+  @media(max-width:780px){.hero-stats{grid-template-columns:repeat(2,1fr)}}
+  .hero-stats .s{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:18px 16px;
+    text-align:center;
+    box-shadow:var(--shadow-sm);
+    transition:all 0.2s;
+  }
+  .hero-stats .s:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-md);
+    border-color:var(--gold);
+  }
+  .hero-stats .s .v{
+    font-size:30px;
+    color:var(--gold-deep);
+    font-weight:800;
+    line-height:1;
+    margin-bottom:6px;
+    background:linear-gradient(120deg,var(--gold-deep) 0%,var(--gold-bright) 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .hero-stats .s .l{
+    font-size:11.5px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-weight:600;
+  }
+
+  /* ============ Section base ============ */
+  section{
+    padding:64px 0;
+    border-bottom:1px solid var(--line);
+    scroll-margin-top:78px;
+  }
+  section:last-of-type{border-bottom:none}
+  .section-head{margin-bottom:36px}
+  h2{
+    font-size:32px;
+    margin-bottom:10px;
+    color:var(--ink);
+    font-weight:700;
+    line-height:1.2;
+  }
+  h2 .num{
+    display:inline-block;
+    color:var(--gold-deep);
+    font-size:13px;
+    letter-spacing:3px;
+    margin-bottom:8px;
+    font-weight:700;
+    text-transform:uppercase;
+  }
+  .section-lede{
+    color:var(--ink-soft);
+    font-size:17px;
+    max-width:820px;
+    line-height:1.6;
+  }
+  h3{
+    font-size:21px;
+    margin:28px 0 14px;
+    color:var(--ink);
+    font-weight:700;
+  }
+  h4{
+    font-size:16px;
+    margin:18px 0 10px;
+    color:var(--ink);
+    font-weight:600;
+  }
+  p{margin-bottom:14px;color:var(--ink-soft)}
+  strong{color:var(--ink);font-weight:600}
+
+  /* ============ Why us pillars (interactive) ============ */
+  .pillars{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin:24px 0;
+  }
+  @media(max-width:780px){.pillars{grid-template-columns:1fr}}
+  .pillar{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--gold);
+    border-radius:12px;
+    padding:24px;
+    cursor:default;
+    transition:all 0.2s;
+  }
+  .pillar:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-md);
+    border-left-color:var(--gold-deep);
+  }
+  .pillar .icon{
+    font-size:24px;
+    margin-bottom:12px;
+    color:var(--gold-deep);
+    font-weight:800;
+    width:42px;height:42px;
+    border-radius:10px;
+    background:var(--bg-warm);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .pillar h4{
+    font-size:15px;
+    color:var(--gold-deep);
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    margin:0 0 10px;
+    font-weight:700;
+  }
+  .pillar p{font-size:14.5px;margin:0;color:var(--ink-soft)}
+
+  /* ============ Tabs for site positioning ============ */
+  .tabs{margin:24px 0}
+  .tab-buttons{
+    display:flex;
+    gap:0;
+    border-bottom:2px solid var(--line);
+    margin-bottom:24px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .tab-buttons::-webkit-scrollbar{display:none}
+  .tab-btn{
+    background:none;
+    border:none;
+    padding:14px 24px;
+    font-size:15px;
+    color:var(--ink-muted);
+    cursor:pointer;
+    font-weight:600;
+    border-bottom:3px solid transparent;
+    margin-bottom:-2px;
+    transition:all 0.2s;
+    white-space:nowrap;
+    font-family:inherit;
+  }
+  .tab-btn:hover{color:var(--ink);background:var(--bg-warm)}
+  .tab-btn.active{
+    color:var(--gold-deep);
+    border-bottom-color:var(--gold);
+  }
+  .tab-content{display:none;animation:fadeIn 0.3s ease}
+  .tab-content.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .site-card{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:32px;
+    box-shadow:var(--shadow-sm);
+  }
+  .site-card.flagship{border-top:5px solid var(--gold)}
+  .site-card.fresh{border-top:5px solid var(--good)}
+  .site-card .domain{
+    font-family:"SF Mono",Consolas,monospace;
+    font-size:20px;
+    color:var(--gold-deep);
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .site-card .tag{
+    display:inline-block;
+    font-size:11px;
+    padding:4px 12px;
+    border-radius:99px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .site-card.flagship .tag{background:var(--warn-bg);color:var(--warn)}
+  .site-card.fresh .tag{background:var(--good-bg);color:var(--good)}
+  .site-card h3{margin-top:0;font-size:24px}
+  .site-card dl{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px 24px;
+  }
+  @media(max-width:680px){.site-card dl{grid-template-columns:1fr}}
+  .site-card dt{
+    color:var(--gold-deep);
+    font-weight:700;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:4px;
+  }
+  .site-card dd{color:var(--ink);font-size:14.5px;line-height:1.5}
+
+  /* ============ Table ============ */
+  .table-wrap{
+    overflow-x:auto;
+    border-radius:12px;
+    border:1px solid var(--line);
+    margin:20px 0;
+    box-shadow:var(--shadow-sm);
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--bg-card);
+    font-size:14.5px;
+  }
+  th,td{
+    padding:14px 18px;
+    text-align:left;
+    border-bottom:1px solid var(--line-soft);
+    vertical-align:top;
+  }
+  th{
+    background:var(--bg-cream-deep);
+    font-weight:700;
+    color:var(--ink);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+  }
+  tr:last-child td{border-bottom:none}
+  tbody tr{transition:background 0.15s}
+  tbody tr:hover td{background:var(--bg-warm)}
+  td strong{color:var(--ink)}
+
+  /* ============ Callouts ============ */
+  .callout{
+    background:var(--bg-warm);
+    border:1px solid var(--gold);
+    border-left:5px solid var(--gold);
+    border-radius:12px;
+    padding:22px 26px;
+    margin:24px 0;
+    box-shadow:var(--shadow-sm);
+  }
+  .callout .label{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:11px;
+    color:var(--gold-deep);
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-weight:800;
+    margin-bottom:8px;
+  }
+  .callout .label::before{
+    content:"";
+    width:18px;height:2px;
+    background:var(--gold);
+    display:inline-block;
+  }
+  .callout p:last-child{margin-bottom:0}
+  .callout.warn{background:var(--warn-bg);border-color:var(--warn)}
+  .callout.warn .label{color:var(--warn)}
+  .callout.warn .label::before{background:var(--warn)}
+  .callout.good{background:var(--good-bg);border-color:var(--good)}
+  .callout.good .label{color:var(--good)}
+  .callout.good .label::before{background:var(--good)}
+
+  /* ============ Interactive Checklist ============ */
+  .checklist{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:24px 28px;
+    margin:18px 0;
+    box-shadow:var(--shadow-sm);
+  }
+  .checklist .header-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .checklist h4{
+    color:var(--gold-deep);
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin:0;
+    font-weight:700;
+  }
+  .checklist .progress{
+    font-size:12px;
+    color:var(--ink-muted);
+    background:var(--bg-warm);
+    padding:4px 12px;
+    border-radius:99px;
+    font-weight:600;
+  }
+  .checklist ul{list-style:none}
+  .checklist li{
+    padding:12px 0 12px 36px;
+    position:relative;
+    border-bottom:1px dotted var(--line);
+    font-size:15px;
+    cursor:pointer;
+    color:var(--ink);
+    transition:all 0.15s;
+    user-select:none;
+  }
+  .checklist li:last-child{border:none}
+  .checklist li:hover{color:var(--gold-deep)}
+  .checklist li::before{
+    content:"";
+    position:absolute;
+    left:4px;
+    top:14px;
+    width:20px;
+    height:20px;
+    border:2px solid var(--gold);
+    border-radius:5px;
+    background:#fff;
+    transition:all 0.2s;
+  }
+  .checklist li.done{
+    color:var(--ink-muted);
+    text-decoration:line-through;
+  }
+  .checklist li.done::before{
+    background:var(--gold);
+    border-color:var(--gold-deep);
+  }
+  .checklist li.done::after{
+    content:"";
+    position:absolute;
+    left:9px;
+    top:16px;
+    width:6px;
+    height:11px;
+    border:solid #fff;
+    border-width:0 2px 2px 0;
+    transform:rotate(45deg);
+  }
+  .checklist li .owner{
+    font-size:10.5px;
+    background:var(--gold);
+    color:#fff;
+    padding:3px 9px;
+    border-radius:99px;
+    margin-left:8px;
+    font-weight:700;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    vertical-align:middle;
+    display:inline-block;
+  }
+  .checklist li .owner.robert{background:var(--good)}
+  .checklist li .owner.me{background:var(--gold-deep)}
+
+  /* ============ Timeline ============ */
+  .timeline{margin:24px 0 8px;position:relative}
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:15px;
+    top:8px;
+    bottom:8px;
+    width:3px;
+    background:linear-gradient(180deg,var(--gold) 0%,var(--line) 100%);
+    border-radius:2px;
+  }
+  .phase{
+    position:relative;
+    padding:6px 0 26px 52px;
+  }
+  .phase::before{
+    content:"";
+    position:absolute;
+    left:8px;
+    top:12px;
+    width:17px;
+    height:17px;
+    border-radius:50%;
+    background:var(--gold);
+    border:4px solid var(--bg);
+    box-shadow:0 0 0 2px var(--gold);
+    transition:all 0.3s;
+  }
+  .phase:hover::before{
+    background:var(--gold-bright);
+    transform:scale(1.15);
+  }
+  .phase .when{
+    font-size:11.5px;
+    color:var(--gold-deep);
+    text-transform:uppercase;
+    letter-spacing:2.5px;
+    font-weight:700;
+  }
+  .phase h4{
+    font-size:18px;
+    margin:6px 0 8px;
+    color:var(--ink);
+  }
+  .phase p{font-size:14.5px;color:var(--ink-soft);margin:0}
+
+  /* ============ Accordion Q&A ============ */
+  .qa{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    margin:10px 0;
+    overflow:hidden;
+    box-shadow:var(--shadow-sm);
+    transition:all 0.2s;
+  }
+  .qa:hover{box-shadow:var(--shadow-md)}
+  .qa .q{
+    padding:18px 24px;
+    cursor:pointer;
+    font-weight:600;
+    color:var(--ink);
+    font-size:16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    user-select:none;
+    transition:background 0.15s;
+  }
+  .qa .q:hover{background:var(--bg-warm)}
+  .qa .q .text{flex:1}
+  .qa .q .text::before{
+    content:"Q.";
+    color:var(--gold-deep);
+    font-weight:800;
+    margin-right:8px;
+  }
+  .qa .q .toggle{
+    width:28px;height:28px;
+    border-radius:50%;
+    background:var(--bg-warm);
+    color:var(--gold-deep);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    font-weight:700;
+    flex-shrink:0;
+    transition:all 0.25s;
+  }
+  .qa.open .q .toggle{
+    background:var(--gold);
+    color:#fff;
+    transform:rotate(45deg);
+  }
+  .qa .a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.3s ease,padding 0.3s ease;
+    padding:0 24px;
+    color:var(--ink-soft);
+    font-size:15px;
+    line-height:1.65;
+  }
+  .qa.open .a{
+    max-height:400px;
+    padding:0 24px 22px;
+  }
+  .qa .a::before{
+    content:"A.";
+    color:var(--good);
+    font-weight:800;
+    margin-right:8px;
+  }
+
+  /* ============ KPI grid ============ */
+  .kpis{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin:24px 0;
+  }
+  @media(max-width:780px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:22px 16px;
+    text-align:center;
+    transition:all 0.2s;
+    box-shadow:var(--shadow-sm);
+  }
+  .kpi:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-md);
+    border-color:var(--gold);
+  }
+  .kpi .v{
+    font-size:32px;
+    font-weight:800;
+    line-height:1;
+    margin-bottom:8px;
+    background:linear-gradient(120deg,var(--gold-deep) 0%,var(--gold-bright) 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .kpi .l{
+    font-size:12px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-weight:600;
+  }
+
+  /* ============ Lists inside content ============ */
+  .content-list{
+    list-style:none;
+    margin:14px 0;
+  }
+  .content-list li{
+    padding:8px 0 8px 28px;
+    position:relative;
+    color:var(--ink-soft);
+    font-size:15px;
+  }
+  .content-list li::before{
+    content:"";
+    position:absolute;
+    left:8px;top:17px;
+    width:8px;height:8px;
+    background:var(--gold);
+    border-radius:50%;
+  }
+
+  /* ============ Back to top button ============ */
+  #toTop{
+    position:fixed;
+    bottom:30px;right:30px;
+    width:48px;height:48px;
+    border-radius:50%;
+    background:var(--gold-deep);
+    color:#fff;
+    border:none;
+    cursor:pointer;
+    font-size:20px;
+    font-weight:700;
+    box-shadow:var(--shadow-lg);
+    opacity:0;
+    pointer-events:none;
+    transition:all 0.3s;
+    z-index:99;
+  }
+  #toTop.show{opacity:1;pointer-events:auto}
+  #toTop:hover{background:var(--gold);transform:translateY(-2px)}
+
+  /* ============ Footer ============ */
+  footer{
+    background:linear-gradient(180deg,var(--bg-cream-deep) 0%,var(--bg) 100%);
+    color:var(--ink-soft);
+    padding:48px 0 40px;
+    text-align:center;
+    font-size:14px;
+    border-top:3px solid var(--gold);
+  }
+  footer .gold{
+    color:var(--gold-deep);
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:1px;
+  }
+  footer .approve{
+    margin-top:24px;
+    display:inline-block;
+    background:linear-gradient(135deg,var(--gold-deep) 0%,var(--gold) 100%);
+    color:#fff;
+    padding:14px 28px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+    box-shadow:var(--shadow-md);
+    transition:all 0.2s;
+  }
+  footer .approve:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+
+  @media(max-width:680px){
+    header h1{font-size:34px}
+    h2{font-size:26px}
+    nav.topnav .brand .label{display:none}
+  }
+
+  @media print{
+    nav.topnav, #progressBar, #toTop{display:none}
+    header.hero{background:#fff;padding:32px 0}
+    section{break-inside:avoid;page-break-inside:avoid;padding:32px 0}
+    .qa .a{max-height:none !important;padding:0 24px 22px !important}
+    .tab-content{display:block !important}
+    .tab-buttons{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div id="progressBar"></div>
+
+<nav class="topnav">
+  <div class="inner">
+    <div class="brand">
+      <span class="dot"></span>
+      <span class="label">Multi-Site Plan</span>
+    </div>
+    <div class="links" id="navLinks">
+      <a href="#why" class="active">Why</a>
+      <a href="#positioning">Sites</a>
+      <a href="#shared">Shared</a>
+      <a href="#separate">Separate</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#ads">Ads</a>
+      <a href="#setup">Setup</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#risks">Risks</a>
+      <a href="#qa">Q&amp;A</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero-inner">
+    <div class="badge"><span class="star">★</span> Strategy Addendum · May 2026</div>
+    <h1>Two front doors.<br>One unstoppable <em>business.</em></h1>
+    <p class="lede">A clear, practical plan for running partylimobusdc.com and partybusrus.com as separate, attributable websites — capturing more search demand, separating ad performance, and protecting against single-domain risk. Same fleet, same dispatch, twice the reach.</p>
+    <div class="meta">
+      <div class="chip"><strong>For</strong><span>Robert Eljeily, Owner</span></div>
+      <div class="chip"><strong>From</strong><span>Frederick, Marketing</span></div>
+      <div class="chip"><strong>Date</strong><span>May 14, 2026</span></div>
+      <div class="chip"><strong>Read time</strong><span>~8 minutes</span></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#why" class="primary">Read the plan ↓</a>
+      <a href="#setup" class="secondary">Jump to setup checklist</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="s"><div class="v">2</div><div class="l">Websites</div></div>
+      <div class="s"><div class="v">1</div><div class="l">Business / Fleet</div></div>
+      <div class="s"><div class="v">8</div><div class="l">Week rollout</div></div>
+      <div class="s"><div class="v">100+</div><div class="l">Reviews goal · Nov</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="why">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">01 · The Idea</span>
+      <h2>Why two websites</h2>
+      <p class="section-lede">One domain can only rank for so much, attract one persona at a time, and represents one point of failure. Operating two sites under one business is a proven strategy used by limo companies, locksmiths, and home services across the DMV — Google indexes each domain independently while customers still call the same dispatch line.</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="icon">↗</div>
+        <h4>More search real estate</h4>
+        <p>Two domains can occupy two spots on page one for the same query. Even if both rank #3 and #7, that's two listings competing only with us — not five competitors.</p>
+      </div>
+      <div class="pillar">
+        <div class="icon">◎</div>
+        <h4>Audience targeting</h4>
+        <p>partylimobusdc.com leans corporate, wedding, and executive. partybusrus.com leans party, bachelorette, birthday, and nightlife. Same trucks, different marketing voice.</p>
+      </div>
+      <div class="pillar">
+        <div class="icon">$</div>
+        <h4>Ad attribution clarity</h4>
+        <p>Separate phone numbers + separate landing pages = we know which campaign, which keyword, and which audience actually converts. No more guessing.</p>
+      </div>
+      <div class="pillar">
+        <div class="icon">⚑</div>
+        <h4>Risk reduction</h4>
+        <p>If one domain gets hit by a Google algorithm update or manual action, the other keeps producing leads. One outage doesn't kill the lead flow.</p>
+      </div>
+    </div>
+
+    <div class="callout good">
+      <div class="label">Real-world precedent</div>
+      <p>You already noticed several DMV limo competitors running 2–4 domains for the same dispatch number — that's exactly this strategy. It's normal, white-hat (no cloaking, no duplicate content), and it scales.</p>
+    </div>
+  </div>
+</section>
+
+<section id="positioning">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">02 · Positioning</span>
+      <h2>Who each site is for</h2>
+      <p class="section-lede">Each site gets its own voice and primary audience. The fleet is the same; the storytelling isn't. Click between the tabs below.</p>
+    </div>
+
+    <div class="tabs">
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="flagship">⚜ partylimobusdc.com</button>
+        <button class="tab-btn" data-tab="fresh">★ partybusrus.com</button>
+      </div>
+
+      <div class="tab-content active" data-content="flagship">
+        <div class="site-card flagship">
+          <span class="tag">Flagship · Existing</span>
+          <div class="domain">partylimobusdc.com</div>
+          <h3>The Premium Door</h3>
+          <p style="font-size:15px;margin-bottom:8px">Refined, polished, premium positioning for clients who care more about service quality than price.</p>
+          <dl>
+            <div>
+              <dt>Primary audience</dt>
+              <dd>Weddings, corporate transport, executive shuttles, milestone birthdays (40+), funerals, anniversaries</dd>
+            </div>
+            <div>
+              <dt>Voice</dt>
+              <dd>"DMV's premier coachway service." Polished, refined, trust-building.</dd>
+            </div>
+            <div>
+              <dt>Hero imagery</dt>
+              <dd>Diamond-quilted leather, star ceilings, white-glove service shots</dd>
+            </div>
+            <div>
+              <dt>Lead magnets</dt>
+              <dd>Wedding transportation guides, corporate account application, group travel quotes</dd>
+            </div>
+            <div>
+              <dt>SEO focus</dt>
+              <dd>"limo service DC," "wedding transportation Virginia," "corporate shuttle Maryland"</dd>
+            </div>
+            <div>
+              <dt>Contact</dt>
+              <dd>(703) 991-3500 · existing email</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="tab-content" data-content="fresh">
+        <div class="site-card fresh">
+          <span class="tag">New · partybusrus.com</span>
+          <div class="domain">partybusrus.com</div>
+          <h3>The Party Door</h3>
+          <p style="font-size:15px;margin-bottom:8px">Energetic, fun, no-pretense positioning for groups looking to celebrate hard and roll deep.</p>
+          <dl>
+            <div>
+              <dt>Primary audience</dt>
+              <dd>Bachelor / bachelorette, 21st &amp; 30th birthdays, prom (older crowd), winery tours, brewery crawls, nightlife groups</dd>
+            </div>
+            <div>
+              <dt>Voice</dt>
+              <dd>"Roll deep. The party starts the second you board." Energetic, fun, no-pretense.</dd>
+            </div>
+            <div>
+              <dt>Hero imagery</dt>
+              <dd>LED interiors lit up, dance pole, multi-color party shots, real groups having fun</dd>
+            </div>
+            <div>
+              <dt>Lead magnets</dt>
+              <dd>Bachelorette route planner, brewery crawl itineraries, group cost-splitter</dd>
+            </div>
+            <div>
+              <dt>SEO focus</dt>
+              <dd>"party bus DC," "bachelorette bus DMV," "winery tour bus Virginia," "birthday bus"</dd>
+            </div>
+            <div>
+              <dt>Contact</dt>
+              <dd>NEW phone (to set up) · info@partybusrus.com</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="label">Why this works</div>
+      <p>Both sites can rank for "party bus DC" — but partybusrus.com will rank stronger because the domain literally matches the query. We stop fighting ourselves and start covering both ends of the market.</p>
+    </div>
+  </div>
+</section>
+
+<section id="shared">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">03 · One Business</span>
+      <h2>What stays shared</h2>
+      <p class="section-lede">Behind both websites it's the same company, same fleet, same insurance, same dispatch. These elements MUST stay unified — or we break the model.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>What</th><th>Why shared</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Google Business Profile</strong></td><td>One physical business = one GBP. Trying to operate two profiles for the same address violates Google's policy and gets one suspended. The single GBP is shared between both sites.</td></tr>
+          <tr><td><strong>Reviews</strong></td><td>All 5-star reviews live on the single GBP. Both websites display the same review feed via the embedded widget — so a fresh review on Tuesday appears on both sites Tuesday night.</td></tr>
+          <tr><td><strong>Fleet inventory</strong></td><td>The buses are the buses. Both sites pull from the same calendar / availability system so we never double-book.</td></tr>
+          <tr><td><strong>Insurance, license, DOT</strong></td><td>One City Coachways Inc. business — same coverage on both sites. Now removed from public display but still legally backing every booking.</td></tr>
+          <tr><td><strong>Pricing structure</strong></td><td>Same hourly rates, same packages. We just present them differently per audience. No "secret discount" site.</td></tr>
+          <tr><td><strong>Dispatch / drivers</strong></td><td>Same team running both. Customers can't tell which site they came from — the experience is identical.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="separate">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">04 · Two Doors</span>
+      <h2>What stays separate</h2>
+      <p class="section-lede">If these aren't separate, we lose the ability to attribute leads, test campaigns, and serve different audiences. These are the variables that make multi-site work.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>What</th><th>partylimobusdc.com</th><th>partybusrus.com</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Domain</strong></td><td>partylimobusdc.com (existing)</td><td>partybusrus.com (owned, new)</td></tr>
+          <tr><td><strong>Phone number</strong></td><td>(703) 991-3500 (existing)</td><td>NEW number — CallRail / Google Voice</td></tr>
+          <tr><td><strong>Email</strong></td><td>Existing contact email</td><td>info@partybusrus.com</td></tr>
+          <tr><td><strong>Brand voice</strong></td><td>Premium, refined</td><td>Energetic, party-focused</td></tr>
+          <tr><td><strong>Color palette</strong></td><td>Cream + gold (luxury)</td><td>Same brand, more LED imagery</td></tr>
+          <tr><td><strong>Ad accounts</strong></td><td>Google Ads campaign A</td><td>Google Ads campaign B</td></tr>
+          <tr><td><strong>Landing pages</strong></td><td>Wedding, corporate, exec</td><td>Bachelorette, birthday, brewery, nightlife</td></tr>
+          <tr><td><strong>Analytics property</strong></td><td>GA4 property A</td><td>GA4 property B</td></tr>
+          <tr><td><strong>Form submissions</strong></td><td>Tag "DC-PREMIUM"</td><td>Tag "PBR-PARTY"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout warn">
+      <div class="label">Don't duplicate the content</div>
+      <p>Both sites must NOT have the same text copy. Google penalizes duplicate content across domains owned by the same business. The fleet pages, blog posts, and city pages need to be rewritten with different angles. Same facts, different storytelling.</p>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">05 · Trust</span>
+      <h2>Reviews &amp; Google Business Profile</h2>
+      <p class="section-lede">Reviews are the single biggest conversion factor for a service business. Here's how we handle them with two sites.</p>
+    </div>
+
+    <h3>The rule: one business = one GBP = one review pool</h3>
+    <p>Google ties verification to a physical business location, phone, and address. Creating a second profile for the same operation is a policy violation that will get one suspended (sometimes both). So we don't.</p>
+
+    <h3>How both sites benefit from shared reviews</h3>
+    <ul class="content-list">
+      <li>A 5-star review left by a wedding client on Tuesday boosts trust for the bachelorette browsing partybusrus.com on Wednesday.</li>
+      <li>The review count grows once but is "leveraged twice" — both sites benefit from every single review.</li>
+      <li>We ask EVERY customer for a review regardless of which site they booked through. Target: 4–6 new reviews per month sustained.</li>
+    </ul>
+
+    <h3>Review velocity plan</h3>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="icon">✉</div>
+        <h4>Post-trip text</h4>
+        <p>Auto-text 2 hours after drop-off with the Google review link. "Thanks for rolling with us! 30 seconds for a review? [link]"</p>
+      </div>
+      <div class="pillar">
+        <div class="icon">▣</div>
+        <h4>Driver QR cards</h4>
+        <p>Drivers hand a small QR card before drop-off pointing to the GBP review page. Higher conversion than email.</p>
+      </div>
+      <div class="pillar">
+        <div class="icon">@</div>
+        <h4>Day-2 email</h4>
+        <p>Email with a photo of their bus, thank-you note, and review request. Soft sell, high conversion.</p>
+      </div>
+      <div class="pillar">
+        <div class="icon">↩</div>
+        <h4>Respond to every review</h4>
+        <p>Within 24 hours. Personal, references the event. Boosts ranking + shows future customers we care.</p>
+      </div>
+    </div>
+
+    <div class="callout good">
+      <div class="label">The math</div>
+      <p>Current review count is around 45+. At 5 new per month, by end of 2026 we're at 80+. At 6 per month sustained, we cross 100 by November — and 100+ reviews is a meaningful trust threshold that lifts conversion across both sites simultaneously.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ads">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">06 · Paid Traffic</span>
+      <h2>Ad campaign separation</h2>
+      <p class="section-lede">Two sites, two ad accounts (or at minimum, two separated campaign groups). Why: clean attribution, audience-specific creative, and the ability to kill one without affecting the other.</p>
+    </div>
+
+    <h3>partylimobusdc.com — premium positioning</h3>
+    <div class="table-wrap">
+      <table>
+        <tbody>
+          <tr><th style="width:200px">Campaign focus</th><td>Weddings, corporate, exec, milestone events</td></tr>
+          <tr><th>Top keywords</th><td>"wedding limo DC," "corporate shuttle Virginia," "limo service Maryland," "executive transportation DMV"</td></tr>
+          <tr><th>Avg CPC</th><td>$4–$9 (corporate / wedding are competitive but high-value)</td></tr>
+          <tr><th>Landing pages</th><td>/weddings, /corporate, /exec — each tightly aligned to its ad</td></tr>
+          <tr><th>Phone</th><td>(703) 991-3500</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>partybusrus.com — party positioning</h3>
+    <div class="table-wrap">
+      <table>
+        <tbody>
+          <tr><th style="width:200px">Campaign focus</th><td>Bachelorette, birthdays (21st, 30th), brewery crawls, winery tours, nightlife</td></tr>
+          <tr><th>Top keywords</th><td>"party bus DC," "bachelorette bus DMV," "winery tour bus Virginia," "brewery bus Maryland," "birthday party bus"</td></tr>
+          <tr><th>Avg CPC</th><td>$3–$7 (lower competition than wedding/corporate)</td></tr>
+          <tr><th>Landing pages</th><td>/bachelorette, /winery-tours, /brewery-bus, /birthdays</td></tr>
+          <tr><th>Phone</th><td>NEW dedicated number</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Budget split — first 90 days</h3>
+    <div class="kpis">
+      <div class="kpi"><div class="v">60%</div><div class="l">partylimobusdc.com</div></div>
+      <div class="kpi"><div class="v">40%</div><div class="l">partybusrus.com</div></div>
+      <div class="kpi"><div class="v">$30–50</div><div class="l">Target cost per lead</div></div>
+      <div class="kpi"><div class="v">15%+</div><div class="l">Booking rate target</div></div>
+    </div>
+
+    <div class="callout">
+      <div class="label">Why a NEW phone for partybusrus.com</div>
+      <p>Without separate numbers, we never know which site / which ad / which keyword drove the call. With call-tracking (CallRail ~$45/mo or Google Voice free) we attribute every call to the exact campaign that produced it. This pays for itself in week one by killing the wasteful campaigns.</p>
+    </div>
+  </div>
+</section>
+
+<section id="setup">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">07 · The Build</span>
+      <h2>What we still need to set up</h2>
+      <p class="section-lede">Click each item to mark it done. Progress saves as you go — open this page anywhere and your checked items come with you.</p>
+    </div>
+
+    <div class="checklist" data-list="domain">
+      <div class="header-row">
+        <h4>Domain &amp; Hosting</h4>
+        <span class="progress">0 / 3</span>
+      </div>
+      <ul>
+        <li>Point partybusrus.com DNS to Netlify (CNAME or A record) <span class="owner robert">Robert</span></li>
+        <li>Verify SSL auto-issues after DNS propagates <span class="owner me">Me</span></li>
+        <li>Set partybusrus.com as primary domain, redirect www → root <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+
+    <div class="checklist" data-list="email">
+      <div class="header-row">
+        <h4>Email</h4>
+        <span class="progress">0 / 4</span>
+      </div>
+      <ul>
+        <li>Choose host: Google Workspace ($7/mo) recommended for deliverability <span class="owner robert">Robert</span></li>
+        <li>Create info@partybusrus.com mailbox <span class="owner robert">Robert</span></li>
+        <li>Set up MX, SPF, DKIM, DMARC records <span class="owner me">Me</span></li>
+        <li>Forward to existing inbox if Robert prefers one inbox <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+
+    <div class="checklist" data-list="phone">
+      <div class="header-row">
+        <h4>Phone</h4>
+        <span class="progress">0 / 4</span>
+      </div>
+      <ul>
+        <li>Get new DMV-area phone number (CallRail / Google Voice / carrier) <span class="owner robert">Robert</span></li>
+        <li>Decide ring destination — same dispatch as (703) 991-3500? <span class="owner robert">Robert</span></li>
+        <li>Update partybusrus.com site with new number everywhere <span class="owner me">Me</span></li>
+        <li>Set up call recording / source attribution <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+
+    <div class="checklist" data-list="content">
+      <div class="header-row">
+        <h4>Content Differentiation</h4>
+        <span class="progress">0 / 4</span>
+      </div>
+      <ul>
+        <li>Rewrite hero, fleet, city pages in party voice (different from DC site) <span class="owner me">Me</span></li>
+        <li>Create 4 party landing pages: bachelorette / brewery / winery / birthday <span class="owner me">Me</span></li>
+        <li>Write 6 blog posts targeting party / bachelorette keywords <span class="owner me">Me</span></li>
+        <li>Swap hero imagery to LED-heavy / party-vibe shots <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+
+    <div class="checklist" data-list="analytics">
+      <div class="header-row">
+        <h4>Analytics &amp; Tracking</h4>
+        <span class="progress">0 / 4</span>
+      </div>
+      <ul>
+        <li>Create separate GA4 property for partybusrus.com <span class="owner me">Me</span></li>
+        <li>Install GA4 + Google Tag Manager + Facebook Pixel <span class="owner me">Me</span></li>
+        <li>Set form submissions as conversions <span class="owner me">Me</span></li>
+        <li>Set phone clicks as conversions <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+
+    <div class="checklist" data-list="ads">
+      <div class="header-row">
+        <h4>Paid Ads</h4>
+        <span class="progress">0 / 4</span>
+      </div>
+      <ul>
+        <li>Create new Google Ads account OR new campaign group under MCC <span class="owner robert">Robert</span></li>
+        <li>Build 4 ad groups: bachelorette / birthday / winery / brewery <span class="owner me">Me</span></li>
+        <li>Write 3 responsive search ads per ad group <span class="owner me">Me</span></li>
+        <li>Set initial budget: $40/day for first 14 days <span class="owner robert">Robert</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">08 · The Path</span>
+      <h2>Rollout timeline</h2>
+      <p class="section-lede">From "site mockup approved" to "ads running on a fully-attributed dual-domain setup." Eight weeks, in plain English.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="phase">
+        <div class="when">Week 1 · May 18–24</div>
+        <h4>Robert approves the mockup &amp; strategy</h4>
+        <p>Robert reviews the redesigned site + this multi-site plan. Decisions on phone source and email host get made.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Week 2 · May 25–31</div>
+        <h4>Domain &amp; email goes live</h4>
+        <p>DNS for partybusrus.com points to Netlify. Email mailbox created and connected. Phone number procured.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Week 3–4 · June 1–14</div>
+        <h4>Content differentiation pass</h4>
+        <p>I rewrite the hero, fleet, and city pages in the party voice. Build 4 new party landing pages. Replace imagery with party-vibe shots.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Week 5 · June 15–21</div>
+        <h4>Analytics &amp; review widget</h4>
+        <p>GA4 set up. Google Reviews widget connected so partybusrus.com displays the shared GBP reviews. Form routing tested. Call tracking live.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Week 6 · June 22–28</div>
+        <h4>Soft launch</h4>
+        <p>Site goes live publicly. Indexed by Google. We start asking every booking which site they came from. No paid ads yet — just organic + word of mouth.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Week 7–8 · June 29 – July 12</div>
+        <h4>Paid ads launch</h4>
+        <p>Google Ads turn on for partybusrus.com — bachelorette, birthday, brewery, winery. Daily check-ins for 14 days to optimize bids. Kill underperformers fast.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Week 9–12 · July 13 – Aug 9</div>
+        <h4>Measure &amp; scale</h4>
+        <p>By week 12 we have clean data: cost-per-lead, booking rate, revenue per site. Scale up winners, kill or rework losers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="risks">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">09 · The Watchlist</span>
+      <h2>Risks &amp; how we handle them</h2>
+      <p class="section-lede">Multi-site can backfire if done wrong. Here's what we watch for — and what we do about each.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Risk</th><th>How we prevent it</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Duplicate content penalty</strong><br><span style="color:var(--ink-muted);font-size:13.5px">Google sees same text on two domains, demotes both.</span></td>
+            <td>All content on partybusrus.com gets rewritten — different angle, word choice, examples. Same fleet facts, different storytelling.</td>
+          </tr>
+          <tr>
+            <td><strong>GBP suspension</strong><br><span style="color:var(--ink-muted);font-size:13.5px">Trying to register a second GBP for same address.</span></td>
+            <td>We don't. One GBP, two sites that display the same reviews via widget. Allowed and standard.</td>
+          </tr>
+          <tr>
+            <td><strong>Lead confusion</strong><br><span style="color:var(--ink-muted);font-size:13.5px">Customer calls one number expecting bachelorette pricing, gets corporate quote.</span></td>
+            <td>Dispatch script reflects both brands. "Hi, party-bus dispatch, how can we help?" works for both. CRM tag from lead source guides quote framing.</td>
+          </tr>
+          <tr>
+            <td><strong>Ad cannibalization</strong><br><span style="color:var(--ink-muted);font-size:13.5px">Both sites bidding on same keyword, driving up our own CPC.</span></td>
+            <td>Keyword strategies don't overlap by design. Wedding/corporate on one site, party/bachelorette on the other. If a keyword overlaps, only one site bids.</td>
+          </tr>
+          <tr>
+            <td><strong>Brand dilution</strong><br><span style="color:var(--ink-muted);font-size:13.5px">Customers confused by two brands for one company.</span></td>
+            <td>Both sites disclose ownership in the footer (City Coachways Inc.). Same fleet photos, same drivers. Customers who notice = customers who appreciate the polish.</td>
+          </tr>
+          <tr>
+            <td><strong>Maintenance overhead</strong><br><span style="color:var(--ink-muted);font-size:13.5px">Two sites to update every time fleet or pricing changes.</span></td>
+            <td>I maintain both. Shared assets folder. Single source of truth for fleet inventory. Changes propagate efficiently.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="qa">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">10 · Common Questions</span>
+      <h2>Things Robert might ask</h2>
+      <p class="section-lede">Click each question to expand the answer.</p>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="text">Won't Google penalize us for owning two similar sites?</span><span class="toggle">+</span></div>
+      <div class="a">Not if content is genuinely differentiated and we don't try to game rankings (no link schemes between the two, no duplicate copy). Owning multiple domains is normal — it's only the duplicate-content shortcut that gets penalized.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="text">Should we just redirect partybusrus.com to partylimobusdc.com instead?</span><span class="toggle">+</span></div>
+      <div class="a">That gets us brand-name protection but loses the entire upside — separate ad attribution, audience segmentation, search real estate, and risk reduction. Running them separately is the higher-value play.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="text">What if Robert wants to sell the business someday? Does two sites help or hurt?</span><span class="toggle">+</span></div>
+      <div class="a">Helps. A buyer sees two productive marketing channels with separated, attributable revenue. That's a more valuable asset than one bigger site with mixed signals.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="text">Do we need separate insurance, LLCs, or business filings for partybusrus.com?</span><span class="toggle">+</span></div>
+      <div class="a">No. Same business (City Coachways Inc.) operating two marketing domains. Same insurance, same DOT, same licensing. A website is a marketing channel, not a legal entity.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="text">How long until we see ROI from the new site?</span><span class="toggle">+</span></div>
+      <div class="a">Paid ads: first leads within 48 hours of launch (~week 7). Organic SEO: meaningful traffic by month 3–4. First profitable month on partybusrus.com paid ads alone: realistically month 2 if we optimize fast.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="text">Can we add a third domain later (e.g. dmvweddinglimo.com)?</span><span class="toggle">+</span></div>
+      <div class="a">Absolutely — once these two are stable and producing leads, adding a third for ultra-specific intent (weddings only) is the natural next move. But two first. Don't fragment too fast.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="text">What if leads on partybusrus.com are lower than expected?</span><span class="toggle">+</span></div>
+      <div class="a">We measure weekly. After 6 weeks of paid traffic, if we're not converting at target rates we either (a) rework landing pages, (b) shift budget back to partylimobusdc.com, or (c) keep the site as an organic-only play with no paid spend. The investment to find out is small — domain + email + content + a few weeks of $40/day ads.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="text">Will customers think they're being scammed if they realize it's the same company?</span><span class="toggle">+</span></div>
+      <div class="a">Almost never. Most don't notice. The minority who do typically see it as "this company has its act together" rather than suspicious. Both sites name City Coachways Inc. in the footer, so anyone looking finds the connection clearly.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p class="gold">Party Bus R Us · Operated by City Coachways Inc.</p>
+    <p style="margin-top:8px">Multi-Site Strategy · May 14, 2026 · Prepared by Frederick</p>
+    <a href="#why" class="approve">↑ Back to top of plan</a>
+    <p style="margin-top:24px;font-size:12px;color:var(--ink-muted)">Once approved, this becomes the operating playbook for both partylimobusdc.com and partybusrus.com.</p>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Back to top">↑</button>
+
+<script>
+  // ============ Tabs ============
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      const wrapper = btn.closest('.tabs');
+      wrapper.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      wrapper.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      wrapper.querySelector('[data-content="' + target + '"]').classList.add('active');
+    });
+  });
+
+  // ============ Accordion Q&A ============
+  document.querySelectorAll('.qa .q').forEach(q => {
+    q.addEventListener('click', () => {
+      q.parentElement.classList.toggle('open');
+    });
+  });
+
+  // ============ Checklist with localStorage ============
+  function getStored(key){
+    try { return JSON.parse(localStorage.getItem(key) || '{}'); }
+    catch(e){ return {}; }
+  }
+  function setStored(key, val){
+    try { localStorage.setItem(key, JSON.stringify(val)); }
+    catch(e){}
+  }
+
+  document.querySelectorAll('.checklist').forEach(list => {
+    const key = 'pbr-checklist-' + list.dataset.list;
+    const stored = getStored(key);
+    const items = list.querySelectorAll('li');
+    const progressEl = list.querySelector('.progress');
+
+    function updateProgress(){
+      const done = list.querySelectorAll('li.done').length;
+      const total = items.length;
+      progressEl.textContent = done + ' / ' + total;
+      if(done === total) progressEl.style.background = 'var(--good-bg)';
+      else if(done > 0) progressEl.style.background = 'var(--warn-bg)';
+      else progressEl.style.background = 'var(--bg-warm)';
+    }
+
+    items.forEach((li, idx) => {
+      if(stored[idx]) li.classList.add('done');
+      li.addEventListener('click', (e) => {
+        if(e.target.tagName === 'SPAN' && e.target.classList.contains('owner')) return;
+        li.classList.toggle('done');
+        const state = getStored(key);
+        state[idx] = li.classList.contains('done');
+        setStored(key, state);
+        updateProgress();
+      });
+    });
+    updateProgress();
+  });
+
+  // ============ Reading progress + back-to-top ============
+  const progressBar = document.getElementById('progressBar');
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progressBar.style.width = pct + '%';
+    if(window.scrollY > 400) toTop.classList.add('show');
+    else toTop.classList.remove('show');
+  });
+  toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // ============ Active section in topnav ============
+  const navLinks = document.querySelectorAll('#navLinks a');
+  const sections = Array.from(navLinks).map(l => document.querySelector(l.getAttribute('href')));
+  function updateActive(){
+    let active = sections[0];
+    const y = window.scrollY + 120;
+    for(let i = 0; i < sections.length; i++){
+      if(sections[i] && sections[i].offsetTop <= y) active = sections[i];
+    }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if(active){
+      const link = document.querySelector('#navLinks a[href="#' + active.id + '"]');
+      if(link) link.classList.add('active');
+    }
+  }
+  window.addEventListener('scroll', updateActive);
+  updateActive();
+</script>
+
+</body>
+</html>

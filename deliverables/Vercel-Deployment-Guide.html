@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vercel Deployment Guide — Party Bus R Us</title>
+<style>
+  :root{
+    --bg:#faf4df; --bg2:#fff8e8; --surf:#fefbf2; --line:#e3d6b8;
+    --text:#2d2418; --mute:#5c4a32; --gold:#c9a961; --gold2:#8a6815;
+    --green:#1a7a4e; --red:#a23a2c; --amber:#b88f1a; --vercel:#000;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);overflow-x:hidden}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif;line-height:1.65;font-size:16px}
+  .serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400}
+  a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(138,104,21,.3)}
+  a:hover{color:var(--text)}
+  code{background:#fff8e8;border:1px solid var(--line);padding:2px 8px;font-family:"SF Mono",Consolas,monospace;font-size:13.5px;color:var(--gold2);border-radius:3px;word-break:break-word}
+  pre{background:#2d2418;color:#fefbf2;border:1px solid #1a1208;padding:18px 22px;font-family:"SF Mono",Consolas,monospace;font-size:13.5px;border-radius:6px;overflow-x:auto;line-height:1.6;margin:14px 0}
+  pre code{background:none;border:none;padding:0;color:#fefbf2;font-size:inherit}
+
+  .hero{background:linear-gradient(180deg,#fff8e8 0%,#faf4df 100%);padding:70px 24px 50px;text-align:center;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+  .hero:before{content:"";position:absolute;top:-200px;right:-180px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,0,0,.06) 0%,transparent 70%);border-radius:50%}
+  .hero-inner{position:relative;z-index:1;max-width:880px;margin:0 auto}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#000;font-weight:700;margin-bottom:14px;padding:6px 14px;background:#fefbf2;border:1px solid #000;border-radius:999px}
+  .kicker svg{width:11px;height:11px;fill:#000}
+  .hero h1{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(38px,6vw,68px);line-height:1.05;font-weight:500;margin-bottom:16px}
+  .hero h1 em{font-style:italic;color:var(--gold2)}
+  .hero p{font-size:18px;color:var(--mute);max-width:680px;margin:0 auto 22px;line-height:1.6}
+
+  .wrap{max-width:900px;margin:0 auto;padding:48px 24px 80px}
+  h2{font-family:"Cormorant Garamond",serif;font-size:clamp(28px,4vw,42px);line-height:1.15;font-weight:500;margin:48px 0 18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  h2:first-child{margin-top:0}
+  h3{font-family:"Cormorant Garamond",serif;font-size:24px;font-weight:500;color:var(--text);margin:24px 0 10px}
+  p{margin-bottom:14px;color:var(--mute);font-size:16px;line-height:1.7}
+  ul,ol{margin:14px 0 18px 22px;color:var(--mute)}
+  li{margin-bottom:10px;line-height:1.65}
+  strong{color:var(--text)}
+
+  .step{background:#fefbf2;border:1px solid var(--line);border-left:4px solid var(--gold);padding:24px 28px;border-radius:6px;margin-bottom:18px;position:relative}
+  .step .num{position:absolute;top:-16px;left:24px;background:#000;color:#fff;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:600;box-shadow:0 4px 10px rgba(0,0,0,.2)}
+  .step h3{margin-top:6px;color:var(--text)}
+
+  .callout{background:linear-gradient(135deg,#fff8e8 0%,#fefbf2 100%);border:1px solid var(--gold);padding:22px 26px;border-radius:6px;margin:18px 0;display:flex;gap:16px;align-items:flex-start}
+  .callout.warn{background:rgba(184,143,26,.06);border-color:var(--amber)}
+  .callout.danger{background:rgba(162,58,44,.05);border-color:var(--red)}
+  .callout.success{background:rgba(26,122,78,.06);border-color:var(--green)}
+  .callout .ico{flex-shrink:0;font-size:24px}
+  .callout strong{display:block;color:var(--text);margin-bottom:4px;font-size:15px}
+  .callout p{margin:0;font-size:14.5px;color:var(--mute)}
+
+  .compare{width:100%;border-collapse:collapse;margin:18px 0;background:#fefbf2;border:1px solid var(--line);border-radius:6px;overflow:hidden;font-size:14.5px;display:block;overflow-x:auto}
+  .compare th{background:#fff8e8;text-align:left;padding:14px 18px;font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:500;color:var(--text);border-bottom:1px solid var(--line)}
+  .compare td{padding:13px 18px;border-bottom:1px solid var(--line);color:var(--mute);vertical-align:top}
+  .compare tr:last-child td{border-bottom:none}
+  .compare td:first-child{color:var(--text);font-weight:500;width:35%}
+  .compare .yes{color:var(--green);font-weight:600}
+  .compare .no{color:var(--red);font-weight:500}
+  @media(min-width:881px){.compare{display:table}}
+
+  .option-tabs{display:flex;gap:8px;margin:24px 0 0;border-bottom:1px solid var(--line)}
+  .option-tab{padding:12px 20px;font-size:14px;font-weight:600;color:var(--mute);cursor:pointer;border:none;background:none;border-bottom:3px solid transparent;margin-bottom:-1px;font-family:inherit;letter-spacing:.04em}
+  .option-tab.active{color:var(--text);border-bottom-color:var(--gold)}
+  .option-content{display:none;padding-top:24px}
+  .option-content.active{display:block}
+
+  footer{background:#2d2418;color:#d4c08a;padding:50px 24px;margin-top:60px;text-align:center}
+  footer h3{font-family:"Cormorant Garamond",serif;font-size:28px;color:#fefbf2;font-weight:500;margin-bottom:12px}
+  footer p{font-size:14px;color:#a89274;max-width:560px;margin:0 auto 8px}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="kicker">
+      <svg viewBox="0 0 24 24"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>
+      Vercel · Deployment Guide
+    </span>
+    <h1 class="serif">Push to Vercel <em>in 5 minutes.</em></h1>
+    <p>Netlify ran out of build minutes. Vercel Hobby gives you unlimited deployments free. The site is already prepped — <code>vercel.json</code> added, form swapped to FormSubmit.co. You just need to push.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+<h2 class="serif">What's already prepped for you</h2>
+<ul>
+  <li><strong>vercel.json</strong> — clean URLs, redirects for deleted bus pages, cache rules, security headers</li>
+  <li><strong>Form swapped to FormSubmit.co</strong> — quote form action changed from Netlify Forms to <code>formsubmit.co/hello@realestateadvancement.com</code></li>
+  <li><strong>Netlify-specific attributes removed</strong> — <code>data-netlify</code>, <code>netlify-honeypot</code> all cleaned</li>
+  <li><strong>Old _redirects file kept</strong> — Vercel ignores it, just there as backup documentation</li>
+</ul>
+
+<div class="callout warn">
+  <div class="ico">⚠️</div>
+  <div><strong>One thing you need to do AFTER first form submission</strong>
+    <p>FormSubmit.co will send you a confirmation email (to <code>hello@realestateadvancement.com</code>) after the FIRST quote anyone submits. Click "Yes, this is my email" once and forms work forever. To change which email gets submissions, just search/replace <code>hello@realestateadvancement.com</code> in <code>site/quote.html</code>.</p></div>
+</div>
+
+<h2 class="serif">Pick your deployment path</h2>
+<p>Two options. Pick the one that fits your comfort level.</p>
+
+<table class="compare">
+  <tr><th>Option</th><th>Vercel CLI</th><th>GitHub + Vercel Dashboard</th></tr>
+  <tr><td>Best for</td><td>One-off deploys, no Git</td><td>Ongoing updates auto-deployed</td></tr>
+  <tr><td>Setup time</td><td class="yes">5 minutes</td><td>15 minutes</td></tr>
+  <tr><td>Requires Node.js</td><td>Yes (one install)</td><td class="yes">No</td></tr>
+  <tr><td>Requires GitHub</td><td class="yes">No</td><td>Yes (free account)</td></tr>
+  <tr><td>Auto-deploys on changes</td><td class="no">No (manual re-run)</td><td class="yes">Yes (just git push)</td></tr>
+  <tr><td>Recommended for you</td><td class="yes">Start here</td><td>Later, when you're comfortable</td></tr>
+</table>
+
+<div class="option-tabs">
+  <button class="option-tab active" data-opt="cli">Option A: Vercel CLI (recommended)</button>
+  <button class="option-tab" data-opt="git">Option B: GitHub + Dashboard</button>
+</div>
+
+<!-- OPTION A: CLI -->
+<div class="option-content active" id="opt-cli">
+
+<div class="step">
+  <span class="num">1</span>
+  <h3>Install Node.js (one-time)</h3>
+  <p>Vercel CLI runs on Node.js. If you've never installed it:</p>
+  <ol>
+    <li>Go to <a href="https://nodejs.org/en/download" target="_blank">nodejs.org/en/download</a></li>
+    <li>Download the <strong>LTS Windows Installer (.msi)</strong></li>
+    <li>Run the installer — accept all defaults, click Next through everything</li>
+    <li>Restart your terminal (PowerShell or Command Prompt) after install</li>
+  </ol>
+  <p>Verify it worked — open PowerShell and run:</p>
+  <pre><code>node --version
+npm --version</code></pre>
+  <p>You should see version numbers like <code>v20.x.x</code> and <code>10.x.x</code>. If you do, you're set.</p>
+</div>
+
+<div class="step">
+  <span class="num">2</span>
+  <h3>Install Vercel CLI</h3>
+  <p>In PowerShell, run:</p>
+  <pre><code>npm install -g vercel</code></pre>
+  <p>Wait for it to finish (~30 seconds). Then verify:</p>
+  <pre><code>vercel --version</code></pre>
+</div>
+
+<div class="step">
+  <span class="num">3</span>
+  <h3>Log into Vercel</h3>
+  <pre><code>vercel login</code></pre>
+  <p>It'll ask how you want to log in — pick the same method you used to create your Hobby account (probably GitHub or email). A browser window opens, you click "Authorize", come back to the terminal, done.</p>
+</div>
+
+<div class="step">
+  <span class="num">4</span>
+  <h3>Navigate to the site folder</h3>
+  <p>Your site is at:</p>
+  <pre><code>cd "C:\Users\LATITUDE-7400\Documents\Claude\Projects\Party Bus R Us\site"</code></pre>
+  <p>Copy-paste that exactly into PowerShell.</p>
+</div>
+
+<div class="step">
+  <span class="num">5</span>
+  <h3>Deploy</h3>
+  <pre><code>vercel</code></pre>
+  <p>First time it'll ask:</p>
+  <ul>
+    <li><strong>Set up and deploy?</strong> → Yes</li>
+    <li><strong>Which scope?</strong> → Your account (usually the only option)</li>
+    <li><strong>Link to existing project?</strong> → No</li>
+    <li><strong>Project name?</strong> → <code>partybusrus</code> (or whatever you want)</li>
+    <li><strong>Directory?</strong> → press Enter (default <code>./</code>)</li>
+    <li><strong>Modify settings?</strong> → No</li>
+  </ul>
+  <p>It uploads the files (~30 seconds) and gives you a URL like <code>https://partybusrus-abc123.vercel.app</code>. That's your preview URL.</p>
+</div>
+
+<div class="step">
+  <span class="num">6</span>
+  <h3>Push to production</h3>
+  <p>The first <code>vercel</code> command deploys to a preview URL. To make it live on the main Vercel URL, run:</p>
+  <pre><code>vercel --prod</code></pre>
+  <p>Done. The site is live at <code>https://partybusrus.vercel.app</code> (or whatever project name you used).</p>
+</div>
+
+<div class="step">
+  <span class="num">7</span>
+  <h3>Connect your custom domain (partybusrus.com)</h3>
+  <ol>
+    <li>Go to <a href="https://vercel.com/dashboard" target="_blank">vercel.com/dashboard</a></li>
+    <li>Click your <code>partybusrus</code> project</li>
+    <li>Top tabs → <strong>Settings</strong> → <strong>Domains</strong></li>
+    <li>Add domain → enter <code>partybusrus.com</code> and <code>www.partybusrus.com</code></li>
+    <li>Vercel will show you DNS records to add at GoDaddy:
+      <ul>
+        <li>For <code>partybusrus.com</code>: <strong>A record</strong> pointing to <code>76.76.21.21</code></li>
+        <li>For <code>www.partybusrus.com</code>: <strong>CNAME</strong> pointing to <code>cname.vercel-dns.com</code></li>
+      </ul>
+    </li>
+    <li>At GoDaddy: <a href="https://dcc.godaddy.com/control/dnsmanagement" target="_blank">DNS Management</a> → find your <code>partybusrus.com</code> domain → add the records Vercel gave you. Remove the OLD Netlify A/CNAME records.</li>
+    <li>Wait 5-60 minutes for DNS propagation</li>
+    <li>SSL certificate auto-provisions. Site is live at <strong>https://partybusrus.com</strong></li>
+  </ol>
+</div>
+
+<div class="step">
+  <span class="num">8</span>
+  <h3>Future deploys</h3>
+  <p>Every time you make a change to <code>site/</code>:</p>
+  <pre><code>cd "C:\Users\LATITUDE-7400\Documents\Claude\Projects\Party Bus R Us\site"
+vercel --prod</code></pre>
+  <p>That's it. Two commands. Fast.</p>
+</div>
+
+</div>
+
+<!-- OPTION B: GitHub -->
+<div class="option-content" id="opt-git">
+
+<div class="step">
+  <span class="num">1</span>
+  <h3>Install GitHub Desktop</h3>
+  <p>Download from <a href="https://desktop.github.com/" target="_blank">desktop.github.com</a>. Run installer. Sign in with a free GitHub account (create one at <a href="https://github.com/signup" target="_blank">github.com/signup</a> if needed).</p>
+</div>
+
+<div class="step">
+  <span class="num">2</span>
+  <h3>Create a new repository from the site folder</h3>
+  <ol>
+    <li>Open GitHub Desktop</li>
+    <li>File → <strong>Add Local Repository</strong></li>
+    <li>Browse to <code>C:\Users\LATITUDE-7400\Documents\Claude\Projects\Party Bus R Us\site</code></li>
+    <li>It'll say "this isn't a Git repository" → click <strong>create a repository</strong></li>
+    <li>Name: <code>partybusrus</code></li>
+    <li>Description: <code>Party Bus R Us website</code></li>
+    <li>Keep "Initialize with README" unchecked (we already have files)</li>
+    <li>Click <strong>Create Repository</strong></li>
+  </ol>
+</div>
+
+<div class="step">
+  <span class="num">3</span>
+  <h3>Publish to GitHub</h3>
+  <p>Top bar → <strong>Publish repository</strong>. Keep it private if you want. Click publish. All files upload to GitHub.</p>
+</div>
+
+<div class="step">
+  <span class="num">4</span>
+  <h3>Import the GitHub repo to Vercel</h3>
+  <ol>
+    <li>Go to <a href="https://vercel.com/new" target="_blank">vercel.com/new</a></li>
+    <li>"Import Git Repository" — click <strong>Import</strong> next to your <code>partybusrus</code> repo</li>
+    <li>Project name: <code>partybusrus</code></li>
+    <li>Framework Preset: <strong>Other</strong></li>
+    <li>Root directory: leave as is</li>
+    <li>Click <strong>Deploy</strong></li>
+  </ol>
+  <p>Vercel builds + deploys in ~30 seconds. Live at <code>https://partybusrus.vercel.app</code>.</p>
+</div>
+
+<div class="step">
+  <span class="num">5</span>
+  <h3>Connect custom domain</h3>
+  <p>Same as Option A Step 7. Vercel dashboard → Settings → Domains → add <code>partybusrus.com</code> → update DNS at GoDaddy.</p>
+</div>
+
+<div class="step">
+  <span class="num">6</span>
+  <h3>Future updates auto-deploy</h3>
+  <p>Make any change to a file in the site folder → GitHub Desktop will show the change → click <strong>Commit to main</strong> → click <strong>Push origin</strong> → Vercel auto-deploys in 30 seconds.</p>
+</div>
+
+</div>
+
+<h2 class="serif">Test the quote form after deploy</h2>
+
+<div class="step">
+  <span class="num">✓</span>
+  <h3>End-to-end form test</h3>
+  <ol>
+    <li>Open your deployed site on your phone: <code>https://partybusrus.vercel.app/quote</code></li>
+    <li>Fill out the 3-step form completely with REAL info (yours)</li>
+    <li>Submit</li>
+    <li>You should see a CAPTCHA from FormSubmit.co (first time only) — solve it</li>
+    <li>You'll be redirected to <code>/thank-you</code></li>
+    <li>Check your <code>hello@realestateadvancement.com</code> inbox:
+      <ul>
+        <li>First email: "Activate your form" from FormSubmit — click the activation link</li>
+        <li>Second email: The actual form submission with all your test data</li>
+      </ul>
+    </li>
+    <li>Submit a SECOND test from the form. This time the email comes through immediately, no CAPTCHA, no activation step.</li>
+  </ol>
+</div>
+
+<div class="callout success">
+  <div class="ico">✅</div>
+  <div><strong>Form is now live</strong>
+    <p>Every future submission goes straight to <code>hello@realestateadvancement.com</code> with all fields formatted in a nice table. Spam-protected. Free forever.</p></div>
+</div>
+
+<h2 class="serif">Privacy upgrade (do this after first successful submission)</h2>
+
+<p>Right now the form action contains your email in the page source: <code>action="https://formsubmit.co/hello@realestateadvancement.com"</code>. Spammers crawl HTML for emails. To hide it:</p>
+
+<div class="step">
+  <span class="num">🔒</span>
+  <h3>Switch to hashed URL</h3>
+  <ol>
+    <li>After your first form submission is delivered, check the email from FormSubmit</li>
+    <li>It'll include a "Random Endpoint" URL like <code>https://formsubmit.co/el/abc123XYZ</code></li>
+    <li>Open <code>site/quote.html</code></li>
+    <li>Find: <code>action="https://formsubmit.co/hello@realestateadvancement.com"</code></li>
+    <li>Replace with: <code>action="https://formsubmit.co/el/abc123XYZ"</code> (your hashed URL)</li>
+    <li>Redeploy: <code>vercel --prod</code></li>
+  </ol>
+  <p>Your email is now hidden from page source but submissions still arrive at the same inbox.</p>
+</div>
+
+<h2 class="serif">Upgrade path: when you outgrow FormSubmit</h2>
+
+<p>FormSubmit is free and works great. When you want more control:</p>
+<ul>
+  <li><strong>Vercel Function</strong> — I can build you a <code>/api/quote</code> serverless function that handles submissions directly. Free unlimited on Hobby plan. Lets us forward to HubSpot, Slack, multiple emails, anywhere.</li>
+  <li><strong>Resend.com</strong> — best free transactional email (100/day free). Lets you fully brand the auto-reply email. Verified domain required.</li>
+  <li><strong>Direct HubSpot Forms API</strong> — when CRM is set up, form posts straight to HubSpot. No middleware.</li>
+</ul>
+
+<p>None of this is urgent. FormSubmit handles the immediate need.</p>
+
+<h2 class="serif">Other notes</h2>
+
+<div class="callout">
+  <div class="ico">📝</div>
+  <div><strong>Build minutes</strong>
+    <p>Vercel Hobby gives 100GB-hours of compute and 100GB of bandwidth per month free. For a static site like this, you'll use maybe 1% of that. Build minutes aren't really a concept on Vercel the way they are on Netlify.</p></div>
+</div>
+
+<div class="callout">
+  <div class="ico">🔄</div>
+  <div><strong>If you ever go back to Netlify</strong>
+    <p>The original <code>_redirects</code> file is still in the folder, untouched. To go back: revert <code>quote.html</code> form attributes to <code>data-netlify="true"</code>, delete <code>vercel.json</code>, drag onto Netlify. Both setups can coexist in the same folder.</p></div>
+</div>
+
+<div class="callout warn">
+  <div class="ico">⚠️</div>
+  <div><strong>DNS gotcha</strong>
+    <p>While DNS propagates (5-60 min), some users might see the old Netlify site and some the new Vercel site. To force-update, hard-refresh (Ctrl+Shift+R) and clear browser cache. Use <a href="https://dnschecker.org" target="_blank">dnschecker.org</a> to confirm worldwide DNS update.</p></div>
+</div>
+
+<h2 class="serif">Need help? Ping me.</h2>
+<p>If anything in this guide hits a snag — Node install failed, Vercel command not found, DNS not propagating, form not working — just tell me where you got stuck and I'll walk you through it live.</p>
+
+</div>
+
+<footer>
+  <h3 class="serif">Vercel · Hobby · $0.</h3>
+  <p>Vercel Deployment Guide · Party Bus R Us · May 27, 2026</p>
+  <p>(703) 991-3500 · 6601 Stonecrest Lane, Fairfax VA</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.option-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.option-tab').forEach(function(t){t.classList.remove('active')});
+      document.querySelectorAll('.option-content').forEach(function(c){c.classList.remove('active')});
+      tab.classList.add('active');
+      document.getElementById('opt-' + tab.dataset.opt).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

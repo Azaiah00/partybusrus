@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100% Audit &amp; Go-to-Market Playbook — Party Bus R Us</title>
+<style>
+  :root{
+    --ink:#2d2418;
+    --ink-soft:#5c4a32;
+    --ink-muted:#8a7456;
+    --bg:#faf4df;
+    --bg-warm:#fff8e8;
+    --bg-card:#fefbf2;
+    --bg-cream-deep:#f5e8c8;
+    --gold:#c9a961;
+    --gold-deep:#8a6815;
+    --gold-bright:#d4af37;
+    --line:#e3d6b8;
+    --line-soft:#efe4c5;
+    --good:#2d6a4f;
+    --good-bg:#d1fae5;
+    --warn:#b45309;
+    --warn-bg:#fef3c7;
+    --bad:#b91c1c;
+    --bad-bg:#fee2e2;
+    --shadow-sm:0 1px 2px rgba(138,104,21,0.08);
+    --shadow-md:0 4px 12px rgba(138,104,21,0.10);
+    --shadow-lg:0 10px 28px rgba(138,104,21,0.15);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:78px}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:16px}
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+  a{color:var(--gold-deep)}
+  #progressBar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold) 0%,var(--gold-bright) 100%);width:0%;z-index:1000;transition:width 0.1s linear}
+  nav.topnav{position:sticky;top:0;background:rgba(250,244,223,0.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);z-index:100;box-shadow:var(--shadow-sm)}
+  nav.topnav .inner{max-width:1100px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  nav.topnav .brand{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--gold-deep);font-weight:700;letter-spacing:1px;text-transform:uppercase;flex-shrink:0}
+  nav.topnav .brand .dot{width:10px;height:10px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 3px rgba(201,169,97,0.25)}
+  nav.topnav .links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  nav.topnav .links::-webkit-scrollbar{display:none}
+  nav.topnav .links a{color:var(--ink-soft);text-decoration:none;font-size:12.5px;padding:7px 12px;border-radius:99px;white-space:nowrap;font-weight:500;transition:all 0.2s}
+  nav.topnav .links a:hover{background:var(--bg-warm);color:var(--gold-deep)}
+  nav.topnav .links a.active{background:var(--gold);color:#fff}
+  header.hero{background:radial-gradient(circle at 20% 0%, rgba(212,175,55,0.18) 0%, transparent 50%),radial-gradient(circle at 80% 100%, rgba(201,169,97,0.15) 0%, transparent 50%),linear-gradient(180deg, #fff8e8 0%, #faf4df 100%);padding:72px 0 64px;position:relative;overflow:hidden}
+  header.hero::before{content:"";position:absolute;top:-50%;left:-10%;width:120%;height:200%;background:radial-gradient(ellipse, rgba(255,248,232,0.6) 0%, transparent 60%);pointer-events:none}
+  header.hero::after{content:"";position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,transparent 0%,var(--gold) 50%,transparent 100%)}
+  header .hero-inner{position:relative;z-index:1}
+  header .badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--gold);color:var(--gold-deep);padding:6px 14px;border-radius:99px;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:20px;box-shadow:var(--shadow-sm)}
+  header .badge .star{color:var(--gold-bright)}
+  header h1{font-size:50px;line-height:1.1;margin-bottom:18px;font-weight:800;color:var(--ink);letter-spacing:-1px}
+  header h1 em{color:var(--gold-deep);font-style:normal;background:linear-gradient(120deg,var(--gold-deep) 0%,var(--gold-bright) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  header .lede{font-size:19px;color:var(--ink-soft);max-width:780px;line-height:1.55;margin-bottom:28px}
+  header .meta{display:flex;gap:0;flex-wrap:wrap;margin-bottom:32px}
+  header .meta .chip{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 16px;margin:6px 8px 0 0;font-size:13px;box-shadow:var(--shadow-sm)}
+  header .meta .chip strong{color:var(--gold-deep);font-size:11px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:2px}
+  header .meta .chip span{color:var(--ink);font-weight:500}
+  header .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+  header .hero-cta a{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:10px;text-decoration:none;font-weight:600;font-size:14.5px;transition:all 0.2s;box-shadow:var(--shadow-sm)}
+  header .hero-cta .primary{background:linear-gradient(135deg,var(--gold-deep) 0%,var(--gold) 100%);color:#fff}
+  header .hero-cta .primary:hover{transform:translateY(-1px);box-shadow:var(--shadow-md)}
+  header .hero-cta .secondary{background:#fff;color:var(--gold-deep);border:1px solid var(--gold)}
+  header .hero-cta .secondary:hover{background:var(--bg-warm)}
+  .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px;position:relative;z-index:1}
+  @media(max-width:780px){.hero-stats{grid-template-columns:repeat(2,1fr)}}
+  .hero-stats .s{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 16px;text-align:center;box-shadow:var(--shadow-sm);transition:all 0.2s}
+  .hero-stats .s:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--gold)}
+  .hero-stats .s .v{font-size:28px;color:var(--gold-deep);font-weight:800;line-height:1;margin-bottom:6px;background:linear-gradient(120deg,var(--gold-deep) 0%,var(--gold-bright) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .hero-stats .s .l{font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+  section{padding:64px 0;border-bottom:1px solid var(--line);scroll-margin-top:78px}
+  section:last-of-type{border-bottom:none}
+  .section-head{margin-bottom:36px}
+  h2{font-size:32px;margin-bottom:10px;color:var(--ink);font-weight:700;line-height:1.2}
+  h2 .num{display:inline-block;color:var(--gold-deep);font-size:13px;letter-spacing:3px;margin-bottom:8px;font-weight:700;text-transform:uppercase}
+  .section-lede{color:var(--ink-soft);font-size:17px;max-width:820px;line-height:1.6}
+  h3{font-size:21px;margin:28px 0 14px;color:var(--ink);font-weight:700}
+  h4{font-size:16px;margin:18px 0 10px;color:var(--ink);font-weight:600}
+  p{margin-bottom:14px;color:var(--ink-soft)}
+  strong{color:var(--ink);font-weight:600}
+  .pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:24px 0}
+  .pillars.three{grid-template-columns:repeat(3,1fr)}
+  .pillars.four{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:780px){.pillars,.pillars.three,.pillars.four{grid-template-columns:1fr}}
+  .pillar{background:var(--bg-card);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;padding:24px;transition:all 0.2s}
+  .pillar:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-left-color:var(--gold-deep)}
+  .pillar.warn{border-left-color:var(--warn)}
+  .pillar.warn:hover{border-left-color:var(--bad)}
+  .pillar.good{border-left-color:var(--good)}
+  .pillar .icon{font-size:22px;margin-bottom:12px;color:var(--gold-deep);font-weight:800;width:42px;height:42px;border-radius:10px;background:var(--bg-warm);display:flex;align-items:center;justify-content:center}
+  .pillar.warn .icon{background:var(--warn-bg);color:var(--warn)}
+  .pillar.good .icon{background:var(--good-bg);color:var(--good)}
+  .pillar h4{font-size:14px;color:var(--gold-deep);text-transform:uppercase;letter-spacing:1.5px;margin:0 0 10px;font-weight:700}
+  .pillar.warn h4{color:var(--warn)}
+  .pillar.good h4{color:var(--good)}
+  .pillar p{font-size:14px;margin:0;color:var(--ink-soft);line-height:1.55}
+  .score-block{display:grid;grid-template-columns:240px 1fr;gap:36px;align-items:center;background:var(--bg-card);border:1px solid var(--line);border-radius:18px;padding:32px;margin:24px 0;box-shadow:var(--shadow-sm)}
+  @media(max-width:780px){.score-block{grid-template-columns:1fr}}
+  .score-dial{position:relative;width:220px;height:220px;margin:0 auto}
+  .score-dial svg{transform:rotate(-90deg)}
+  .score-dial .center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+  .score-dial .num{font-size:62px;font-weight:800;line-height:1;background:linear-gradient(120deg,var(--gold-deep) 0%,var(--gold-bright) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .score-dial .denom{font-size:14px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-top:2px}
+  .tabs{margin:24px 0}
+  .tab-buttons{display:flex;gap:0;border-bottom:2px solid var(--line);margin-bottom:24px;overflow-x:auto;scrollbar-width:none}
+  .tab-buttons::-webkit-scrollbar{display:none}
+  .tab-btn{background:none;border:none;padding:14px 22px;font-size:14.5px;color:var(--ink-muted);cursor:pointer;font-weight:600;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all 0.2s;white-space:nowrap;font-family:inherit}
+  .tab-btn:hover{color:var(--ink);background:var(--bg-warm)}
+  .tab-btn.active{color:var(--gold-deep);border-bottom-color:var(--gold)}
+  .tab-content{display:none;animation:fadeIn 0.3s ease}
+  .tab-content.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--line);margin:20px 0;box-shadow:var(--shadow-sm)}
+  table{width:100%;border-collapse:collapse;background:var(--bg-card);font-size:14px;min-width:560px}
+  th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  th{background:var(--bg-cream-deep);font-weight:700;color:var(--ink);font-size:11.5px;text-transform:uppercase;letter-spacing:1.5px}
+  tr:last-child td{border-bottom:none}
+  tbody tr{transition:background 0.15s}
+  tbody tr:hover td{background:var(--bg-warm)}
+  td strong{color:var(--ink)}
+  .sev{display:inline-block;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:3px 10px;border-radius:99px}
+  .sev.block{background:var(--bad-bg);color:var(--bad)}
+  .sev.high{background:var(--warn-bg);color:var(--warn)}
+  .sev.med{background:var(--bg-cream-deep);color:var(--gold-deep)}
+  .sev.low{background:var(--good-bg);color:var(--good)}
+  .sev.pass{background:var(--good-bg);color:var(--good)}
+  .sev.fail{background:var(--bad-bg);color:var(--bad)}
+  .sev.partial{background:var(--warn-bg);color:var(--warn)}
+  .threat-high{color:var(--bad);font-weight:700}
+  .threat-med{color:var(--warn);font-weight:700}
+  .threat-low{color:var(--good);font-weight:700}
+  .callout{background:var(--bg-warm);border:1px solid var(--gold);border-left:5px solid var(--gold);border-radius:12px;padding:22px 26px;margin:24px 0;box-shadow:var(--shadow-sm)}
+  .callout .label{display:inline-flex;align-items:center;gap:8px;font-size:11px;color:var(--gold-deep);text-transform:uppercase;letter-spacing:2px;font-weight:800;margin-bottom:8px}
+  .callout .label::before{content:"";width:18px;height:2px;background:var(--gold);display:inline-block}
+  .callout p:last-child{margin-bottom:0}
+  .callout.warn{background:var(--warn-bg);border-color:var(--warn)}
+  .callout.warn .label{color:var(--warn)}
+  .callout.warn .label::before{background:var(--warn)}
+  .callout.good{background:var(--good-bg);border-color:var(--good)}
+  .callout.good .label{color:var(--good)}
+  .callout.good .label::before{background:var(--good)}
+  .callout.bad{background:var(--bad-bg);border-color:var(--bad)}
+  .callout.bad .label{color:var(--bad)}
+  .callout.bad .label::before{background:var(--bad)}
+  .checklist{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin:18px 0;box-shadow:var(--shadow-sm)}
+  .checklist .header-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+  .checklist h4{color:var(--gold-deep);font-size:13px;text-transform:uppercase;letter-spacing:2px;margin:0;font-weight:700}
+  .checklist .progress{font-size:12px;color:var(--ink-muted);background:var(--bg-warm);padding:4px 12px;border-radius:99px;font-weight:600}
+  .checklist ul{list-style:none}
+  .checklist li{padding:11px 0 11px 36px;position:relative;border-bottom:1px dotted var(--line);font-size:14.5px;cursor:pointer;color:var(--ink);transition:all 0.15s;user-select:none;line-height:1.5}
+  .checklist li:last-child{border:none}
+  .checklist li:hover{color:var(--gold-deep)}
+  .checklist li::before{content:"";position:absolute;left:4px;top:13px;width:20px;height:20px;border:2px solid var(--gold);border-radius:5px;background:#fff;transition:all 0.2s}
+  .checklist li.done{color:var(--ink-muted);text-decoration:line-through}
+  .checklist li.done::before{background:var(--gold);border-color:var(--gold-deep)}
+  .checklist li.done::after{content:"";position:absolute;left:9px;top:15px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .checklist li .owner{font-size:10px;background:var(--gold);color:#fff;padding:2px 8px;border-radius:99px;margin-left:6px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;vertical-align:middle;display:inline-block}
+  .checklist li .owner.robert{background:var(--good)}
+  .checklist li .owner.me{background:var(--gold-deep)}
+  .checklist li .owner.dev{background:var(--warn)}
+  .timeline{margin:24px 0 8px;position:relative}
+  .timeline::before{content:"";position:absolute;left:15px;top:8px;bottom:8px;width:3px;background:linear-gradient(180deg,var(--gold) 0%,var(--line) 100%);border-radius:2px}
+  .phase{position:relative;padding:6px 0 26px 52px}
+  .phase::before{content:"";position:absolute;left:8px;top:12px;width:17px;height:17px;border-radius:50%;background:var(--gold);border:4px solid var(--bg);box-shadow:0 0 0 2px var(--gold);transition:all 0.3s}
+  .phase:hover::before{background:var(--gold-bright);transform:scale(1.15)}
+  .phase .when{font-size:11.5px;color:var(--gold-deep);text-transform:uppercase;letter-spacing:2.5px;font-weight:700}
+  .phase h4{font-size:18px;margin:6px 0 8px;color:var(--ink)}
+  .phase p{font-size:14.5px;color:var(--ink-soft);margin:0}
+  .qa{background:var(--bg-card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;box-shadow:var(--shadow-sm);transition:all 0.2s}
+  .qa:hover{box-shadow:var(--shadow-md)}
+  .qa .q{padding:16px 22px;cursor:pointer;font-weight:600;color:var(--ink);font-size:15px;display:flex;align-items:center;justify-content:space-between;gap:16px;user-select:none;transition:background 0.15s}
+  .qa .q:hover{background:var(--bg-warm)}
+  .qa .q .text{flex:1}
+  .qa .q .text .tag{display:inline-block;font-size:10.5px;background:var(--gold);color:#fff;padding:2px 9px;border-radius:99px;margin-right:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;vertical-align:middle}
+  .qa .q .toggle{width:28px;height:28px;border-radius:50%;background:var(--bg-warm);color:var(--gold-deep);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;flex-shrink:0;transition:all 0.25s}
+  .qa.open .q .toggle{background:var(--gold);color:#fff;transform:rotate(45deg)}
+  .qa .a{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.4s ease;padding:0 22px;color:var(--ink-soft);font-size:14.5px;line-height:1.65}
+  .qa.open .a{max-height:1800px;padding:0 22px 20px}
+  .qa .a p{font-size:14.5px;margin-bottom:10px}
+  .qa .a ul{padding-left:20px;margin:8px 0;font-size:14px}
+  .qa .a ul li{margin:4px 0;color:var(--ink-soft)}
+  .qa .a code,code{background:var(--bg-cream-deep);padding:1px 6px;border-radius:4px;font-size:13px;font-family:"SF Mono",Consolas,monospace;color:var(--gold-deep)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0}
+  @media(max-width:780px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--bg-card);border:1px solid var(--line);border-radius:12px;padding:22px 16px;text-align:center;transition:all 0.2s;box-shadow:var(--shadow-sm)}
+  .kpi:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--gold)}
+  .kpi .v{font-size:30px;font-weight:800;line-height:1;margin-bottom:8px;background:linear-gradient(120deg,var(--gold-deep) 0%,var(--gold-bright) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .kpi .l{font-size:11.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+  .signal-bars{margin:24px 0}
+  .signal{margin:14px 0}
+  .signal .label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .signal .label-row .name{font-size:14px;color:var(--ink);font-weight:600}
+  .signal .label-row .pct{font-size:13px;color:var(--gold-deep);font-weight:700;background:var(--bg-warm);padding:2px 10px;border-radius:99px}
+  .signal .track{height:12px;background:var(--bg-cream-deep);border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+  .signal .fill{height:100%;background:linear-gradient(90deg,var(--gold-deep) 0%,var(--gold-bright) 100%);border-radius:99px;transition:width 0.6s ease}
+  pre{background:var(--bg-cream-deep);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:8px;padding:16px 20px;font-family:"SF Mono",Consolas,monospace;font-size:13px;color:var(--ink);overflow-x:auto;margin:14px 0;line-height:1.55}
+  .content-list{list-style:none;margin:14px 0}
+  .content-list li{padding:7px 0 7px 28px;position:relative;color:var(--ink-soft);font-size:14.5px;line-height:1.55}
+  .content-list li::before{content:"";position:absolute;left:8px;top:15px;width:8px;height:8px;background:var(--gold);border-radius:50%}
+  .content-list li strong{color:var(--ink)}
+  .content-list.good li::before{background:var(--good)}
+  .content-list.warn li::before{background:var(--warn)}
+  .side-by-side{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0}
+  @media(max-width:780px){.side-by-side{grid-template-columns:1fr}}
+  .side-box{background:var(--bg-card);border:1px solid var(--line);border-radius:12px;padding:22px;box-shadow:var(--shadow-sm)}
+  .side-box.have{border-top:4px solid var(--good)}
+  .side-box.need{border-top:4px solid var(--warn)}
+  .side-box h4{font-size:12px;color:var(--gold-deep);text-transform:uppercase;letter-spacing:2px;margin:0 0 12px;font-weight:700}
+  .side-box.have h4{color:var(--good)}
+  .side-box.need h4{color:var(--warn)}
+  .channel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px 0}
+  @media(max-width:780px){.channel-grid{grid-template-columns:1fr}}
+  .channel{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow-sm);transition:all 0.2s}
+  .channel:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--gold)}
+  .channel .ch-head{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+  .channel .ch-icon{width:46px;height:46px;border-radius:12px;background:var(--bg-warm);color:var(--gold-deep);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;flex-shrink:0}
+  .channel .ch-name{font-size:16px;font-weight:700;color:var(--ink)}
+  .channel .ch-verdict{display:inline-block;font-size:10.5px;padding:2px 9px;border-radius:99px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-top:3px}
+  .channel .ch-verdict.yes{background:var(--good-bg);color:var(--good)}
+  .channel .ch-verdict.maybe{background:var(--warn-bg);color:var(--warn)}
+  .channel .ch-verdict.no{background:var(--bad-bg);color:var(--bad)}
+  .channel .ch-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .channel .ch-stats .st{text-align:center}
+  .channel .ch-stats .st .l{font-size:9.5px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+  .channel .ch-stats .st .v{font-size:13px;color:var(--gold-deep);font-weight:700;margin-top:2px}
+  .channel p{font-size:13.5px;color:var(--ink-soft);margin:0;line-height:1.5}
+  .calendar table{font-size:13px}
+  .calendar td{padding:10px 12px;font-size:13px}
+  .calendar .day{font-weight:700;color:var(--gold-deep)}
+  #toTop{position:fixed;bottom:30px;right:30px;width:48px;height:48px;border-radius:50%;background:var(--gold-deep);color:#fff;border:none;cursor:pointer;font-size:20px;font-weight:700;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:all 0.3s;z-index:99}
+  #toTop.show{opacity:1;pointer-events:auto}
+  #toTop:hover{background:var(--gold);transform:translateY(-2px)}
+  footer{background:linear-gradient(180deg,var(--bg-cream-deep) 0%,var(--bg) 100%);color:var(--ink-soft);padding:48px 0 40px;text-align:center;font-size:14px;border-top:3px solid var(--gold)}
+  footer .gold{color:var(--gold-deep);font-weight:700;font-size:18px;letter-spacing:1px}
+  footer .quote{font-style:italic;font-size:17px;color:var(--ink);max-width:600px;margin:16px auto 8px;line-height:1.5}
+  footer .quote::before{content:"\201C ";color:var(--gold)}
+  footer .quote::after{content:" \201D";color:var(--gold)}
+  footer .approve{margin-top:24px;display:inline-block;background:linear-gradient(135deg,var(--gold-deep) 0%,var(--gold) 100%);color:#fff;padding:14px 28px;border-radius:10px;text-decoration:none;font-weight:600;box-shadow:var(--shadow-md);transition:all 0.2s}
+  footer .approve:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+  @media(max-width:680px){header h1{font-size:34px}h2{font-size:26px}nav.topnav .brand .label{display:none}.score-block{padding:22px}}
+  @media print{nav.topnav,#progressBar,#toTop{display:none}header.hero{background:#fff;padding:32px 0}section{break-inside:avoid;page-break-inside:avoid;padding:32px 0}.qa .a{max-height:none !important;padding:0 22px 18px !important}.tab-content{display:block !important}.tab-buttons{display:none}}
+</style>
+</head>
+<body>
+<div id="progressBar"></div>
+<nav class="topnav">
+  <div class="inner">
+    <div class="brand"><span class="dot"></span><span class="label">100% Playbook</span></div>
+    <div class="links" id="navLinks">
+      <a href="#score" class="active">Score</a>
+      <a href="#audit">Audit</a>
+      <a href="#competitors">Competitors</a>
+      <a href="#seo">SEO</a>
+      <a href="#ads">Ads</a>
+      <a href="#paid-other">Paid</a>
+      <a href="#instagram">IG</a>
+      <a href="#ai">AI</a>
+      <a href="#leads">Leads</a>
+      <a href="#quick-wins">Quick Wins</a>
+      <a href="#ninety">90 Days</a>
+      <a href="#budget">Budget</a>
+      <a href="#kpis">KPIs</a>
+      <a href="#stack">Stack</a>
+    </div>
+  </div>
+</nav>
+<header class="hero">
+  <div class="container hero-inner">
+    <div class="badge"><span class="star">&#9733;</span> 100% Audit &amp; Go-to-Market Playbook &middot; May 2026</div>
+    <h1>We see the gaps.<br>Here's how we <em>win.</em></h1>
+    <p class="lede">A complete audit of the new partybusrus.com site, the 8 competitors we're up against, and the 90-day plan to dominate organic search, paid ads, and Instagram in the DMV. Built for Robert. Run by Frederick. Reference this for the next 90 days.</p>
+    <div class="meta">
+      <div class="chip"><strong>For</strong><span>Robert Eljeily, Owner</span></div>
+      <div class="chip"><strong>From</strong><span>Frederick, Marketing</span></div>
+      <div class="chip"><strong>Date</strong><span>May 19, 2026</span></div>
+      <div class="chip"><strong>Read time</strong><span>~25 minutes</span></div>
+      <div class="chip"><strong>Horizon</strong><span>90 days</span></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#score" class="primary">Read the plan &darr;</a>
+      <a href="#quick-wins" class="secondary">Jump to quick wins</a>
+    </div>
+    <div class="hero-stats">
+      <div class="s"><div class="v">28/100</div><div class="l">Current SEO score</div></div>
+      <div class="s"><div class="v">8</div><div class="l">Competitors audited</div></div>
+      <div class="s"><div class="v">3,500+</div><div class="l">IG goal &middot; day 90</div></div>
+      <div class="s"><div class="v">$20-50K</div><div class="l">Revenue &middot; day 90</div></div>
+    </div>
+  </div>
+</header>
+<section id="score">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">01 &middot; The Score</span>
+      <h2>Where we stand today</h2>
+      <p class="section-lede">The new partybusrus.com site looks beautiful &mdash; and that's exactly the problem. Underneath the surface, Google sees almost none of it. Here's the unvarnished number.</p>
+    </div>
+    <div class="score-block">
+      <div class="score-dial">
+        <svg width="220" height="220" viewBox="0 0 220 220">
+          <circle cx="110" cy="110" r="92" fill="none" stroke="#f5e8c8" stroke-width="20"/>
+          <circle cx="110" cy="110" r="92" fill="none" stroke="url(#goldGrad)" stroke-width="20" stroke-dasharray="578" stroke-dashoffset="416" stroke-linecap="round"/>
+          <defs><linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8a6815"/><stop offset="100%" stop-color="#d4af37"/></linearGradient></defs>
+        </svg>
+        <div class="center"><div class="num">28</div><div class="denom">/ 100</div></div>
+      </div>
+      <div>
+        <h3 style="margin-top:0">SEO + go-to-market readiness</h3>
+        <p>We have a 2,438-word home page with strong on-brand copy, real photography, and a polished design. But the site is a single-file SPA with hash routing &mdash; meaning <strong>45 of 46 pages are invisible to Google</strong>. The quote form is non-functional, zero analytics are installed, and the favicon is a 1.1 MB PNG that browsers refuse to render.</p>
+        <p><strong>The good news:</strong> none of these are hard to fix. Most are 1-4 hours of work. The biggest one (re-architecting from SPA to multi-page) is the highest-ROI move we will make in 2026.</p>
+      </div>
+    </div>
+    <h3>The 5 strengths we keep</h3>
+    <div class="pillars">
+      <div class="pillar good"><div class="icon">&#9733;</div><h4>Strong home page copy</h4><p>2,438 words of on-brand, on-voice copy. Most competitors have 400-800 words of generic boilerplate. This is a real moat.</p></div>
+      <div class="pillar good"><div class="icon">&#9678;</div><h4>LocalBusiness schema exists</h4><p>JSON-LD is present &mdash; needs a few additions (review aggregate, services, areaServed) but the foundation is laid.</p></div>
+      <div class="pillar good"><div class="icon">&#10004;</div><h4>Unique city pages</h4><p>Each DC/MD/VA city page is genuinely written, not templated. Once they're crawlable, they'll rank.</p></div>
+      <div class="pillar good"><div class="icon">&#9728;</div><h4>Alt text on every image</h4><p>Often skipped on premium sites. Ours is clean &mdash; accessibility and SEO both benefit.</p></div>
+      <div class="pillar good"><div class="icon">&#9786;</div><h4>Brand voice locked in</h4><p>Energetic, DMV-rooted, no-corporate-fluff. That's worth more than any technical fix because it can't be copied.</p></div>
+    </div>
+    <h3>The 5 critical blockers</h3>
+    <div class="pillars">
+      <div class="pillar warn"><div class="icon">&#9888;</div><h4>SPA hash routing</h4><p>Single-file site with #/page URLs. Google indexes only the home page &mdash; 45 other pages are invisible. <strong>BLOCKER #1.</strong></p></div>
+      <div class="pillar warn"><div class="icon">&#9888;</div><h4>Quote form is broken</h4><p>Form fields lack <code>name</code> attributes and have no backend. Every inquiry submitted right now is lost. Every. One.</p></div>
+      <div class="pillar warn"><div class="icon">&#9888;</div><h4>Zero analytics</h4><p>No GA4, no GTM, no Meta Pixel, no call tracking. We're flying blind. Cannot improve what we cannot measure.</p></div>
+      <div class="pillar warn"><div class="icon">&#9888;</div><h4>46 H1 tags in one document</h4><p>Every "page" is technically a section inside the SPA, and each has an H1. To Google this reads as a chaotic, unfocused document.</p></div>
+      <div class="pillar warn"><div class="icon">&#9888;</div><h4>1.1 MB PNG as favicon</h4><p>The favicon is the full brand lockup at 1.1 MB. Most browsers refuse to render it. Tab shows blank. Looks unprofessional.</p></div>
+    </div>
+    <div class="callout bad">
+      <div class="label">Bottom line</div>
+      <p><strong>We have a beautiful site that Google mostly can't see, the form leaks every lead, and we have zero tracking.</strong> Fix these three things and we 5x our results overnight. None of these are huge projects &mdash; the SPA fix is the biggest and it's 2-3 weeks of work for a measurable doubling of indexed pages.</p>
+    </div>
+  </div>
+</section>
+
+<section id="audit">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">02 &middot; The Audit</span>
+      <h2>Full website audit</h2>
+      <p class="section-lede">Twenty-one technical checks across crawlability, indexability, performance, schema, and conversion. Every row mapped to severity.</p>
+    </div>
+    <h3>Technical SEO scorecard</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th style="width:34%">Check</th><th style="width:13%">Status</th><th>Finding</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Crawlability &mdash; multi-page structure</strong></td><td><span class="sev fail">Fail</span></td><td>Single-file SPA with hash routing. Only the home URL is indexable.</td></tr>
+        <tr><td><strong>H1 hierarchy</strong></td><td><span class="sev fail">Fail</span></td><td>46 H1s in one document. Should be one per page.</td></tr>
+        <tr><td><strong>Canonical URLs</strong></td><td><span class="sev fail">Fail</span></td><td>Missing on all pages. No signal to Google about preferred URL.</td></tr>
+        <tr><td><strong>XML sitemap</strong></td><td><span class="sev fail">Fail</span></td><td>None present. Search Console has nothing to crawl.</td></tr>
+        <tr><td><strong>Robots.txt</strong></td><td><span class="sev partial">Partial</span></td><td>Exists but doesn't reference a sitemap.</td></tr>
+        <tr><td><strong>Hreflang on Spanish content</strong></td><td><span class="sev fail">Fail</span></td><td>Spanish version has no <code>lang="es"</code> and no <code>hreflang</code> alternates.</td></tr>
+        <tr><td><strong>JSON-LD LocalBusiness schema</strong></td><td><span class="sev partial">Partial</span></td><td>Present. Needs review aggregate, services, areaServed, sameAs URLs.</td></tr>
+        <tr><td><strong>Open Graph / Twitter cards</strong></td><td><span class="sev partial">Partial</span></td><td>Some tags present. Image references need to be absolute URLs.</td></tr>
+        <tr><td><strong>Page titles &amp; meta descriptions</strong></td><td><span class="sev partial">Partial</span></td><td>Home page only. Other "pages" share the SPA's title.</td></tr>
+        <tr><td><strong>Image alt text</strong></td><td><span class="sev pass">Pass</span></td><td>All visible images have alt attributes. Well done.</td></tr>
+        <tr><td><strong>Image weight &amp; format</strong></td><td><span class="sev fail">Fail</span></td><td>14.7 MB of images. Three over 1 MB. No WebP. No srcset.</td></tr>
+        <tr><td><strong>Favicon</strong></td><td><span class="sev fail">Fail</span></td><td>1.1 MB PNG lockup. Most browsers refuse to display.</td></tr>
+        <tr><td><strong>LCP (largest contentful paint)</strong></td><td><span class="sev fail">Fail</span></td><td>Hero image is the LCP and it's 1.4 MB. Will fail Core Web Vitals.</td></tr>
+        <tr><td><strong>Mobile responsiveness</strong></td><td><span class="sev pass">Pass</span></td><td>Site is responsive. No horizontal scroll bugs detected.</td></tr>
+        <tr><td><strong>HTTPS</strong></td><td><span class="sev pass">Pass</span></td><td>SSL active via Netlify auto-issue.</td></tr>
+        <tr><td><strong>Form functionality</strong></td><td><span class="sev fail">Fail</span></td><td>Quote form fields lack <code>name</code> attrs, no submission backend.</td></tr>
+        <tr><td><strong>Analytics installed</strong></td><td><span class="sev fail">Fail</span></td><td>No GA4, no GTM, no Meta Pixel, no CallRail. Zero data.</td></tr>
+        <tr><td><strong>Click-to-call tracking</strong></td><td><span class="sev fail">Fail</span></td><td>Phone links have <code>tel:</code> but no event tracking attached.</td></tr>
+        <tr><td><strong>Content uniqueness</strong></td><td><span class="sev pass">Pass</span></td><td>Home + city pages are uniquely written. No duplicate content concerns.</td></tr>
+        <tr><td><strong>Internal linking depth</strong></td><td><span class="sev partial">Partial</span></td><td>Hash routing means link equity flows to one URL only.</td></tr>
+        <tr><td><strong>Spanish version feature parity</strong></td><td><span class="sev partial">Partial</span></td><td>Exists but is thinner than English. Needs build-out.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Critical issues &mdash; severity ranked</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th style="width:14%">Severity</th><th>Issue</th></tr></thead>
+      <tbody>
+        <tr><td><span class="sev block">Blocker</span></td><td><strong>SPA hash routing makes 45 of 46 pages uncrawlable.</strong> Re-architect to multi-page static site (Astro, Next, or hand-built static HTML).</td></tr>
+        <tr><td><span class="sev block">Blocker</span></td><td><strong>Quote form has no backend.</strong> Every lead is lost. Wire to Formspree, HubSpot Forms, or Netlify Forms &mdash; this week.</td></tr>
+        <tr><td><span class="sev block">Blocker</span></td><td><strong>Zero analytics installed.</strong> Add GA4 + GTM + Meta Pixel + CallRail in week 1.</td></tr>
+        <tr><td><span class="sev high">High</span></td><td><strong>46 H1 tags in one document.</strong> Auto-fixed when we move to multi-page architecture.</td></tr>
+        <tr><td><span class="sev high">High</span></td><td><strong>1.1 MB PNG favicon.</strong> Replace with 32&times;32 + 192&times;192 PNG plus a 16&times;16 ICO.</td></tr>
+        <tr><td><span class="sev high">High</span></td><td><strong>Hero image &amp; 2 others over 1 MB.</strong> IMG_5053, IMG_3095, IMG_2366 each need to be &lt;300 KB and converted to WebP.</td></tr>
+        <tr><td><span class="sev high">High</span></td><td><strong>Insurance/credentials still appear in 7 places</strong> despite the decision to remove them. Search and strip.</td></tr>
+        <tr><td><span class="sev high">High</span></td><td><strong>"6 years running" + "thousands of nights"</strong> leftovers from years-stripping pass &mdash; these contradict our new positioning.</td></tr>
+        <tr><td><span class="sev high">High</span></td><td><strong>Duplicate testimonial section</strong> at lines 1520-1549. Delete one.</td></tr>
+        <tr><td><span class="sev high">High</span></td><td><strong>About page contradicts pricing-removal</strong> &mdash; says "flat-rate pricing is published" but no pricing is on the site.</td></tr>
+        <tr><td><span class="sev med">Medium</span></td><td><strong>Google review URL broken</strong> &mdash; currently has no place ID. Need correct GBP place ID URL.</td></tr>
+        <tr><td><span class="sev med">Medium</span></td><td><strong>9 blog posts use Unsplash stock images</strong> and go to dead links. Replace with real photos or delete the posts.</td></tr>
+        <tr><td><span class="sev med">Medium</span></td><td><strong>Only 1 of 7 fleet detail pages exists.</strong> Build the remaining 6.</td></tr>
+        <tr><td><span class="sev med">Medium</span></td><td><strong>JSON-LD URLs are relative.</strong> Make all absolute (<code>https://partybusrus.com/...</code>).</td></tr>
+        <tr><td><span class="sev low">Low</span></td><td><strong>14.7 MB total images.</strong> Heavy but quality is real. Convert to WebP with srcset to cut ~60%.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>15 quick wins &mdash; do this week</h3>
+    <div class="checklist" data-list="qw-tracking">
+      <div class="header-row"><h4>Tracking foundation</h4><span class="progress">0 / 4</span></div>
+      <ul>
+        <li>Install GA4 + Google Tag Manager (paste container snippet in &lt;head&gt;) <span class="owner me">Me</span></li>
+        <li>Add Meta Pixel via GTM <span class="owner me">Me</span></li>
+        <li>Set up CallRail tracking number, swap phone on site <span class="owner robert">Robert</span></li>
+        <li>Wire phone-click events to GA4 + GTM <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+    <div class="checklist" data-list="qw-fixes">
+      <div class="header-row"><h4>Critical site fixes</h4><span class="progress">0 / 6</span></div>
+      <ul>
+        <li>Replace 1.1 MB favicon with proper 32&times;32 PNG + 16&times;16 ICO <span class="owner me">Me</span></li>
+        <li>Remove duplicate testimonial section (lines 1520-1549) <span class="owner me">Me</span></li>
+        <li>Fix Google review URL with correct place ID <span class="owner me">Me</span></li>
+        <li>Strip insurance/credentials references from 7 remaining spots <span class="owner me">Me</span></li>
+        <li>Strip "6 years running" + "thousands of nights" leftovers <span class="owner me">Me</span></li>
+        <li>Fix About page pricing contradiction <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+    <div class="checklist" data-list="qw-perf">
+      <div class="header-row"><h4>Performance &amp; schema</h4><span class="progress">0 / 5</span></div>
+      <ul>
+        <li>Compress IMG_5053, IMG_3095, IMG_2366 to &lt;300 KB each <span class="owner me">Me</span></li>
+        <li>Add <code>name</code> attributes to all form fields <span class="owner me">Me</span></li>
+        <li>Wire form to Formspree or HubSpot backend <span class="owner me">Me</span></li>
+        <li>Add <code>lang="es"</code> and <code>hreflang</code> to Spanish pages <span class="owner me">Me</span></li>
+        <li>Make all JSON-LD URLs absolute (https://...) <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+    <h3>Bigger projects (effort estimated)</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Project</th><th style="width:18%">Effort</th><th style="width:22%">Impact</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Re-architect as multi-page site</strong> (Astro or Next.js)</td><td>2-3 weeks</td><td><strong style="color:var(--good)">Highest ROI</strong></td></tr>
+        <tr><td><strong>Build 9 missing blog posts</strong> with real photos &amp; on-brand copy</td><td>2 weeks</td><td>High</td></tr>
+        <tr><td><strong>Build 6 missing fleet detail pages</strong></td><td>1 week</td><td>High</td></tr>
+        <tr><td><strong>Convert images to WebP + srcset</strong></td><td>3 days</td><td>Med-High (Core Web Vitals)</td></tr>
+        <tr><td><strong>Build Spanish version to feature parity</strong></td><td>2 weeks</td><td>Med (~17% DMV Hispanic)</td></tr>
+        <tr><td><strong>Embed 8 fleet videos</strong> with lazy-load posters</td><td>2 days</td><td>Med (huge competitor gap)</td></tr>
+        <tr><td><strong>Build pricing-calculator landing tool</strong></td><td>1 week</td><td>Med-High (conversion lift)</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+<section id="competitors">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">03 &middot; The Field</span>
+      <h2>Competitive landscape</h2>
+      <p class="section-lede">Eight DMV competitors audited. Pricing intel pulled. Gaps mapped. We know where each one is strong, where they leak, and exactly where Party Bus R Us can take share.</p>
+    </div>
+    <div class="tabs">
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="top8">Top 8</button>
+        <button class="tab-btn" data-tab="threats">Biggest Threats</button>
+        <button class="tab-btn" data-tab="study">Best to Study</button>
+        <button class="tab-btn" data-tab="gaps">Universal Gaps</button>
+      </div>
+      <div class="tab-content active" data-content="top8">
+        <p>Comparison matrix of all 8 DMV competitors. Scroll horizontally on mobile.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Competitor</th><th>Founded</th><th>Fleet</th><th>Reviews</th><th>Site</th><th>IG</th><th>Pricing?</th><th>Differentiation</th><th>Threat</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Chariots For Hire</strong><br><span style="color:var(--ink-muted);font-size:12px">Sterling, VA</span></td><td>2002</td><td>50+</td><td>Strong</td><td>High</td><td>~3K</td><td>No</td><td>Most complete playbook</td><td><span class="threat-med">Med</span></td></tr>
+            <tr><td><strong>Reston Limousine</strong><br><span style="color:var(--ink-muted);font-size:12px">Sterling, VA</span></td><td>1990</td><td>200+</td><td>Strong</td><td>High</td><td>~5K</td><td>No</td><td>Woman-owned, wine-tour leader</td><td><span class="threat-med">Med</span></td></tr>
+            <tr><td><strong>Bayside Limousine</strong><br><span style="color:var(--ink-muted);font-size:12px">Upper Marlboro, MD</span></td><td>1992</td><td>30+</td><td>143 WW</td><td>Med</td><td>~2K</td><td>No</td><td>WeddingWire dominance</td><td><span class="threat-med">Med</span></td></tr>
+            <tr><td><strong>Point to Point Limo</strong><br><span style="color:var(--ink-muted);font-size:12px">Leesburg, VA</span></td><td>2007</td><td>20+</td><td>Strong</td><td>Med</td><td>~1K</td><td>No</td><td>Loudoun wedding focus</td><td><span class="threat-low">Low</span></td></tr>
+            <tr><td><strong>Uptown Bus</strong><br><span style="color:var(--ink-muted);font-size:12px">Annandale, VA</span></td><td>~2010</td><td>25+</td><td>Med</td><td>Med</td><td>~2K</td><td>No</td><td>Broadest service taxonomy</td><td><span class="threat-high">High</span></td></tr>
+            <tr><td><strong>DC 4 Party</strong><br><span style="color:var(--ink-muted);font-size:12px">DC</span></td><td>~2012</td><td>15+</td><td>Med</td><td>Med-Low</td><td>~4K</td><td>No</td><td>VIP / red-carpet angle</td><td><span class="threat-high">High</span></td></tr>
+            <tr><td><strong>The DMV Party Bus</strong><br><span style="color:var(--ink-muted);font-size:12px">Riverdale, MD</span></td><td>2014</td><td>10+</td><td>Strong</td><td>Low</td><td><strong>~16K</strong></td><td><strong>Yes - $10/p/hr</strong></td><td>IG-native, transparent pricing</td><td><span class="threat-high">High</span></td></tr>
+            <tr><td><strong>Tru Vybez Charter</strong><br><span style="color:var(--ink-muted);font-size:12px">Clinton, MD</span></td><td>2022</td><td>5+</td><td>Few</td><td>Low</td><td>~1K</td><td>No</td><td>Bachelorette / girls'-night niche</td><td><span class="threat-low">Low</span></td></tr>
+          </tbody>
+        </table></div>
+        <div class="callout">
+          <div class="label">Pricing intel</div>
+          <p><strong>Range:</strong> $150-$350/hr across the DMV market. <strong>Weekend premium:</strong> 15-30% typical. <strong>The only competitor showing public pricing is The DMV Party Bus</strong> at $10/person/hr (which back-solves to roughly $200-250/hr for a 20-25 passenger bus). Transparent pricing is a moat nobody else is willing to build.</p>
+        </div>
+      </div>
+      <div class="tab-content" data-content="threats">
+        <h3>The 3 most dangerous to us</h3>
+        <div class="pillars three">
+          <div class="pillar warn"><div class="icon">1</div><h4>The DMV Party Bus</h4><p><strong>Why threatening:</strong> 16K Instagram, transparent $10/person/hr pricing in bio, IG-native lead capture. Owns the search bar and the social bar at once.</p></div>
+          <div class="pillar warn"><div class="icon">2</div><h4>DC 4 Party</h4><p><strong>Why threatening:</strong> VIP/red-carpet positioning that overlaps with our higher-end party voice. Thin social proof but aggressive ad spend. Could undercut our paid CPCs.</p></div>
+          <div class="pillar warn"><div class="icon">3</div><h4>Uptown Bus</h4><p><strong>Why threatening:</strong> The broadest service taxonomy in the market &mdash; they target everything from prom to corporate. Solid GBP signal. Hardest to outrank generically.</p></div>
+        </div>
+        <div class="callout warn">
+          <div class="label">Defensive plays</div>
+          <p>(1) Bid on these 3 brand names as competitor-conquesting keywords. (2) Beat <strong>The DMV Party Bus</strong> on transparency: we publish an actual quote calculator, not just a per-person number. (3) Beat <strong>DC 4 Party</strong> on social proof: 30 reviews in 90 days. (4) Beat <strong>Uptown Bus</strong> on niche depth: we win bachelorette, they spread thin.</p>
+        </div>
+      </div>
+      <div class="tab-content" data-content="study">
+        <h3>Best to study: Chariots For Hire</h3>
+        <p>Their playbook is the most complete in the DMV &mdash; and the most copyable.</p>
+        <ul class="content-list">
+          <li><strong>Multi-page site architecture</strong> with separate landing pages per occasion + per city.</li>
+          <li><strong>Strong photography</strong> on every fleet page, not just the home.</li>
+          <li><strong>Schema markup</strong> on each fleet vehicle as a Product entity with images.</li>
+          <li><strong>Internal linking</strong> &mdash; every page links to 4-7 related city/occasion pages.</li>
+          <li><strong>Review widget</strong> on every page, not just the home.</li>
+          <li><strong>FAQs at the bottom of each occasion page</strong> &mdash; Google rewards this with featured snippets.</li>
+          <li><strong>Sticky CTA bar on mobile</strong> with phone + quote button.</li>
+        </ul>
+        <div class="callout good">
+          <div class="label">What we copy, what we beat</div>
+          <p><strong>Copy:</strong> their site architecture, FAQ blocks, schema-per-vehicle, mobile sticky bar. <strong>Beat:</strong> their photography (we have better real shots), voice (theirs is corporate, ours is alive), Instagram (they have ~3K, we'll be at 3.5K in 90 days), and Spanish content (they have none).</p>
+        </div>
+      </div>
+      <div class="tab-content" data-content="gaps">
+        <h3>Universal blind spots &mdash; gaps we can exploit</h3>
+        <p>Across all 8 competitors, these gaps appear in every audit. Each is an opportunity for Party Bus R Us to leapfrog the market.</p>
+        <div class="pillars">
+          <div class="pillar good"><div class="icon">&#9655;</div><h4>Video</h4><p>Not one competitor has embedded fleet video. We have 8 already shot &mdash; embed them and we instantly differentiate.</p></div>
+          <div class="pillar good"><div class="icon">ES</div><h4>Spanish content</h4><p>Zero competitors offer Spanish. 17% of the DMV is Hispanic. A real Spanish site captures a market nobody is fighting for.</p></div>
+          <div class="pillar good"><div class="icon">&#9883;</div><h4>Quincea&ntilde;era</h4><p>No competitor has a Quincea&ntilde;era landing page. It's a $20K+/year segment in the DMV that's wide open.</p></div>
+          <div class="pillar good"><div class="icon">&#9201;</div><h4>Real-time booking</h4><p>Every competitor uses a quote form. Real-time availability + instant booking is a UX leap nobody offers.</p></div>
+          <div class="pillar good"><div class="icon">&#10070;</div><h4>Schema markup</h4><p>Weak across all 8. Adding full LocalBusiness, Service, FAQ, BreadcrumbList, and Vehicle schema vaults us in AI Overviews.</p></div>
+          <div class="pillar good"><div class="icon">&#9881;</div><h4>Instant quote calculator</h4><p>Zero competitors offer instant pricing. A 4-input calculator (passengers, hours, date, ZIP) eliminates the form friction wall.</p></div>
+          <div class="pillar good"><div class="icon">&#9825;</div><h4>Loyalty programs</h4><p>Not a single competitor has repeat-customer rewards. Wedding planners book 8-15 events/year &mdash; we should be locking them in.</p></div>
+          <div class="pillar good"><div class="icon">&#9786;</div><h4>Real UGC</h4><p>Most use stock photography or staged shots. We have real client photos and videos. Use them ruthlessly.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="callout good">
+      <div class="label">PBRU positioning recommendation</div>
+      <p><strong>Lead with bachelorette + birthday</strong> (emotional pull, highest social-share rate, easiest to advertise on Meta/IG). <strong>Layer transparent pricing</strong> as our operational moat (we will be the only DMV operator with a real quote calculator). <strong>Seed wine tours</strong> as the Q2/Q3 vertical (high AOV, daytime utilization, repeat customers via planners).</p>
+    </div>
+  </div>
+</section>
+
+<section id="seo">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">04 &middot; The Algorithm</span>
+      <h2>SEO readiness for 2026</h2>
+      <p class="section-lede">Local SEO in 2026 looks different from 2024. AI Overviews now trigger on 68% of local queries. Here's what Google weighs &mdash; and what we have versus what we need.</p>
+    </div>
+    <h3>2026 local SEO signal weights</h3>
+    <div class="signal-bars">
+      <div class="signal"><div class="label-row"><span class="name">Google Business Profile (proximity, reviews, photos, categories, posts)</span><span class="pct">32%</span></div><div class="track"><div class="fill" style="width:32%"></div></div></div>
+      <div class="signal"><div class="label-row"><span class="name">On-page SEO (titles, H1s, content depth, schema, internal links)</span><span class="pct">19%</span></div><div class="track"><div class="fill" style="width:19%"></div></div></div>
+      <div class="signal"><div class="label-row"><span class="name">Reviews (count, velocity, rating, response rate, keywords in reviews)</span><span class="pct">16%</span></div><div class="track"><div class="fill" style="width:16%"></div></div></div>
+      <div class="signal"><div class="label-row"><span class="name">Backlinks (domain authority, local citations, brand mentions)</span><span class="pct">15%</span></div><div class="track"><div class="fill" style="width:15%"></div></div></div>
+      <div class="signal"><div class="label-row"><span class="name">Behavioral &amp; other (CTR, dwell time, mobile UX, Core Web Vitals)</span><span class="pct">18%</span></div><div class="track"><div class="fill" style="width:18%"></div></div></div>
+    </div>
+    <div class="callout">
+      <div class="label">What changed in 2026</div>
+      <p><strong>AI Overviews trigger on 68% of local queries</strong> &mdash; versus only 39% triggering a traditional local pack. Google's AI synthesizes business info from schema, GBP, and a small handful of high-authority pages. <strong>Schema markup is now the single most underleveraged ranking factor</strong> because it's how AI Overviews quote you.</p>
+    </div>
+    <h3>What we have vs. what we need</h3>
+    <div class="side-by-side">
+      <div class="side-box have">
+        <h4>&#10004; What we have</h4>
+        <ul class="content-list good">
+          <li><strong>LocalBusiness JSON-LD</strong> on the home page (partial, needs additions)</li>
+          <li><strong>Strong on-brand copy</strong> &mdash; 2,438 words on the home page</li>
+          <li><strong>Unique city pages</strong> for DC, MD, VA</li>
+          <li><strong>Alt text</strong> on every visible image</li>
+          <li><strong>HTTPS + mobile responsive</strong></li>
+          <li><strong>Real photography</strong> beating most competitors</li>
+        </ul>
+      </div>
+      <div class="side-box need">
+        <h4>&#9888; What we need</h4>
+        <ul class="content-list warn">
+          <li><strong>Multi-page architecture</strong> so each "page" is actually crawlable</li>
+          <li><strong>Sitemap.xml</strong> submitted to Search Console</li>
+          <li><strong>Canonical URLs</strong> on every page</li>
+          <li><strong>FAQ schema</strong> on top 6 service pages (boosts AI Overview citations)</li>
+          <li><strong>Service schema</strong> for each occasion (bachelorette, wedding, prom)</li>
+          <li><strong>Vehicle schema</strong> on each fleet detail page</li>
+          <li><strong>BreadcrumbList schema</strong> site-wide</li>
+          <li><strong>Review aggregateRating</strong> in JSON-LD</li>
+          <li><strong>30+ citations</strong> across Yelp, BBB, Apple Maps, etc.</li>
+          <li><strong>4-6 reviews/month sustained</strong> to hit 100+ by November</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Schema additions to ship (code snippets)</h3>
+    <p>Add these to the LocalBusiness JSON-LD on the home page and on each relevant subpage.</p>
+    <h4>1. Review aggregate</h4>
+<pre>"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": "4.9",
+  "reviewCount": "45",
+  "bestRating": "5"
+}</pre>
+    <h4>2. Services array (one entry per occasion)</h4>
+<pre>"makesOffer": [
+  {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Bachelorette Party Bus DMV",
+      "areaServed": ["Washington DC","Arlington VA","Bethesda MD"]
+    }
+  }
+]</pre>
+    <h4>3. FAQ schema on each service page</h4>
+<pre>{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How much does a party bus cost in DC?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Party bus rentals in the DMV typically run $150-$350/hr..."
+    }
+  }]
+}</pre>
+    <h4>4. Vehicle schema on each fleet detail page</h4>
+<pre>{
+  "@context": "https://schema.org",
+  "@type": "Vehicle",
+  "name": "30-Passenger Limo Bus",
+  "vehicleSeatingCapacity": "30",
+  "image": "https://partybusrus.com/fleet/30-pass-1.webp"
+}</pre>
+  </div>
+</section>
+<section id="ads">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">05 &middot; Paid Search</span>
+      <h2>Google Ads plan</h2>
+      <p class="section-lede">Four campaigns, phased rollout, clean attribution. Built to start cheap, scale fast, and kill underperformers in week one.</p>
+    </div>
+    <h3>Campaign structure</h3>
+    <div class="tabs">
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="c1">1. Brand &amp; Geo</button>
+        <button class="tab-btn" data-tab="c2">2. Occasion</button>
+        <button class="tab-btn" data-tab="c3">3. Competitor Conquest</button>
+        <button class="tab-btn" data-tab="c4">4. Performance Max</button>
+      </div>
+      <div class="tab-content active" data-content="c1">
+        <h4>Search &middot; Core Brand &amp; Geo</h4>
+        <p><strong>Focus:</strong> Defensive brand bidding + core city/service combinations. Highest intent.</p>
+        <p><strong>Top keywords:</strong> party bus DC, party bus rental DC, party bus Washington DC, party bus Virginia, party bus Maryland, party bus rental DMV, limo bus DC, charter bus DC, party bus Arlington, party bus Bethesda</p>
+        <p><strong>Match type:</strong> Phrase match primary, with brand exact for "Party Bus R Us"</p>
+        <p><strong>Sample RSA:</strong></p>
+<pre>Headlines:
+- DMV Party Bus Rentals
+- Bachelorette Buses &middot; LED Interior
+- Book in 60 Seconds &middot; 24/7 Quotes
+- Real DMV Drivers &middot; Real Reviews
+- Party Bus DC &middot; MD &middot; VA
+
+Descriptions:
+- Bachelorette, birthday, brewery crawl - we have the bus.
+  LED interior, premium sound, instant quote. Call now.
+- Trusted by hundreds of DMV groups. Real photos, real
+  reviews, clear pricing. Get your quote in 60 seconds.</pre>
+        <p><strong>Daily budget:</strong> $40 (pilot) &rarr; $80 (scale) &rarr; $150 (established)</p>
+      </div>
+      <div class="tab-content" data-content="c2">
+        <h4>Search &middot; Occasion</h4>
+        <p><strong>Focus:</strong> Long-tail occasion-driven intent. Lower CPCs, higher conversion rates.</p>
+        <p><strong>Top keywords:</strong> bachelorette party bus DC, prom bus rental Virginia, winery tour bus Maryland, brewery crawl bus DMV, birthday party bus DC, wedding shuttle bus DC, Quincea&ntilde;era bus Maryland, 21st birthday party bus, sweet 16 party bus DC, sports tailgate bus DMV</p>
+        <p><strong>Match type:</strong> Phrase + a small set of exact for highest-volume terms</p>
+        <p><strong>Sample RSA (Bachelorette):</strong></p>
+<pre>Headlines:
+- Bachelorette Party Bus DMV
+- 14-30 Passenger LED Buses
+- Real DMV Routes &middot; Real Reviews
+- Bachelorette Squad &middot; Roll Deep
+- Free Bachelorette Itinerary
+
+Descriptions:
+- Roll deep with your squad on a real DMV party bus.
+  LED interior, premium sound, pickup anywhere in DC/MD/VA.
+- Free bachelorette route planner with every quote. Pin
+  drops, photo stops, the works. Book in 60 seconds.</pre>
+        <p><strong>Sample RSA (Wedding):</strong></p>
+<pre>Headlines:
+- DMV Wedding Shuttle Bus
+- Bride &amp; Groom Trusted
+- 14-40 Passenger &middot; LED + Sound
+- Real DMV Routes &middot; Real Reviews
+- Free Wedding Quote &middot; 60 Sec
+
+Descriptions:
+- Get your bridal party from hotel to venue to afterparty
+  in style. Real DMV drivers. LED interior. Real reviews.</pre>
+        <p><strong>Daily budget:</strong> $30 (pilot) &rarr; $80 (scale) &rarr; $150 (established)</p>
+      </div>
+      <div class="tab-content" data-content="c3">
+        <h4>Search &middot; Competitor Conquesting</h4>
+        <p><strong>Focus:</strong> Bid on the brand names of the top 8 competitors. Show our ad above their organic listing.</p>
+        <p><strong>Top keywords:</strong> the dmv party bus, dc 4 party bus, uptown bus, chariots for hire, reston limousine, bayside limousine, point to point limousine, tru vybez charter</p>
+        <p><strong>Match type:</strong> Phrase only (avoid trademark issues with broad match)</p>
+        <p><strong>Sample RSA:</strong></p>
+<pre>Headlines:
+- Compare DMV Party Buses
+- Real Reviews &middot; Real Photos
+- Book in 60 Seconds
+- LED Interior &middot; Premium Sound
+- DMV's Newer Party Bus Fleet
+
+Descriptions:
+- Looking for a DMV party bus? Compare options. Real
+  photos, real reviews, clear pricing. Get your quote.</pre>
+        <p><strong>Daily budget:</strong> $10 (pilot) &rarr; $20 (scale) &rarr; $40 (established)</p>
+        <p><strong>Compliance:</strong> Never use a competitor's brand in ad copy (only in keyword targeting). Avoids trademark complaints.</p>
+      </div>
+      <div class="tab-content" data-content="c4">
+        <h4>Performance Max</h4>
+        <p><strong>Focus:</strong> Multi-channel automated campaign across Search, Display, YouTube, Maps, Discover. Only run AFTER 90 days of clean conversion data &mdash; Google's AI needs the training signal to be profitable.</p>
+        <p><strong>Inputs we need before launching:</strong></p>
+        <ul class="content-list">
+          <li>90+ days of GA4 conversion data</li>
+          <li>20+ converted leads imported back as offline conversions</li>
+          <li>10+ image assets per asset group (1:1, 4:5, 1.91:1)</li>
+          <li>5+ video assets per asset group</li>
+          <li>Branded + non-branded headline pools (15+ each)</li>
+        </ul>
+        <p><strong>Daily budget when ready:</strong> $80-150</p>
+        <p><strong>Kill criteria:</strong> If 21-day rolling ROAS &lt; 2x, pause and re-feed assets.</p>
+      </div>
+    </div>
+    <h3>Budget progression</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Phase</th><th>Month</th><th>Daily budget</th><th>Monthly</th><th>Goal</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pilot</strong></td><td>Month 1</td><td>$80/day</td><td>$2,400</td><td>Calibrate, kill losers</td></tr>
+        <tr><td><strong>Scale</strong></td><td>Month 2-3</td><td>$160-$250/day</td><td>$4,800-$7,500</td><td>Double down on winners</td></tr>
+        <tr><td><strong>Established</strong></td><td>Month 4+</td><td>$330-$500/day</td><td>$10,000-$15,000</td><td>Add Performance Max</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Expected outcomes</h3>
+    <div class="kpis">
+      <div class="kpi"><div class="v">$25-70</div><div class="l">Cost per lead</div></div>
+      <div class="kpi"><div class="v">$150-280</div><div class="l">Cost per booking</div></div>
+      <div class="kpi"><div class="v">3-7&times;</div><div class="l">ROAS target</div></div>
+      <div class="kpi"><div class="v">80-150</div><div class="l">Leads/mo at full scale</div></div>
+    </div>
+    <h3>Conversion tracking checklist</h3>
+    <div class="checklist" data-list="conv-tracking">
+      <div class="header-row"><h4>Conversions to wire up</h4><span class="progress">0 / 6</span></div>
+      <ul>
+        <li>Form submission &rarr; GA4 conversion + Google Ads import <span class="owner me">Me</span></li>
+        <li>Phone click &rarr; GA4 event + Google Ads conversion <span class="owner me">Me</span></li>
+        <li>CallRail incoming call &rarr; Google Ads offline conversion import <span class="owner me">Me</span></li>
+        <li>Quote calculator complete &rarr; GA4 conversion <span class="owner me">Me</span></li>
+        <li>Booking confirmed &rarr; offline conversion import (biggest 2026 lever) <span class="owner me">Me</span></li>
+        <li>Revenue value attached to booking conversion <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+    <h3>Negative keywords (starter list)</h3>
+    <div class="qa">
+      <div class="q"><span class="text"><span class="tag">35+ negatives</span> Click to expand the full negative keyword starter list</span><span class="toggle">+</span></div>
+      <div class="a">
+        <p><strong>Always-negative (add at account level):</strong></p>
+        <p><code>job, jobs, hiring, career, careers, salary, lawsuit, accident, injury, crash, drunk, dui, used, sale, "for sale", parts, repair, mechanic, "school bus", transit, shuttle (commuter), commuter, nyc, "new york", miami, vegas, "las vegas", free, buy, manufacturer, conversion (kit), wikipedia, definition, meaning, history, owner, ownership</code></p>
+        <p><strong>Conditional (review weekly, may add depending on intent):</strong></p>
+        <p><code>cheap, cheapest, lowest, discount, coupon, voucher, deal, "how to start"</code></p>
+        <p><strong>Why "cheap" is conditional:</strong> some bachelorette searchers absolutely use "cheap party bus DMV" with real booking intent. Watch the conversion data for 30 days before excluding.</p>
+      </div>
+    </div>
+    <h3>Local Services Ads (LSAs)</h3>
+    <div class="callout warn">
+      <div class="label">LSA status &mdash; not yet eligible</div>
+      <p>Local Services Ads are <strong>not currently available for the party bus / limo category in the DMV</strong> as of May 2026. Check the LSA eligibility console quarterly &mdash; when it opens, we want to be first in line. LSA leads run $25-50 per booked call vs. $150+ for cold Google Ads, so this is a meaningful future lever.</p>
+    </div>
+  </div>
+</section>
+
+<section id="paid-other">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">06 &middot; Other Paid Channels</span>
+      <h2>Beyond Google Ads</h2>
+      <p class="section-lede">Six other paid channels we evaluated. Verdict, expected CPL, and investment level for each. Recommended sequence at the bottom.</p>
+    </div>
+    <div class="channel-grid">
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">f</div><div><div class="ch-name">Meta Ads (FB + IG)</div><div class="ch-verdict yes">Recommended</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">CPL</div><div class="v">$8-22</div></div><div class="st"><div class="l">Investment</div><div class="v">Med</div></div><div class="st"><div class="l">Start</div><div class="v">Week 4</div></div></div>
+        <p>Lead form ads work shockingly well for emotional categories like bachelorette and birthday. Lower CPL than Google because intent is created by the creative, not the search query. Budget $30-60/day to start.</p>
+      </div>
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">T</div><div><div class="ch-name">TikTok Ads</div><div class="ch-verdict yes">Recommended (selective)</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">CPL</div><div class="v">$12-25</div></div><div class="st"><div class="l">Investment</div><div class="v">Med</div></div><div class="st"><div class="l">Start</div><div class="v">Month 2</div></div></div>
+        <p>Bachelorette + prom segments only. Spark Ads (boosted organic) outperform paid-from-scratch. Needs 8-10 native-feeling vertical videos before launching, which our Instagram pipeline produces anyway.</p>
+      </div>
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">&#9658;</div><div><div class="ch-name">YouTube Ads</div><div class="ch-verdict maybe">Upper-funnel only</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">CPM</div><div class="v">$8-15</div></div><div class="st"><div class="l">Investment</div><div class="v">Low-Med</div></div><div class="st"><div class="l">Start</div><div class="v">Month 3</div></div></div>
+        <p>Not a direct-response channel for us. Use only for retargeting site visitors with 15-sec bus-in-action clips. Skip pre-roll on cold audiences &mdash; wastes budget.</p>
+      </div>
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">&#9825;</div><div><div class="ch-name">The Knot / WeddingWire</div><div class="ch-verdict maybe">Free first</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">Free</div><div class="v">Required</div></div><div class="st"><div class="l">Paid CPL</div><div class="v">$60-180</div></div><div class="st"><div class="l">Start</div><div class="v">Week 1</div></div></div>
+        <p>Build out free profiles immediately. <strong>Do NOT pay for the boosted listing until 25+ reviews are on the platform</strong> &mdash; without reviews the paid spot underperforms. Bayside Limousine's 143 WW reviews is the bar.</p>
+      </div>
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">&#10006;</div><div><div class="ch-name">Thumbtack / Bark</div><div class="ch-verdict no">Skip</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">CPL</div><div class="v">$20-40</div></div><div class="st"><div class="l">Quality</div><div class="v">Low</div></div><div class="st"><div class="l">Verdict</div><div class="v">Skip</div></div></div>
+        <p>Lead quality is notoriously low for transportation services. Customers are price-shoppers, not premium buyers. Conversion rates of 2-5% vs. 12-18% from Google search. Time is better spent elsewhere.</p>
+      </div>
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">G</div><div><div class="ch-name">GigSalad</div><div class="ch-verdict maybe">Free profile only</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">Free</div><div class="v">Yes</div></div><div class="st"><div class="l">Paid?</div><div class="v">Skip</div></div><div class="st"><div class="l">Start</div><div class="v">Week 2</div></div></div>
+        <p>Worth the 30 minutes to claim a free profile for citation/SEO value. Paid promotion isn't worth it &mdash; audience isn't aligned with our core occasions.</p>
+      </div>
+    </div>
+    <h3>Recommended sequence</h3>
+    <ul class="content-list">
+      <li><strong>Week 1:</strong> Claim free profiles on The Knot, WeddingWire, GigSalad. Citation submission to top 30.</li>
+      <li><strong>Week 4:</strong> Launch Meta Ads (lead form ads, bachelorette + birthday). $30/day.</li>
+      <li><strong>Month 2:</strong> Add TikTok Spark Ads on best-performing organic videos. $20/day.</li>
+      <li><strong>Month 3:</strong> Add YouTube retargeting (visitor remarketing only). $10/day.</li>
+      <li><strong>Month 4:</strong> When WeddingWire reviews hit 25+, evaluate paid boosted listing.</li>
+    </ul>
+  </div>
+</section>
+<section id="instagram">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">07 &middot; Instagram</span>
+      <h2>Instagram playbook</h2>
+      <p class="section-lede">Today: 86 followers, 7 posts. Target: 3,500 followers and 12+ bookings/month from IG by day 90. Here's exactly how.</p>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="v">86</div><div class="l">Followers today</div></div>
+      <div class="kpi"><div class="v">500</div><div class="l">Day 30 goal</div></div>
+      <div class="kpi"><div class="v">1,500</div><div class="l">Day 60 goal</div></div>
+      <div class="kpi"><div class="v">3,500+</div><div class="l">Day 90 goal</div></div>
+    </div>
+    <div class="callout">
+      <div class="label">Where the bar is set</div>
+      <p>Current top competitors on IG: <strong>@dmvpartybus ~16K</strong> (highest in DMV niche), <strong>@partybusgroup ~15K</strong>, <strong>@dmvpartybusllc ~10K</strong> (aggressive pricing in bio). We're not catching them in 90 days &mdash; we're catching up enough to start converting at scale.</p>
+    </div>
+    <h3>The 6 content pillars</h3>
+    <div class="pillars three">
+      <div class="pillar"><div class="icon">&#9658;</div><h4>Bus in Action &middot; 40%</h4><p>Real event footage &mdash; groups boarding, dance pole moments, LED reveals, brewery stops. Reels primary. Highest engagement.</p></div>
+      <div class="pillar"><div class="icon">&#9728;</div><h4>LED Moods &middot; 10%</h4><p>Color showcase reels &mdash; quick cuts of the LED interior in 6-8 different colors with bass-drop sound. Reels.</p></div>
+      <div class="pillar"><div class="icon">&#9873;</div><h4>Plan With Us &middot; 15%</h4><p>Itinerary inspiration carousels &mdash; "5 stops every Annapolis bachelorette needs," "DC brewery crawl route." Highest save rate of all pillars.</p></div>
+      <div class="pillar"><div class="icon">&#9881;</div><h4>Behind the Scenes &middot; 10%</h4><p>Cleaning the bus, prepping the LEDs, driver's POV pulling up to a pickup. Reels + Stories.</p></div>
+      <div class="pillar"><div class="icon">&#9825;</div><h4>Customer Stories &middot; 15%</h4><p>UGC reels &mdash; clips from real groups (with permission), tag the bride/birthday person. Word-of-mouth amplifier.</p></div>
+      <div class="pillar"><div class="icon">&#9733;</div><h4>DMV Nights &middot; 10%</h4><p>Local landmarks at night &mdash; H Street, Adams Morgan, Wharf, Tysons Corner. Geo-tagged. Reels + grid posts.</p></div>
+    </div>
+    <h3>Weekly posting cadence</h3>
+    <div class="table-wrap calendar"><table>
+      <thead><tr><th style="width:90px">Day</th><th style="width:90px">Time</th><th>Content type</th><th>Pillar</th></tr></thead>
+      <tbody>
+        <tr><td class="day">Mon</td><td>7:30 PM</td><td>Reel</td><td>Bus in Action</td></tr>
+        <tr><td class="day">Tue</td><td>11:00 AM</td><td>Carousel (8-10 slides)</td><td>Plan With Us</td></tr>
+        <tr><td class="day">Wed</td><td>7:00 PM</td><td>Reel</td><td>LED Moods or DMV Nights</td></tr>
+        <tr><td class="day">Thu</td><td>12:00 PM</td><td>Reel</td><td>Behind the Scenes</td></tr>
+        <tr><td class="day">Fri</td><td>6:30 PM</td><td>Reel</td><td>UGC / Testimonial</td></tr>
+        <tr><td class="day">Sat</td><td>All day</td><td>Stories only (3-5)</td><td>Bus in Action (live)</td></tr>
+        <tr><td class="day">Sun</td><td>5:00 PM</td><td>Carousel (light, recap)</td><td>Week in Review</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Hashtag strategy &mdash; 4 rotating buckets</h3>
+    <p>Use 13-15 hashtags per post. Mix one bucket with 4-5 evergreen DMV tags every time.</p>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Bucket 1</span> Bachelorette / Bachelor</span><span class="toggle">+</span></div><div class="a"><p>#bacheloretteparty #bachelorettedmv #bacheloretteweekend #dcbachelorette #vabachelorette #mdbachelorette #bridesquad #bachelorettetrip #bacheloretteweekendgoals #bridetribedmv #partybusdc #partybusrental #ledbus #dmvbachelorette</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Bucket 2</span> Wedding / Bridal</span><span class="toggle">+</span></div><div class="a"><p>#dmvwedding #dcwedding #vawedding #mdwedding #weddingshuttle #weddingtransportation #brideandgroom #weddingvendors #weddingplannerdmv #weddingplannerdc #dmvbride #weddinglogistics #bridalparty #weddinglimo</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Bucket 3</span> Brewery / Winery / Daytime</span><span class="toggle">+</span></div><div class="a"><p>#breweryhopdmv #vawine #virginiawine #dmvbreweries #loudounbrewery #mdbreweries #vabrewerytour #virginiawinetour #loudouncountywine #leesburgwine #dcbreweries #craftbeerdmv #winerytour #dmvthingstodo</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Bucket 4</span> Nightlife / Birthday</span><span class="toggle">+</span></div><div class="a"><p>#dmvnights #washingtondcnight #dmvnightlife #dcnightlife #adamsmorgan #ustreet #hstreetdc #dmvbirthday #birthdaypartybus #21stbirthday #30birthday #dcbirthday #vipdc #dmvthings</p></div></div>
+    <h3>DM response templates</h3>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Template 1</span> Initial inquiry response (within 5 min)</span><span class="toggle">+</span></div><div class="a"><p>"Hey [first name]! Thanks for reaching out &#127881; To send a real quote your way &mdash; quick 3 questions: (1) Date? (2) How many in your group? (3) Pickup ZIP or city? I'll have pricing back to you in 10 minutes. Or if it's easier, call us: [number]."</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Template 2</span> Price-question deflection</span><span class="toggle">+</span></div><div class="a"><p>"Great question! Pricing depends on bus size, hours, and date &mdash; but for a Saturday night bachelorette with 18 guests for 5 hours, expect around $1,100-$1,400 all-in. Want me to send a real quote? Just need your date + pickup ZIP."</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Template 3</span> "Just looking" / browse-mode</span><span class="toggle">+</span></div><div class="a"><p>"Totally get it &mdash; planning ahead is smart &#128076; Want me to send our free DMV bachelorette route guide? It's the same one we send brides. PDF with 5 stops, photo spots, and timing. Drop your email and I'll fire it over." (Captures the email lead.)</p></div></div>
+    <h3>30-day content calendar</h3>
+    <p>Each day below is click-to-expand. Reorder freely &mdash; the cadence pattern matters more than the exact topic.</p>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 1 &middot; Mon</span> LED Reveal Reel (launch post)</span><span class="toggle">+</span></div><div class="a"><p>Higgsfield Recast reel &mdash; pan through 6 LED colors with bass-drop edit. Caption: "The DMV's loudest party bus. Roll deep. &#127881; Tap to quote." 14 hashtags from Bucket 4.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 2 &middot; Tue</span> "5 stops every Annapolis bachelorette needs" carousel</span><span class="toggle">+</span></div><div class="a"><p>8-slide carousel: Cover (bold typography), 5 stops with photos + tags, "How to book the bus" CTA slide, location-tag map. Pillar 3 (Plan With Us).</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 3 &middot; Wed</span> DMV Nights &mdash; H Street drive-by</span><span class="toggle">+</span></div><div class="a"><p>10-sec reel: bus rolling past H Street neon signs, interior LEDs pulsing. Geo-tag the strip. Pillar 6.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 4 &middot; Thu</span> BTS &mdash; Detail day cleanout</span><span class="toggle">+</span></div><div class="a"><p>Time-lapse of full interior detail. Vacuum, leather wipe, bar restock, LED test. Caption: "Why every group rolls into a brand-new bus." Pillar 4.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 5 &middot; Fri</span> UGC &mdash; Bachelorette Bri's video</span><span class="toggle">+</span></div><div class="a"><p>15-sec clip from real client (with permission) &mdash; bride blowing out candles in the bus. Tag client. Pillar 5.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 6 &middot; Sat</span> Stories &mdash; live event coverage</span><span class="toggle">+</span></div><div class="a"><p>3-5 stories from Saturday night charter. Pickup, in-route, drop-off. Add "BOOK YOURS &rarr;" sticker linking to site.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 7 &middot; Sun</span> Week recap carousel</span><span class="toggle">+</span></div><div class="a"><p>5 slides: best moments of the week, screenshot reviews, CTA to "book your weekend." Light pillar.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 8 &middot; Mon</span> Bus in Action &mdash; Brewery crawl reel</span><span class="toggle">+</span></div><div class="a"><p>20-sec compilation of a brewery crawl charter. Multiple stops, group cheers shots. Pillar 1.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 9 &middot; Tue</span> "DC brewery crawl route" carousel</span><span class="toggle">+</span></div><div class="a"><p>8 slides: 5 breweries, suggested order, parking notes, group photo spots. Pillar 3.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 10 &middot; Wed</span> LED Moods &mdash; gold + magenta reveal</span><span class="toggle">+</span></div><div class="a"><p>Higgsfield-generated reel with bass-drop transition between 2 LED color states. 8 sec. Pillar 2.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 11 &middot; Thu</span> BTS &mdash; Driver POV pulling up to pickup</span><span class="toggle">+</span></div><div class="a"><p>POV reel: bus pulling up, group cheering, doors opening. "When the squad sees the bus pull up &#128064;" Pillar 4.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 12 &middot; Fri</span> UGC &mdash; Birthday group dance pole</span><span class="toggle">+</span></div><div class="a"><p>Real group dance clip with permission. Pillar 5.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 13 &middot; Sat</span> Stories &mdash; Saturday event live</span><span class="toggle">+</span></div><div class="a"><p>Continuous Saturday coverage. Use "Ask me" sticker for engagement.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 14 &middot; Sun</span> "Bachelorette pricing demystified" carousel</span><span class="toggle">+</span></div><div class="a"><p>7-slide myth-buster carousel. Real numbers, real ranges. Saves like crazy.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 15 &middot; Mon</span> Bus in Action &mdash; Wedding shuttle reel</span><span class="toggle">+</span></div><div class="a"><p>Bridal party boarding outside hotel. 15-sec, dramatic. Pillar 1.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 16 &middot; Tue</span> "Top 5 DMV winery tour routes" carousel</span><span class="toggle">+</span></div><div class="a"><p>8 slides covering Loudoun, Middleburg, Frederick wine country. Pillar 3.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 17 &middot; Wed</span> DMV Nights &mdash; Wharf evening</span><span class="toggle">+</span></div><div class="a"><p>Reel of bus arriving at Wharf, group walking out for dinner. Pillar 6.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 18 &middot; Thu</span> BTS &mdash; LED system tech tour</span><span class="toggle">+</span></div><div class="a"><p>Short reel: behind-the-scenes of LED control system, sound rig walkthrough. Pillar 4.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 19 &middot; Fri</span> UGC &mdash; Wedding bride's testimonial</span><span class="toggle">+</span></div><div class="a"><p>20-sec talking head from bride. Pillar 5.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 20 &middot; Sat</span> Stories &mdash; Saturday charter live</span><span class="toggle">+</span></div><div class="a"><p>Stories sequence. Tag the venue accounts to encourage repost.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 21 &middot; Sun</span> "Sunday brunch winery run" recap</span><span class="toggle">+</span></div><div class="a"><p>Carousel showing a real Sunday charter. Daytime utilization push.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 22 &middot; Mon</span> Bus in Action &mdash; 30th birthday reel</span><span class="toggle">+</span></div><div class="a"><p>High-energy reel of a 30th birthday. Pillar 1.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 23 &middot; Tue</span> "Tysons to Wharf bachelorette route" carousel</span><span class="toggle">+</span></div><div class="a"><p>Pillar 3. NoVA-to-DC route inspiration.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 24 &middot; Wed</span> LED Moods &mdash; color-wave reel</span><span class="toggle">+</span></div><div class="a"><p>6-color wave with rhythmic edit. Pillar 2.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 25 &middot; Thu</span> BTS &mdash; Prepping for a Friday-night charter</span><span class="toggle">+</span></div><div class="a"><p>Time-lapse: bus pulls in, gets washed, LEDs tested, bar restocked. Pillar 4.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 26 &middot; Fri</span> UGC &mdash; Group photo wall</span><span class="toggle">+</span></div><div class="a"><p>Carousel of 8 real groups (with permission). Pillar 5.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 27 &middot; Sat</span> Stories &mdash; Saturday live</span><span class="toggle">+</span></div><div class="a"><p>Stories sequence with poll: "Brewery or winery for your next group event?"</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 28 &middot; Sun</span> "How to plan a DMV bachelorette" carousel</span><span class="toggle">+</span></div><div class="a"><p>10-slide guide. Pillar 3. End with quote CTA.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 29 &middot; Mon</span> Bus in Action &mdash; Quincea&ntilde;era reel</span><span class="toggle">+</span></div><div class="a"><p>Spanish-language caption. Bilingual hashtags. Pillar 1. Seeds the Quincea&ntilde;era market.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Day 30 &middot; Tue</span> "Month-in-review" carousel</span><span class="toggle">+</span></div><div class="a"><p>Top 5 nights of the month. Best moments. Set up the month-2 launch with a "what's next" tease.</p></div></div>
+    <h3>20 reel concepts (rotation pool)</h3>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">01</span> "POV: bus pulls up to the bachelorette" &mdash; driver POV reel</span><span class="toggle">+</span></div><div class="a"><p>Pillar 1. Drone-style approach, group screams. Higgsfield bus pull-up.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">02</span> "We have 6 LED colors. Pick a vibe." &mdash; color swap reel</span><span class="toggle">+</span></div><div class="a"><p>Pillar 2. Quick swap between 6 colors. Higgsfield Recast.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">03</span> "5 stops that turn an Annapolis bachelorette legendary"</span><span class="toggle">+</span></div><div class="a"><p>Pillar 3. Talking-head with B-roll. Higgsfield talking-head + real footage.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">04</span> "Detail day from $0 to $200" &mdash; BTS time-lapse</span><span class="toggle">+</span></div><div class="a"><p>Pillar 4. Cost transparency.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">05</span> "Bride's reaction to the LED reveal" &mdash; UGC clip</span><span class="toggle">+</span></div><div class="a"><p>Pillar 5. Real bride emotional moment.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">06</span> "DMV nights tour" &mdash; fast-cut DMV at night</span><span class="toggle">+</span></div><div class="a"><p>Pillar 6. Bus rolling through 5 DMV neighborhoods.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">07</span> "What $1,200 gets you on a DMV party bus"</span><span class="toggle">+</span></div><div class="a"><p>Pillar 3. Transparency reel &mdash; myth-buster.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">08</span> "Bachelorette starter pack" &mdash; items list reel</span><span class="toggle">+</span></div><div class="a"><p>Pillar 3. Bachelorette items flat-lay (Nano Banana generated).</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">09</span> "Squad reactions to first pickup" &mdash; montage</span><span class="toggle">+</span></div><div class="a"><p>Pillar 1. Stitched reactions from 6 different real charters.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">10</span> "Brewery vs winery vs nightlife: pick your party"</span><span class="toggle">+</span></div><div class="a"><p>Pillar 3. Three-way comparison reel.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">11</span> "Why we built our LED system custom" &mdash; BTS</span><span class="toggle">+</span></div><div class="a"><p>Pillar 4. Tech storytelling.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">12</span> "What's actually inside our 25-passenger bus" &mdash; tour</span><span class="toggle">+</span></div><div class="a"><p>Pillar 1 + 4. Walkthrough reel.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">13</span> "Wedding shuttle vs party bus &mdash; same fleet, different vibe"</span><span class="toggle">+</span></div><div class="a"><p>Pillar 1. Split-screen comparison.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">14</span> "Quincea&ntilde;era arrival &mdash; Spanish caption reel"</span><span class="toggle">+</span></div><div class="a"><p>Pillar 1. Bilingual approach.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">15</span> "30 seconds in our brewery crawl charter" &mdash; fast-cut</span><span class="toggle">+</span></div><div class="a"><p>Pillar 1. Compilation reel.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">16</span> "Loudoun winery tour POV"</span><span class="toggle">+</span></div><div class="a"><p>Pillar 1. Daytime, vineyard scenery.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">17</span> "Driver tips for the perfect bachelorette night" &mdash; talking head</span><span class="toggle">+</span></div><div class="a"><p>Pillar 3 + 4. Higgsfield-generated talking head.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">18</span> "Real client review screen-grabs" &mdash; testimonial montage</span><span class="toggle">+</span></div><div class="a"><p>Pillar 5. Screenshot Google reviews on bus interior B-roll.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">19</span> "Sunset over the DMV from our bus rooftop" &mdash; slow b-roll</span><span class="toggle">+</span></div><div class="a"><p>Pillar 6. Cinematic Higgsfield-generated atmosphere reel.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">20</span> "How we plan your route in 60 seconds"</span><span class="toggle">+</span></div><div class="a"><p>Pillar 3. Frederick on-camera with whiteboard or map. Lead-generation focused.</p></div></div>
+    <h3>Story Highlights structure</h3>
+    <p>Pinned at the top of the profile. Update monthly.</p>
+    <ul class="content-list">
+      <li><strong>The Fleet</strong> &mdash; 6 stories, one per bus, walk-through</li>
+      <li><strong>Bachelorette</strong> &mdash; 8 stories of real bachelorette events</li>
+      <li><strong>Weddings</strong> &mdash; bridal party shuttles</li>
+      <li><strong>Brewery + Winery</strong> &mdash; daytime tour clips</li>
+      <li><strong>LED Vibes</strong> &mdash; color reveals</li>
+      <li><strong>Reviews</strong> &mdash; screen-grab testimonials</li>
+      <li><strong>Behind the Scenes</strong> &mdash; detail days, driver life</li>
+      <li><strong>How to Book</strong> &mdash; 5 stories explaining the quote flow</li>
+    </ul>
+    <h3>Engagement &amp; outbound</h3>
+    <ul class="content-list">
+      <li><strong>Engagement window:</strong> 30 minutes of active engagement immediately after every post (like, comment, reply).</li>
+      <li><strong>Outbound DMs:</strong> 20 cold DMs/day to bachelorette-tagged accounts, brides-to-be hashtags, and event planners. Soft intro, no pitch.</li>
+      <li><strong>Story takeovers:</strong> Partner with 1 DMV wedding venue/month for a story takeover swap.</li>
+    </ul>
+  </div>
+</section>
+<section id="ai">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">08 &middot; AI Content</span>
+      <h2>Nano Banana + Higgsfield production</h2>
+      <p class="section-lede">We already pay for both. Here's exactly how to use them to produce 80% of the IG content without a paid photographer or videographer.</p>
+    </div>
+    <h3>5 Nano Banana prompts (image generation)</h3>
+    <h4>1. Hero parked shot (bus exterior, golden hour)</h4>
+<pre>A premium 30-passenger black party bus parked in front of a luxury
+Washington DC venue at golden hour. Subtle gold and amber LED interior
+glow visible through the windows. Cinematic lighting, shallow depth of
+field. Slight rain on pavement creates reflections. Wide-angle, low
+camera angle. Hyperrealistic, editorial photography style.</pre>
+    <h4>2. Bachelorette flat lay</h4>
+<pre>Top-down flat lay on a cream background: champagne flutes, sash that
+reads "Bride Tribe," gold sunglasses, disposable camera, polaroid
+photos showing women laughing, small gold "30" candles, confetti.
+Warm golden hour lighting. Editorial bridal magazine aesthetic.</pre>
+    <h4>3. Lifestyle mockup (bachelorette boarding the bus)</h4>
+<pre>Six women in coordinated outfits stepping onto a luxury black party
+bus at dusk. LED interior visible in deep magenta and gold. Bride
+holding a sash, friends laughing. Shot from behind/three-quarter
+angle. Cinematic, warm tones, editorial fashion campaign style.</pre>
+    <h4>4. Fleet portrait (25-passenger interior)</h4>
+<pre>Interior of a luxury 25-passenger party bus. Quilted black leather
+benches, dance pole in center, ceiling LED strips in deep magenta
+fading to gold. Bar with champagne flutes glowing. Smooth glossy
+floor reflecting LEDs. Wide-angle interior, hyperrealistic.</pre>
+    <h4>5. Illustrated route map (DC brewery crawl)</h4>
+<pre>Hand-illustrated map of Washington DC with 5 brewery pin drops in a
+crawl route. Cream paper background, gold ink illustration style.
+Small icons for each brewery (hops, beer glass, location pin). Text
+labels for each stop. Polished, editorial guidebook aesthetic.</pre>
+    <h3>5 Higgsfield prompts / mode picks (video generation)</h3>
+    <h4>1. LED reveal reel &mdash; Recast mode</h4>
+<pre>Mode: Recast
+Base clip: 8-second interior shot of the bus
+Prompt: Transform interior lighting - start with white LEDs, transition
+through magenta, gold, deep blue, green, back to gold. Each color holds
+for 1.3 seconds. Bass-drop sound design timed to color shifts.</pre>
+    <h4>2. Atmospheric night b-roll</h4>
+<pre>Mode: Generate (text-to-video)
+Prompt: Slow cinematic dolly shot of a black luxury party bus driving
+through Washington DC at night. Streetlights and neon reflecting on
+glossy black paint. Interior LED glow visible through tinted windows
+(magenta). Wet pavement reflections. 10 seconds, 9:16 vertical.</pre>
+    <h4>3. Talking-head UGC (driver tips)</h4>
+<pre>Mode: Avatar (Higgsfield Soul)
+Avatar: Friendly male driver, 30s, warm smile, navy polo
+Setting: Interior of party bus, LEDs soft amber in background
+Script: "Three things every bachelorette should ask their bus
+driver before the trip - number one..."
+Length: 25 seconds, 9:16 vertical</pre>
+    <h4>4. Bus pull-up reel</h4>
+<pre>Mode: Generate (text-to-video)
+Prompt: First-person POV: walking out of an upscale Tysons Corner
+hotel lobby at dusk. A long black luxury party bus pulls up directly
+in front of camera. Door opens, magenta LED light spills out. Group
+visible inside cheering. 12 seconds, vertical.</pre>
+    <h4>5. Logo stinger</h4>
+<pre>Mode: Generate (text-to-video)
+Prompt: Gold metallic "Party Bus R Us" logo materializes from particles
+of light against a cream background. Slight 3D rotation, then settles.
+Subtle gold glow rays radiate outward. 3 seconds, square 1:1.</pre>
+    <h3>Frederick + AI collaboration pattern</h3>
+    <div class="pillars">
+      <div class="pillar"><div class="icon">1</div><h4>Frederick captures the real</h4><p>Saturday-night charter footage, BTS, real client clips. Phone is fine. Quantity over quality.</p></div>
+      <div class="pillar"><div class="icon">2</div><h4>AI fills the gaps</h4><p>Hero stills, LED reveal reels, talking-head UGC, logo stingers, route map illustrations. The stuff that's too expensive to shoot weekly.</p></div>
+      <div class="pillar"><div class="icon">3</div><h4>Edit + caption batch</h4><p>One 4-hour batch session per week. Cut 8-10 reels and 3-4 carousels in CapCut. Schedule via Meta Business Suite.</p></div>
+      <div class="pillar"><div class="icon">4</div><h4>Engage live</h4><p>Frederick handles reply/comment/DM in real time across the week. The human layer that converts followers into bookings.</p></div>
+    </div>
+    <h3>Cost / time savings vs. traditional shoots</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Asset type</th><th>Traditional cost</th><th>AI cost</th><th>Time saved</th></tr></thead>
+      <tbody>
+        <tr><td>Hero brand still</td><td>$400-800/shoot</td><td>$1-3 in credits</td><td>~6 hours</td></tr>
+        <tr><td>LED reveal reel</td><td>$300-600/clip</td><td>$3-8 in credits</td><td>~4 hours</td></tr>
+        <tr><td>Talking-head UGC</td><td>$200-400 (paid creator)</td><td>$4-10 in credits</td><td>~2 hours</td></tr>
+        <tr><td>Route map illustration</td><td>$150-300 (freelance)</td><td>$1-2 in credits</td><td>~3 hours</td></tr>
+        <tr><td><strong>Monthly total (8 assets)</strong></td><td><strong>$2,500-5,000</strong></td><td><strong>$30-80</strong></td><td><strong>~30 hours</strong></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="leads">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">09 &middot; Lead Generation</span>
+      <h2>Multi-channel lead generation</h2>
+      <p class="section-lede">Eight channels that bring leads. Each with investment level, time-to-result, and expected lead volume. No single channel carries us &mdash; the mix does.</p>
+    </div>
+    <div class="channel-grid">
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">&#9906;</div><div><div class="ch-name">Organic Search (SEO)</div><div class="ch-verdict yes">High priority</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">Investment</div><div class="v">Medium</div></div><div class="st"><div class="l">Time</div><div class="v">12-24 wk</div></div><div class="st"><div class="l">Volume</div><div class="v">30-80/mo</div></div></div>
+        <p>Long ramp but compounding. Once multi-page architecture ships + 30 citations + 100 reviews land, organic becomes a free lead engine.</p>
+      </div>
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">G</div><div><div class="ch-name">Google Ads</div><div class="ch-verdict yes">Highest priority</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">Investment</div><div class="v">High</div></div><div class="st"><div class="l">Time</div><div class="v">48 hours</div></div><div class="st"><div class="l">Volume</div><div class="v">80-150/mo</div></div></div>
+        <p>Fastest path to consistent leads. Pilot at $80/day, scale to $250/day after week 4. Highest direct attribution.</p>
+      </div>
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">f</div><div><div class="ch-name">Meta Ads (FB + IG)</div><div class="ch-verdict yes">High priority</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">Investment</div><div class="v">Medium</div></div><div class="st"><div class="l">Time</div><div class="v">1-2 wk</div></div><div class="st"><div class="l">Volume</div><div class="v">40-80/mo</div></div></div>
+        <p>Lead form ads. Lower CPL than Google. Best for bachelorette/birthday emotional segments.</p>
+      </div>
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">&#9786;</div><div><div class="ch-name">Instagram Organic</div><div class="ch-verdict yes">Compounding</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">Investment</div><div class="v">Time-heavy</div></div><div class="st"><div class="l">Time</div><div class="v">4-12 wk</div></div><div class="st"><div class="l">Volume</div><div class="v">5-25/mo</div></div></div>
+        <p>5 reels/week + DM flow. By month 3 generating 25+ DMs/week, ~12 bookings/month.</p>
+      </div>
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">&#9879;</div><div><div class="ch-name">Partnerships</div><div class="ch-verdict yes">Highest LTV</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">Investment</div><div class="v">Low-Med</div></div><div class="st"><div class="l">Time</div><div class="v">2-8 wk</div></div><div class="st"><div class="l">Volume</div><div class="v">5-20/mo</div></div></div>
+        <p>Venues, wedding planners, winery managers. Each top planner is worth 8-15 bookings/year. Highest LTV channel.</p>
+      </div>
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">&#9825;</div><div><div class="ch-name">WeddingWire / The Knot</div><div class="ch-verdict maybe">Free first</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">Investment</div><div class="v">Low (free)</div></div><div class="st"><div class="l">Time</div><div class="v">4-8 wk</div></div><div class="st"><div class="l">Volume</div><div class="v">2-10/mo</div></div></div>
+        <p>Free profile required (citation value). Paid only after 25+ platform reviews.</p>
+      </div>
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">@</div><div><div class="ch-name">Email Nurture</div><div class="ch-verdict yes">Multiplier</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">Investment</div><div class="v">Low</div></div><div class="st"><div class="l">Time</div><div class="v">Ongoing</div></div><div class="st"><div class="l">Volume</div><div class="v">3-10/mo</div></div></div>
+        <p>Klaviyo welcome series + bachelorette guide opt-in + monthly newsletter. Multiplies every other channel.</p>
+      </div>
+      <div class="channel">
+        <div class="ch-head"><div class="ch-icon">&#10148;</div><div><div class="ch-name">Referral / Repeat</div><div class="ch-verdict yes">Free engine</div></div></div>
+        <div class="ch-stats"><div class="st"><div class="l">Investment</div><div class="v">Low</div></div><div class="st"><div class="l">Time</div><div class="v">8-24 wk</div></div><div class="st"><div class="l">Volume</div><div class="v">10-30/mo</div></div></div>
+        <p>$50 referral credit + post-trip review text. By month 6, this is 20%+ of all bookings.</p>
+      </div>
+    </div>
+    <div class="callout good">
+      <div class="label">Channel mix at day 90</div>
+      <p>Realistic split: <strong>Google Ads 40% &middot; Meta Ads 20% &middot; Organic search 15% &middot; Instagram 10% &middot; Partnerships 10% &middot; Email/Referral 5%</strong>. The point isn't winning any one channel &mdash; it's that no single channel can kill us if it underperforms in a given month.</p>
+    </div>
+  </div>
+</section>
+<section id="quick-wins">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">10 &middot; Quick Wins</span>
+      <h2>30-day execution checklist</h2>
+      <p class="section-lede">Everything we should ship in the first 30 days, grouped by week. Click any item to mark it done &mdash; progress saves automatically.</p>
+    </div>
+    <div class="checklist" data-list="w1-tracking">
+      <div class="header-row"><h4>Week 1 &middot; Tracking foundation</h4><span class="progress">0 / 6</span></div>
+      <ul>
+        <li>Create GA4 property + install via GTM <span class="owner me">Me</span></li>
+        <li>Install Google Tag Manager container in &lt;head&gt; <span class="owner me">Me</span></li>
+        <li>Install Meta Pixel via GTM <span class="owner me">Me</span></li>
+        <li>Get CallRail number, swap site phone <span class="owner robert">Robert</span></li>
+        <li>Configure phone-click event in GTM &rarr; GA4 <span class="owner me">Me</span></li>
+        <li>Confirm conversion data flowing in Realtime view <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+    <div class="checklist" data-list="w1-fixes">
+      <div class="header-row"><h4>Week 1 &middot; Critical site fixes</h4><span class="progress">0 / 7</span></div>
+      <ul>
+        <li>Wire form to Formspree backend <span class="owner me">Me</span></li>
+        <li>Add <code>name</code> attributes to form fields <span class="owner me">Me</span></li>
+        <li>Replace 1.1 MB favicon with proper sizes <span class="owner me">Me</span></li>
+        <li>Remove duplicate testimonial section (lines 1520-1549) <span class="owner me">Me</span></li>
+        <li>Fix Google review URL with place ID <span class="owner me">Me</span></li>
+        <li>Strip insurance/credentials text from 7 remaining spots <span class="owner me">Me</span></li>
+        <li>Strip "6 years running" + "thousands of nights" lines <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+    <div class="checklist" data-list="w2-schema">
+      <div class="header-row"><h4>Week 2 &middot; Schema enrichment + GBP optimization</h4><span class="progress">0 / 6</span></div>
+      <ul>
+        <li>Add aggregateRating to LocalBusiness JSON-LD <span class="owner me">Me</span></li>
+        <li>Add Service entries for top 6 occasions <span class="owner me">Me</span></li>
+        <li>Add FAQ schema to 6 service pages <span class="owner me">Me</span></li>
+        <li>Update GBP categories, services, attributes <span class="owner robert">Robert</span></li>
+        <li>Post 4 GBP posts (1/week scheduled) <span class="owner me">Me</span></li>
+        <li>Upload 30+ photos to GBP <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+    <div class="checklist" data-list="w2-content">
+      <div class="header-row"><h4>Week 2 &middot; Content gaps</h4><span class="progress">0 / 5</span></div>
+      <ul>
+        <li>Replace 9 blog post Unsplash images with real photos <span class="owner me">Me</span></li>
+        <li>Build 6 missing fleet detail pages <span class="owner dev">Dev</span></li>
+        <li>Compress IMG_5053, IMG_3095, IMG_2366 to &lt;300 KB <span class="owner me">Me</span></li>
+        <li>Embed 8 fleet videos with lazy-load posters <span class="owner me">Me</span></li>
+        <li>Fix About page pricing contradiction <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+    <div class="checklist" data-list="w3-ig">
+      <div class="header-row"><h4>Week 3 &middot; First IG content batch</h4><span class="progress">0 / 6</span></div>
+      <ul>
+        <li>Shoot/capture 10 reels worth of B-roll (Saturday charter focus) <span class="owner me">Me</span></li>
+        <li>Generate 5 Higgsfield LED reveal reels <span class="owner me">Me</span></li>
+        <li>Generate 5 Nano Banana hero stills + flat lays <span class="owner me">Me</span></li>
+        <li>Edit + schedule 10 reels for the next 2 weeks <span class="owner me">Me</span></li>
+        <li>Build 4 "Plan With Us" carousels <span class="owner me">Me</span></li>
+        <li>Set up Highlights structure on profile <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+    <div class="checklist" data-list="w3-citations">
+      <div class="header-row"><h4>Week 3 &middot; Citation submission (30+)</h4><span class="progress">0 / 8</span></div>
+      <ul>
+        <li>Yelp, Yellow Pages, BBB, Bing Places, Apple Maps <span class="owner me">Me</span></li>
+        <li>WeddingWire + The Knot (free profiles) <span class="owner me">Me</span></li>
+        <li>GigSalad free profile <span class="owner me">Me</span></li>
+        <li>Hotfrog, Manta, MerchantCircle, ShowMeLocal <span class="owner me">Me</span></li>
+        <li>Local chambers (DC, Arlington, Bethesda, Tysons) <span class="owner me">Me</span></li>
+        <li>Tourism boards (Visit Loudoun, Capital Region USA) <span class="owner me">Me</span></li>
+        <li>Niche directories (LimoSeven, GroundLink, Limos.com) <span class="owner me">Me</span></li>
+        <li>Audit + correct existing citation NAP inconsistencies <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+    <div class="checklist" data-list="w4-ads">
+      <div class="header-row"><h4>Week 4 &middot; Google Ads pilot launch</h4><span class="progress">0 / 6</span></div>
+      <ul>
+        <li>Build Brand &amp; Geo campaign (10 keywords, 2 ad groups) <span class="owner me">Me</span></li>
+        <li>Build Occasion campaign (bachelorette, wedding, brewery, winery) <span class="owner me">Me</span></li>
+        <li>Build Competitor Conquest campaign (8 brand keywords) <span class="owner me">Me</span></li>
+        <li>Write 3 RSAs per ad group (min 12 RSAs total) <span class="owner me">Me</span></li>
+        <li>Configure 6 conversion events in Google Ads <span class="owner me">Me</span></li>
+        <li>Launch at $80/day combined budget <span class="owner robert">Robert</span></li>
+      </ul>
+    </div>
+    <div class="checklist" data-list="w4-partner">
+      <div class="header-row"><h4>Week 4 &middot; Partnerships outreach</h4><span class="progress">0 / 5</span></div>
+      <ul>
+        <li>5 DMV wedding venues &mdash; referral partnership pitch <span class="owner me">Me</span></li>
+        <li>5 DMV wedding planners &mdash; vendor card swap <span class="owner me">Me</span></li>
+        <li>3 Loudoun/Frederick wineries &mdash; daytime tour cross-promo <span class="owner me">Me</span></li>
+        <li>3 DC breweries &mdash; crawl partnership <span class="owner me">Me</span></li>
+        <li>2 hotel concierge desks (Tysons, Bethesda) &mdash; referral card <span class="owner me">Me</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="ninety">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">11 &middot; The Path</span>
+      <h2>90-day roadmap</h2>
+      <p class="section-lede">Week-by-week milestones. Decision gates marked with kill criteria so we don't burn budget on losers.</p>
+    </div>
+    <div class="timeline">
+      <div class="phase">
+        <div class="when">Week 1 &middot; May 19-25</div>
+        <h4>Tracking foundation + critical fixes</h4>
+        <p>GA4 / GTM / Meta Pixel / CallRail installed. Form wired to backend. Favicon, duplicate testimonial, broken review URL all fixed. Zero leads lost from this point forward.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Week 2 &middot; May 26-Jun 1</div>
+        <h4>Schema + GBP + content gaps</h4>
+        <p>Schema enriched. GBP optimized with 30+ photos and weekly posts scheduled. 9 blog posts get real photos. Fleet detail pages spec'd for dev.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Week 3 &middot; Jun 2-8</div>
+        <h4>IG content batch + citations</h4>
+        <p>10 reels + 4 carousels in the schedule. 30 citations submitted. Highlights structure live. First DM templates in use.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Week 4 &middot; Jun 9-15</div>
+        <h4>Google Ads pilot launch + partnerships</h4>
+        <p>$80/day Google Ads goes live. First Meta Ads campaign warmed up. 18 partnership outreach emails sent. <strong>Decision gate at day 14:</strong> if CPL &gt; $80 on Google Ads, pause Competitor Conquest campaign.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Weeks 5-6 &middot; Jun 16-29</div>
+        <h4>Multi-page site re-architecture begins</h4>
+        <p>Move from SPA to multi-page static site (Astro recommended). Each city, occasion, fleet vehicle becomes its own indexable URL. The single biggest ROI move of 2026.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Weeks 7-8 &middot; Jun 30-Jul 13</div>
+        <h4>Meta Ads scale + IG hits 1,500 followers</h4>
+        <p>Meta Ads scale to $50/day. Google Ads scale to $160/day on winners. IG should hit 1,500 followers by week 8 if cadence held. <strong>Decision gate:</strong> kill any ad group with CPL &gt; 2&times; account average.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Weeks 9-10 &middot; Jul 14-27</div>
+        <h4>New site goes live &middot; Spanish parity build</h4>
+        <p>Multi-page rebuild deployed. 301 redirects mapped. Search Console fed new sitemap. Spanish version built to feature parity.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Weeks 11-12 &middot; Jul 28-Aug 10</div>
+        <h4>TikTok launch + scale-up</h4>
+        <p>TikTok Spark Ads on best-performing IG content. Google Ads to $250/day. Meta to $80/day. <strong>Decision gate:</strong> if combined ROAS &lt; 2.5&times; over rolling 21 days, freeze scale and audit landing pages.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Day 90 &middot; Aug 17</div>
+        <h4>Review &amp; reset</h4>
+        <p>Full review with Robert. Channel mix, ROAS, lead-to-booking rate, IG follower count, organic ranking deltas. Decide month-4 budget shape &mdash; established phase or hold-and-optimize.</p>
+      </div>
+    </div>
+    <div class="callout warn">
+      <div class="label">Kill criteria &mdash; when to stop spending</div>
+      <p><strong>Google Ads ad group:</strong> CPL &gt; 2&times; account average for 14 days = pause. <strong>Meta Ads ad set:</strong> CPL &gt; $35 for 7 days = pause. <strong>Any channel:</strong> ROAS &lt; 1.5&times; over 21 rolling days = stop, audit, restart with fixed creative or LP.</p>
+    </div>
+  </div>
+</section>
+
+<section id="budget">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">12 &middot; Budget</span>
+      <h2>Budget allocation</h2>
+      <p class="section-lede">Three phases. Each builds on the data from the last. No mystery line items &mdash; every dollar maps to a measurable outcome.</p>
+    </div>
+    <h3>Monthly spend by phase</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Line item</th><th>Pilot (Mo 1)</th><th>Scale (Mo 2-3)</th><th>Established (Mo 4+)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Google Ads</strong></td><td>$2,400</td><td>$4,800</td><td>$10,000</td></tr>
+        <tr><td><strong>Meta Ads</strong></td><td>$0</td><td>$1,500</td><td>$3,000</td></tr>
+        <tr><td><strong>TikTok Ads</strong></td><td>$0</td><td>$0</td><td>$600</td></tr>
+        <tr><td><strong>Tools / SaaS</strong></td><td>$300</td><td>$500</td><td>$700</td></tr>
+        <tr><td><strong>Content (AI credits)</strong></td><td>$80</td><td>$120</td><td>$180</td></tr>
+        <tr><td><strong>Partnerships (cards, gifts)</strong></td><td>$150</td><td>$300</td><td>$500</td></tr>
+        <tr><td><strong>Citations / directory paid</strong></td><td>$120</td><td>$120</td><td>$120</td></tr>
+        <tr><td><strong>Buffer / experiments</strong></td><td>$150</td><td>$300</td><td>$700</td></tr>
+        <tr style="background:var(--bg-cream-deep)"><td><strong>Monthly total</strong></td><td><strong>$3,200</strong></td><td><strong>$7,640</strong></td><td><strong>$15,800</strong></td></tr>
+      </tbody>
+    </table></div>
+    <h3>ROI projection</h3>
+    <div class="kpis">
+      <div class="kpi"><div class="v">$3,200</div><div class="l">Month 1 spend</div></div>
+      <div class="kpi"><div class="v">40-60</div><div class="l">Month 1 leads</div></div>
+      <div class="kpi"><div class="v">6-10</div><div class="l">Month 1 bookings</div></div>
+      <div class="kpi"><div class="v">$8-14K</div><div class="l">Month 1 revenue</div></div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="v">$7,640</div><div class="l">Month 3 spend</div></div>
+      <div class="kpi"><div class="v">100-160</div><div class="l">Month 3 leads</div></div>
+      <div class="kpi"><div class="v">18-28</div><div class="l">Month 3 bookings</div></div>
+      <div class="kpi"><div class="v">$22-50K</div><div class="l">Month 3 revenue</div></div>
+    </div>
+    <div class="callout good">
+      <div class="label">Why this works financially</div>
+      <p>Average booking value in the DMV party bus market is $900-1,800. At a 15% lead-to-booking rate and $40 CPL, customer acquisition cost lands around $260 &mdash; well inside the unit economics. Month 1 is roughly break-even by design (we're paying to learn). Month 3 is the first month of meaningful profit.</p>
+    </div>
+    <div class="callout warn">
+      <div class="label">What blows the budget</div>
+      <p>(1) Scaling spend before conversion tracking is reliable. (2) Adding Performance Max before 90 days of conversion data. (3) Paying for WeddingWire boosted listing without reviews on the platform. (4) Buying citations from spammy listing services instead of doing the 30 manually. Avoid these and the budget holds.</p>
+    </div>
+  </div>
+</section>
+<section id="kpis">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">13 &middot; KPIs</span>
+      <h2>What we measure (and how often)</h2>
+      <p class="section-lede">One north star. Five weekly metrics. Eight monthly metrics. Built into a Looker Studio dashboard so Robert sees the same numbers Frederick sees, when Frederick sees them.</p>
+    </div>
+    <h3>North star</h3>
+    <div class="callout">
+      <div class="label">The one metric</div>
+      <p style="font-size:18px;color:var(--ink);font-weight:600">Booked revenue from new partybusrus.com per month.</p>
+      <p>Not leads. Not clicks. Not impressions. Not even bookings. <strong>Booked revenue.</strong> Because that's the only number that pays the buses.</p>
+    </div>
+    <h3>Weekly tracking (every Monday morning)</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Metric</th><th>Target</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Leads by source</strong></td><td>Channel mix on track</td><td>GA4 + CallRail</td></tr>
+        <tr><td><strong>Cost per lead (CPL)</strong></td><td>$25-70</td><td>Google Ads + Meta Ads</td></tr>
+        <tr><td><strong>Lead-to-booking rate</strong></td><td>12-18%</td><td>CRM</td></tr>
+        <tr><td><strong>IG follower delta</strong></td><td>+150/wk mo 1, +300/wk mo 3</td><td>Instagram Insights</td></tr>
+        <tr><td><strong>Reviews added this week</strong></td><td>1-2/week sustained</td><td>GBP</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Monthly tracking (first Monday of each month)</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Metric</th><th>Target</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ROAS by channel</strong></td><td>3-7&times;</td><td>Tells us where to scale, where to kill</td></tr>
+        <tr><td><strong>CPA (cost per booking)</strong></td><td>$150-280</td><td>Unit-economics health check</td></tr>
+        <tr><td><strong>Organic ranking deltas</strong></td><td>Top 3 for 5+ kw by month 6</td><td>Long-term moat building</td></tr>
+        <tr><td><strong>Review count + rating</strong></td><td>100+ by Nov, 4.9 maintained</td><td>Trust signal compounding</td></tr>
+        <tr><td><strong>Average booking value</strong></td><td>$900-1,800</td><td>Quality of leads we're attracting</td></tr>
+        <tr><td><strong>Repeat / referral booking %</strong></td><td>20%+ by month 6</td><td>Customer satisfaction proxy</td></tr>
+        <tr><td><strong>IG engagement rate</strong></td><td>4%+</td><td>Content quality signal</td></tr>
+        <tr><td><strong>Form abandonment rate</strong></td><td>&lt;55%</td><td>CRO health check</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Dashboard recommendation</h3>
+    <div class="callout">
+      <div class="label">Looker Studio template</div>
+      <p>Build one Looker Studio dashboard pulling from GA4 + Google Ads + Meta Ads + CallRail + Sheets (for offline conversions). Single source of truth. Robert gets view-only access. Update cadence: daily auto-refresh. Frederick reviews every Monday 9am with Robert by text.</p>
+    </div>
+    <h3>Reporting cadence</h3>
+    <ul class="content-list">
+      <li><strong>Daily (Frederick only):</strong> Quick GA4 + ad accounts glance, 5 minutes</li>
+      <li><strong>Weekly (Mon 9am):</strong> 5-metric text to Robert with a one-line summary</li>
+      <li><strong>Monthly (1st Mon):</strong> Full Looker dashboard review + 30-min call with Robert</li>
+      <li><strong>Quarterly (every 90 days):</strong> Strategy reset &mdash; what's working, what to add, what to drop</li>
+    </ul>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">14 &middot; The Stack</span>
+      <h2>Tech stack &amp; tools</h2>
+      <p class="section-lede">Every tool we need, with monthly cost. Total subscription baseline is $500-700/mo. Most are free at our current scale.</p>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Tool</th><th>Category</th><th>Monthly cost</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Moovs</strong> <em style="color:var(--ink-muted)">or Limo Anywhere</em></td><td>Booking / dispatch</td><td>$199</td><td>Required</td></tr>
+        <tr><td><strong>HoneyBook</strong></td><td>CRM</td><td>$39</td><td>Required</td></tr>
+        <tr><td><strong>Klaviyo</strong></td><td>Email marketing</td><td>Free &lt;250 / ~$45 after</td><td>Required</td></tr>
+        <tr><td><strong>CallRail</strong></td><td>Call tracking</td><td>$45</td><td>Required</td></tr>
+        <tr><td><strong>Formspree</strong> <em style="color:var(--ink-muted)">or HubSpot Forms (free)</em></td><td>Form backend</td><td>$10 (or $0)</td><td>Required</td></tr>
+        <tr><td><strong>Google Analytics 4</strong></td><td>Analytics</td><td>Free</td><td>Required</td></tr>
+        <tr><td><strong>Google Tag Manager</strong></td><td>Tag mgmt</td><td>Free</td><td>Required</td></tr>
+        <tr><td><strong>Meta Pixel</strong></td><td>Ad tracking</td><td>Free</td><td>Required</td></tr>
+        <tr><td><strong>Netlify Pro</strong></td><td>Hosting + forms</td><td>$19</td><td>Recommended</td></tr>
+        <tr><td><strong>Cloudinary</strong> <em style="color:var(--ink-muted)">free tier sufficient</em></td><td>Image CDN</td><td>Free up to 25 GB</td><td>Optional</td></tr>
+        <tr><td><strong>Nano Banana</strong></td><td>AI image gen</td><td>Already paid</td><td>In use</td></tr>
+        <tr><td><strong>Higgsfield</strong></td><td>AI video gen</td><td>Already paid</td><td>In use</td></tr>
+        <tr><td><strong>Meta Business Suite</strong></td><td>IG + FB scheduler</td><td>Free</td><td>Required</td></tr>
+        <tr><td><strong>CapCut Pro</strong></td><td>Video editing</td><td>$8</td><td>Recommended</td></tr>
+        <tr><td><strong>Ahrefs Lite</strong></td><td>SEO research</td><td>$129</td><td>Optional</td></tr>
+        <tr><td><strong>Looker Studio</strong></td><td>Dashboard</td><td>Free</td><td>Required</td></tr>
+        <tr style="background:var(--bg-cream-deep)"><td colspan="2"><strong>Minimum baseline (required only)</strong></td><td colspan="2"><strong>~$320/mo</strong></td></tr>
+        <tr style="background:var(--bg-cream-deep)"><td colspan="2"><strong>Recommended stack</strong></td><td colspan="2"><strong>~$500/mo</strong></td></tr>
+        <tr style="background:var(--bg-cream-deep)"><td colspan="2"><strong>Full stack with Ahrefs</strong></td><td colspan="2"><strong>~$700/mo</strong></td></tr>
+      </tbody>
+    </table></div>
+    <h3>Tool decisions worth making in week 1</h3>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Moovs vs Limo Anywhere</span> Which booking system?</span><span class="toggle">+</span></div><div class="a"><p><strong>Moovs</strong> is newer, more modern UI, integrates with Stripe out of the box, and has a better online-booking widget for the public website. <strong>Limo Anywhere</strong> is the legacy DMV standard &mdash; most other operators use it, which matters if we want to take overflow work from other companies. Recommendation: start with Moovs unless Robert already has Limo Anywhere accounts. The modern booking UX matters more than dispatch network integration at this stage.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Klaviyo vs Mailchimp</span> Which email platform?</span><span class="toggle">+</span></div><div class="a"><p><strong>Klaviyo every time.</strong> Mailchimp lost the e-commerce/automation arms race years ago. Klaviyo's free tier handles 250 contacts (we'll cross that in month 2). After that, it scales to ~$45/mo and the segmentation + automation features pay for themselves on a single email sequence.</p></div></div>
+    <div class="qa"><div class="q"><span class="text"><span class="tag">Formspree vs Netlify Forms vs HubSpot</span> Form backend?</span><span class="toggle">+</span></div><div class="a"><p>If we move to Netlify Pro hosting, <strong>Netlify Forms</strong> is the simplest answer (built-in, $0 extra at our volume). If we host elsewhere, <strong>Formspree</strong> at $10/mo is the cleanest. <strong>HubSpot Forms</strong> are free and connect to a CRM but the embed code is bulky and slows page load. My pick: Netlify Forms if we go Netlify Pro, Formspree otherwise.</p></div></div>
+    <div class="callout">
+      <div class="label">First-month tool-onboarding order</div>
+      <p>Day 1: GA4 + GTM + Meta Pixel. Day 2: CallRail. Day 3: Formspree (or Netlify Forms). Week 2: Klaviyo + HoneyBook. Week 3: Moovs booking integration. Week 4: Looker Studio dashboard. Everything else is optional polish.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p class="gold">Party Bus R Us &middot; Operated by City Coachways Inc.</p>
+    <p class="quote">The site looks beautiful &mdash; now let's make it sell.</p>
+    <p style="color:var(--ink-muted);font-size:13px">&mdash; Frederick &middot; Marketing</p>
+    <p style="margin-top:14px">100% Audit &amp; Go-to-Market Playbook &middot; May 19, 2026</p>
+    <a href="#score" class="approve">&uarr; Back to top of plan</a>
+    <p style="margin-top:24px;font-size:12px;color:var(--ink-muted)">Reference this document for the next 90 days. Every checklist saves your progress. Print-friendly. Mobile-friendly. Designed to be the only marketing doc you need.</p>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Back to top">&uarr;</button>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      const wrapper = btn.closest('.tabs');
+      wrapper.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      wrapper.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      wrapper.querySelector('[data-content="' + target + '"]').classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.qa .q').forEach(q => {
+    q.addEventListener('click', () => {
+      q.parentElement.classList.toggle('open');
+    });
+  });
+
+  function getStored(key){
+    try { return JSON.parse(localStorage.getItem(key) || '{}'); }
+    catch(e){ return {}; }
+  }
+  function setStored(key, val){
+    try { localStorage.setItem(key, JSON.stringify(val)); }
+    catch(e){}
+  }
+
+  document.querySelectorAll('.checklist').forEach(list => {
+    const key = 'pbr-100-checklist-' + list.dataset.list;
+    const stored = getStored(key);
+    const items = list.querySelectorAll('li');
+    const progressEl = list.querySelector('.progress');
+
+    function updateProgress(){
+      const done = list.querySelectorAll('li.done').length;
+      const total = items.length;
+      progressEl.textContent = done + ' / ' + total;
+      if(done === total && total > 0) progressEl.style.background = 'var(--good-bg)';
+      else if(done > 0) progressEl.style.background = 'var(--warn-bg)';
+      else progressEl.style.background = 'var(--bg-warm)';
+    }
+
+    items.forEach((li, idx) => {
+      if(stored[idx]) li.classList.add('done');
+      li.addEventListener('click', (e) => {
+        if(e.target.tagName === 'SPAN' && e.target.classList.contains('owner')) return;
+        li.classList.toggle('done');
+        const state = getStored(key);
+        state[idx] = li.classList.contains('done');
+        setStored(key, state);
+        updateProgress();
+      });
+    });
+    updateProgress();
+  });
+
+  const progressBar = document.getElementById('progressBar');
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progressBar.style.width = pct + '%';
+    if(window.scrollY > 400) toTop.classList.add('show');
+    else toTop.classList.remove('show');
+  });
+  toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  const navLinks = document.querySelectorAll('#navLinks a');
+  const sections = Array.from(navLinks).map(l => document.querySelector(l.getAttribute('href')));
+  function updateActive(){
+    let active = sections[0];
+    const y = window.scrollY + 120;
+    for(let i = 0; i < sections.length; i++){
+      if(sections[i] && sections[i].offsetTop <= y) active = sections[i];
+    }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if(active){
+      const link = document.querySelector('#navLinks a[href="#' + active.id + '"]');
+      if(link) link.classList.add('active');
+    }
+  }
+  window.addEventListener('scroll', updateActive);
+  updateActive();
+</script>
+
+</body>
+</html>

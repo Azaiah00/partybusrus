@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Party Bus R Us — Website Review · For Robert</title>
+<link rel="icon" type="image/png" href="../logo/lockup-gold.png">
+<link rel="apple-touch-icon" href="../logo/lockup-gold.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0b14;--bg2:#13131e;--surf:#1a1a26;--surf2:#22222e;
+  --line:#2a2a38;--line2:#3a3a48;--text:#f5f4ee;--mute:#a8a8a0;--dim:#6b6b78;
+  --gold:#d4af37;--gold2:#f0d878;--gold3:#b58e1a;--wine:#7a1f2b;
+  --green:#34d399;--red:#f87171;--blue:#60a5fa;
+  --grad:linear-gradient(135deg,#d4af37 0%,#f0d878 50%,#b58e1a 100%);
+  --ease:cubic-bezier(.2,.6,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:"Inter",sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.serif{font-family:"Cormorant Garamond",Georgia,serif}
+a{color:var(--gold2);text-decoration:none;transition:color .2s var(--ease)}
+a:hover{color:#fff}
+.container{max-width:780px;margin:0 auto;padding:0 24px}
+@media(max-width:680px){.container{padding:0 18px}}
+
+/* HERO */
+.hero{padding:80px 0 50px;background:radial-gradient(900px 500px at 20% -10%,rgba(212,175,55,.18),transparent 60%);text-align:center;border-bottom:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold2);font-weight:700;margin-bottom:20px;padding:6px 14px;border:1px solid var(--gold);border-radius:999px}
+.hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(38px,6vw,58px);line-height:1.05;font-weight:500;margin-bottom:18px}
+.hero h1 em{font-style:italic;color:var(--gold2);font-weight:400}
+.hero .sub{font-size:18px;color:#d8d8cc;font-weight:300;max-width:560px;margin:0 auto 28px;line-height:1.55}
+.meta-bar{display:inline-flex;align-items:center;gap:18px;padding:14px 22px;background:var(--surf);border:1px solid var(--line);border-radius:999px;font-size:13px;color:#d8d8cc;flex-wrap:wrap;justify-content:center}
+.meta-bar span:not(:last-child):after{content:"·";color:var(--gold);margin-left:18px}
+.meta-bar b{color:var(--gold2);font-weight:600}
+
+/* QUICK TILES */
+.tldr{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:50px 0}
+.tldr div{background:var(--surf);border:1px solid var(--line);padding:22px 20px;border-radius:8px}
+.tldr div b{display:block;font-family:"Cormorant Garamond",serif;font-size:32px;color:var(--gold2);font-weight:500;line-height:1;margin-bottom:6px}
+.tldr div span{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:600}
+
+/* SECTIONS */
+section{padding:60px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:none}
+h2{font-family:"Cormorant Garamond",serif;font-size:clamp(30px,4vw,40px);font-weight:500;line-height:1.1;margin-bottom:10px}
+h2 em{font-style:italic;color:var(--gold2);font-weight:400}
+h2 .num{display:inline-block;padding:3px 11px;background:var(--gold);color:#1a0e00;font-family:Inter,sans-serif;font-size:13px;font-weight:700;letter-spacing:.06em;border-radius:4px;margin-right:14px;vertical-align:middle;line-height:1.4}
+h3{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:500;margin:24px 0 10px;color:#fff}
+.section-intro{color:#bdbdb5;font-size:16px;margin-bottom:26px;font-weight:300;line-height:1.6}
+
+/* TOUR STEPS */
+.step{background:var(--surf);border:1px solid var(--line);border-left:3px solid var(--gold);padding:22px 26px;margin-bottom:14px;border-radius:0 8px 8px 0;display:flex;gap:20px;align-items:start;flex-wrap:wrap}
+.step .n{font-family:"Cormorant Garamond",serif;font-size:42px;font-weight:300;color:var(--gold);line-height:1;flex:0 0 50px;font-style:italic}
+.step .body{flex:1;min-width:240px}
+.step .body h4{font-family:"Cormorant Garamond",serif;font-size:21px;font-weight:500;color:#fff;margin-bottom:6px}
+.step .body p{color:#bdbdb5;font-size:14.5px;line-height:1.6;margin-bottom:10px}
+.step .body .open-link{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#1a0e00;padding:8px 18px;font-size:12px;font-weight:700;letter-spacing:.06em;border-radius:4px;text-transform:uppercase}
+.step .body .open-link:hover{background:#f0d878;color:#1a0e00}
+.step .body .open-link:after{content:"→"}
+
+/* WOW CARDS */
+.wow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:20px}
+.wow{background:var(--surf);border:1px solid var(--line);padding:24px 22px;border-radius:8px;position:relative;overflow:hidden}
+.wow:before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad)}
+.wow .icon{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:32px;color:var(--gold);line-height:1;margin-bottom:14px;font-weight:400}
+.wow h4{font-family:"Cormorant Garamond",serif;font-size:20px;color:#fff;font-weight:500;margin-bottom:8px}
+.wow p{color:var(--mute);font-size:13.5px;line-height:1.6;margin-bottom:12px}
+.wow .competitive{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);font-weight:700;padding:5px 10px;background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3);border-radius:4px;display:inline-block}
+
+/* BEFORE/AFTER */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:30px 0}
+@media(max-width:680px){.compare{grid-template-columns:1fr}}
+.compare .col{padding:24px 24px;border-radius:8px;border:1px solid var(--line)}
+.compare .col.now{background:rgba(248,113,113,.04);border-color:rgba(248,113,113,.3)}
+.compare .col.new{background:rgba(52,211,153,.04);border-color:var(--gold)}
+.compare .col .label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+.compare .col.now .label{color:var(--red)}
+.compare .col.new .label{color:var(--gold2)}
+.compare .col h3{font-family:"Cormorant Garamond",serif;font-size:22px;margin-bottom:14px;color:#fff;font-weight:500}
+.compare .col ul{padding:0;list-style:none;font-size:14px;color:#bdbdb5;line-height:1.85}
+.compare .col ul li{padding-left:20px;position:relative}
+.compare .col.now ul li:before{content:"✗";position:absolute;left:0;color:var(--red);font-weight:700}
+.compare .col.new ul li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+
+/* DECISIONS */
+.decisions{margin-top:24px}
+.decision{background:var(--surf);border:1px solid var(--line);padding:22px 26px;margin-bottom:12px;border-radius:8px;display:flex;gap:18px;align-items:start}
+.decision .badge{flex:0 0 48px;width:48px;height:48px;background:var(--gradGold);background:var(--grad);color:#1a0e00;display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:24px;font-weight:600;border-radius:50%;font-style:italic}
+.decision .content{flex:1;min-width:0}
+.decision .content h4{font-size:16px;color:#fff;font-weight:600;margin-bottom:4px;letter-spacing:.01em}
+.decision .content p{font-size:13.5px;color:#bdbdb5;line-height:1.6;margin-bottom:8px}
+.decision .content .impact{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold2);font-weight:700}
+.decision .content .cost{display:inline-block;font-size:11px;padding:3px 9px;background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.25);border-radius:3px;font-weight:600;letter-spacing:.04em;margin-left:8px}
+
+/* ROADMAP */
+.roadmap{position:relative;padding-left:32px;margin:24px 0}
+.roadmap:before{content:"";position:absolute;left:9px;top:10px;bottom:10px;width:2px;background:var(--gold)}
+.roadmap-item{position:relative;margin-bottom:24px}
+.roadmap-item:before{content:"";position:absolute;left:-28px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(212,175,55,.18)}
+.roadmap-item h5{font-family:"Cormorant Garamond",serif;font-size:18px;color:#fff;font-weight:500;margin-bottom:4px}
+.roadmap-item p{color:var(--mute);font-size:13.5px;line-height:1.55}
+.roadmap-item .tag{display:inline-block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px}
+
+/* SIGNOFF */
+.signoff{background:linear-gradient(135deg,rgba(212,175,55,.08),rgba(0,0,0,0));border:1px solid var(--gold);padding:36px 32px;border-radius:8px;text-align:center;margin:50px 0 20px}
+.signoff h2{margin-bottom:14px}
+.signoff p{color:#bdbdb5;font-size:15.5px;margin-bottom:24px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.65}
+.btn-row{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:4px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;transition:all .2s var(--ease)}
+.btn.gold{background:var(--grad);color:#1a0e00}
+.btn.gold:hover{transform:translateY(-1px);box-shadow:0 12px 30px -10px rgba(212,175,55,.4)}
+.btn.ghost{background:transparent;color:#fff;border:1px solid var(--line2)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold2)}
+
+/* FOR FREDERICK FOOTER */
+.host-note{background:#000;border-top:1px solid var(--line);padding:50px 0;margin-top:40px}
+.host-note .container{max-width:780px}
+.host-note .tag{display:inline-block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--wine);font-weight:700;margin-bottom:14px;padding:5px 12px;background:rgba(122,31,43,.15);border:1px solid var(--wine);border-radius:3px}
+.host-note h3{font-family:"Cormorant Garamond",serif;font-size:26px;color:#fff;margin-bottom:12px;font-weight:500}
+.host-note p{color:#bdbdb5;font-size:14.5px;margin-bottom:14px;line-height:1.7}
+.host-note ol{padding-left:22px;color:#bdbdb5;font-size:14.5px;line-height:1.85}
+.host-note ol li{margin-bottom:8px}
+.host-note code{font-family:ui-monospace,Menlo,monospace;background:var(--surf2);padding:2px 8px;border-radius:3px;font-size:.9em;color:var(--gold2)}
+.host-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:18px 0}
+.host-options .opt{background:var(--surf);border:1px solid var(--line);padding:18px 20px;border-radius:6px}
+.host-options .opt b{display:block;color:#fff;font-size:15px;font-weight:600;margin-bottom:6px}
+.host-options .opt b .rec{display:inline-block;font-size:9px;letter-spacing:.16em;color:var(--gold2);background:rgba(212,175,55,.12);border:1px solid var(--gold3);padding:2px 7px;border-radius:3px;margin-left:6px;vertical-align:middle;font-weight:700}
+.host-options .opt span{font-size:13px;color:var(--mute);line-height:1.55;display:block;margin-bottom:8px}
+.host-options .opt a{font-size:12.5px;color:var(--gold2);font-weight:600}
+
+.footer{text-align:center;padding:30px 24px;color:var(--dim);font-size:12px;background:#000}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <img src="../logo/lockup-gold.png" alt="Party Bus R Us" style="max-width:380px;width:100%;height:auto;margin:0 auto 32px;display:block;filter:drop-shadow(0 4px 18px rgba(212,175,55,.2))">
+    <div class="eyebrow">For Robert · 5 minutes</div>
+    <h1>The Party Bus R Us<br>website, <em>rebuilt.</em></h1>
+    <p class="sub">A complete redesign of partylimobusdc.com that takes us from a 4-page Web.com brochure to a 23-page premium site that competes with — and beats — every other DMV operator.</p>
+    <div class="meta-bar">
+      <span>Built by <b>Frederick</b></span>
+      <span><b>23 pages</b></span>
+      <span><b>Real fleet photos</b></span>
+      <span><b>Mobile-ready</b></span>
+    </div>
+  </div>
+</header>
+
+<section style="padding-top:30px;padding-bottom:30px;border-bottom:none">
+  <div class="container">
+    <div class="tldr">
+      <div><b>23</b><span>Pages</span></div>
+      <div><b>11</b><span>Service Types</span></div>
+      <div><b>7</b><span>Buses Featured</span></div>
+      <div><b>2</b><span>Languages (EN / ES)</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:radial-gradient(800px 400px at 50% 0%,rgba(212,175,55,.06),transparent 70%);padding-top:50px;padding-bottom:50px">
+  <div class="container">
+    <h2 style="text-align:center;margin-bottom:14px"><span class="num">★</span>And the brand <em>got a glow-up too.</em></h2>
+    <p style="color:#bdbdb5;font-size:16px;text-align:center;font-weight:300;max-width:560px;margin:0 auto 36px;line-height:1.55">A 13-year-old company deserves a logo that doesn't look 13 years old. Here's where we've taken the brand.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch;margin-bottom:24px">
+      <div style="background:#f5f4ee;border:1px solid var(--line);border-radius:8px;padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#a33;font-weight:700;margin-bottom:18px">— Current —</div>
+        <img src="../logo/original.png" alt="Current Party Bus R Us logo" style="max-width:240px;width:100%;height:auto;display:block">
+      </div>
+      <div style="background:#0a0a0f;border:1px solid var(--gold);border-radius:8px;padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);font-weight:700;margin-bottom:18px">— New —</div>
+        <img src="../logo/lockup-gold.png" alt="New Party Bus R Us lockup" style="max-width:300px;width:100%;height:auto;display:block;filter:drop-shadow(0 4px 14px rgba(212,175,55,.2))">
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:30px">
+      <div style="background:var(--surf);border:1px solid var(--line);padding:20px;border-radius:6px;text-align:center">
+        <div style="height:80px;display:flex;align-items:center;justify-content:center;margin-bottom:10px">
+          <img src="../logo/wordmark-gold.png" alt="Wordmark Gold" style="max-height:70px;width:auto;max-width:200px">
+        </div>
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:600">Wordmark · Light Backgrounds</div>
+      </div>
+      <div style="background:#0a0a0f;border:1px solid var(--line);padding:20px;border-radius:6px;text-align:center">
+        <div style="height:80px;display:flex;align-items:center;justify-content:center;margin-bottom:10px">
+          <img src="../logo/wordmark-cream.png" alt="Wordmark Cream" style="max-height:70px;width:auto;max-width:200px">
+        </div>
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:600">Wordmark · Dark Backgrounds</div>
+      </div>
+      <div style="background:var(--surf);border:1px solid var(--gold);padding:20px;border-radius:6px;text-align:center">
+        <div style="height:80px;display:flex;align-items:center;justify-content:center;margin-bottom:10px">
+          <img src="../logo/lockup-gold.png" alt="Full Lockup" style="max-height:70px;width:auto;max-width:240px">
+        </div>
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);font-weight:600">Full Lockup · Primary</div>
+      </div>
+    </div>
+
+    <p style="margin-top:30px;font-size:13.5px;color:var(--mute);text-align:center;font-style:italic;max-width:620px;margin-left:auto;margin-right:auto;line-height:1.6">
+      Same name, same legacy. Refined typography, champagne-gold palette, custom interlocked PB monogram with a 3-point crown, and a calligraphic "R Us" script that turns the kitschy bit into a deliberate calligraphic flourish. Already implemented across the new website nav and footer — go open the mockup and look at the top-left.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2><span class="num">01</span>The 5-minute tour.</h2>
+    <p class="section-intro">Click each "Open" button to jump straight to that section in the mockup. New tab opens — your spot in this guide stays where you left it.</p>
+
+    <div class="step">
+      <div class="n">I.</div>
+      <div class="body">
+        <h4>Start at the home page</h4>
+        <p>You'll see the new hero with our actual black bus exterior, a scrolling list of every DMV city we cover, big stat numbers, and our "Step Inside" photo gallery of the real fleet interiors.</p>
+        <a class="open-link" href="Website-Mockup.html#home" target="_blank">Open Home</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">II.</div>
+      <div class="body">
+        <h4>Scroll to "What's open this weekend"</h4>
+        <p>Live availability widget — shows all 7 buses with real-time status (booked, available, 1 slot left). Creates urgency and lets customers book in seconds. <b>No DMV competitor has this.</b></p>
+        <a class="open-link" href="Website-Mockup.html#home" target="_blank">See Availability Widget</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">III.</div>
+      <div class="body">
+        <h4>Click the ES toggle (top-right of the nav)</h4>
+        <p>Switches to the Spanish home page. Full quinceañera section, Spanish service descriptions, Spanish pricing. <b>We're one of two DMV operators with end-to-end Spanish service — and the only one with a Spanish website.</b></p>
+        <a class="open-link" href="Website-Mockup.html#home-es" target="_blank">See Spanish Site</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">IV.</div>
+      <div class="body">
+        <h4>Go to Fleet → Click the Signature 30</h4>
+        <p>Each bus gets its own detail page with a video walkaround placeholder (we shoot 15-second phone clips this summer), real photo gallery, full specs, and a sticky "Reserve This Bus" sidebar that converts.</p>
+        <a class="open-link" href="Website-Mockup.html#bus-30pax" target="_blank">See Bus Detail Page</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">V.</div>
+      <div class="body">
+        <h4>Scroll to "Live, from Google"</h4>
+        <p>Real Google Reviews widget — pulls live from our actual GBP. Click the <b>"Q4 2026 Target"</b> tab next to it. Watch what 127 reviews looks like when the SMS automation runs. Same widget, transformed.</p>
+        <a class="open-link" href="Website-Mockup.html#home" target="_blank">See Reviews Widget</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">VI.</div>
+      <div class="body">
+        <h4>Open the Quote page</h4>
+        <p>Multi-step quote form that captures everything we need (date, hours, headcount, event type, pickup) and routes to our team in 60 seconds. Replaces the current 4-field contact form.</p>
+        <a class="open-link" href="Website-Mockup.html#quote" target="_blank">See Quote Form</a>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;padding:18px 22px;background:rgba(212,175,55,.08);border:1px solid var(--gold);border-radius:6px;font-size:14px;color:#e8e8dc;line-height:1.6">
+      <b style="color:var(--gold2)">Pro tip:</b> Open the mockup on your phone too. The mobile experience is where Web.com really falls apart — and where most of our actual customers find us.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2><span class="num">02</span>The 6 things that didn't exist before.</h2>
+    <p class="section-intro">Features built into the new site that beat what every DMV competitor has today.</p>
+
+    <div class="wow-grid">
+      <div class="wow">
+        <div class="icon">i.</div>
+        <h4>Live availability widget</h4>
+        <p>Real-time "3 of 7 buses available this Saturday" indicator. Creates urgency, signals demand.</p>
+        <span class="competitive">★ Zero DMV competitors have this</span>
+      </div>
+      <div class="wow">
+        <div class="icon">ii.</div>
+        <h4>Spanish version (/es)</h4>
+        <p>Full Spanish home page with quinceañera-forward content. Captures the DMV Hispanic market no one else is serving.</p>
+        <span class="competitive">★ Only one DMV site has Spanish</span>
+      </div>
+      <div class="wow">
+        <div class="icon">iii.</div>
+        <h4>Transparent pricing</h4>
+        <p>Every rate published openly by vehicle class, weekday and weekend, with gratuity included.</p>
+        <span class="competitive">★ Most competitors are quote-only</span>
+      </div>
+      <div class="wow">
+        <div class="icon">iv.</div>
+        <h4>Google reviews widget</h4>
+        <p>Live Google Business Profile integration with a Today/Q4 toggle showing exactly where we're headed.</p>
+        <span class="competitive">★ Few competitors embed reviews</span>
+      </div>
+      <div class="wow">
+        <div class="icon">v.</div>
+        <h4>Wedding portfolio</h4>
+        <p>Dedicated gallery of wedding-day photos with venue + couple labels. Becomes the wedding closer.</p>
+        <span class="competitive">★ None build a real portfolio</span>
+      </div>
+      <div class="wow">
+        <div class="icon">vi.</div>
+        <h4>SEO architecture</h4>
+        <p>11 service pages, 4 city pages, blog, and pricing — all built to rank where we're invisible today.</p>
+        <span class="competitive">★ We're not on page 1 today</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2><span class="num">03</span>What's different from today.</h2>
+    <p class="section-intro">The current partylimobusdc.com vs. the new site, side by side.</p>
+
+    <div class="compare">
+      <div class="col now">
+        <div class="label">— Current Site —</div>
+        <h3>Web.com brochure</h3>
+        <ul>
+          <li>4 pages total</li>
+          <li>Footer typo (Vienna VA 2218)</li>
+          <li>Stock photos, none of our buses</li>
+          <li>No prices anywhere</li>
+          <li>Generic contact form</li>
+          <li>Mobile LCP: 9.2 seconds</li>
+          <li>No Spanish</li>
+          <li>No reviews shown</li>
+          <li>No live availability</li>
+          <li>Invisible on "party bus dc"</li>
+        </ul>
+      </div>
+      <div class="col new">
+        <div class="label">— New Site —</div>
+        <h3>Full premium platform</h3>
+        <ul>
+          <li>23 pages, all real bus photos</li>
+          <li>NAP synced everywhere</li>
+          <li>Our actual fleet on every page</li>
+          <li>Vehicle-class tiered pricing</li>
+          <li>Multi-step quote form</li>
+          <li>Mobile-fast hero, image-compressed</li>
+          <li>Full Spanish /es subpath</li>
+          <li>Live Google reviews widget</li>
+          <li>Real-time availability</li>
+          <li>Built to rank for every search</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2><span class="num">04</span>What I need from you, Robert.</h2>
+    <p class="section-intro">Eight decisions. Most are zero-cost. The ones with budget are clearly marked.</p>
+
+    <div class="decisions">
+
+      <div class="decision">
+        <div class="badge">i</div>
+        <div class="content">
+          <h4>Add me as a manager on the Google Business Profile</h4>
+          <p>Free, takes you 30 seconds. Lets me fix photos, posts, hours, and the category mismatch.</p>
+          <span class="impact">Unlocks Map Pack improvement</span>
+          <span class="cost">$0 · Reversible</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="badge">ii</div>
+        <div class="content">
+          <h4>Web.com builder login or admin access</h4>
+          <p>Lets me fix the address typo, install Google Analytics, add real Instagram link, compress images.</p>
+          <span class="impact">Fixes 9-second mobile load</span>
+          <span class="cost">$0 · Reversible</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="badge">iii</div>
+        <div class="content">
+          <h4>Read-only Google Ads access</h4>
+          <p>Lets me see what your $2–4K/month is actually buying. Cost Per Conversion. Search Terms. Spend by campaign type.</p>
+          <span class="impact">May reveal 30–50% wasted spend</span>
+          <span class="cost">$0 · No risk</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="badge">iv</div>
+        <div class="content">
+          <h4>$0 approval to install GA4 + Meta Pixel</h4>
+          <p>Free Google product. Takes me 30 minutes. After 14 days we'll know which marketing channels actually book.</p>
+          <span class="impact">Foundation for all decisions</span>
+          <span class="cost">$0 · Free tools</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="badge">v</div>
+        <div class="content">
+          <h4>Pick a budget tier for the 90-day plan</h4>
+          <p>Scrappy ($1.5–2.5K — I do everything), Moderate ($5–10K — vendors help), Aggressive ($15–30K — full rebuild). Most appropriate: Moderate.</p>
+          <span class="impact">3–5× lead lift in 90 days</span>
+          <span class="cost">$2.5K–$30K · Quarterly</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="badge">vi</div>
+        <div class="content">
+          <h4>Greenlight TheKnot + WeddingWire profiles</h4>
+          <p>The two highest-LTV referral channels we have zero presence on. Premium tiers run $500–$1,000 per quarter each.</p>
+          <span class="impact">Wedding bookings unlock</span>
+          <span class="cost">$1–2K · Quarterly</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="badge">vii</div>
+        <div class="content">
+          <h4>Decide on partybusrus.com</h4>
+          <p>That domain is owned by another operator. Options: (a) reach out to buy it ($500–2K likely), (b) rebrand under a more defensible name, (c) accept the leakage.</p>
+          <span class="impact">Brand confusion fix</span>
+          <span class="cost">$0–$2K · One-time</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="badge">viii</div>
+        <div class="content">
+          <h4>Approve publishing flat-rate pricing</h4>
+          <p>Industry standard is quote-only. Our wedge is being the only premium operator with published rates. Lifts conversion 30–50%.</p>
+          <span class="impact">Conversion lift, reversible</span>
+          <span class="cost">$0 · Reversible</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:30px;padding:20px 26px;background:var(--surf);border:1px solid var(--line);border-radius:8px;color:#e8e8dc;font-size:14.5px;line-height:1.7">
+      <b style="color:var(--gold2);font-family:'Cormorant Garamond',serif;font-size:18px;display:block;margin-bottom:6px;font-weight:500">The honest framing:</b>
+      Six of these eight are zero-dollar. The two that have budget (the 90-day plan + wedding platforms) are quarter-by-quarter — if we're not hitting the numbers by day 60, we adjust. The full audit (with the math, the risks, and the lead projections) is in the workspace folder if you want the deeper read.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2><span class="num">05</span>What happens after you say yes.</h2>
+    <p class="section-intro">The first month, condensed. So you know what shipping looks like.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <div class="tag">Week 1</div>
+        <h5>Triage &amp; quick wins</h5>
+        <p>Delete the policy-violation review. Fix the address typo. Install GA4. Add Instagram link. Reclaim Birdeye. Pull the wasteful branded-search ads. Parking lot photo shoot. Free, fast, foundational.</p>
+      </div>
+      <div class="roadmap-item">
+        <div class="tag">Week 2–3</div>
+        <h5>Build the real site</h5>
+        <p>Migrate off Web.com to WordPress or Webflow (vendor build, ~$1,500). Roll out the 23-page architecture I mocked up. Install schema markup. Launch the Instagram cadence (3 reels/week from the lot shoot footage).</p>
+      </div>
+      <div class="roadmap-item">
+        <div class="tag">Week 4</div>
+        <h5>Trust signals + wedding pipeline</h5>
+        <p>TheKnot and WeddingWire profiles live. BBB application submitted. Safety &amp; Credentials page published with our WMATC, USDOT, and $5M insurance. Outreach to 20 wedding venues for preferred-vendor relationships.</p>
+      </div>
+      <div class="roadmap-item">
+        <div class="tag">Month 2</div>
+        <h5>Compound</h5>
+        <p>SMS review automation running. Aiming for first 24 new Google reviews. Non-brand Google Ads launched on city + service keywords. Meta retargeting live. First Map Pack movement starts showing up.</p>
+      </div>
+      <div class="roadmap-item">
+        <div class="tag">Month 3</div>
+        <h5>Show results</h5>
+        <p>Real GA4 data. Real lead numbers. Real Google review count climbing. First wedding-venue partnership booked. Full 90-day recap meeting with you, and the next quarter's plan based on what worked.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="signoff">
+    <h2>Ready to <em>move forward?</em></h2>
+    <p>Open the mockup if you haven't, take 5 more minutes with the audit if you want the full math, and let me know which decisions are a yes. I'll handle the rest.</p>
+    <div class="btn-row">
+      <a class="btn gold" href="Website-Mockup.html" target="_blank">Open the Mockup →</a>
+      <a class="btn ghost" href="Audit-Strategy.html" target="_blank">Read the Full Audit</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOR FREDERICK -->
+<div class="host-note">
+  <div class="container">
+    <span class="tag">★ For Frederick — not Robert</span>
+    <h3>How to make this shareable</h3>
+    <p>Robert opens the link, scrolls through this 5-minute guide, clicks into the mockup wherever he wants. Here are three ways to get it to him, fastest first:</p>
+
+    <div class="host-options">
+      <div class="opt">
+        <b>Tiiny.Host <span class="rec">Easiest</span></b>
+        <span>Drag the entire <code>Party Bus R Us</code> folder onto tiiny.host. Free, no signup, takes 30 seconds. Gives you a public URL like <code>tiiny.site/abc123</code>. Set a name like "partybusrus-review".</span>
+        <a href="https://tiiny.host" target="_blank">→ tiiny.host</a>
+      </div>
+      <div class="opt">
+        <b>Netlify Drop</b>
+        <span>Drag the folder onto app.netlify.com/drop. Free, no signup for first deploy. Gives you a URL like <code>amazing-mockup.netlify.app</code>. Slightly more permanent and reliable than Tiiny.</span>
+        <a href="https://app.netlify.com/drop" target="_blank">→ Netlify Drop</a>
+      </div>
+      <div class="opt">
+        <b>ZIP &amp; Email</b>
+        <span>Right-click the <code>Party Bus R Us</code> folder → Compress to ZIP → email or text to Robert. He unzips and double-clicks <code>Robert-Review-Guide.html</code>. Works offline, no link needed.</span>
+      </div>
+    </div>
+
+    <p><b style="color:var(--gold2)">What to send Robert (any of the three options above):</b></p>
+    <ol>
+      <li><b>The link</b> (or the unzipped folder) — opens this guide first</li>
+      <li><b>A short text or email:</b> "Hey Robert — I've been working on a complete website redesign. Built it as a clickable mockup so you can see exactly what it'll look like. 5 minutes to review, link below. There are 8 decisions for you at the end. Let me know when you're free to chat. — F"</li>
+      <li><b>That's it.</b> Don't pre-load him with the audit. The guide → mockup is enough to start the conversation. The audit is for the follow-up meeting.</li>
+    </ol>
+
+    <p style="margin-top:18px;font-size:13.5px;color:var(--mute);font-style:italic">If Tiiny or Netlify ever expire (free hosts sometimes do after 7–30 days), just re-upload the folder and send a new link. Or upgrade to their $5/month paid tier for permanent hosting — worth it once Robert is in.</p>
+  </div>
+</div>
+
+<div class="footer">
+  Party Bus R Us · Website Review · Prepared by Frederick · May 2026<br>
+  This page links to <code style="font-family:ui-monospace,Menlo,monospace;background:rgba(255,255,255,.05);padding:2px 6px;border-radius:3px;color:var(--gold2)">Website-Mockup.html</code> and <code style="font-family:ui-monospace,Menlo,monospace;background:rgba(255,255,255,.05);padding:2px 6px;border-radius:3px;color:var(--gold2)">Audit-Strategy.html</code> in the same folder.
+</div>
+
+</body>
+</html>

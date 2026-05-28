@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HubSpot CRM Setup Guide — Party Bus R Us</title>
+<style>
+  :root{
+    --bg:#faf4df; --bg2:#fff8e8; --surf:#fefbf2; --line:#e3d6b8;
+    --text:#2d2418; --mute:#5c4a32; --gold:#c9a961; --gold2:#8a6815;
+    --green:#1a7a4e; --red:#a23a2c; --amber:#b88f1a; --hubspot:#ff7a59;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);overflow-x:hidden}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif;line-height:1.65;font-size:16px}
+  .serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400}
+  a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(138,104,21,.3)}
+  a:hover{color:var(--text);border-bottom-color:var(--text)}
+  code{background:#fff8e8;border:1px solid var(--line);padding:2px 8px;font-family:"SF Mono",Consolas,monospace;font-size:13.5px;color:var(--gold2);border-radius:3px}
+  pre{background:#fefbf2;border:1px solid var(--line);padding:18px;font-family:"SF Mono",Consolas,monospace;font-size:13px;border-radius:6px;overflow-x:auto;line-height:1.5;color:var(--text)}
+
+  .hero{background:linear-gradient(180deg,#fff8e8 0%,#faf4df 100%);padding:70px 24px 50px;text-align:center;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+  .hero:before{content:"";position:absolute;top:-200px;right:-150px;width:450px;height:450px;background:radial-gradient(circle,rgba(255,122,89,.12) 0%,transparent 70%);border-radius:50%}
+  .hero-inner{position:relative;z-index:1;max-width:880px;margin:0 auto}
+  .kicker{display:inline-block;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--hubspot);font-weight:700;margin-bottom:14px;padding:6px 14px;background:rgba(255,122,89,.1);border:1px solid var(--hubspot);border-radius:999px}
+  .hero h1{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(38px,6vw,68px);line-height:1.05;font-weight:500;margin-bottom:16px}
+  .hero h1 em{font-style:italic;color:var(--gold2)}
+  .hero p{font-size:18px;color:var(--mute);max-width:680px;margin:0 auto 22px;line-height:1.6}
+
+  .wrap{max-width:900px;margin:0 auto;padding:48px 24px 80px}
+  h2{font-family:"Cormorant Garamond",serif;font-size:clamp(28px,4vw,42px);line-height:1.15;font-weight:500;margin:48px 0 18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  h2:first-child{margin-top:0}
+  h3{font-family:"Cormorant Garamond",serif;font-size:24px;font-weight:500;color:var(--text);margin:30px 0 12px}
+  p{margin-bottom:14px;color:var(--mute);font-size:16px;line-height:1.7}
+  ul,ol{margin:14px 0 18px 22px;color:var(--mute)}
+  li{margin-bottom:8px;line-height:1.65}
+  strong{color:var(--text)}
+
+  .step{background:#fefbf2;border:1px solid var(--line);border-left:4px solid var(--gold);padding:24px 28px;border-radius:6px;margin-bottom:18px;position:relative}
+  .step .num{position:absolute;top:-14px;left:24px;background:linear-gradient(135deg,#d4af37,#c9a961);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:600;box-shadow:0 4px 10px rgba(138,104,21,.2)}
+  .step h3{margin-top:8px;color:var(--text)}
+  .step p{color:var(--mute);font-size:15.5px}
+  .step ol{counter-reset:none}
+  .step ol li{font-size:15px}
+
+  .callout{background:linear-gradient(135deg,#fff8e8 0%,#fefbf2 100%);border:1px solid var(--gold);padding:22px 26px;border-radius:6px;margin:18px 0;display:flex;gap:16px;align-items:flex-start}
+  .callout .ico{flex-shrink:0;font-size:24px}
+  .callout strong{display:block;color:var(--text);margin-bottom:4px;font-size:15px;letter-spacing:.04em}
+  .callout p{margin:0;font-size:14.5px;color:var(--mute)}
+
+  .pipeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:20px 0}
+  .stage{background:#fefbf2;border:1px solid var(--line);padding:14px 12px;border-radius:6px;text-align:center;position:relative}
+  .stage .step-name{font-family:"Cormorant Garamond",serif;font-size:18px;color:var(--text);font-weight:500;margin-bottom:4px}
+  .stage .step-desc{font-size:12px;color:var(--mute);line-height:1.4}
+  .stage:nth-child(1){border-color:#1a7a4e}
+  .stage:nth-child(2){border-color:#22a468}
+  .stage:nth-child(3){border-color:var(--gold)}
+  .stage:nth-child(4){border-color:var(--gold2)}
+  .stage:nth-child(5){border-color:var(--green)}
+
+  .compare{width:100%;border-collapse:collapse;margin:18px 0;background:#fefbf2;border:1px solid var(--line);border-radius:6px;overflow:hidden;font-size:14.5px}
+  .compare th{background:#fff8e8;text-align:left;padding:14px 18px;font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:500;color:var(--text);border-bottom:1px solid var(--line)}
+  .compare td{padding:13px 18px;border-bottom:1px solid var(--line);color:var(--mute);vertical-align:top}
+  .compare tr:last-child td{border-bottom:none}
+  .compare td:first-child{color:var(--text);font-weight:500;width:40%}
+  .compare .yes{color:var(--green);font-weight:600}
+  .compare .no{color:var(--red);font-weight:500}
+
+  .tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11.5px;letter-spacing:.06em;font-weight:600;margin-right:6px}
+  .tag.free{background:rgba(26,122,78,.12);color:var(--green)}
+  .tag.paid{background:rgba(184,143,26,.15);color:var(--amber)}
+
+  /* Sticky table of contents on desktop */
+  .toc{background:#fefbf2;border:1px solid var(--line);padding:22px;border-radius:6px;margin-bottom:36px}
+  .toc h4{font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:500;color:var(--text);margin-bottom:10px}
+  .toc ol{margin-left:18px}
+  .toc a{font-size:14.5px;color:var(--gold2);border-bottom:none}
+  .toc a:hover{color:var(--text);text-decoration:underline}
+
+  footer{background:#2d2418;color:#d4c08a;padding:50px 24px;margin-top:60px;text-align:center}
+  footer h3{font-family:"Cormorant Garamond",serif;font-size:28px;color:#fefbf2;font-weight:500;margin-bottom:12px}
+  footer p{font-size:14px;color:#a89274;max-width:560px;margin:0 auto 8px}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="kicker">HubSpot Free · CRM Setup Guide</span>
+    <h1 class="serif">From quote form to <em>booked event.</em></h1>
+    <p>Right now your quote form captures leads in Netlify, but no email is going out and nothing is following up. Here's how to wire it into HubSpot Free so every inquiry becomes a tracked lead, an email notification, and a marketable contact — all for $0.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+<div class="toc">
+  <h4 class="serif">In this guide</h4>
+  <ol>
+    <li><a href="#why">Why HubSpot Free</a></li>
+    <li><a href="#account">1. Create your HubSpot account</a></li>
+    <li><a href="#pipeline">2. Set up your sales pipeline</a></li>
+    <li><a href="#props">3. Add custom properties for party bus leads</a></li>
+    <li><a href="#wire">4. Wire Netlify Forms → HubSpot</a></li>
+    <li><a href="#notify">5. Set up email notifications</a></li>
+    <li><a href="#auto">6. Build the welcome automation</a></li>
+    <li><a href="#mkt">7. Set up email marketing lists</a></li>
+    <li><a href="#dash">8. Build a dashboard to track leads</a></li>
+    <li><a href="#email-host">9. Get info@partybusrus.com working</a></li>
+    <li><a href="#testing">10. Test the full flow end-to-end</a></li>
+  </ol>
+</div>
+
+<h2 id="why" class="serif">Why HubSpot Free</h2>
+<p>For a service business like Party Bus R Us, you need three things: <strong>capture every lead, follow up automatically, and never lose anyone</strong>. HubSpot Free does all three, doesn't expire, and won't trap you when you grow.</p>
+
+<table class="compare">
+  <tr><th>Feature</th><th>HubSpot Free</th><th>GoHighLevel</th><th>Mailchimp Free</th></tr>
+  <tr><td>Cost</td><td class="yes">$0 forever</td><td>$97/mo</td><td class="yes">$0</td></tr>
+  <tr><td>Contact limit</td><td class="yes">1 million</td><td>Unlimited</td><td class="no">500</td></tr>
+  <tr><td>Sales pipeline (Kanban)</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td></tr>
+  <tr><td>Email marketing</td><td class="yes">2,000/mo</td><td class="yes">Unlimited</td><td class="yes">500/mo</td></tr>
+  <tr><td>SMS marketing</td><td class="no">Add-on</td><td class="yes">Built in</td><td class="no">No</td></tr>
+  <tr><td>Automations</td><td>Limited</td><td class="yes">Full</td><td>Limited</td></tr>
+  <tr><td>Best for</td><td>Starting from $0</td><td>Scaling up</td><td>Email-only</td></tr>
+</table>
+
+<div class="callout">
+  <div class="ico">💡</div>
+  <div><strong>The plan:</strong><p>Start with HubSpot Free. Once you're booking 15+ events/month, the upgrade path is either HubSpot Sales Starter ($20/mo for more automation) or GoHighLevel ($97/mo for built-in SMS). For now, free is enough.</p></div>
+</div>
+
+<h2 id="account" class="serif">Step 1 — Create your HubSpot account</h2>
+<div class="step">
+  <span class="num">1</span>
+  <h3>Sign up</h3>
+  <ol>
+    <li>Go to <a href="https://www.hubspot.com/products/get-started-free" target="_blank">hubspot.com/products/get-started-free</a></li>
+    <li>Click "Get HubSpot free" — top right</li>
+    <li>Use <strong>info@partybusrus.com</strong> if it's set up, otherwise your personal email — you can change it later</li>
+    <li>Company name: <strong>Party Bus R Us</strong></li>
+    <li>Industry: Transportation</li>
+    <li>Number of employees: 1-5</li>
+    <li>Skip the "buy stuff" upsell — pick free tier when prompted</li>
+  </ol>
+  <p style="margin-top:14px"><strong>That's it.</strong> Account live in 60 seconds. Confirm the email when it arrives.</p>
+</div>
+
+<h2 id="pipeline" class="serif">Step 2 — Set up your sales pipeline</h2>
+<p>This is the most important step. A pipeline is the visual Kanban board where every lead lives until it's booked or lost.</p>
+
+<div class="pipeline">
+  <div class="stage"><div class="step-name">New Lead</div><div class="step-desc">Just submitted quote form</div></div>
+  <div class="stage"><div class="step-name">Quoted</div><div class="step-desc">We sent them a price</div></div>
+  <div class="stage"><div class="step-name">Negotiating</div><div class="step-desc">Back-and-forth in progress</div></div>
+  <div class="stage"><div class="step-name">Booked</div><div class="step-desc">Deposit received</div></div>
+  <div class="stage"><div class="step-name">Completed</div><div class="step-desc">Event ran successfully</div></div>
+</div>
+
+<div class="step">
+  <span class="num">2</span>
+  <h3>Build the pipeline in HubSpot</h3>
+  <ol>
+    <li>In HubSpot, top-right gear icon → <strong>Settings</strong></li>
+    <li>Left menu: <strong>Objects → Deals</strong></li>
+    <li>Click <strong>Pipelines</strong> tab</li>
+    <li>Default pipeline exists — rename it <strong>"Party Bus Bookings"</strong></li>
+    <li>Replace default stages with:
+      <ul>
+        <li><strong>New Lead</strong> (probability 10%)</li>
+        <li><strong>Quoted</strong> (probability 30%)</li>
+        <li><strong>Negotiating</strong> (probability 60%)</li>
+        <li><strong>Booked — Deposit Paid</strong> (probability 100%, won)</li>
+        <li><strong>Lost — Not Booked</strong> (probability 0%, lost)</li>
+        <li><strong>Completed</strong> (probability 100%, won)</li>
+      </ul>
+    </li>
+    <li>Save</li>
+  </ol>
+</div>
+
+<h2 id="props" class="serif">Step 3 — Add custom properties for party bus leads</h2>
+<p>Default HubSpot has Name, Email, Phone. You need event date, headcount, event type, etc. so the deal card shows everything at a glance.</p>
+
+<div class="step">
+  <span class="num">3</span>
+  <h3>Create custom contact properties</h3>
+  <p>Settings → <strong>Properties</strong> → Contact properties → <strong>Create property</strong>. Make all of these:</p>
+  <table class="compare">
+    <tr><th>Property name</th><th>Field type</th><th>Why it matters</th></tr>
+    <tr><td>Event Date</td><td>Date picker</td><td>So you can sort upcoming events</td></tr>
+    <tr><td>Pickup Time</td><td>Single-line text</td><td>Easy to read on a list view</td></tr>
+    <tr><td>Hours Needed</td><td>Dropdown</td><td>4 / 5 / 6 / 7 / 8 / 9+</td></tr>
+    <tr><td>Headcount</td><td>Dropdown</td><td>Match your form options</td></tr>
+    <tr><td>Event Type</td><td>Dropdown</td><td>Wedding, Bachelorette, Prom, etc.</td></tr>
+    <tr><td>Pickup Location</td><td>Single-line text</td><td>So you know which area</td></tr>
+    <tr><td>Destinations</td><td>Multi-line text</td><td>Their planned stops</td></tr>
+    <tr><td>Contact Preference</td><td>Dropdown</td><td>Text / Call / Email</td></tr>
+    <tr><td>Source Page</td><td>Single-line text</td><td>Which page they filled the form on</td></tr>
+    <tr><td>UTM Source/Medium/Campaign</td><td>3 separate text fields</td><td>Track which ad/post drove the lead</td></tr>
+    <tr><td>Device Type</td><td>Dropdown</td><td>Mobile / Tablet / Desktop</td></tr>
+    <tr><td>Marketing Opt-In</td><td>Single checkbox</td><td>GDPR/CAN-SPAM compliance</td></tr>
+  </table>
+</div>
+
+<h2 id="wire" class="serif">Step 4 — Wire Netlify Forms → HubSpot</h2>
+<p>Right now your quote form posts to Netlify. We need every submission to ALSO create a contact in HubSpot. There are two ways — pick one.</p>
+
+<h3>Option A: Zapier (easiest — recommended for non-developers)</h3>
+<div class="step">
+  <span class="num">4A</span>
+  <h3>Zapier integration</h3>
+  <ol>
+    <li>Create a free Zapier account at <a href="https://zapier.com/sign-up" target="_blank">zapier.com</a> (100 tasks/month free)</li>
+    <li>Click <strong>Create Zap</strong></li>
+    <li><strong>Trigger:</strong> "Netlify" → "New Form Submission"
+      <ul><li>Connect your Netlify account (it'll walk you through OAuth)</li>
+          <li>Pick the <code>quote-form</code> form</li></ul></li>
+    <li><strong>Action:</strong> "HubSpot" → "Create or Update Contact"
+      <ul><li>Connect HubSpot account</li>
+          <li>Map fields: Email from Netlify → Email in HubSpot, Phone → Phone, Name → First/Last Name (Zapier can split), event_date → Event Date custom property, etc.</li></ul></li>
+    <li>Add a SECOND action: "HubSpot" → "Create Deal"
+      <ul><li>Pipeline: Party Bus Bookings</li>
+          <li>Stage: New Lead</li>
+          <li>Associate with contact created above</li>
+          <li>Deal name: <code>{{event_type}} — {{name}} — {{event_date}}</code></li></ul></li>
+    <li>Turn Zap on. Test by submitting a form.</li>
+  </ol>
+</div>
+
+<h3>Option B: Direct webhook (free, slightly more technical)</h3>
+<div class="step">
+  <span class="num">4B</span>
+  <h3>Netlify Functions → HubSpot API</h3>
+  <p>If Zapier's 100 tasks/mo isn't enough (you'd need 100+ leads/month — good problem to have!), I can build you a Netlify Function that POSTs directly to HubSpot's Forms API. Free forever, no task limits. Let me know if you want this and I'll write the function file.</p>
+  <p>Roughly: a <code>.js</code> file in <code>/netlify/functions/</code> that listens for the Netlify form submission webhook, transforms the data, and POSTs to HubSpot's <code>/forms/v2/submissions</code> endpoint with your portal ID + form GUID.</p>
+</div>
+
+<h2 id="notify" class="serif">Step 5 — Set up email notifications</h2>
+<p>You want a notification email the second anyone submits a quote. Two places to set this up:</p>
+
+<div class="step">
+  <span class="num">5</span>
+  <h3>Netlify side — instant notification</h3>
+  <ol>
+    <li>Netlify dashboard → your site → <strong>Forms</strong></li>
+    <li>Click the <code>quote-form</code> form</li>
+    <li>Settings → <strong>Form notifications</strong> → Add notification → Email</li>
+    <li>Recipient: <strong>info@partybusrus.com</strong> (or your personal email until you set up the business email)</li>
+    <li>Subject: <code>🚍 New Quote Request from {{name}} — {{event_type}}</code></li>
+    <li>Save</li>
+  </ol>
+  <h3 style="margin-top:18px">HubSpot side — followup reminder</h3>
+  <ol>
+    <li>In HubSpot, top-right gear → <strong>Settings → Notifications</strong></li>
+    <li>Enable: "New contact assigned to me", "Deal created", "Deal stage changed"</li>
+    <li>Email + browser push both on</li>
+  </ol>
+</div>
+
+<h2 id="auto" class="serif">Step 6 — Build the welcome automation</h2>
+<p>The moment a lead submits, three things should happen automatically: <strong>(1)</strong> they get a confirmation email, <strong>(2)</strong> they get a confirmation text (manual or via paid SMS), <strong>(3)</strong> you get an internal task to follow up within 60 minutes.</p>
+
+<div class="step">
+  <span class="num">6</span>
+  <h3>HubSpot Workflows (free tier has limited workflows — use the most important one)</h3>
+  <p>Free HubSpot gives you a few simple workflows. Build this one:</p>
+  <ol>
+    <li>HubSpot → <strong>Automation → Workflows</strong> → Create workflow → Contact-based</li>
+    <li>Trigger: "Contact has been created" + "Lifecycle stage = Lead"</li>
+    <li>Action 1: <strong>Send email</strong> — use the template below</li>
+    <li>Action 2: <strong>Create task</strong> — Title: "Reply to {{firstname}} within 60 min", assigned to you, due in 1 hour</li>
+    <li>Action 3 (optional): Delay 24 hours → If deal still in "New Lead" stage → Send follow-up email</li>
+  </ol>
+
+  <h3>Auto-reply email template</h3>
+  <pre>Subject: Got your request, {{firstname}} — quote coming within 60 minutes
+
+Hey {{firstname}},
+
+Thanks for reaching out to Party Bus R Us! We received your quote
+request for a {{event_type}} on {{event_date}} for {{headcount}}.
+
+I'm working on your custom quote right now. You'll get a reply
+within 60 minutes during business hours (8am–11pm).
+
+In the meantime:
+  • Reply to this email if you have questions
+  • Call or text us anytime: (703) 991-3500
+  • See our fleet: https://partybusrus.com/fleet.html
+
+— Frederick
+Party Bus R Us
+6601 Stonecrest Lane, Fairfax VA
+partybusrus.com</pre>
+</div>
+
+<h2 id="mkt" class="serif">Step 7 — Set up email marketing lists</h2>
+<p>Every booked customer becomes a future repeat customer. Every "didn't book" lead becomes someone you can re-engage for prom, holidays, NYE.</p>
+
+<div class="step">
+  <span class="num">7</span>
+  <h3>Build three smart lists</h3>
+  <ol>
+    <li><strong>"All Leads"</strong> — everyone who ever filled the form</li>
+    <li><strong>"Booked Customers"</strong> — Deal stage = Completed</li>
+    <li><strong>"Didn't Book — Re-engage"</strong> — Deal stage = Lost, marketing_optin = true</li>
+  </ol>
+  <p>HubSpot → <strong>Contacts → Lists → Create list → Active list</strong>. Set filters by lifecycle stage, deal stage, and properties.</p>
+
+  <h3>Recurring email campaigns to set up:</h3>
+  <ul>
+    <li><strong>Monthly newsletter</strong> — fleet updates, blog posts, customer spotlights</li>
+    <li><strong>Prom season blast</strong> (March/April) — to "Didn't Book" list with prom-specific deal</li>
+    <li><strong>NYE early-bird</strong> (October) — book your NYE party bus now</li>
+    <li><strong>Wedding season</strong> (February) — booking calendar opening for May-October weddings</li>
+    <li><strong>Birthday auto-trigger</strong> — capture birthdays in the form, auto-send "Your birthday's coming up!" email 4 weeks before</li>
+  </ul>
+</div>
+
+<h2 id="dash" class="serif">Step 8 — Build a dashboard to track leads</h2>
+<div class="step">
+  <span class="num">8</span>
+  <h3>HubSpot Dashboard</h3>
+  <p>HubSpot → <strong>Reports → Dashboards → Create dashboard</strong>. Add these tiles:</p>
+  <ul>
+    <li><strong>New leads this week</strong> — count of contacts created last 7 days</li>
+    <li><strong>Conversion rate</strong> — Booked / Total Leads</li>
+    <li><strong>Lead source breakdown</strong> — by utm_source property (Google, Instagram, Direct, Referral)</li>
+    <li><strong>Hot leads pipeline</strong> — list view of deals in "Quoted" or "Negotiating" stages</li>
+    <li><strong>Upcoming events</strong> — sort contacts by event_date asc, show next 30 days</li>
+    <li><strong>Revenue this month</strong> — sum of deal value for "Booked" deals this month</li>
+  </ul>
+</div>
+
+<h2 id="email-host" class="serif">Step 9 — Get info@partybusrus.com working</h2>
+<p>HubSpot needs a verified sending domain so your emails don't go to spam. Pick one of:</p>
+
+<div class="callout">
+  <div class="ico">⭐</div>
+  <div><strong>Recommended: Google Workspace ($6/mo)</strong>
+    <p>Best deliverability, Gmail interface, integrates with everything. <a href="https://workspace.google.com/business/signup/welcome" target="_blank">Sign up here</a>. Use code if available for first-month discount.</p></div>
+</div>
+
+<div class="step">
+  <span class="num">9</span>
+  <h3>Once you pick an email host:</h3>
+  <ol>
+    <li>Sign up, verify domain ownership (they'll give you DNS records to add at GoDaddy)</li>
+    <li>Add MX records, SPF, DKIM, DMARC at GoDaddy DNS settings</li>
+    <li>Create <code>info@partybusrus.com</code></li>
+    <li>In HubSpot: Settings → <strong>Marketing → Email → Sending domains</strong> → Connect domain</li>
+    <li>HubSpot will give you 2 more DNS records (DKIM) — add to GoDaddy</li>
+    <li>Wait 1-24 hours for propagation, then verify</li>
+  </ol>
+  <p>I can write you the exact DNS record values once you pick the host.</p>
+</div>
+
+<h2 id="testing" class="serif">Step 10 — Test the full flow end-to-end</h2>
+<div class="step">
+  <span class="num">10</span>
+  <h3>Walkthrough</h3>
+  <ol>
+    <li>Open partybusrus.com on your phone</li>
+    <li>Fill out the quote form completely</li>
+    <li>Submit</li>
+    <li>Within 60 seconds you should see:
+      <ul>
+        <li>Email in your inbox (from Netlify notification)</li>
+        <li>New contact in HubSpot (via Zapier)</li>
+        <li>New deal in your pipeline (via Zapier)</li>
+        <li>Auto-reply email arrives at the address you submitted</li>
+        <li>Task created in HubSpot to follow up</li>
+      </ul>
+    </li>
+    <li>Move the deal through the pipeline manually to make sure each stage feels right</li>
+    <li>Submit 2 more test leads with different event types to confirm property mapping works for all of them</li>
+  </ol>
+</div>
+
+<div class="callout">
+  <div class="ico">🎯</div>
+  <div><strong>What good looks like after 30 days</strong>
+    <p>Every lead captured. Every lead with a follow-up task. Every lost lead in a re-engagement list. Booked customers tagged for repeat outreach. A real conversion rate you can see, optimize, and grow.</p></div>
+</div>
+
+<h2 class="serif">What I can do for you</h2>
+<p>I can't actually create the HubSpot account for you — that requires you logging in. But once you create the account, I can:</p>
+<ul>
+  <li>Walk you through setup in real time</li>
+  <li>Write the Netlify Function code if you want the direct webhook option instead of Zapier</li>
+  <li>Build the exact email templates and load them into HubSpot</li>
+  <li>Set up the dashboards once you give me browser access</li>
+  <li>Help diagnose any DNS / verification issues</li>
+</ul>
+
+<p>Want to start with Step 1 right now? Reply <strong>"create the account"</strong> and I'll walk you through it live.</p>
+
+</div>
+
+<footer>
+  <h3 class="serif">Lead → Quoted → Booked → Repeat.</h3>
+  <p>HubSpot Free CRM Setup Guide · Party Bus R Us · May 26, 2026</p>
+  <p>(703) 991-3500 · 6601 Stonecrest Lane, Fairfax VA</p>
+</footer>
+
+</body>
+</html>

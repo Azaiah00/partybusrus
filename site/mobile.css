@@ -1,0 +1,798 @@
+﻿/* =============================================================
+   MOBILE.CSS — Party Bus R Us
+   Last stylesheet loaded. Overrides everything for mobile/tablet.
+   Built for: iPhone SE → iPhone Pro Max, Galaxy Fold → Tab,
+              old Androids, every viewport from 320px up.
+   ============================================================= */
+
+/* ---- 1. UNIVERSAL FOUNDATION (applies at every size) ---- */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html, body {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+}
+*, *::before, *::after { box-sizing: border-box !important; }
+img, video, iframe, picture, svg.responsive {
+  max-width: 100% !important;
+  height: auto !important;
+}
+table, .comp-table {
+  max-width: 100% !important;
+}
+/* Keep the desktop nav logo constrained despite the universal image reset above. */
+nav.main .logo {
+  width: auto !important;
+  max-width: 220px !important;
+  min-width: 180px !important;
+  overflow: visible !important;
+}
+nav.main .logo .mark {
+  width: auto !important;
+  height: 62px !important;
+  max-width: 200px !important;
+  flex: 0 0 auto !important;
+}
+nav.main .logo .mark img {
+  width: auto !important;
+  height: 62px !important;
+  max-width: 200px !important;
+  max-height: 62px !important;
+  object-fit: contain !important;
+}
+
+/* Tap highlight branded gold, not default blue */
+* { -webkit-tap-highlight-color: rgba(201, 169, 97, 0.25); }
+
+/* Form inputs: 16px+ font kills iOS auto-zoom. ALWAYS. */
+input, select, textarea, button {
+  font-size: 16px !important;
+  font-family: inherit;
+}
+input[type="checkbox"], input[type="radio"] {
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+}
+/* Force focus visibility */
+:focus-visible {
+  outline: 2px solid #d4af37 !important;
+  outline-offset: 2px !important;
+  border-radius: 2px;
+}
+
+/* ---- 2. TOUCH DEVICE MINIMUM (any pointer:coarse / hover:none) ---- */
+@media (hover: none) and (pointer: coarse) {
+  /* Every interactive element gets 44x44 minimum tap target */
+  a, button, .btn, [role="button"], input[type="submit"], input[type="button"],
+  .nav-cta a, .nav-cta button, .float-cta a, .menu-btn, .mobile-nav a,
+  .qf-chip, .qf-next, .qf-back, .ab-cta, .ab-close, .la-close,
+  .pwa-yes, .pwa-no, .share-btn, .social-icons a, .lang-toggle a {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  .nav-links a, footer a {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    display: inline-block !important;
+  }
+  /* Social icons need proper hit zone even when icon is small */
+  .social-icons a {
+    padding: 11px !important;
+    width: 44px !important;
+    height: 44px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .social-icons svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  /* Topbar close/icon buttons */
+  .ab-close, .la-close {
+    width: 44px !important;
+    height: 44px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px !important;
+    line-height: 1 !important;
+  }
+}
+
+/* ---- 3. TABLET RANGE (981px and below) ---- */
+@media (max-width: 980px) {
+  /* Nav: kill desktop nav links, force hamburger */
+  .nav-links { display: none !important; }
+  .menu-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    font-size: 28px !important;
+    line-height: 1 !important;
+    padding: 8px !important;
+    background: transparent !important;
+    border: none !important;
+    color: #fefbf2 !important;
+    cursor: pointer;
+  }
+  /* Hide TEXT and ghost buttons in nav-cta to save room */
+  .nav-cta .btn.ghost,
+  .nav-cta a[href^="sms:"] { display: none !important; }
+  /* Tighter container */
+  .container { padding-left: 20px !important; padding-right: 20px !important; }
+  /* Stack nav-cta + logo */
+  nav.main .container {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+  /* Logo smaller on tablet */
+  nav.main .logo { min-width: 0 !important; max-width: 150px !important; }
+  nav.main .logo .mark { height: 44px !important; max-width: 140px !important; }
+  nav.main .logo .mark img, nav.main .logo img { height: 44px !important; max-height: 44px !important; width: auto !important; max-width: 140px !important; }
+}
+
+/* ---- 4. PHONE RANGE (680px and below) ---- */
+@media (max-width: 680px) {
+  /* Body needs bottom padding so float CTA bar doesn't cover content */
+  body {
+    padding-bottom: 80px !important;
+    font-size: 16px !important;
+    line-height: 1.55 !important;
+  }
+
+  /* TOPBAR — keep compact, single line if possible */
+  .topbar {
+    font-size: 11px !important;
+    padding: 8px 0 !important;
+    text-align: center !important;
+  }
+  .topbar .container {
+    flex-direction: column !important;
+    gap: 4px !important;
+    padding: 0 14px !important;
+  }
+  .topbar .social-icons {
+    margin-left: 0 !important;
+    margin-top: 4px !important;
+    gap: 14px !important;
+  }
+  /* Hide the "Operating 24/7..." duplicate text on mobile */
+  .topbar > .container > span:first-child { display: none !important; }
+
+  /* AVAILABILITY BANNER — full width, compact */
+  .avail-banner {
+    font-size: 12px !important;
+    padding: 8px 0 !important;
+  }
+  .avail-banner .container {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 0 14px !important;
+  }
+  .avail-banner .ab-text { flex: 1; min-width: 0; line-height: 1.3; text-align: left; }
+  .avail-banner .ab-cta {
+    padding: 6px 12px !important;
+    font-size: 11.5px !important;
+    flex-shrink: 0;
+  }
+  .avail-banner .ab-close { padding: 0 8px !important; }
+
+  /* MAIN NAV */
+  nav.main .container {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    gap: 12px !important;
+  }
+  /* Mobile drawer — full-screen overlay */
+  .mobile-nav {
+    padding: 24px !important;
+  }
+  .mobile-nav .close {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 32px !important;
+    line-height: 1 !important;
+    top: 16px !important;
+    right: 16px !important;
+  }
+  .mobile-nav .links { margin-top: 70px !important; gap: 4px !important; }
+  .mobile-nav a {
+    font-size: 22px !important;
+    padding: 16px 0 !important;
+    min-height: 56px !important;
+    display: flex !important;
+    align-items: center;
+  }
+
+  /* HERO — bulletproof */
+  .hero { padding: 60px 0 70px !important; min-height: auto !important; }
+  .hero, .hero-inner, .hero .container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .hero h1, h1.hero-title {
+    font-size: clamp(32px, 9vw, 48px) !important;
+    line-height: 1.05 !important;
+    margin-bottom: 16px !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+  .hero h1 em, .hero h1 br + * { display: inline !important; }
+  .hero p, .hero .sub, .hero-sub {
+    font-size: 15.5px !important;
+    line-height: 1.55 !important;
+    margin-bottom: 22px !important;
+  }
+  .hero .kicker, .kicker {
+    font-size: 11px !important;
+    padding: 6px 12px !important;
+    letter-spacing: .14em !important;
+  }
+  /* Hero buttons stack full-width */
+  .hero-actions, .hero-cta, .hero .actions {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+  .hero-actions .btn, .hero .btn,
+  .hero-actions a, .hero-actions button {
+    width: 100% !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    padding: 16px 20px !important;
+    min-height: 50px !important;
+  }
+  .hero .scroll, .hero .scroll-indicator { display: none !important; }
+
+  /* SECTIONS — kill all inline padding, enforce tight mobile spacing */
+  section, section.s, .s, .s-light, .section-feature-why, .section-feature-services, .showcase, .showcase-section,
+  section[style], section.s[style] {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  /* Override the inline padding-top:90px on the showcase section */
+  section.s[style*="padding-top:90px"],
+  section.s[style*="padding-top: 90px"] {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+  section .container, .s .container { padding-left: 18px !important; padding-right: 18px !important; }
+  .section-head { margin-bottom: 28px !important; }
+  .section-feature-services .section-head[style] {
+    padding-top: 48px !important;
+    padding-bottom: 28px !important;
+  }
+  .section-feature-services .container[style] {
+    padding-bottom: 48px !important;
+  }
+  .section-head h2, h2 {
+    font-size: clamp(26px, 7vw, 38px) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 10px !important;
+  }
+  .section-head p, h2 + p { font-size: 15px !important; line-height: 1.55 !important; }
+  h3 { font-size: clamp(22px, 5.5vw, 28px) !important; line-height: 1.15 !important; }
+  h4 { font-size: 18px !important; line-height: 1.2 !important; }
+  p { font-size: 15.5px !important; line-height: 1.6 !important; }
+
+  /* GRIDS — ALL collapse to 1 column on phones */
+  .fleet-grid, .services-grid, .blog-grid, .area-grid, .testi-grid,
+  .led-grid, .why-grid, .steps, .cred-row, .stats-big-grid, .stat-row,
+  .footer-grid, .cities-grid, .out-grid, .compare-grid,
+  .feature-grid, .wow-grid, .gallery-grid, .pricing-grid, .tier-grid,
+  .blog-list, .detail-grid, .spec-grid, .specs, .gw-grid,
+  .form-grid, .why-feature, .step-row, .quote-process,
+  .footer .container, footer .container {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  /* 2-col exceptions for compact tiles */
+  .stat-row, .stats-big-grid, .stats, .stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .stats-big {
+    display: block !important;
+  }
+  .stats-big .container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .stats-big-grid {
+    gap: 0 !important;
+  }
+  .feature-glow,
+  .feature-glow-2 {
+    display: none !important;
+  }
+  /* Flex containers that may not be grids */
+  .nav-cta, .quote-actions, .form-actions, .qf-row {
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+  }
+  .qf-row { flex-direction: column !important; }
+  .qf-row .btn { width: 100% !important; }
+
+  /* CARDS */
+  .bus-card, .service, .blog-card, .testi, .area-col, .step, .wow, .card,
+  .quote-side, .panel, .feature, .spec-card, .why-feature .item, .gw-card,
+  .live-availability, .avail-widget, .gw-widget, .comp, .tier {
+    padding: 22px !important;
+    margin: 0 !important;
+  }
+  .bus-card img, .blog-card img, .testi img, .gallery-item img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: auto !important;
+    max-height: 240px !important;
+    object-fit: cover !important;
+  }
+  .bus-card .img {
+    aspect-ratio: 16 / 10 !important;
+    min-height: 0 !important;
+  }
+  .home-fleet-preview .fleet-grid {
+    gap: 16px !important;
+  }
+  .home-fleet-preview .bus-card .body {
+    padding: 20px !important;
+  }
+  .home-fleet-preview .bus-card .body p {
+    margin-bottom: 14px !important;
+  }
+  .home-fleet-preview .bus-card .body .footer {
+    padding-top: 14px !important;
+  }
+
+  /* TABLES - horizontal scroll wrapper for ordinary data tables */
+  .comp-table-wrap, .table-wrap, .table-scroll {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    max-width: 100% !important;
+  }
+  table:not(.comp-table) {
+    font-size: 13px !important;
+    min-width: 480px !important;
+  }
+  table:not(.comp-table) th, table:not(.comp-table) td {
+    padding: 8px 10px !important;
+  }
+
+  /* QUOTE FORM */
+  .quote, .quote-grid, .quote-wrap, .quote-section {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .quote-form, .quote-form-stepped {
+    padding: 20px !important;
+  }
+  .quote-form h3, .quote-form-stepped h3 {
+    font-size: 24px !important;
+  }
+  .field, .qf-step .field {
+    margin-bottom: 14px !important;
+  }
+  .field input, .field select, .field textarea,
+  .quote-form input, .quote-form select, .quote-form textarea,
+  .quote-form-stepped input, .quote-form-stepped select, .quote-form-stepped textarea {
+    width: 100% !important;
+    padding: 14px 14px !important;
+    font-size: 16px !important;
+    min-height: 50px !important;
+    border-radius: 4px !important;
+  }
+  .quote-form textarea { min-height: 100px !important; resize: vertical; }
+  .qf-chips { gap: 6px !important; }
+  .qf-chip {
+    font-size: 13px !important;
+    padding: 10px 12px !important;
+    min-height: 40px !important;
+    flex-shrink: 0;
+  }
+  .qf-contact-pref {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .qf-radio { min-width: 0 !important; }
+  .btn[type="submit"], button[type="submit"] {
+    width: 100% !important;
+    min-height: 54px !important;
+  }
+
+  /* FLOAT CTA — sticky bottom bar with safe area */
+  .float-cta {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 6px !important;
+    padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px)) 8px !important;
+    background: rgba(20, 16, 28, 0.97) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-top: 1px solid rgba(212, 175, 55, 0.3) !important;
+    z-index: 200 !important;
+  }
+  .float-cta a {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    min-height: 50px !important;
+    padding: 12px 4px !important;
+    font-size: 12px !important;
+    border-radius: 6px !important;
+    border: none !important;
+    text-align: center !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+  }
+  .float-cta .fc-icon { font-size: 18px !important; }
+  .float-cta .fc-label { font-size: 11px !important; display: inline !important; margin-left: 4px !important; }
+  /* Hide WhatsApp label on phones to fit 4 buttons cleanly */
+  .float-cta .fc-wa .fc-label { display: none !important; }
+  .float-cta .fc-wa { flex: 0.7 !important; }
+
+  /* LIVE ACTIVITY widget — keep out of way, top-aligned */
+  .live-activity {
+    bottom: auto !important;
+    top: 110px !important;
+    left: 10px !important;
+    right: 10px !important;
+    max-width: none !important;
+    font-size: 12.5px !important;
+    padding: 12px 36px 12px 14px !important;
+  }
+
+  /* PWA INSTALL BAR */
+  #pwaInstallBar {
+    bottom: 88px !important;
+    left: 12px !important;
+    right: 12px !important;
+    padding: 14px 16px !important;
+    font-size: 13px !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+  }
+  #pwaInstallBar > span { font-size: 13px !important; }
+
+  /* FOOTER */
+  footer { padding: 40px 18px 30px !important; }
+  .footer-grid, footer > .container > * {
+    grid-template-columns: 1fr !important;
+    gap: 26px !important;
+  }
+  footer h5 { font-size: 13px !important; }
+  footer p, footer li, footer a { font-size: 14.5px !important; }
+
+  /* IMAGES IN HERO + content */
+  .hero-bg, .hero-image, .hero-bus {
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  /* MARQUEE / trust strip - keep readable */
+  .marquee { padding: 18px 0 !important; font-size: 12.5px !important; }
+
+  /* LED color cycle - hide scroll arrows if any */
+  .led-tile { aspect-ratio: 1 !important; }
+  .led-tile img { object-fit: cover !important; }
+
+  /* PRICING TIERS / TEASER */
+  .pricing-teaser, .pricing-section, .tier-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .tier { padding: 24px !important; }
+
+  /* GOOGLE REVIEWS WIDGET */
+  .gw-widget { padding: 24px 20px !important; }
+  .gw-card { padding: 18px !important; }
+  .gw-card .review-text { font-size: 14px !important; line-height: 1.55 !important; }
+
+  /* AVAILABILITY WIDGET */
+  .avail-widget { padding: 26px 20px !important; }
+  .avail-date-row { flex-wrap: wrap !important; gap: 8px !important; }
+  .avail-date-tab { font-size: 12px !important; padding: 10px 12px !important; min-height: 42px !important; }
+
+  /* GALLERY FILTERS */
+  .gallery-filter {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: center !important;
+  }
+  .gallery-filter button {
+    font-size: 12px !important;
+    padding: 8px 12px !important;
+    min-height: 38px !important;
+  }
+
+  /* SHARE BUTTON */
+  .share-row { flex-direction: column !important; align-items: flex-start !important; }
+  .share-btn { width: 100% !important; justify-content: center !important; }
+
+  /* FAQ */
+  .faq-item { padding: 16px 0 !important; }
+  .faq-q { font-size: 16px !important; padding: 10px 0 !important; }
+  .faq-a { font-size: 14.5px !important; line-height: 1.6 !important; }
+
+  /* BREADCRUMB */
+  .breadcrumb { font-size: 12px !important; flex-wrap: wrap !important; gap: 4px !important; }
+
+  /* GHOST + GOLD buttons general */
+  .btn {
+    font-size: 13px !important;
+    padding: 14px 22px !important;
+    min-height: 48px !important;
+    letter-spacing: 0.08em !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    text-align: center !important;
+    line-height: 1.2 !important;
+  }
+  .btn.lg { padding: 16px 26px !important; min-height: 54px !important; font-size: 14px !important; }
+}
+
+/* ---- 5. TINY PHONES (380px and below — iPhone SE, Galaxy Fold outer) ---- */
+@media (max-width: 380px) {
+  .hero h1, h1.hero-title { font-size: 28px !important; }
+  .section-head h2, h2 { font-size: 24px !important; }
+  h3 { font-size: 20px !important; }
+  .btn { font-size: 12px !important; padding: 12px 16px !important; }
+  .topbar { font-size: 10.5px !important; }
+  .container { padding: 0 14px !important; }
+  section .container, .s .container { padding-left: 14px !important; padding-right: 14px !important; }
+  .float-cta a { padding: 10px 2px !important; font-size: 11px !important; }
+  .float-cta .fc-icon { font-size: 16px !important; }
+  .float-cta .fc-label { font-size: 10px !important; }
+  .mobile-nav a { font-size: 20px !important; }
+  .bus-card, .service, .blog-card { padding: 18px !important; }
+  .quote-form, .quote-form-stepped { padding: 16px !important; }
+  .qf-chip { font-size: 11.5px !important; padding: 8px 10px !important; }
+  .stats-row, .stat-row, .stats-big-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ---- 6. KILL ANIMATIONS THAT TANK MOBILE PERF ---- */
+@media (max-width: 880px) {
+  .hero-bg, .hero-image { transform: none !important; }
+  /* Disable scroll parallax + scrub effects */
+  [data-parallax], .parallax { transform: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- 7. LANDSCAPE PHONE (height very short) ---- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero { padding: 40px 0 !important; }
+  .hero h1 { font-size: 32px !important; }
+  .hero p { font-size: 14px !important; }
+  body { padding-bottom: 70px !important; }
+}
+
+/* ---- 8. FOLDABLE / NARROW (320px and below) ---- */
+@media (max-width: 320px) {
+  .hero h1 { font-size: 24px !important; }
+  .section-head h2 { font-size: 22px !important; }
+  .container { padding: 0 12px !important; }
+  .float-cta a .fc-label { display: none !important; }
+  .float-cta a { padding: 12px 4px !important; }
+}
+
+/* ---- 9. PRINT STYLES (bonus) ---- */
+@media print {
+  .float-cta, .avail-banner, .live-activity, #pwaInstallBar,
+  nav.main, .mobile-nav, footer, .topbar { display: none !important; }
+  body { padding-bottom: 0 !important; }
+}
+
+/* ---- 10. SHOWCASE GRID (Step Inside section with bus photos) ---- */
+/* Force single-column stack with concrete heights — no aspect-ratio (more
+   reliable across iOS Safari versions and beats inline grid-template-rows). */
+@media (max-width: 980px) {
+  section#inside .showcase-grid,
+  .showcase-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: none !important;
+    grid-auto-rows: auto !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .showcase-grid > .showcase-tile,
+  .showcase-grid > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: 240px !important;
+    min-height: 240px !important;
+    max-height: 240px !important;
+    grid-row: auto !important;
+    grid-column: auto !important;
+    background-size: cover !important;
+    background-position: center !important;
+    box-sizing: border-box !important;
+  }
+  .showcase-grid > .showcase-tile-feature {
+    height: 320px !important;
+    min-height: 320px !important;
+    max-height: 320px !important;
+    background-position: center 40% !important;
+  }
+  .showcase-grid > .showcase-tile-wide {
+    height: 260px !important;
+    min-height: 260px !important;
+    max-height: 260px !important;
+  }
+  /* Caption overlay on every tile — shrink text, keep it inside the tile */
+  .showcase-grid > .showcase-tile > div,
+  .showcase-grid > * > div {
+    left: 14px !important;
+    right: 14px !important;
+    bottom: 14px !important;
+    max-width: calc(100% - 28px) !important;
+    font-size: 17px !important;
+    line-height: 1.15 !important;
+  }
+  /* Diamond 24 featured tile — smaller serif so it doesn't overflow */
+  .showcase-tile-feature > div > div:first-child {
+    font-size: 9.5px !important;
+    margin-bottom: 4px !important;
+  }
+  .showcase-tile-feature > div > div:nth-child(2) {
+    font-size: 21px !important;
+    line-height: 1.1 !important;
+  }
+}
+@media (max-width: 380px) {
+  .showcase-grid > .showcase-tile,
+  .showcase-grid > * {
+    height: 210px !important;
+    min-height: 210px !important;
+    max-height: 210px !important;
+  }
+  .showcase-grid > .showcase-tile-feature {
+    height: 280px !important;
+    min-height: 280px !important;
+    max-height: 280px !important;
+  }
+  .showcase-tile-feature > div > div:nth-child(2) {
+    font-size: 19px !important;
+  }
+  .showcase-grid > * > div { font-size: 15px !important; }
+}
+
+/* ---- 11. COMPARISON TABLE — convert to mobile cards ---- */
+@media (max-width: 980px) {
+  table.comp-table,
+  section .comp-table,
+  section#compare table {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    border: none !important;
+    background: none !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    margin: 18px 0 !important;
+    table-layout: auto !important;
+  }
+  .comp-table colgroup,
+  .comp-table col { display: none !important; }
+  .comp-table thead { display: none !important; }
+  .comp-table tbody { display: block !important; width: 100% !important; }
+  .comp-table tr {
+    display: block !important;
+    margin: 0 0 12px 0 !important;
+    padding: 14px 16px !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(212, 175, 55, 0.25) !important;
+    border-radius: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  /* Make the entire feature row look like a card */
+  .comp-table tr td {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 8px 0 !important;
+    border: none !important;
+    background: none !important;
+    text-align: left !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    font-size: 14.5px !important;
+    line-height: 1.5 !important;
+  }
+  /* First cell (feature name) styled as card header */
+  .comp-table tr td:first-child {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #d4af37 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    margin-bottom: 8px !important;
+    padding-bottom: 8px !important;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2) !important;
+  }
+  /* Second cell (our value) - prefix with "Party Bus R Us:" */
+  .comp-table tr td:nth-child(2) {
+    color: #5dd4a1 !important;
+    font-size: 14.5px !important;
+    padding: 6px 0 !important;
+  }
+  .comp-table .yes,
+  .comp-table .no {
+    display: block !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+  .comp-table tr td:nth-child(2)::before {
+    content: "PARTY BUS R US" !important;
+    display: block !important;
+    font-size: 10px !important;
+    color: #c9a961 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.12em !important;
+    margin-bottom: 2px !important;
+    text-transform: uppercase !important;
+  }
+  /* Third cell (their value) */
+  .comp-table tr td:nth-child(3) {
+    color: #a89274 !important;
+    font-size: 14px !important;
+    padding: 6px 0 0 !important;
+  }
+  .comp-table tr td:nth-child(3)::before {
+    content: "TYPICAL OPERATOR" !important;
+    display: block !important;
+    font-size: 10px !important;
+    color: #6f6358 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.12em !important;
+    margin-bottom: 2px !important;
+    text-transform: uppercase !important;
+  }
+  /* Cream-section variant */
+  .s-light .comp-table tr {
+    background: #fefbf2 !important;
+    border-color: #e3d6b8 !important;
+  }
+  .s-light .comp-table tr td:first-child { color: #8a6815 !important; border-bottom-color: #e3d6b8 !important; }
+  .s-light .comp-table tr td:nth-child(2) { color: #1a7a4e !important; }
+  .s-light .comp-table tr td:nth-child(2)::before { color: #8a6815 !important; }
+  .s-light .comp-table tr td:nth-child(3) { color: #5c4a32 !important; }
+  .s-light .comp-table tr td:nth-child(3)::before { color: #8a7755 !important; }
+}
+
+/* =============================================================
+   END MOBILE.CSS
+   ============================================================= */
