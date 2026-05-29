@@ -684,17 +684,13 @@ input[type="checkbox"], input[type="radio"] {
   .hero-scroll { display: none !important; }
   /* Disable scroll parallax + scrub effects */
   [data-parallax], .parallax { transform: none !important; }
-  /* Tell the browser it can skip layout/paint for sections that
-     scroll off-screen. Major paint-perf win on long mobile pages. */
-  section.s, section.stats-big, section.final-cta, section.midcta {
-    content-visibility: auto;
-    contain-intrinsic-size: 0 600px;
-  }
-  /* But NOT the hero (which is on-screen at load) and NOT the
-     first section after hero (might be just below the fold). */
-  .hero, .hero ~ section.stats-big:first-of-type {
-    content-visibility: visible !important;
-  }
+  /* NOTE: content-visibility:auto was previously applied to section.s here
+     for paint perf. Removed because it broke GSAP ScrollTrigger position
+     calculations on .fleet-grid (and likely .services-grid, .testimonial-
+     grid, .area-grid, .led-grid). The placeholder contain-intrinsic-size
+     (600px) didn't match actual mobile layout (~3000px for 7 stacked bus
+     cards), so ScrollTrigger fired at wrong scroll positions, leaving the
+     gsap.from {opacity:0} initial state stuck. Reverted to eager rendering. */
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

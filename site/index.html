@@ -399,7 +399,7 @@ footer{background:#000;color:var(--mute);padding:80px 0 30px;border-top:1px soli
 .mobile-nav a{font-family:"Cormorant Garamond",serif;font-size:30px;color:#fff;padding:12px 0;border-bottom:1px solid var(--line)}
 .mobile-nav a:hover{color:var(--gold2)}
 
-/* === LIGHT/CREAM SECTIONS � welcoming alternates from dark === */
+/* === LIGHT/CREAM SECTIONS — welcoming alternates from dark === */
 .s-light{background:#faf4df !important;color:#1a1424}
 .s-light .section-head h2,.s-light h3,.s-light h4{color:#1a1424}
 .s-light .section-head .kicker{color:#8a6815}
@@ -537,7 +537,7 @@ footer{background:#000;color:var(--mute);padding:80px 0 30px;border-top:1px soli
 .s-light .pricing-incl{color:#3a3344}
 .s-light .pricing-incl span:before{color:#8a6815}
 
-/* SECTION FEATURE TREATMENTS � make services & why-stand-apart stand out */
+/* SECTION FEATURE TREATMENTS — make services & why-stand-apart stand out */
 /* Services-feature: darker cream w/ gold gradient dividers + radial glow */
 .section-feature-services{background:#f5e8c8 !important;position:relative;overflow:hidden}
 .section-feature-services:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 0%,#d4af37 20%,#f0d878 50%,#d4af37 80%,transparent 100%);z-index:3}
@@ -552,7 +552,7 @@ footer{background:#000;color:var(--mute);padding:80px 0 30px;border-top:1px soli
 .section-feature-services .service .icon:after{content:"";position:absolute;left:0;bottom:0;width:36px;height:2px;background:linear-gradient(90deg,#d4af37 0%,transparent 100%)}
 .section-feature-services .section-head h2 em{color:#8a6815}
 
-/* Why-stand-apart: cream callout box with gold top accent � distinct visual moment */
+/* Why-stand-apart: cream callout box with gold top accent — distinct visual moment */
 .section-feature-why{background:#faf4df !important;position:relative;overflow:hidden}
 .section-feature-why .container{position:relative;z-index:2}
 .section-feature-why .why-callout{background:#fffaee;border:1px solid #d8c9a3;border-radius:2px;padding:60px 50px;position:relative;box-shadow:0 30px 60px -25px rgba(101,80,18,.20),0 6px 20px -8px rgba(101,80,18,.10)}
@@ -571,13 +571,13 @@ footer{background:#000;color:var(--mute);padding:80px 0 30px;border-top:1px soli
 /* MOCKUP FLOATING BUTTON */
 .mockup-flag{position:fixed;bottom:22px;left:22px;background:var(--wine);color:#fff;padding:9px 16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;border-radius:999px;z-index:300;box-shadow:0 10px 24px -8px rgba(0,0,0,.6)}
 
-/* DROPDOWN NAV � bridged so it doesn't disappear when cursor moves down */
+/* DROPDOWN NAV — bridged so it doesn't disappear when cursor moves down */
 .dd{position:relative}
 .dd-trigger{cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:8px 0;position:relative}
 .dd-trigger .caret{font-size:9px;color:var(--gold);transition:transform .25s var(--ease)}
 .dd:hover .caret{transform:rotate(180deg)}
 .dd-menu{position:absolute;top:calc(100% + 14px);left:-14px;min-width:280px;background:#000;border:1px solid var(--line2);padding:10px 0;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .2s var(--ease),transform .2s var(--ease);z-index:101;box-shadow:0 20px 40px -10px rgba(0,0,0,.8)}
-/* invisible hover bridge � covers the 14px gap so cursor doesn't lose hover state */
+/* invisible hover bridge — covers the 14px gap so cursor doesn't lose hover state */
 .dd-menu:before{content:"";position:absolute;bottom:100%;left:-6px;right:-6px;height:22px}
 .dd:hover .dd-menu,.dd-menu:hover,.dd:focus-within .dd-menu{opacity:1;pointer-events:auto;transform:none}
 .dd-menu a{display:block;padding:11px 20px;font-size:13px;color:#d8d8cc;text-transform:none;letter-spacing:.02em;font-weight:500;border:none;white-space:nowrap}
@@ -934,7 +934,7 @@ footer{background:#000;color:var(--mute);padding:80px 0 30px;border-top:1px soli
 @media(min-width:680px){#pwaInstallBar{left:auto;right:20px;bottom:20px;max-width:380px}}
 
 </style>
-<link rel="stylesheet" href="/mobile.css?v=20260528-gallery" media="screen">
+<link rel="stylesheet" href="/mobile.css?v=20260529-fleetgrid-fix" media="screen">
 </head>
 <body class="page-home">
 <!-- Google Tag Manager (noscript) -->
@@ -947,7 +947,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="avail-banner" id="availBanner">
   <div class="container">
     <span class="ab-pulse"></span>
-    <span class="ab-text">Available tonight � <strong id="abCount">2</strong> buses open for <span id="abDate"></span></span>
+    <span class="ab-text">Available tonight — <strong id="abCount">2</strong> buses open for <span id="abDate"></span></span>
     <a href="/quote.html?asap=1" class="ab-cta">Lock it in &rarr;</a>
     <button class="ab-close" onclick="closeAvailBanner()" aria-label="Dismiss">&times;</button>
   </div>
@@ -1047,7 +1047,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="https://wa.me/17033994394?text=Hi%21%20I%27m%20interested%20in%20booking%20a%20party%20bus." target="_blank" rel="noopener" title="WhatsApp" class="fc-wa" data-cta="float-whatsapp" aria-label="WhatsApp Party Bus R Us"><span class="fc-icon">&#128172;</span><span class="fc-label">WhatsApp</span></a>
   <a class="gold fc-quote" data-cta="float-quote" href="/quote.html" title="Get a quote" aria-label="Get a quote">Quote &#9656;</a>
 </div>
-<!-- LIVE NOW BADGE (Phase 10 i3) � only shows when competitors are closed -->
+<!-- LIVE NOW BADGE (Phase 10 i3) — only shows when competitors are closed -->
 <div class="live-now" id="liveNow" style="display:none"><span class="live-dot"></span>Dispatch on call now</div>
 <script>(function(){var el=document.getElementById('liveNow');if(!el)return;var d=new Date();var h=d.getHours();var w=d.getDay();var show=(w===0)||(w===6&&h>=22)||(h<9||h>=22);if(show)el.style.display='inline-flex';})();</script>
 
@@ -1057,7 +1057,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <header class="hero">
     <div class="hero-bg"></div>
     <div class="hero-inner container">
-      <div class="min-callout">? Booking now for May�September � 4-hour minimum</div>
+      <div class="min-callout">Booking now for May–September · 4-hour minimum</div>
       <div class="eyebrow">DMV's Most-Booked Party Bus &amp; Limo Bus Fleet</div>
       <h1>Move the moment <em>forward.</em></h1>
       <p class="lede">Meticulously maintained party and limo buses for the DMV&rsquo;s biggest nights &mdash; weddings, bachelorettes, proms, quincea&ntilde;eras, college nights, concerts, winery days, monument tours, corporate transfers, airport runs, and tailgates &mdash; day and night, across DC, Maryland, and Northern Virginia. Out-of-town on request.</p>
@@ -1133,7 +1133,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- PRESS / TRUSTED BY -->
   <div class="press-strip">
     <div class="container">
-      <div class="label">� Trusted by planners, venues &amp; couples across the DMV �</div>
+      <div class="label">— Trusted by planners, venues &amp; couples across the DMV —</div>
       <div class="press-grid">
         <div class="press-logo">DAR Constitution Hall</div>
         <div class="press-logo">Salamander Resort</div>
@@ -1149,7 +1149,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section class="s" id="inside" style="padding-top:90px;padding-bottom:90px">
     <div class="container">
       <div class="section-head">
-        <span class="kicker">� Step Inside �</span>
+        <span class="kicker">— Step Inside —</span>
         <h2>This is what you're <em>booking.</em></h2>
         <p>LED-lit interiors, leather perimeter seating, full bars, four-screen entertainment, club-grade sound, and the kind of lighting presets that turn a Tuesday into a celebration.</p>
       </div>
@@ -1157,7 +1157,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="showcase-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:280px 280px 280px;gap:14px">
         <div class="showcase-tile showcase-tile-feature" style="grid-row:span 2;background-color:#1a1a22;background-image:linear-gradient(180deg,rgba(0,0,0,0) 50%,rgba(10,10,15,.65) 100%),url('/IMG_2366.jpeg');background-size:cover;background-position:center;border:1px solid var(--line);position:relative;overflow:hidden">
           <div style="position:absolute;bottom:24px;left:24px;right:24px;color:#fff">
-            <div style="font-size:10px;letter-spacing:.2em;color:var(--gold2);text-transform:uppercase;font-weight:600;margin-bottom:6px">� Featured � The Diamond 24 �</div>
+            <div style="font-size:10px;letter-spacing:.2em;color:var(--gold2);text-transform:uppercase;font-weight:600;margin-bottom:6px">— Featured · The Diamond 24 —</div>
             <div style="font-family:'Cormorant Garamond',serif;font-size:32px;line-height:1.05">Star ceiling, fiber-optic, white leather throne seating</div>
           </div>
         </div>
@@ -1174,10 +1174,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div style="position:absolute;bottom:18px;left:20px;color:#fff;font-family:'Cormorant Garamond',serif;font-size:20px">Wet bar &amp; glassware</div>
         </div>
         <div class="showcase-tile showcase-tile-wide" style="grid-column:span 2;background-color:#0a0a0a;background-image:linear-gradient(180deg,rgba(0,0,0,.1),rgba(10,10,15,.7)),url('/IMG_0153.JPG');background-size:cover;background-position:center;border:1px solid var(--line);position:relative;overflow:hidden">
-          <div style="position:absolute;bottom:18px;left:20px;color:#fff;font-family:'Cormorant Garamond',serif;font-size:20px">Showroom view � lights up</div>
+          <div style="position:absolute;bottom:18px;left:20px;color:#fff;font-family:'Cormorant Garamond',serif;font-size:20px">Showroom view — lights up</div>
         </div>
         <div class="showcase-tile" style="background-color:#0a141a;background-image:linear-gradient(180deg,rgba(0,0,0,.1),rgba(10,10,15,.6)),url('/IMG_0154.JPG');background-size:cover;background-position:center;border:1px solid var(--line);position:relative;overflow:hidden">
-          <div style="position:absolute;bottom:18px;left:20px;color:#fff;font-family:'Cormorant Garamond',serif;font-size:20px">Diamond leather � blue LED</div>
+          <div style="position:absolute;bottom:18px;left:20px;color:#fff;font-family:'Cormorant Garamond',serif;font-size:20px">Diamond leather — blue LED</div>
         </div>
       </div>
 
@@ -1192,8 +1192,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section class="s home-fleet-preview" id="fleet-preview" style="background:#14101c;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
     <div class="container">
       <div class="section-head">
-        <span class="kicker">� Choose Your Bus �</span>
-        <h2>Seven ways to <em>arrive.</em></h2>
+        <span class="kicker">— Choose Your Bus —</span>
+        <h2>Bespoke ways to <em>arrive.</em></h2>
         <p>Pick by headcount, mood, or the photo that makes the group chat say yes. Every bus includes a professional chauffeur, full LED lighting, premium sound, and a four-hour minimum.</p>
       </div>
       <div class="fleet-grid">
@@ -1389,7 +1389,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="feature-glow-2"></div>
     <div class="container">
       <div class="section-head" style="padding:90px 0 50px">
-        <span class="kicker">� What We Do Best �</span>
+        <span class="kicker">— What We Do Best —</span>
         <h2>The DMV's most <em>memorable</em> nights.</h2>
         <p>Every booking is treated as a single event with one client. From the first reply to the final drop-off, you'll work with people who care that the night lands.</p>
       </div>
@@ -1523,7 +1523,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container">
       <div class="why-callout">
       <div class="section-head">
-        <span class="kicker">� Why We Stand Apart �</span>
+        <span class="kicker">— Why We Stand Apart —</span>
         <h2>Booked because we're <em>different.</em></h2>
         <p>The DMV has plenty of party bus operators. Most are price-floors with a phone number. Here&rsquo;s what a purpose-built fleet &mdash; and a team that takes the night seriously &mdash; gets you instead.</p>
       </div>
@@ -1531,7 +1531,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="item">
           <div class="icon">i.</div>
           <h4>Quote inside 60 minutes</h4>
-          <p>Tell us about your event � date, hours, headcount, pickup ZIP. We respond with a custom all-in quote in under an hour during business hours. No back-and-forth.</p>
+          <p>Tell us about your event — date, hours, headcount, pickup ZIP. We respond with a custom all-in quote in under an hour during business hours. No back-and-forth.</p>
         </div>
         <div class="item">
           <div class="icon">ii.</div>
@@ -1541,7 +1541,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="item">
           <div class="icon">iii.</div>
           <h4>Custom every booking</h4>
-          <p>Every event is bespoke. We tailor the bus, the route, the timing, and the in-cabin setup to your group&#39;s vibe � not a generic rate-card service.</p>
+          <p>Every event is bespoke. We tailor the bus, the route, the timing, and the in-cabin setup to your group&#39;s vibe — not a generic rate-card service.</p>
         </div>
         <div class="item">
           <div class="icon">iv.</div>
@@ -1557,9 +1557,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section class="s" id="compare" style="background:#000;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
     <div class="container">
       <div class="section-head">
-        <span class="kicker">� How We Compare �</span>
+        <span class="kicker">— How We Compare —</span>
         <h2>The receipts vs. the <em>industry norm.</em></h2>
-        <p>We've worked next to most DMV party bus operators. Here's what's different about us � and what to watch for in their quotes.</p>
+        <p>We've worked next to most DMV party bus operators. Here's what's different about us — and what to watch for in their quotes.</p>
       </div>
 
       <table class="comp-table">
@@ -1595,9 +1595,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section class="s pricing-teaser">
     <div class="container" style="position:relative;z-index:2">
       <div class="section-head">
-        <span class="kicker">� How We Quote �</span>
+        <span class="kicker">— How We Quote —</span>
         <h2>Every booking is bespoke. <em>Every quote is fast.</em></h2>
-        <p>Every night is different. Every group is different. So we quote every booking individually � tailored to your event, your hours, your headcount, and your bus preference.</p>
+        <p>Every night is different. Every group is different. So we quote every booking individually — tailored to your event, your hours, your headcount, and your bus preference.</p>
       </div>
 
       <div class="pricing-grid">
@@ -1605,10 +1605,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="cap">Step I</div>
           <h4>Tell us your event</h4>
           <div class="price" style="font-size:34px">60 sec</div>
-          <div class="sub">Date � hours � headcount � pickup ZIP � event type. That's it.</div>
+          <div class="sub">Date · hours · headcount · pickup ZIP · event type. That's it.</div>
         </div>
         <div class="pricing-col" style="background:rgba(212,175,55,.05);border-left:1px solid var(--gold);border-right:1px solid var(--gold)">
-          <div class="cap">Step II � Where We Add Value</div>
+          <div class="cap">Step II — Where We Add Value</div>
           <h4>We match the bus</h4>
           <div class="price" style="font-size:34px">Bespoke fleet</div>
           <div class="sub">We recommend the right vehicle from our fleet based on your group size &amp; vibe.</div>
@@ -1639,9 +1639,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section class="s s-light">
     <div class="container">
       <div class="section-head">
-        <span class="kicker">� What Clients Are Saying �</span>
+        <span class="kicker">— What Clients Are Saying —</span>
         <h2>Real <em>moments,</em> real reviews</h2>
-        <p>From bachelorettes to birthdays to brewery crawls � here's what our riders had to say.</p>
+        <p>From bachelorettes to birthdays to brewery crawls — here's what our riders had to say.</p>
       </div>
       <div class="testimonial-grid">
         <div class="testi">
@@ -1649,7 +1649,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p class="quote">"Absolutely made our bachelorette weekend. Driver was on time, the LEDs were everything, and the bar was loaded. Worth every penny."</p>
           <div class="author">
             <div class="avatar">S</div>
-            <div class="info"><b>Sarah M.</b><span>Bachelorette � Loudoun Winery Tour</span></div>
+            <div class="info"><b>Sarah M.</b><span>Bachelorette · Loudoun Winery Tour</span></div>
           </div>
         </div>
         <div class="testi">
@@ -1657,15 +1657,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p class="quote">"Booked for my 30th and it set the entire tone. Pulled up to the venue and everyone outside was staring. Easy 10/10."</p>
           <div class="author">
             <div class="avatar">J</div>
-            <div class="info"><b>Jasmine R.</b><span>Birthday � DC Nightlife</span></div>
+            <div class="info"><b>Jasmine R.</b><span>Birthday · DC Nightlife</span></div>
           </div>
         </div>
         <div class="testi">
           <div class="stars">?????</div>
-          <p class="quote">"Booked them for our wedding shuttle. Clean, on time, professional driver � and the bridal party loved riding back from the venue with the LEDs going. Saved us hours of stress."</p>
+          <p class="quote">"Booked them for our wedding shuttle. Clean, on time, professional driver — and the bridal party loved riding back from the venue with the LEDs going. Saved us hours of stress."</p>
           <div class="author">
             <div class="avatar">M</div>
-            <div class="info"><b>Maria + David L.</b><span>Wedding � Maryland</span></div>
+            <div class="info"><b>Maria + David L.</b><span>Wedding · Maryland</span></div>
           </div>
         </div>
         <div class="testi">
@@ -1673,7 +1673,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p class="quote">"Wineries day trip with 12 of my girls. Driver navigated everything, we just rode and drank. The bus felt huge inside and the speakers were unreal."</p>
           <div class="author">
             <div class="avatar">A</div>
-            <div class="info"><b>Ashley T.</b><span>Group Trip � Virginia Wineries</span></div>
+            <div class="info"><b>Ashley T.</b><span>Group Trip · Virginia Wineries</span></div>
           </div>
         </div>
         <div class="testi">
@@ -1681,7 +1681,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p class="quote">"Did a brewery crawl in NoVA for my buddy's bachelor party. Bus was spotless when we got on, the driver was patient with all our stops, and we ALL made it home safe. Will rebook."</p>
           <div class="author">
             <div class="avatar">D</div>
-            <div class="info"><b>Derrick K.</b><span>Bachelor � NoVA Brewery Crawl</span></div>
+            <div class="info"><b>Derrick K.</b><span>Bachelor · NoVA Brewery Crawl</span></div>
           </div>
         </div>
         <div class="testi">
@@ -1689,23 +1689,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p class="quote">"Used them for a corporate happy hour shuttle from Tysons to the city. Polished, on time, and the team loved the experience. Already booked them again for our holiday party."</p>
           <div class="author">
             <div class="avatar">R</div>
-            <div class="info"><b>Rachel B.</b><span>Corporate � Tysons</span></div>
+            <div class="info"><b>Rachel B.</b><span>Corporate · Tysons</span></div>
           </div>
         </div>
         <div class="testi">
           <div class="stars">?????</div>
-          <p class="quote">"Booked a bus for my daughter's quincea�era. They worked with us on the timing, dropped us at the church and the venue, and made her feel like royalty. Will recommend to every family I know."</p>
+          <p class="quote">"Booked a bus for my daughter's quinceañera. They worked with us on the timing, dropped us at the church and the venue, and made her feel like royalty. Will recommend to every family I know."</p>
           <div class="author">
             <div class="avatar">L</div>
-            <div class="info"><b>Lupe G.</b><span>Quincea�era � Silver Spring</span></div>
+            <div class="info"><b>Lupe G.</b><span>Quinceañera · Silver Spring</span></div>
           </div>
         </div>
         <div class="testi">
           <div class="stars">?????</div>
-          <p class="quote">"Concert night at Capital One � bus dropped us off at the gate, picked us up after, no fighting for an Uber. Best decision we made all year."</p>
+          <p class="quote">"Concert night at Capital One — bus dropped us off at the gate, picked us up after, no fighting for an Uber. Best decision we made all year."</p>
           <div class="author">
             <div class="avatar">T</div>
-            <div class="info"><b>Tre + crew</b><span>Concert � Capital One Arena</span></div>
+            <div class="info"><b>Tre + crew</b><span>Concert · Capital One Arena</span></div>
           </div>
         </div>
       </div>
@@ -1720,21 +1720,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How far in advance should we book?","acceptedAnswer":{"@type":"Answer","text":"For weddings: 4-6 months ahead. For prom: book by February for May-June dates. For bachelorette / nightlife: 2-4 weeks. For NYE, Halloween, July 4: at least 60 days. Last-minute openings appear weekly — text us if your date is tight."}},{"@type":"Question","name":"Is BYOB allowed?","acceptedAnswer":{"@type":"Answer","text":"Yes, in Virginia and Maryland — you're welcome to bring your own. By state law we cannot sell or serve alcohol on the bus. In DC proper, alcohol service requires an ABRA permit; we can advise on the process for events that need it. All passengers must be 21+ for alcohol on board."}},{"@type":"Question","name":"What's included in the hourly rate?","acceptedAnswer":{"@type":"Answer","text":"Everything except your bar. Hourly rate includes: vehicle, professional chauffeur, 18% gratuity, fuel, basic decor (lighting, sound), pre-route planning, and 15 minutes pre-arrival. You're responsible only for: BYOB, food, custom decor, and any tolls outside the DMV."}},{"@type":"Question","name":"What's the cancellation policy?","acceptedAnswer":{"@type":"Answer","text":"Full refund 30+ days before your event. 50% refund 14-30 days. Deposit forfeit inside 14 days. Weather or driver-cancelled bookings get full refunds or rescheduled at no charge."}},{"@type":"Question","name":"Are your drivers and buses licensed?","acceptedAnswer":{"@type":"Answer","text":"All drivers hold commercial CDLs with passenger endorsement and undergo background checks and drug screening before they ever touch a wheel. Every vehicle is inspected weekly and deep-cleaned between every booking."}},{"@type":"Question","name":"Do you serve outside the DMV?","acceptedAnswer":{"@type":"Answer","text":"Our home base is the DC / Maryland / Northern Virginia metro. We routinely run to Baltimore, Annapolis, Frederick, Fredericksburg, and the Eastern Shore. Beach trips (OCMD, Rehoboth) and weekend ski trips (Wisp, Snowshoe, Wintergreen) are available with advance booking."}}],"speakable":{"@type":"SpeakableSpecification","cssSelector":[".faq-item summary",".faq-item .ans"]}}</script>
     <div class="container">
       <div class="section-head">
-        <span class="kicker">� Common Questions �</span>
+        <span class="kicker">— Common Questions —</span>
         <h2>Everything you'd want to know <em>before booking.</em></h2>
       </div>
       <div class="faq">
         <details class="faq-item" open><summary>How far in advance should we book?<span class="plus">+</span></summary>
-          <div class="ans">For weddings: 4�6 months ahead. For prom: book by February for May�June dates. For bachelorette / nightlife: 2�4 weeks. For NYE, Halloween, July 4: at least 60 days. Last-minute openings appear weekly � text us if your date is tight.</div>
+          <div class="ans">For weddings: 4–6 months ahead. For prom: book by February for May–June dates. For bachelorette / nightlife: 2–4 weeks. For NYE, Halloween, July 4: at least 60 days. Last-minute openings appear weekly — text us if your date is tight.</div>
         </details>
         <details class="faq-item"><summary>Is BYOB allowed?<span class="plus">+</span></summary>
-          <div class="ans">Yes, in Virginia and Maryland � you're welcome to bring your own. By state law we cannot sell or serve alcohol on the bus. In DC proper, alcohol service requires an ABRA permit; we can advise on the process for events that need it. All passengers must be 21+ for alcohol on board.</div>
+          <div class="ans">Yes, in Virginia and Maryland — you're welcome to bring your own. By state law we cannot sell or serve alcohol on the bus. In DC proper, alcohol service requires an ABRA permit; we can advise on the process for events that need it. All passengers must be 21+ for alcohol on board.</div>
         </details>
         <details class="faq-item"><summary>What's included in the hourly rate?<span class="plus">+</span></summary>
           <div class="ans">Everything except your bar. Hourly rate includes: vehicle, professional chauffeur, 18% gratuity, fuel, basic decor (lighting, sound), pre-route planning, and 15 minutes pre-arrival. You're responsible only for: BYOB, food, custom decor, and any tolls outside the DMV.</div>
         </details>
         <details class="faq-item"><summary>What's the cancellation policy?<span class="plus">+</span></summary>
-          <div class="ans">Full refund 30+ days before your event. 50% refund 14�30 days. Deposit forfeit inside 14 days. Weather or driver-cancelled bookings get full refunds or rescheduled at no charge.</div>
+          <div class="ans">Full refund 30+ days before your event. 50% refund 14–30 days. Deposit forfeit inside 14 days. Weather or driver-cancelled bookings get full refunds or rescheduled at no charge.</div>
         </details>
         <details class="faq-item"><summary>Are your drivers and buses licensed?<span class="plus">+</span></summary>
           <div class="ans">All drivers hold commercial CDLs with passenger endorsement and undergo background checks &amp; drug screening before they ever touch a wheel. Every vehicle is inspected weekly and deep-cleaned between every booking.</div>
@@ -1893,23 +1893,27 @@ window.addEventListener('load', function(){
     });
   });
 
-  // Desktop-only effects below (parallax + sticky-nav scrub � battery-heavy on phones)
-  if (!isDesktop) return;
+  // Desktop-only effects below (parallax + sticky-nav scrub — battery-heavy on phones)
+  if (isDesktop) {
+    // Hero parallax (subtle)
+    var heroBg = document.querySelector('.hero-bg');
+    if (heroBg) {
+      gsap.to(heroBg, {
+        y: 60, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+      });
+    }
 
-  // Hero parallax (subtle)
-  var heroBg = document.querySelector('.hero-bg');
-  if (heroBg) {
-    gsap.to(heroBg, {
-      y: 60, ease: 'none',
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+    // Sticky nav scrolled state
+    ScrollTrigger.create({
+      start: 'top -80', end: 99999,
+      toggleClass: { className: 'scrolled', targets: 'nav.main' }
     });
   }
 
-  // Sticky nav scrolled state
-  ScrollTrigger.create({
-    start: 'top -80', end: 99999,
-    toggleClass: { className: 'scrolled', targets: 'nav.main' }
-  });
+  // Defensive: recalc trigger positions once layout settles (lazy imgs, web fonts,
+  // content-visibility). Runs on every viewport so mobile grid/header reveals stay aligned.
+  ScrollTrigger.refresh();
 });
 </script>
 
@@ -1918,7 +1922,7 @@ window.addEventListener('load', function(){
 
 
 <script>
-// Availability banner � today's date + dismissal persistence
+// Availability banner — today's date + dismissal persistence
 (function(){
   var banner = document.getElementById('availBanner');
   if(!banner) return;
