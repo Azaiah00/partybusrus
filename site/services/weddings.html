@@ -370,7 +370,7 @@ footer{background:#000;color:var(--mute);padding:80px 0 30px;border-top:1px soli
 .mobile-nav a{font-family:"Cormorant Garamond",serif;font-size:30px;color:#fff;padding:12px 0;border-bottom:1px solid var(--line)}
 .mobile-nav a:hover{color:var(--gold2)}
 
-/* === LIGHT/CREAM SECTIONS — welcoming alternates from dark === */
+/* === LIGHT/CREAM SECTIONS â€” welcoming alternates from dark === */
 .s-light{background:#faf4df !important;color:#1a1424}
 .s-light .section-head h2,.s-light h3,.s-light h4{color:#1a1424}
 .s-light .section-head .kicker{color:#8a6815}
@@ -513,13 +513,13 @@ footer{background:#000;color:var(--mute);padding:80px 0 30px;border-top:1px soli
 /* MOCKUP FLOATING BUTTON */
 .mockup-flag{position:fixed;bottom:22px;left:22px;background:var(--wine);color:#fff;padding:9px 16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;border-radius:999px;z-index:300;box-shadow:0 10px 24px -8px rgba(0,0,0,.6)}
 
-/* DROPDOWN NAV — bridged so it doesn't disappear when cursor moves down */
+/* DROPDOWN NAV â€” bridged so it doesn't disappear when cursor moves down */
 .dd{position:relative}
 .dd-trigger{cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:8px 0;position:relative}
 .dd-trigger .caret{font-size:9px;color:var(--gold);transition:transform .25s var(--ease)}
 .dd:hover .caret{transform:rotate(180deg)}
 .dd-menu{position:absolute;top:calc(100% + 14px);left:-14px;min-width:280px;background:#000;border:1px solid var(--line2);padding:10px 0;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .2s var(--ease),transform .2s var(--ease);z-index:101;box-shadow:0 20px 40px -10px rgba(0,0,0,.8)}
-/* invisible hover bridge — covers the 14px gap so cursor doesn't lose hover state */
+/* invisible hover bridge â€” covers the 14px gap so cursor doesn't lose hover state */
 .dd-menu:before{content:"";position:absolute;bottom:100%;left:-6px;right:-6px;height:22px}
 .dd:hover .dd-menu,.dd-menu:hover,.dd:focus-within .dd-menu{opacity:1;pointer-events:auto;transform:none}
 .dd-menu a{display:block;padding:11px 20px;font-size:13px;color:#d8d8cc;text-transform:none;letter-spacing:.02em;font-weight:500;border:none;white-space:nowrap}
@@ -838,7 +838,7 @@ footer{background:#000;color:var(--mute);padding:80px 0 30px;border-top:1px soli
 @media(max-width:680px){.topbar .social-icons{margin-left:8px;gap:6px}}
 
 
-/* Native share button — fleet + service pages */
+/* Native share button â€” fleet + service pages */
 .share-row{display:inline-flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap}
 .share-btn{display:inline-flex;align-items:center;gap:10px;background:#fff8e8;border:1px solid var(--gold);color:#5c4a32;padding:11px 20px;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border-radius:999px;transition:all .2s ease;min-height:44px}
 .share-btn:hover{background:var(--gold);color:#fff;transform:translateY(-1px);box-shadow:0 6px 16px rgba(201,169,97,.25)}
@@ -900,7 +900,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="avail-banner" id="availBanner">
   <div class="container">
     <span class="ab-pulse"></span>
-    <span class="ab-text">Available tonight — <strong id="abCount">2</strong> buses open for <span id="abDate"></span></span>
+    <span class="ab-text">Available tonight â€” <strong id="abCount">2</strong> buses open for <span id="abDate"></span></span>
     <a href="/quote.html?asap=1" class="ab-cta">Lock it in &rarr;</a>
     <button class="ab-close" onclick="closeAvailBanner()" aria-label="Dismiss">&times;</button>
   </div>
@@ -1000,7 +1000,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="https://wa.me/17033994394?text=Hi%21%20I%27m%20interested%20in%20a%20wedding%20party%20bus." target="_blank" rel="noopener" title="WhatsApp" class="fc-wa" data-cta="float-whatsapp" aria-label="WhatsApp Party Bus R Us"><span class="fc-icon">&#128172;</span><span class="fc-label">WhatsApp</span></a>
   <a class="gold fc-quote" data-cta="float-quote" href="/quote.html" title="Get a quote" aria-label="Get a quote">Quote &#9656;</a>
 </div>
-<!-- LIVE NOW BADGE (Phase 10 i3) — only shows when competitors are closed -->
+<!-- LIVE NOW BADGE (Phase 10 i3) â€” only shows when competitors are closed -->
 <div class="live-now" id="liveNow" style="display:none"><span class="live-dot"></span>Dispatch on call now</div>
 <script>(function(){var el=document.getElementById('liveNow');if(!el)return;var d=new Date();var h=d.getHours();var w=d.getDay();var show=(w===0)||(w===6&&h>=22)||(h<9||h>=22);if(show)el.style.display='inline-flex';})();</script>
 
@@ -1010,7 +1010,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container">
       <div class="breadcrumb"><a href="/">Home</a><span class="sep">/</span>Services<span class="sep">/</span>Wedding Shuttle</div>
       <h1>The wedding day, <em>moved.</em></h1>
-      <p>Bride, groom, party, and guests — transported with the precision your wedding planner wishes every vendor brought. On-time, on-brand, on the dot.</p>
+      <p>Bride, groom, party, and guests â€” transported with the precision your wedding planner wishes every vendor brought. On-time, on-brand, on the dot.</p>
       <div class="share-row">
         <button class="share-btn" onclick="sharePage(this)" type="button" aria-label="Share this page">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
@@ -1026,7 +1026,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="detail-grid">
         <div class="detail-content">
           <h3>Why couples choose us.</h3>
-          <p>Most wedding bookings come to us from planners — the people who watch what works and what doesn't, week after week, across the DMV. We're on their preferred-vendor lists because we treat the wedding day like our wedding day: every detail noted, every stop confirmed, every driver briefed.</p>
+          <p>Most wedding bookings come to us from planners â€” the people who watch what works and what doesn't, week after week, across the DMV. We're on their preferred-vendor lists because we treat the wedding day like our wedding day: every detail noted, every stop confirmed, every driver briefed.</p>
 
           <h3>What's included.</h3>
           <ul class="amenity-list">
@@ -1043,18 +1043,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </ul>
 
           <h3>The wedding day flow.</h3>
-          <p>The typical wedding-day shuttle runs 8 hours and looks something like this: arrival at the bridal-party hotel one hour before ceremony, scenic route to the ceremony venue, 60–90 minute hold during the ceremony, multi-stop transfer to the reception, mid-reception driver standby, late-night shuttle from reception to after-party or hotels. We customize this for your day — most weddings need 6–10 hours total.</p>
+          <p>The typical wedding-day shuttle runs 8 hours and looks something like this: arrival at the bridal-party hotel one hour before ceremony, scenic route to the ceremony venue, 60â€“90 minute hold during the ceremony, multi-stop transfer to the reception, mid-reception driver standby, late-night shuttle from reception to after-party or hotels. We customize this for your day â€” most weddings need 6â€“10 hours total.</p>
 
           <h3>Preferred wedding venues.</h3>
-          <p>We work with most major DMV venues including the Hay-Adams, DAR Constitution Hall, The Mayflower, Salamander Resort, Lansdowne Resort, Stone Tower Winery, 868 Estate Vineyards, Top of the Town, The Carriage House, Whitehall Estate, The Inn at Willow Grove, and Top of the Town. If your venue isn't listed, we've probably done it — ask.</p>
+          <p>We work with most major DMV venues including the Hay-Adams, DAR Constitution Hall, The Mayflower, Salamander Resort, Lansdowne Resort, Stone Tower Winery, 868 Estate Vineyards, Top of the Town, The Carriage House, Whitehall Estate, The Inn at Willow Grove, and Top of the Town. If your venue isn't listed, we've probably done it â€” ask.</p>
         </div>
 
         <aside class="detail-side">
           <div class="price-box">
             <div class="from">Wedding Day Package</div>
             <div class="num" style="font-size:38px">Get a Quote</div>
-            <div class="notes">Three bus options · 8-hour wedding-day package · Signage, champagne setup, formal driver, red carpet — all-in.</div>
-            <a href="/quote.html" class="btn gold" style="display:flex">Reserve the Wedding Bus <span class="arrow">?</span></a>
+            <div class="notes">Three bus options Â· 8-hour wedding-day package Â· Signage, champagne setup, formal driver, red carpet â€” all-in.</div>
+            <a href="/quote.html" class="btn gold" style="display:flex">Reserve the Wedding Bus <span class="arrow">â†’</span></a>
           </div>
           <div class="quick-call">
             <p style="margin-bottom:6px">For planners:</p>
@@ -1069,14 +1069,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section class="s testimonials s-light">
     <div class="container">
       <div class="section-head">
-        <span class="kicker">— Wedding Day Reviews —</span>
+        <span class="kicker">â€” Wedding Day Reviews â€”</span>
         <h2>From the couples and planners who've <em>seen the day through.</em></h2>
       </div>
       <div class="testimonial-grid">
         <div class="testi">
           <div class="stars">?????</div>
           <p class="quote">"They were the calmest people at the wedding. Our driver had backup routes ready when traffic on 66 closed down. We were 8 minutes early to the church."</p>
-          <div class="author"><div class="avatar">MR</div><div class="info"><b>Maria &amp; Rob</b><span>Wedding · Salamander Resort</span></div></div>
+          <div class="author"><div class="avatar">MR</div><div class="info"><b>Maria &amp; Rob</b><span>Wedding Â· Salamander Resort</span></div></div>
         </div>
         <div class="testi">
           <div class="stars">?????</div>
@@ -1086,7 +1086,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="testi">
           <div class="stars">?????</div>
           <p class="quote">"Champagne setup was beautiful. Driver in a black suit. The red carpet at the reception entrance made our entrance feel like a movie. Worth every penny."</p>
-          <div class="author"><div class="avatar">AT</div><div class="info"><b>Aisha &amp; Tariq</b><span>Wedding · The Hay-Adams</span></div></div>
+          <div class="author"><div class="avatar">AT</div><div class="info"><b>Aisha &amp; Tariq</b><span>Wedding Â· The Hay-Adams</span></div></div>
         </div>
       </div>
     </div>
@@ -1095,9 +1095,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section class="final-cta" style="background-image:url('/IMG_8575.JPG')">
     <div class="container">
       <h2>Your wedding day deserves <em>this one decision</em> made right.</h2>
-      <p>Tell us your date, your venue, your headcount — we'll build a wedding-day shuttle plan and price within 24 hours.</p>
+      <p>Tell us your date, your venue, your headcount â€” we'll build a wedding-day shuttle plan and price within 24 hours.</p>
       <div class="final-cta-actions">
-        <a href="/quote.html" class="btn gold lg">Plan My Wedding Shuttle <span class="arrow">?</span></a>
+        <a href="/quote.html" class="btn gold lg">Plan My Wedding Shuttle <span class="arrow">â†’</span></a>
         <a class="btn ghost lg" href="tel:7033994394">Call (703) 399-4394</a>
       </div>
     </div>
@@ -1388,7 +1388,7 @@ window.addEventListener('load', function(){
     });
   });
 
-  // Desktop-only effects below (parallax + sticky-nav scrub — battery-heavy on phones)
+  // Desktop-only effects below (parallax + sticky-nav scrub â€” battery-heavy on phones)
   if (!isDesktop) return;
 
   // Hero parallax (subtle)
@@ -1432,7 +1432,7 @@ function sharePage(btn){
 
 
 <script>
-// Availability banner — today's date + dismissal persistence
+// Availability banner â€” today's date + dismissal persistence
 (function(){
   var banner = document.getElementById('availBanner');
   if(!banner) return;

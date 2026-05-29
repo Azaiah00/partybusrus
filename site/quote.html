@@ -370,7 +370,7 @@ footer{background:#000;color:var(--mute);padding:80px 0 30px;border-top:1px soli
 .mobile-nav a{font-family:"Cormorant Garamond",serif;font-size:30px;color:#fff;padding:12px 0;border-bottom:1px solid var(--line)}
 .mobile-nav a:hover{color:var(--gold2)}
 
-/* === LIGHT/CREAM SECTIONS — welcoming alternates from dark === */
+/* === LIGHT/CREAM SECTIONS â€” welcoming alternates from dark === */
 .s-light{background:#faf4df !important;color:#1a1424}
 .s-light .section-head h2,.s-light h3,.s-light h4{color:#1a1424}
 .s-light .section-head .kicker{color:#8a6815}
@@ -513,13 +513,13 @@ footer{background:#000;color:var(--mute);padding:80px 0 30px;border-top:1px soli
 /* MOCKUP FLOATING BUTTON */
 .mockup-flag{position:fixed;bottom:22px;left:22px;background:var(--wine);color:#fff;padding:9px 16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;border-radius:999px;z-index:300;box-shadow:0 10px 24px -8px rgba(0,0,0,.6)}
 
-/* DROPDOWN NAV — bridged so it doesn't disappear when cursor moves down */
+/* DROPDOWN NAV â€” bridged so it doesn't disappear when cursor moves down */
 .dd{position:relative}
 .dd-trigger{cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:8px 0;position:relative}
 .dd-trigger .caret{font-size:9px;color:var(--gold);transition:transform .25s var(--ease)}
 .dd:hover .caret{transform:rotate(180deg)}
 .dd-menu{position:absolute;top:calc(100% + 14px);left:-14px;min-width:280px;background:#000;border:1px solid var(--line2);padding:10px 0;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .2s var(--ease),transform .2s var(--ease);z-index:101;box-shadow:0 20px 40px -10px rgba(0,0,0,.8)}
-/* invisible hover bridge — covers the 14px gap so cursor doesn't lose hover state */
+/* invisible hover bridge â€” covers the 14px gap so cursor doesn't lose hover state */
 .dd-menu:before{content:"";position:absolute;bottom:100%;left:-6px;right:-6px;height:22px}
 .dd:hover .dd-menu,.dd-menu:hover,.dd:focus-within .dd-menu{opacity:1;pointer-events:auto;transform:none}
 .dd-menu a{display:block;padding:11px 20px;font-size:13px;color:#d8d8cc;text-transform:none;letter-spacing:.02em;font-weight:500;border:none;white-space:nowrap}
@@ -1023,7 +1023,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="avail-banner" id="availBanner">
   <div class="container">
     <span class="ab-pulse"></span>
-    <span class="ab-text">Available tonight — <strong id="abCount">2</strong> buses open for <span id="abDate"></span></span>
+    <span class="ab-text">Available tonight â€” <strong id="abCount">2</strong> buses open for <span id="abDate"></span></span>
     <a href="/quote.html?asap=1" class="ab-cta">Lock it in &rarr;</a>
     <button class="ab-close" onclick="closeAvailBanner()" aria-label="Dismiss">&times;</button>
   </div>
@@ -1123,7 +1123,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="https://wa.me/17033994394?text=Hi%21%20I%27m%20interested%20in%20booking%20a%20party%20bus." target="_blank" rel="noopener" title="WhatsApp" class="fc-wa" data-cta="float-whatsapp" aria-label="WhatsApp Party Bus R Us"><span class="fc-icon">&#128172;</span><span class="fc-label">WhatsApp</span></a>
   <a class="gold fc-quote" data-cta="float-quote" href="/quote.html" title="Get a quote" aria-label="Get a quote">Quote &#9656;</a>
 </div>
-<!-- LIVE NOW BADGE (Phase 10 i3) — only shows when competitors are closed -->
+<!-- LIVE NOW BADGE (Phase 10 i3) â€” only shows when competitors are closed -->
 <div class="live-now" id="liveNow" style="display:none"><span class="live-dot"></span>Dispatch on call now</div>
 <script>(function(){var el=document.getElementById('liveNow');if(!el)return;var d=new Date();var h=d.getHours();var w=d.getDay();var show=(w===0)||(w===6&&h>=22)||(h<9||h>=22);if(show)el.style.display='inline-flex';})();</script>
 
@@ -1133,7 +1133,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container">
       <div class="breadcrumb"><a href="/">Home</a><span class="sep">/</span>Get a Quote</div>
       <h1>Reserve your <em>night.</em></h1>
-      <p>Fill out the form below or call us — we respond to every quote within 60 minutes during business hours, and within 4 hours overnight.</p>
+      <p>Fill out the form below or call us â€” we respond to every quote within 60 minutes during business hours, and within 4 hours overnight.</p>
     </div>
   </header>
 
@@ -1148,7 +1148,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="hidden" name="_next" value="https://partybusrus.vercel.app/thank-you.html">
           <input type="hidden" name="_captcha" value="true">
           <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_autoresponse" value="Hi! We received your party bus quote request and will reply within 60 minutes during business hours. — Frederick, Party Bus R Us">
+          <input type="hidden" name="_autoresponse" value="Hi! We received your party bus quote request and will reply within 60 minutes during business hours. â€” Frederick, Party Bus R Us">
           <!-- Lead source tracking -->
           <input type="hidden" name="source_page" id="srcPage" value="">
           <input type="hidden" name="source_referrer" id="srcRef" value="">
@@ -1162,13 +1162,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <!-- PROGRESS -->
           <div class="qf-progress">
             <div class="qf-progress-bar"><div class="qf-progress-fill" id="qfFill" style="width:33.33%"></div></div>
-            <div class="qf-step-label"><span id="qfStepNum">1</span> of 3 · <span id="qfStepName">When &amp; how many</span></div>
+            <div class="qf-step-label"><span id="qfStepNum">1</span> of 3 Â· <span id="qfStepName">When &amp; how many</span></div>
           </div>
 
           <!-- STEP 1: WHEN + HOW MANY -->
           <div class="qf-step active" data-step="1">
             <h3 class="serif">When's the party?</h3>
-            <p class="qf-sub">Just the basics — we'll figure out the rest together.</p>
+            <p class="qf-sub">Just the basics â€” we'll figure out the rest together.</p>
 
             <div class="field full">
               <label>Event date</label>
@@ -1190,12 +1190,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <label>How many people?</label>
               <select name="headcount" id="qfHeadcount" required>
                 <option value="">Select headcount...</option>
-                <option>10–14 (Midnight 20 fits)</option>
-                <option>15–20 (Midnight 20)</option>
-                <option>21–25 (Bridal 25)</option>
-                <option>26–30 (Signature 30)</option>
-                <option>31–35 (Empire 32 or Imperial 35)</option>
-                <option>36–40 (Two-bus split)</option>
+                <option>10â€“14 (Midnight 20 fits)</option>
+                <option>15â€“20 (Midnight 20)</option>
+                <option>21â€“25 (Bridal 25)</option>
+                <option>26â€“30 (Signature 30)</option>
+                <option>31â€“35 (Empire 32 or Imperial 35)</option>
+                <option>36â€“40 (Two-bus split)</option>
               </select>
             </div>
 
@@ -1212,7 +1212,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </select>
             </div>
 
-            <button type="button" class="btn gold lg qf-next" data-next="2" style="width:100%;margin-top:18px">Continue <span class="arrow">?</span></button>
+            <button type="button" class="btn gold lg qf-next" data-next="2" style="width:100%;margin-top:18px">Continue <span class="arrow">â†’</span></button>
           </div>
 
           <!-- STEP 2: WHAT KIND + WHERE -->
@@ -1229,7 +1229,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <option>Bachelor party</option>
                 <option>Birthday</option>
                 <option>Sweet 16</option>
-                <option>Quinceañera</option>
+                <option>QuinceaÃ±era</option>
                 <option>Prom / Graduation</option>
                 <option>Winery / Brewery tour</option>
                 <option>Sports event / Concert</option>
@@ -1259,7 +1259,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="qf-row">
               <button type="button" class="btn ghost qf-back" data-back="1">? Back</button>
-              <button type="button" class="btn gold qf-next" data-next="3">Continue <span class="arrow">?</span></button>
+              <button type="button" class="btn gold qf-next" data-next="3">Continue <span class="arrow">â†’</span></button>
             </div>
           </div>
 
@@ -1306,16 +1306,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="qf-row">
               <button type="button" class="btn ghost qf-back" data-back="2">? Back</button>
-              <button class="btn gold lg" type="submit" id="qfSubmit" style="flex:2">Get My Quote <span class="arrow">?</span></button>
+              <button class="btn gold lg" type="submit" id="qfSubmit" style="flex:2">Get My Quote <span class="arrow">â†’</span></button>
             </div>
-            <p style="color:var(--mute);font-size:12px;margin-top:14px;text-align:center;letter-spacing:.06em">We reply within 60 minutes · No spam, ever · Quote is non-binding</p>
+            <p style="color:var(--mute);font-size:12px;margin-top:14px;text-align:center;letter-spacing:.06em">We reply within 60 minutes Â· No spam, ever Â· Quote is non-binding</p>
           </div>
 
         </form>
 
         <aside class="quote-side">
           <h3>Prefer to talk to a person?</h3>
-          <p>Both work — we just want to make it easy. Average phone response time: 45 seconds during business hours.</p>
+          <p>Both work â€” we just want to make it easy. Average phone response time: 45 seconds during business hours.</p>
 
           <div class="contact-card">
             <div class="lbl">Phone &amp; text</div>
@@ -1327,13 +1327,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="contact-card">
             <div class="lbl">Service area</div>
-            <div class="val">DC · Maryland · Northern Virginia</div>
+            <div class="val">DC Â· Maryland Â· Northern Virginia</div>
             <p style="color:var(--mute);font-size:13.5px;margin-top:8px">Extended trips to Baltimore, Annapolis, Frederick, Eastern Shore, ski areas, and beach destinations available with advance booking.</p>
           </div>
           <div class="contact-card">
             <div class="lbl">Hours</div>
             <div class="val">24 / 7</div>
-            <p style="color:var(--mute);font-size:13.5px;margin-top:8px">Booking team available daily 8am–10pm. Dispatch on call 24/7 for active reservations.</p>
+            <p style="color:var(--mute);font-size:13.5px;margin-top:8px">Booking team available daily 8amâ€“10pm. Dispatch on call 24/7 for active reservations.</p>
           </div>
         </aside>
       </div>
@@ -1732,13 +1732,13 @@ window.addEventListener('load', function(){
           });
       }, function(err){
         geoBtn.classList.remove('locating');
-        geoHint.textContent = err.code === 1 ? "Location blocked — please type your city." : "Couldn't get location.";
+        geoHint.textContent = err.code === 1 ? "Location blocked â€” please type your city." : "Couldn't get location.";
         geoHint.className = 'qf-help error';
       }, { enableHighAccuracy: false, timeout: 8000, maximumAge: 60000 });
     });
   }
 
-  // ---- Progress save (localStorage) — pure UX, not a CRM substitute ----
+  // ---- Progress save (localStorage) â€” pure UX, not a CRM substitute ----
   var STORAGE_KEY = 'pbru_quote_draft';
   function saveProgress() {
     try {

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Party Bus R Us — Marketing Plan 2026</title>
+<style>
+  :root{
+    --bg:#0d0d10; --panel:#16161c; --panel2:#1d1d26;
+    --gold:#D4AF37; --magenta:#E0218A; --cream:#f7f1e3;
+    --text:#e8e6e0; --muted:#a7a39b; --line:#2c2c36;
+    --good:#37c97a; --warn:#f0a93b; --bad:#ef5a6b;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:var(--gold);}
+  /* NAV */
+  header.topbar{position:sticky;top:0;z-index:50;background:rgba(13,13,16,.92);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .topbar-inner{max-width:1080px;margin:0 auto;padding:10px 20px;display:flex;
+    align-items:center;gap:14px;flex-wrap:wrap;}
+  .brandmark{font-weight:800;letter-spacing:.5px;font-size:15px;white-space:nowrap;}
+  .brandmark .b1{color:var(--gold);} .brandmark .b2{color:var(--magenta);}
+  nav.jump{display:flex;gap:4px;flex-wrap:wrap;font-size:12px;margin-left:auto;}
+  nav.jump a{color:var(--muted);text-decoration:none;padding:5px 9px;border-radius:6px;
+    transition:.15s;white-space:nowrap;}
+  nav.jump a:hover,nav.jump a.active{color:#fff;background:var(--panel2);}
+  /* HERO */
+  .hero{max-width:1080px;margin:0 auto;padding:60px 20px 30px;}
+  .eyebrow{color:var(--gold);font-weight:700;letter-spacing:2px;font-size:12px;
+    text-transform:uppercase;}
+  .hero h1{font-size:clamp(34px,6vw,60px);line-height:1.05;margin:14px 0 10px;
+    background:linear-gradient(90deg,var(--gold),var(--magenta));
+    -webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;}
+  .hero p.lead{font-size:18px;color:var(--muted);max-width:760px;}
+  .meta-grid{display:flex;gap:26px;flex-wrap:wrap;margin-top:24px;
+    padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);}
+  .meta-grid b{color:var(--text);display:block;font-size:14px;}
+  /* KPI strip */
+  .kpis{max-width:1080px;margin:30px auto;padding:0 20px;display:grid;
+    grid-template-columns:repeat(4,1fr);gap:14px;}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:18px;text-align:center;}
+  .kpi .num{font-size:26px;font-weight:800;color:var(--gold);}
+  .kpi .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+  /* SECTIONS */
+  section.block{max-width:1080px;margin:0 auto;padding:46px 20px;
+    border-top:1px solid var(--line);}
+  .sec-no{color:var(--magenta);font-weight:800;font-size:13px;letter-spacing:2px;}
+  section.block h2{font-size:30px;margin:6px 0 6px;font-weight:800;}
+  section.block .sub{color:var(--muted);margin-bottom:24px;max-width:780px;}
+  h3{font-size:18px;margin:26px 0 10px;color:#fff;}
+  /* CARDS */
+  .cards{display:grid;gap:14px;}
+  .c2{grid-template-columns:repeat(2,1fr);}
+  .c3{grid-template-columns:repeat(3,1fr);}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;}
+  .card h4{margin:0 0 6px;font-size:15px;color:#fff;}
+  .card p{margin:0;font-size:13.5px;color:var(--muted);}
+  .card .tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+    padding:3px 8px;border-radius:20px;display:inline-block;margin-bottom:8px;}
+  .t-gold{background:rgba(212,175,55,.15);color:var(--gold);}
+  .t-mag{background:rgba(224,33,138,.15);color:var(--magenta);}
+  .t-good{background:rgba(55,201,122,.13);color:var(--good);}
+  .t-warn{background:rgba(240,169,59,.13);color:var(--warn);}
+  .t-bad{background:rgba(239,90,107,.13);color:var(--bad);}
+  /* TABLES */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:14px 0;}
+  table{border-collapse:collapse;width:100%;font-size:13px;min-width:520px;}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{background:var(--panel2);color:var(--gold);font-weight:700;
+    text-transform:uppercase;font-size:11px;letter-spacing:.5px;}
+  tr:last-child td{border-bottom:none;}
+  td .pill{font-size:10px;font-weight:700;padding:2px 7px;border-radius:12px;}
+  /* CALLOUT */
+  .callout{background:linear-gradient(135deg,rgba(212,175,55,.08),rgba(224,33,138,.08));
+    border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:10px;
+    padding:16px 18px;margin:18px 0;font-size:14px;}
+  .callout b{color:var(--gold);}
+  /* lists */
+  ul.clean{list-style:none;padding:0;margin:10px 0;}
+  ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px solid var(--line);font-size:14px;}
+  ul.clean li:before{content:"▹";position:absolute;left:4px;color:var(--magenta);}
+  ul.clean li:last-child{border-bottom:none;}
+  /* tabs (two-site) */
+  .tabs{display:flex;gap:8px;margin:8px 0 16px;flex-wrap:wrap;}
+  .tab-btn{background:var(--panel);border:1px solid var(--line);color:var(--muted);
+    padding:9px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:.15s;}
+  .tab-btn.active{background:var(--panel2);color:#fff;border-color:var(--gold);}
+  .tab-panel{display:none;} .tab-panel.active{display:block;}
+  /* timeline */
+  .tl{border-left:2px solid var(--line);margin-left:8px;padding-left:22px;}
+  .tl-item{position:relative;padding:6px 0 18px;}
+  .tl-item:before{content:"";position:absolute;left:-29px;top:10px;width:12px;height:12px;
+    border-radius:50%;background:var(--gold);border:2px solid var(--bg);}
+  .tl-item .wk{font-size:11px;color:var(--magenta);font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+  .tl-item h4{margin:3px 0 4px;font-size:15px;color:#fff;}
+  .tl-item p{margin:0;font-size:13px;color:var(--muted);}
+  footer{max-width:1080px;margin:0 auto;padding:40px 20px 70px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:13px;text-align:center;}
+  footer .sig{color:var(--gold);font-weight:700;margin-top:8px;}
+  @media(max-width:760px){
+    .kpis{grid-template-columns:repeat(2,1fr);}
+    .c2,.c3{grid-template-columns:1fr;}
+    nav.jump{display:none;}
+  }
+  @media print{
+    header.topbar{position:static;} body{background:#fff;color:#111;}
+    .card,.kpi,.tbl-wrap,.callout{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brandmark"><span class="b1">PARTY BUS</span> <span class="b2">R US</span></div>
+    <nav class="jump" id="jumpNav">
+      <a href="#overview">Overview</a>
+      <a href="#market">Market</a>
+      <a href="#twosite">Two Sites</a>
+      <a href="#foundation">Foundation</a>
+      <a href="#seo">SEO &amp; GBP</a>
+      <a href="#ads">Google Ads</a>
+      <a href="#channels">Channels</a>
+      <a href="#ig">Instagram</a>
+      <a href="#ai">AI Content</a>
+      <a href="#leads">Lead Gen</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#budget">Budget</a>
+      <a href="#kpis">KPIs</a>
+      <a href="#stack">Stack</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="overview">
+  <div class="eyebrow">★ Marketing Plan · DMV · 2026</div>
+  <h1>The plan to own the DMV party bus market.</h1>
+  <p class="lead">One consolidated marketing plan for Party Bus R Us — combining the go-to-market playbook, the two-website strategy, paid search, social, and lead generation into a single 90-day operating plan. Built for Robert. Run by Frederick.</p>
+  <div class="meta-grid">
+    <div><b>Robert Eljeily</b>Owner</div>
+    <div><b>Frederick · Marketing</b>Real Estate Advancement</div>
+    <div><b>City Coachways Inc.</b>Operating entity</div>
+    <div><b>90 days</b>Planning horizon</div>
+    <div><b>partybusrus.com</b>Primary domain</div>
+  </div>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="num">$20–50K</div><div class="lbl">Revenue · day 90</div></div>
+  <div class="kpi"><div class="num">80–150</div><div class="lbl">Leads/mo at scale</div></div>
+  <div class="kpi"><div class="num">3,500+</div><div class="lbl">IG followers · day 90</div></div>
+  <div class="kpi"><div class="num">3–7×</div><div class="lbl">Target ROAS</div></div>
+</div>
+
+<!-- NORTH STAR -->
+<section class="block">
+  <div class="sec-no">THE GOAL</div>
+  <h2>North star: booked revenue</h2>
+  <p class="sub">Not leads. Not clicks. Not impressions. Not even bookings. <b>Booked revenue from partybusrus.com per month</b> — because that's the only number that pays the buses. Everything below ladders up to it.</p>
+  <div class="callout">
+    <b>The economics that make this work:</b> Average DMV party bus booking value is $900–1,800. At a 15% lead-to-booking rate and ~$40 cost per lead, customer acquisition cost lands around $260 — well inside the unit economics. Month 1 is roughly break-even by design (we pay to learn). Month 3 is the first month of meaningful profit.
+  </div>
+</section>
+
+<!-- MARKET -->
+<section class="block" id="market">
+  <div class="sec-no">01 · THE FIELD</div>
+  <h2>Market &amp; positioning</h2>
+  <p class="sub">Eight DMV competitors audited. Pricing runs $150–$350/hr with a 15–30% weekend premium. Only one competitor publishes pricing. Here's where we take share.</p>
+
+  <h3>The 3 most dangerous competitors</h3>
+  <div class="cards c3">
+    <div class="card"><span class="tag t-bad">Threat #1</span><h4>The DMV Party Bus</h4><p>16K Instagram, transparent $10/person/hr pricing in bio, IG-native lead capture. Owns the search bar and the social bar at once.</p></div>
+    <div class="card"><span class="tag t-bad">Threat #2</span><h4>DC 4 Party</h4><p>VIP / red-carpet positioning that overlaps our higher-end party voice. Thin social proof but aggressive ad spend — could undercut our paid CPCs.</p></div>
+    <div class="card"><span class="tag t-bad">Threat #3</span><h4>Uptown Bus</h4><p>Broadest service taxonomy in the market (prom → corporate). Solid Google Business signal. Hardest to outrank on generic terms.</p></div>
+  </div>
+
+  <div class="callout">
+    <b>Defensive plays:</b> (1) Bid on these 3 brand names as competitor-conquest keywords. (2) Beat The DMV Party Bus on transparency — publish a real quote calculator, not just a per-person number. (3) Beat DC 4 Party on social proof — 30 reviews in 90 days. (4) Beat Uptown Bus on niche depth — we win bachelorette while they spread thin.
+  </div>
+
+  <h3>Universal gaps we can exploit</h3>
+  <div class="cards c3">
+    <div class="card"><h4>Video</h4><p>Not one competitor has embedded fleet video. We have 8 clips already shot — embed them and instantly differentiate.</p></div>
+    <div class="card"><h4>Spanish content</h4><p>Zero competitors offer Spanish. 17% of the DMV is Hispanic — a market nobody is fighting for.</p></div>
+    <div class="card"><h4>Quinceañera</h4><p>No competitor has a Quinceañera landing page. A $20K+/year segment that's wide open.</p></div>
+    <div class="card"><h4>Instant quote calculator</h4><p>Zero competitors offer instant pricing. A 4-input calculator (passengers, hours, date, ZIP) removes the form-friction wall.</p></div>
+    <div class="card"><h4>Schema markup</h4><p>Weak across all 8. Full LocalBusiness, Service, FAQ, and Vehicle schema vaults us into AI Overviews.</p></div>
+    <div class="card"><h4>Loyalty / planners</h4><p>No competitor rewards repeat customers. Wedding planners book 8–15 events/year — lock them in.</p></div>
+  </div>
+
+  <div class="callout">
+    <b>Positioning recommendation:</b> Lead with <b>bachelorette + birthday</b> (emotional pull, highest social-share rate, easiest to advertise on Meta/IG). Layer <b>transparent pricing</b> as the operational moat (only DMV operator with a real quote calculator). Seed <b>wine tours</b> as the Q2/Q3 vertical (high AOV, daytime utilization, repeat customers via planners).
+  </div>
+</section>
+
+<!-- TWO SITE -->
+<section class="block" id="twosite">
+  <div class="sec-no">02 · POSITIONING</div>
+  <h2>Two front doors, one business</h2>
+  <p class="sub">Run <b>partylimobusdc.com</b> (premium) and <b>partybusrus.com</b> (party) as separate, attributable sites. Same fleet, same dispatch, twice the search real estate and clean ad attribution — a proven white-hat strategy DMV limo competitors already use.</p>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="premium">⚜ Premium Door</button>
+    <button class="tab-btn" data-tab="party">★ Party Door</button>
+  </div>
+  <div class="tab-panel active" id="premium">
+    <div class="card">
+      <h4>partylimobusdc.com — "The Premium Door"</h4>
+      <p style="margin-top:8px;"><b style="color:var(--text)">Audience:</b> weddings, corporate transport, executive shuttles, milestone birthdays (40+), funerals, anniversaries.<br>
+      <b style="color:var(--text)">Voice:</b> "DMV's premier coachway service." Polished, refined, trust-building.<br>
+      <b style="color:var(--text)">SEO focus:</b> limo service DC, wedding transportation Virginia, corporate shuttle Maryland.<br>
+      <b style="color:var(--text)">Lead magnets:</b> wedding transportation guide, corporate account application.</p>
+    </div>
+  </div>
+  <div class="tab-panel" id="party">
+    <div class="card">
+      <h4>partybusrus.com — "The Party Door"</h4>
+      <p style="margin-top:8px;"><b style="color:var(--text)">Audience:</b> bachelor/bachelorette, 21st & 30th birthdays, prom, winery tours, brewery crawls, nightlife groups.<br>
+      <b style="color:var(--text)">Voice:</b> "Roll deep. The party starts the second you board." Energetic, fun, no-pretense.<br>
+      <b style="color:var(--text)">SEO focus:</b> party bus DC, bachelorette bus DMV, winery tour bus Virginia, birthday bus.<br>
+      <b style="color:var(--text)">Lead magnets:</b> bachelorette route planner, brewery crawl itineraries, group cost-splitter.</p>
+    </div>
+  </div>
+
+  <h3>What stays shared (non-negotiable)</h3>
+  <ul class="clean">
+    <li><b>One Google Business Profile.</b> One physical business = one GBP. Two profiles for the same address violates Google policy and gets one suspended.</li>
+    <li><b>Reviews.</b> All reviews live on the single GBP; both sites display the same embedded feed.</li>
+    <li><b>Fleet + dispatch + pricing.</b> Same buses, same calendar (no double-booking), same rates — just presented to a different audience.</li>
+  </ul>
+  <div class="callout"><b>Why it works:</b> Both sites can rank for "party bus DC" — but partybusrus.com ranks stronger because the domain matches the query. We stop competing with ourselves and start covering both ends of the market. 8-week rollout.</div>
+</section>
+
+<!-- FOUNDATION -->
+<section class="block" id="foundation">
+  <div class="sec-no">03 · FIX THE LEAKS</div>
+  <h2>Foundation: stop losing leads now</h2>
+  <p class="sub">The new site looks beautiful — and that's the problem. SEO + go-to-market readiness scored <b>28/100</b>. Three blockers are quietly killing results. None are hard to fix.</p>
+
+  <div class="cards c3">
+    <div class="card"><span class="tag t-bad">Blocker #1</span><h4>SPA hash routing</h4><p>Single-file site with #/page URLs. Google indexes only the home page — 45 of 46 pages are invisible. Re-architect to a multi-page static site (Astro). Highest-ROI move of 2026.</p></div>
+    <div class="card"><span class="tag t-bad">Blocker #2</span><h4>Quote form is broken</h4><p>Form fields lack name attributes and there's no backend. Every inquiry submitted right now is lost. Wire to Formspree / Netlify Forms this week.</p></div>
+    <div class="card"><span class="tag t-bad">Blocker #3</span><h4>Zero analytics</h4><p>No GA4, GTM, Meta Pixel, or call tracking. We're flying blind. Install all four in week 1 — we can't improve what we can't measure.</p></div>
+  </div>
+
+  <h3>The 15 quick wins — week 1</h3>
+  <div class="cards c3">
+    <div class="card"><span class="tag t-gold">Tracking</span><p>Install GA4 + GTM · Meta Pixel via GTM · CallRail number + swap site phone · wire phone-click events to GA4.</p></div>
+    <div class="card"><span class="tag t-gold">Site fixes</span><p>Replace 1.1 MB favicon · remove duplicate testimonial · fix Google review URL · strip insurance/credentials & "6 years" leftovers · fix About-page pricing contradiction.</p></div>
+    <div class="card"><span class="tag t-gold">Performance &amp; schema</span><p>Compress 3 oversized hero images to &lt;300 KB · add name attributes + wire form backend · add lang/hreflang to Spanish pages · make JSON-LD URLs absolute.</p></div>
+  </div>
+
+  <div class="callout"><b>Strengths we keep:</b> a strong 2,438-word home page (most competitors have 400–800), genuine city pages, alt text on every image, LocalBusiness schema foundation, and a locked-in brand voice that can't be copied.</div>
+</section>
+
+<!-- SEO -->
+<section class="block" id="seo">
+  <div class="sec-no">04 · THE ALGORITHM</div>
+  <h2>SEO &amp; Google Business Profile</h2>
+  <p class="sub">Local SEO in 2026 is different: AI Overviews now trigger on 68% of local queries (vs. 39% triggering a traditional local pack). Schema is the single most underleveraged ranking factor — it's how AI Overviews quote you.</p>
+
+  <h3>2026 local SEO signal weights</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Signal</th><th>Weight</th></tr>
+    <tr><td>Google Business Profile (proximity, reviews, photos, categories, posts)</td><td>32%</td></tr>
+    <tr><td>On-page SEO (titles, H1s, content depth, schema, internal links)</td><td>19%</td></tr>
+    <tr><td>Behavioral &amp; other (CTR, dwell time, mobile UX, Core Web Vitals)</td><td>18%</td></tr>
+    <tr><td>Reviews (count, velocity, rating, response rate, keywords)</td><td>16%</td></tr>
+    <tr><td>Backlinks (domain authority, local citations, brand mentions)</td><td>15%</td></tr>
+  </table></div>
+
+  <div class="cards c2">
+    <div class="card"><span class="tag t-good">✔ What we have</span><p>LocalBusiness JSON-LD · 2,438-word home page · unique DC/MD/VA city pages · alt text on every image · HTTPS + mobile responsive · real photography beating competitors.</p></div>
+    <div class="card"><span class="tag t-warn">⚠ What we need</span><p>Multi-page architecture · sitemap.xml in Search Console · canonical URLs · FAQ schema on top 6 service pages · Service + Vehicle schema · review aggregateRating · 30+ citations · 4–6 reviews/month to hit 100+ by November.</p></div>
+  </div>
+  <div class="callout"><b>GBP priorities:</b> update categories/services/attributes, post weekly, upload 30+ photos, and sustain 1–2 fresh reviews/week. GBP is 32% of the ranking weight — it's the single biggest lever.</div>
+</section>
+
+<!-- ADS -->
+<section class="block" id="ads">
+  <div class="sec-no">05 · PAID SEARCH</div>
+  <h2>Google Ads plan</h2>
+  <p class="sub">Four campaigns, phased rollout, clean attribution. Start cheap, scale fast, kill underperformers in week one.</p>
+
+  <div class="cards c2">
+    <div class="card"><span class="tag t-gold">1 · Brand &amp; Geo</span><h4>Highest intent</h4><p>Defensive brand bidding + core city/service combos: party bus DC, party bus rental DMV, limo bus DC, party bus Arlington/Bethesda. Phrase match + brand exact. Budget $40 → $80 → $150/day.</p></div>
+    <div class="card"><span class="tag t-gold">2 · Occasion</span><h4>Best conversion rate</h4><p>Long-tail intent: bachelorette party bus DC, prom bus VA, winery tour bus MD, brewery crawl bus, Quinceañera bus, wedding shuttle. Budget $30 → $80 → $150/day.</p></div>
+    <div class="card"><span class="tag t-gold">3 · Competitor Conquest</span><h4>Steal share</h4><p>Bid on the 8 competitor brand names (phrase only — never use their brand in ad copy). Budget $10 → $20 → $40/day.</p></div>
+    <div class="card"><span class="tag t-gold">4 · Performance Max</span><h4>Only after 90 days</h4><p>Multi-channel automation — launch only after 90 days of clean conversion data + 20 offline conversions imported. Budget $80–150/day. Kill if 21-day ROAS &lt; 2×.</p></div>
+  </div>
+
+  <h3>Budget progression &amp; expected outcomes</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Phase</th><th>Month</th><th>Daily</th><th>Monthly</th><th>Goal</th></tr>
+    <tr><td>Pilot</td><td>1</td><td>$80</td><td>$2,400</td><td>Calibrate, kill losers</td></tr>
+    <tr><td>Scale</td><td>2–3</td><td>$160–250</td><td>$4,800–7,500</td><td>Double down on winners</td></tr>
+    <tr><td>Established</td><td>4+</td><td>$330–500</td><td>$10,000–15,000</td><td>Add Performance Max</td></tr>
+  </table></div>
+  <div class="callout"><b>Targets:</b> $25–70 cost per lead · $150–280 cost per booking · 3–7× ROAS · 80–150 leads/mo at full scale. Wire 6 conversions: form submit, phone click, CallRail call, calculator complete, booking confirmed, and revenue value. <b>Booking-confirmed offline-conversion import is the biggest 2026 lever.</b></div>
+</section>
+
+<!-- CHANNELS -->
+<section class="block" id="channels">
+  <div class="sec-no">06 · BEYOND GOOGLE</div>
+  <h2>Other paid channels</h2>
+  <p class="sub">Six channels evaluated. Verdict and expected cost per lead for each.</p>
+  <div class="tbl-wrap"><table>
+    <tr><th>Channel</th><th>Verdict</th><th>CPL</th><th>Start</th></tr>
+    <tr><td><b>Meta Ads (FB + IG)</b> — lead form ads, bachelorette/birthday</td><td><span class="pill t-good">Recommended</span></td><td>$8–22</td><td>Week 4 · $30–60/day</td></tr>
+    <tr><td><b>TikTok Ads</b> — Spark Ads on best organic, bachelorette/prom</td><td><span class="pill t-good">Selective</span></td><td>$12–25</td><td>Month 2 · $20/day</td></tr>
+    <tr><td><b>YouTube Ads</b> — retargeting site visitors only</td><td><span class="pill t-warn">Upper-funnel</span></td><td>$8–15 CPM</td><td>Month 3 · $10/day</td></tr>
+    <tr><td><b>The Knot / WeddingWire</b> — free profiles first</td><td><span class="pill t-warn">Free first</span></td><td>$60–180 paid</td><td>Week 1 (free) · pay after 25 reviews</td></tr>
+    <tr><td><b>GigSalad</b> — claim free profile for citation value</td><td><span class="pill t-warn">Free only</span></td><td>—</td><td>Week 2</td></tr>
+    <tr><td><b>Thumbtack / Bark</b> — low-quality price-shoppers</td><td><span class="pill t-bad">Skip</span></td><td>$20–40</td><td>—</td></tr>
+  </table></div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="block" id="ig">
+  <div class="sec-no">07 · INSTAGRAM</div>
+  <h2>Instagram playbook</h2>
+  <p class="sub">Today: 86 followers, 7 posts. Target: 3,500 followers and 12+ bookings/month from IG by day 90. The DMV leaders sit at 10–16K — we're catching up enough to convert at scale.</p>
+
+  <div class="kpis" style="padding:0;margin:0 0 20px;">
+    <div class="kpi"><div class="num">86</div><div class="lbl">Today</div></div>
+    <div class="kpi"><div class="num">500</div><div class="lbl">Day 30</div></div>
+    <div class="kpi"><div class="num">1,500</div><div class="lbl">Day 60</div></div>
+    <div class="kpi"><div class="num">3,500+</div><div class="lbl">Day 90</div></div>
+  </div>
+
+  <h3>The 6 content pillars</h3>
+  <div class="cards c3">
+    <div class="card"><h4>Bus in Action · 40%</h4><p>Real event footage — boarding, dance-pole moments, LED reveals, brewery stops. Reels. Highest engagement.</p></div>
+    <div class="card"><h4>Plan With Us · 15%</h4><p>Itinerary carousels — "5 stops every Annapolis bachelorette needs." Highest save rate.</p></div>
+    <div class="card"><h4>Customer Stories · 15%</h4><p>UGC reels from real groups (with permission). Word-of-mouth amplifier.</p></div>
+    <div class="card"><h4>LED Moods · 10%</h4><p>Color-showcase reels with bass-drop sound design.</p></div>
+    <div class="card"><h4>Behind the Scenes · 10%</h4><p>Cleaning, prepping LEDs, driver POV pulling up to a pickup.</p></div>
+    <div class="card"><h4>DMV Nights · 10%</h4><p>Geo-tagged local landmarks at night — H Street, Adams Morgan, Wharf, Tysons.</p></div>
+  </div>
+
+  <h3>Weekly cadence</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Day</th><th>Time</th><th>Format</th><th>Pillar</th></tr>
+    <tr><td>Mon</td><td>7:30 PM</td><td>Reel</td><td>Bus in Action</td></tr>
+    <tr><td>Tue</td><td>11:00 AM</td><td>Carousel</td><td>Plan With Us</td></tr>
+    <tr><td>Wed</td><td>7:00 PM</td><td>Reel</td><td>LED Moods / DMV Nights</td></tr>
+    <tr><td>Thu</td><td>12:00 PM</td><td>Reel</td><td>Behind the Scenes</td></tr>
+    <tr><td>Fri</td><td>6:30 PM</td><td>Reel</td><td>UGC / Testimonial</td></tr>
+    <tr><td>Sat</td><td>All day</td><td>Stories (3–5)</td><td>Bus in Action (live)</td></tr>
+    <tr><td>Sun</td><td>5:00 PM</td><td>Carousel</td><td>Week in Review</td></tr>
+  </table></div>
+  <div class="callout"><b>Engagement engine:</b> 30 minutes of active engagement right after every post · 20 cold DMs/day to bachelorette-tagged accounts and planners · one venue story-takeover swap per month · fast 5-minute DM responses using saved quote templates. 13–15 hashtags/post from 4 rotating buckets (bachelorette, wedding, brewery/winery, nightlife).</div>
+</section>
+
+<!-- AI -->
+<section class="block" id="ai">
+  <div class="sec-no">08 · AI CONTENT</div>
+  <h2>Nano Banana + Higgsfield production</h2>
+  <p class="sub">We already pay for both. They produce ~80% of the IG content without a paid photographer or videographer.</p>
+  <div class="cards c2">
+    <div class="card"><span class="tag t-mag">Nano Banana · images</span><p>Hero golden-hour bus exteriors · bachelorette flat-lays · lifestyle boarding mockups · 25-pax interior portraits · illustrated brewery-crawl route maps.</p></div>
+    <div class="card"><span class="tag t-mag">Higgsfield · video</span><p>LED reveal reels (Recast) · atmospheric night b-roll · talking-head driver-tip UGC (Avatar) · bus pull-up POV reels · 3-second logo stingers.</p></div>
+  </div>
+  <h3>Cost / time savings vs. traditional shoots</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Asset</th><th>Traditional</th><th>AI cost</th><th>Time saved</th></tr>
+    <tr><td>Hero brand still</td><td>$400–800</td><td>$1–3</td><td>~6 hrs</td></tr>
+    <tr><td>LED reveal reel</td><td>$300–600</td><td>$3–8</td><td>~4 hrs</td></tr>
+    <tr><td>Talking-head UGC</td><td>$200–400</td><td>$4–10</td><td>~2 hrs</td></tr>
+    <tr><td>Route map illustration</td><td>$150–300</td><td>$1–2</td><td>~3 hrs</td></tr>
+    <tr><td><b>Monthly total (8 assets)</b></td><td><b>$2,500–5,000</b></td><td><b>$30–80</b></td><td><b>~30 hrs</b></td></tr>
+  </table></div>
+  <div class="callout"><b>Workflow:</b> Frederick captures real Saturday-night footage (phone is fine, quantity over quality) → AI fills the gaps (hero stills, reveal reels, UGC) → one 4-hour weekly batch edit in CapCut, scheduled via Meta Business Suite → Frederick handles live replies/DMs (the human layer that converts).</div>
+</section>
+
+<!-- LEADS -->
+<section class="block" id="leads">
+  <div class="sec-no">09 · LEAD GENERATION</div>
+  <h2>Multi-channel lead mix</h2>
+  <p class="sub">No single channel carries us — the mix does. So no single channel can kill us if it underperforms in a given month.</p>
+  <div class="tbl-wrap"><table>
+    <tr><th>Channel</th><th>Priority</th><th>Time to result</th><th>Volume/mo</th></tr>
+    <tr><td>Google Ads</td><td><span class="pill t-good">Highest</span></td><td>48 hours</td><td>80–150</td></tr>
+    <tr><td>Organic Search (SEO)</td><td><span class="pill t-good">High</span></td><td>12–24 wk</td><td>30–80</td></tr>
+    <tr><td>Meta Ads (FB + IG)</td><td><span class="pill t-good">High</span></td><td>1–2 wk</td><td>40–80</td></tr>
+    <tr><td>Partnerships (venues, planners, wineries)</td><td><span class="pill t-gold">Highest LTV</span></td><td>2–8 wk</td><td>5–20</td></tr>
+    <tr><td>Instagram organic</td><td><span class="pill t-warn">Compounding</span></td><td>4–12 wk</td><td>5–25</td></tr>
+    <tr><td>Referral / repeat</td><td><span class="pill t-warn">Free engine</span></td><td>8–24 wk</td><td>10–30</td></tr>
+    <tr><td>Email nurture (Klaviyo)</td><td><span class="pill t-warn">Multiplier</span></td><td>ongoing</td><td>3–10</td></tr>
+    <tr><td>WeddingWire / The Knot</td><td><span class="pill t-warn">Free first</span></td><td>4–8 wk</td><td>2–10</td></tr>
+  </table></div>
+  <div class="callout"><b>Channel mix at day 90:</b> Google Ads 40% · Meta Ads 20% · Organic 15% · Instagram 10% · Partnerships 10% · Email/Referral 5%.</div>
+</section>
+
+<!-- ROADMAP -->
+<section class="block" id="roadmap">
+  <div class="sec-no">10 · THE PATH</div>
+  <h2>90-day roadmap</h2>
+  <p class="sub">Week-by-week milestones, with decision gates and kill criteria so we don't burn budget on losers.</p>
+  <div class="tl">
+    <div class="tl-item"><div class="wk">Week 1</div><h4>Tracking foundation + critical fixes</h4><p>GA4 / GTM / Meta Pixel / CallRail installed. Form wired to a backend. Favicon, duplicate testimonial, broken review URL fixed. Zero leads lost from here on.</p></div>
+    <div class="tl-item"><div class="wk">Week 2</div><h4>Schema + GBP + content gaps</h4><p>Schema enriched. GBP optimized with 30+ photos and weekly posts. 9 blog posts get real photos. Fleet detail pages spec'd for dev.</p></div>
+    <div class="tl-item"><div class="wk">Week 3</div><h4>IG content batch + citations</h4><p>10 reels + 4 carousels scheduled. 30 citations submitted. Highlights structure live. DM templates in use.</p></div>
+    <div class="tl-item"><div class="wk">Week 4</div><h4>Google Ads pilot + partnerships</h4><p>$80/day Google Ads live. First Meta campaign warming. 18 partnership emails sent. <b>Gate (day 14):</b> if CPL &gt; $80, pause Competitor Conquest.</p></div>
+    <div class="tl-item"><div class="wk">Weeks 5–6</div><h4>Multi-page site re-architecture begins</h4><p>SPA → multi-page static site (Astro). Every city, occasion, and fleet vehicle becomes its own indexable URL. The single biggest ROI move of 2026.</p></div>
+    <div class="tl-item"><div class="wk">Weeks 7–8</div><h4>Meta scale + IG hits 1,500</h4><p>Meta to $50/day, Google to $160/day on winners. <b>Gate:</b> kill any ad group with CPL &gt; 2× account average.</p></div>
+    <div class="tl-item"><div class="wk">Weeks 9–10</div><h4>New site live · Spanish parity</h4><p>Multi-page rebuild deployed, 301 redirects mapped, new sitemap fed to Search Console. Spanish version built to feature parity.</p></div>
+    <div class="tl-item"><div class="wk">Weeks 11–12</div><h4>TikTok launch + scale-up</h4><p>TikTok Spark Ads on best IG content. Google to $250/day, Meta to $80/day. <b>Gate:</b> if combined ROAS &lt; 2.5× over 21 rolling days, freeze scale and audit landing pages.</p></div>
+    <div class="tl-item"><div class="wk">Day 90</div><h4>Review &amp; reset</h4><p>Full review with Robert — channel mix, ROAS, lead-to-booking rate, IG followers, ranking deltas. Decide month-4 shape: scale or hold-and-optimize.</p></div>
+  </div>
+  <div class="callout"><b>Kill criteria:</b> Google ad group CPL &gt; 2× account average for 14 days = pause. Meta ad set CPL &gt; $35 for 7 days = pause. Any channel ROAS &lt; 1.5× over 21 rolling days = stop, audit, restart with fixed creative or landing page.</div>
+</section>
+
+<!-- BUDGET -->
+<section class="block" id="budget">
+  <div class="sec-no">11 · BUDGET</div>
+  <h2>Budget &amp; ROI</h2>
+  <p class="sub">Three phases, each building on the last. Every dollar maps to a measurable outcome.</p>
+  <div class="tbl-wrap"><table>
+    <tr><th>Line item</th><th>Pilot (Mo 1)</th><th>Scale (Mo 2–3)</th><th>Established (Mo 4+)</th></tr>
+    <tr><td>Google Ads</td><td>$2,400</td><td>$4,800</td><td>$10,000</td></tr>
+    <tr><td>Meta Ads</td><td>$0</td><td>$1,500</td><td>$3,000</td></tr>
+    <tr><td>TikTok Ads</td><td>$0</td><td>$0</td><td>$600</td></tr>
+    <tr><td>Tools / SaaS</td><td>$300</td><td>$500</td><td>$700</td></tr>
+    <tr><td>Content (AI credits)</td><td>$80</td><td>$120</td><td>$180</td></tr>
+    <tr><td>Partnerships</td><td>$150</td><td>$300</td><td>$500</td></tr>
+    <tr><td>Citations / directories</td><td>$120</td><td>$120</td><td>$120</td></tr>
+    <tr><td>Buffer / experiments</td><td>$150</td><td>$300</td><td>$700</td></tr>
+    <tr><td><b>Monthly total</b></td><td><b>$3,200</b></td><td><b>$7,640</b></td><td><b>$15,800</b></td></tr>
+  </table></div>
+  <div class="cards c2">
+    <div class="card"><span class="tag t-gold">Month 1</span><h4>$3,200 spend</h4><p>40–60 leads · 6–10 bookings · $8–14K revenue. Roughly break-even by design — we pay to learn.</p></div>
+    <div class="card"><span class="tag t-gold">Month 3</span><h4>$7,640 spend</h4><p>100–160 leads · 18–28 bookings · $22–50K revenue. First month of meaningful profit.</p></div>
+  </div>
+  <div class="callout"><b>What blows the budget:</b> (1) scaling spend before tracking is reliable; (2) adding Performance Max before 90 days of data; (3) paying for WeddingWire boosted listings without reviews; (4) buying spammy citations instead of doing the 30 manually.</div>
+</section>
+
+<!-- KPIS -->
+<section class="block" id="kpis">
+  <div class="sec-no">12 · KPIs</div>
+  <h2>What we measure</h2>
+  <p class="sub">One north star, five weekly metrics, eight monthly metrics — all in one Looker Studio dashboard so Robert sees the same numbers Frederick does, when Frederick does.</p>
+  <h3>Weekly (every Monday 9am)</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Metric</th><th>Target</th><th>Source</th></tr>
+    <tr><td>Leads by source</td><td>Mix on track</td><td>GA4 + CallRail</td></tr>
+    <tr><td>Cost per lead</td><td>$25–70</td><td>Google + Meta</td></tr>
+    <tr><td>Lead-to-booking rate</td><td>12–18%</td><td>CRM</td></tr>
+    <tr><td>IG follower delta</td><td>+150/wk (mo 1) → +300/wk (mo 3)</td><td>IG Insights</td></tr>
+    <tr><td>Reviews added</td><td>1–2/week</td><td>GBP</td></tr>
+  </table></div>
+  <h3>Monthly (first Monday)</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Metric</th><th>Target</th></tr>
+    <tr><td>ROAS by channel</td><td>3–7×</td></tr>
+    <tr><td>Cost per booking</td><td>$150–280</td></tr>
+    <tr><td>Organic ranking deltas</td><td>Top 3 for 5+ keywords by month 6</td></tr>
+    <tr><td>Review count + rating</td><td>100+ by Nov · 4.9 maintained</td></tr>
+    <tr><td>Average booking value</td><td>$900–1,800</td></tr>
+    <tr><td>Repeat / referral booking %</td><td>20%+ by month 6</td></tr>
+    <tr><td>IG engagement rate</td><td>4%+</td></tr>
+    <tr><td>Form abandonment rate</td><td>&lt;55%</td></tr>
+  </table></div>
+  <div class="callout"><b>Reporting cadence:</b> daily 5-min glance (Frederick) · Monday 5-metric text to Robert · monthly full Looker review + 30-min call · quarterly strategy reset.</div>
+</section>
+
+<!-- STACK -->
+<section class="block" id="stack">
+  <div class="sec-no">13 · THE STACK</div>
+  <h2>Tech stack &amp; tools</h2>
+  <p class="sub">Required baseline ~$320/mo · recommended ~$500/mo · full stack with Ahrefs ~$700/mo. Most are free at our current scale.</p>
+  <div class="tbl-wrap"><table>
+    <tr><th>Tool</th><th>Category</th><th>Monthly</th><th>Status</th></tr>
+    <tr><td>Moovs <i>or</i> Limo Anywhere</td><td>Booking / dispatch</td><td>$199</td><td>Required</td></tr>
+    <tr><td>HoneyBook</td><td>CRM</td><td>$39</td><td>Required</td></tr>
+    <tr><td>Klaviyo</td><td>Email</td><td>Free &lt;250 / ~$45</td><td>Required</td></tr>
+    <tr><td>CallRail</td><td>Call tracking</td><td>$45</td><td>Required</td></tr>
+    <tr><td>Formspree / Netlify Forms</td><td>Form backend</td><td>$0–10</td><td>Required</td></tr>
+    <tr><td>GA4 + GTM + Meta Pixel</td><td>Analytics / tags</td><td>Free</td><td>Required</td></tr>
+    <tr><td>Looker Studio</td><td>Dashboard</td><td>Free</td><td>Required</td></tr>
+    <tr><td>Netlify Pro</td><td>Hosting + forms</td><td>$19</td><td>Recommended</td></tr>
+    <tr><td>CapCut Pro</td><td>Video editing</td><td>$8</td><td>Recommended</td></tr>
+    <tr><td>Nano Banana + Higgsfield</td><td>AI image / video</td><td>Already paid</td><td>In use</td></tr>
+    <tr><td>Ahrefs Lite</td><td>SEO research</td><td>$129</td><td>Optional</td></tr>
+  </table></div>
+  <div class="callout"><b>Week-1 onboarding order:</b> Day 1 GA4 + GTM + Meta Pixel · Day 2 CallRail · Day 3 Formspree/Netlify Forms · Week 2 Klaviyo + HoneyBook · Week 3 Moovs booking · Week 4 Looker Studio. <b>Tool picks:</b> Moovs (modern booking UX) · Klaviyo (automation) · Netlify Forms if on Netlify Pro, Formspree otherwise.</div>
+</section>
+
+<footer>
+  Party Bus R Us · Operated by City Coachways Inc.<br>
+  Consolidated Marketing Plan · 2026 · The site looks beautiful — now let's make it sell.
+  <div class="sig">— Frederick · Marketing</div>
+  <p style="margin-top:14px;"><a href="#overview">↑ Back to top</a></p>
+</footer>
+
+<script>
+  // Two-site tabs
+  document.querySelectorAll('.tab-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+  // Active nav highlight on scroll
+  var navLinks = Array.from(document.querySelectorAll('#jumpNav a'));
+  var sections = navLinks.map(a=>document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    var pos = window.scrollY + 120;
+    var current = sections[0];
+    sections.forEach(function(s){ if(s && s.offsetTop <= pos) current = s; });
+    navLinks.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#'+(current && current.id));
+    });
+  }
+  window.addEventListener('scroll', onScroll); onScroll();
+</script>
+</body>
+</html>

@@ -7,3 +7,6 @@ Thumbs.db
 .env.local
 .idea/
 .vscode/
+
+# local verification tooling (lighthouse/puppeteer) - do not deploy
+.verify/
