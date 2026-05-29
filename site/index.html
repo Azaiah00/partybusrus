@@ -1853,10 +1853,12 @@ window.addEventListener('load', function(){
   gsap.utils.toArray('section').forEach(function(section){
     var targets = section.querySelectorAll('.section-head, .section-head h2, .section-head p, .section-head .kicker');
     if (!targets.length) return;
-    gsap.from(targets, {
-      y: 30, opacity: 0, duration: 0.8, ease: 'power2.out', stagger: 0.1,
-      scrollTrigger: { trigger: section, start: 'top 80%', toggleActions: 'play none none none' }
-    });
+    // fromTo (not from): explicit end state can't be mis-captured as opacity:0 by ScrollTrigger.refresh()
+    gsap.fromTo(targets,
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out', stagger: 0.1,
+        scrollTrigger: { trigger: section, start: 'top 80%', toggleActions: 'play none none none' } }
+    );
   });
 
   // Stagger reveals on common grids
@@ -1865,10 +1867,12 @@ window.addEventListener('load', function(){
     document.querySelectorAll(sel).forEach(function(grid){
       var items = grid.children;
       if (!items || !items.length) return;
-      gsap.from(items, {
-        y: 24, opacity: 0, duration: 0.6, ease: 'power2.out', stagger: 0.06,
-        scrollTrigger: { trigger: grid, start: 'top 85%', toggleActions: 'play none none none' }
-      });
+      // fromTo (not from): explicit end state can't be mis-captured as opacity:0 by ScrollTrigger.refresh()
+      gsap.fromTo(items,
+        { y: 24, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out', stagger: 0.06,
+          scrollTrigger: { trigger: grid, start: 'top 85%', toggleActions: 'play none none none' } }
+      );
     });
   });
 
