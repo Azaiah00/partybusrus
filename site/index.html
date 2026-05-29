@@ -278,6 +278,14 @@ section.s{padding:100px 0;position:relative}
 .final-cta p{font-size:18px;color:#d8d8cc;margin-bottom:36px;font-weight:300}
 .final-cta-actions{display:inline-flex;gap:14px;flex-wrap:wrap;justify-content:center}
 
+/* MID-PAGE CTA STRIP (Phase 5 i3) — conversion exit between photo cluster and text middle */
+.midcta{padding:34px 0;background:#0a0a0f;border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative}
+.midcta:before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold) 50%,transparent);opacity:.5}
+.midcta .container{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.midcta-text{font-size:17px;color:#d8d8cc;margin:0;font-weight:300;line-height:1.5;flex:1;min-width:260px}
+.midcta-text strong{color:var(--gold2);font-weight:500;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:21px;display:inline-block;margin-left:4px}
+@media(max-width:680px){.midcta{padding:26px 0}.midcta .container{flex-direction:column;text-align:center;gap:16px}.midcta-text{font-size:15.5px}.midcta-text strong{font-size:19px;display:block;margin-left:0;margin-top:4px}.midcta .btn{width:100%}}
+
 /* FOOTER */
 footer{background:#000;color:var(--mute);padding:80px 0 30px;border-top:1px solid var(--line)}
 .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:36px;margin-bottom:60px}
@@ -1351,6 +1359,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <a href="/services/out-of-town.html" class="btn gold">Out-of-Town Trips <span class="arrow">&rarr;</span></a>
       </div>
+    </div>
+  </section>
+
+  <!-- MID-PAGE QUOTE CTA STRIP (Phase 5 i3) -->
+  <section class="midcta" aria-label="Get a quote">
+    <div class="container">
+      <p class="midcta-text">Already picturing your night?<strong>Get a real quote in under 60 seconds.</strong></p>
+      <a class="btn gold lg" href="/quote.html">Get a Quote <span class="arrow">&rarr;</span></a>
     </div>
   </section>
 
