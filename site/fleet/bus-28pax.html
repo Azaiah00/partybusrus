@@ -33,49 +33,20 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"The Cavalier 28","description":"The Cavalier 28 is a 28-passenger party bus with deep blue LED, chrome dance pole, premium leather seating, and full bar. Built for prom groups, brewery crawls, and bachelorettes.","url":"https://partybusrus.vercel.app/fleet/bus-28pax.html","brand":{"@type":"Brand","name":"Party Bus R Us"},"category":"Limousine Service Vehicle"}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<!-- ====== ANALYTICS SCAFFOLDING ====== -->
-<!-- WARNING: REPLACE these placeholder IDs with real values before deploying to production -->
-
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
-<!-- End Google Tag Manager -->
-
-<!-- Google Analytics 4 (also gets injected by GTM, but adding direct as fallback) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=optional" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=optional"></noscript>
+<!-- ====== ANALYTICS SCAFFOLDING (parked for performance — see ANALYTICS-SETUP.md) ====== -->
+<!-- ANALYTICS PLACEHOLDER: replace this comment with the real Google Tag Manager container script when the GTM ID is available. See ANALYTICS-SETUP.md. -->
+<!-- ANALYTICS PLACEHOLDER: replace this comment with the real GA4 gtag.js loader + config when the G- ID is available. See ANALYTICS-SETUP.md. -->
+<!-- ANALYTICS PLACEHOLDER: replace this comment with the real Meta Pixel fbevents.js loader when the Pixel ID is available. See ANALYTICS-SETUP.md. -->
+<!-- ANALYTICS PLACEHOLDER: replace this comment with the real CallRail swap.js script when the CallRail IDs are available. See ANALYTICS-SETUP.md. -->
 <script>
+  // Tracking stubs — keep so the site's gtag('event',...) and fbq('track',...) calls
+  // (used across pages) don't throw until the real scripts above are restored.
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX', {
-    'page_path': window.location.pathname,
-    'anonymize_ip': true
-  });
+  window.fbq = window.fbq || function(){(fbq.q=fbq.q||[]).push(arguments);};
 </script>
-
-<!-- Meta Pixel -->
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', 'XXXXXXXXXXXXXXX');
-  fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" alt="" style="display:none"
-  src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"/></noscript>
-
-<!-- CallRail (Dynamic Number Insertion - optional, for tracking phone calls by source) -->
-<script async src="//cdn.callrail.com/companies/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXX/12/swap.js"></script>
-
 <!-- ====== END ANALYTICS SCAFFOLDING ====== -->
 
 <style>
@@ -260,7 +231,7 @@ section.s{padding:100px 0;position:relative}
 .faq-item .ans{padding:0 0 28px;color:var(--mute);font-size:15px;line-height:1.7;max-width:780px}
 
 /* FINAL CTA */
-.final-cta{position:relative;background-color:#14101c;background-image:url('/IMG_0156-1200.webp');background-size:cover;background-position:center;background-attachment:fixed;padding:140px 0;text-align:center;overflow:hidden}
+.final-cta{position:relative;background-color:#14101c;background-image:url('/IMG_0156-768.webp');background-size:cover;background-position:center;background-attachment:fixed;padding:140px 0;text-align:center;overflow:hidden}
 .final-cta:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,15,.85),rgba(10,10,15,.6))}
 .final-cta .container{position:relative;z-index:2}
 .final-cta h2{font-family:"Cormorant Garamond",serif;font-size:clamp(40px,6vw,72px);font-weight:300;color:#fff;margin-bottom:18px;line-height:1.05}
