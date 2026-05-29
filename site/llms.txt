@@ -1,6 +1,6 @@
 # Party Bus R Us
 
-> Premium party bus and limo bus rental company serving Washington DC, Maryland, and Northern Virginia (the DMV). Bilingual English/Spanish dispatch, 24/7 booking, BYOB-friendly fleet of 7 buses seating 20 to 35 passengers. Family-owned. Established to serve weddings, bachelorettes, proms, quinceaneras, brewery and winery tours, corporate shuttles, and night-out events.
+> Premium party bus and limo bus rental company serving Washington DC, Maryland, and Northern Virginia (the DMV). Bilingual English/Spanish dispatch, 24/7 booking, BYOB-friendly fleet of luxury party buses seating 20 to 35 passengers. Family-owned. Established to serve weddings, bachelorettes, proms, quinceaneras, brewery and winery tours, corporate shuttles, and night-out events.
 
 ## About
 
@@ -14,7 +14,7 @@
 - Hours: Booking team 8am-10pm daily; dispatch on call 24/7
 - Languages: English, Spanish
 
-## Fleet (7 buses)
+## Fleet
 
 - Imperial 35 — 35 passengers, top of fleet, full LED, premium sound, wet bar, dance pole, wood floor — /fleet/bus-35pax.html
 - Empire 32 — 32 passengers, club-grade LED, wet bar — /fleet/bus-32pax.html

@@ -59,7 +59,7 @@
     {
       "name": "View Fleet",
       "short_name": "Fleet",
-      "description": "Browse all 7 party buses",
+      "description": "Browse our fleet",
       "url": "/fleet.html?source=pwa-shortcut",
       "icons": [{"src": "/icon-192.png", "sizes": "192x192"}]
     },
