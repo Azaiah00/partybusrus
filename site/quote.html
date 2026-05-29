@@ -1567,7 +1567,7 @@ document.querySelectorAll('.gw-state-btn').forEach(btn => {
 window.addEventListener('load', function(){
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.matchMedia('(max-width: 880px)').matches) return;
+  var isDesktop = !window.matchMedia('(max-width: 880px)').matches;
   gsap.registerPlugin(ScrollTrigger);
   // Fade-up section headers
   gsap.utils.toArray('section').forEach(function(section){

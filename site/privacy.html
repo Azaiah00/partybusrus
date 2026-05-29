@@ -1239,7 +1239,7 @@ window.addEventListener('load', function(){
   gsap.registerPlugin(ScrollTrigger);
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  if (window.matchMedia('(max-width: 880px)').matches) return;
+  var isDesktop = !window.matchMedia('(max-width: 880px)').matches;
   // Fade-up on section headers
   gsap.utils.toArray('section').forEach(function(section){
     var targets = section.querySelectorAll('.section-head, .section-head h2, .section-head p, .section-head .kicker');
@@ -1283,6 +1283,9 @@ window.addEventListener('load', function(){
       }
     });
   });
+
+  // Desktop-only effects below (parallax + sticky-nav scrub — battery-heavy on phones)
+  if (!isDesktop) return;
 
   // Hero parallax (subtle)
   var heroBg = document.querySelector('.hero-bg');

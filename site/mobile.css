@@ -590,11 +590,31 @@ input[type="checkbox"], input[type="radio"] {
   .stats-row, .stat-row, .stats-big-grid { grid-template-columns: 1fr !important; }
 }
 
-/* ---- 6. KILL ANIMATIONS THAT TANK MOBILE PERF ---- */
+/* ---- 6. KILL ANIMATIONS THAT TANK MOBILE PERF (Phase 6 i3 audit) ---- */
 @media (max-width: 880px) {
-  .hero-bg, .hero-image { transform: none !important; }
+  /* Stop the hero ken-burns transform AND the underlying animation
+     so the browser doesn't process keyframes every frame for nothing. */
+  .hero-bg, .hero-image {
+    transform: none !important;
+    animation: none !important;
+  }
+  /* The hero-scroll indicator pulses continuously via scroll-pulse
+     keyframe — and on a phone where the user has already scrolled
+     past it, it's burning battery. Hide on mobile entirely. */
+  .hero-scroll { display: none !important; }
   /* Disable scroll parallax + scrub effects */
   [data-parallax], .parallax { transform: none !important; }
+  /* Tell the browser it can skip layout/paint for sections that
+     scroll off-screen. Major paint-perf win on long mobile pages. */
+  section.s, section.stats-big, section.final-cta, section.midcta {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 600px;
+  }
+  /* But NOT the hero (which is on-screen at load) and NOT the
+     first section after hero (might be just below the fold). */
+  .hero, .hero ~ section.stats-big:first-of-type {
+    content-visibility: visible !important;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

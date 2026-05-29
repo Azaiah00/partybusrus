@@ -160,6 +160,15 @@ nav.main .container{display:flex;align-items:center;justify-content:space-betwee
 .diff-pill:hover{border-color:rgba(212,175,55,.7);background:rgba(20,16,28,.75)}
 @media(max-width:520px){.diff-row{gap:8px;margin-top:24px}.diff-pill{padding:8px 13px;font-size:11.5px}}
 
+/* HERO LOAD-IN FADE-UP (Phase 6 i2) — works on mobile + desktop without GSAP */
+@keyframes heroFadeUp{from{opacity:0;transform:translate3d(0,18px,0)}to{opacity:1;transform:none}}
+.hero .min-callout,.hero .eyebrow{animation:heroFadeUp .55s cubic-bezier(.22,.61,.36,1) .02s both}
+.hero h1{animation:heroFadeUp .6s cubic-bezier(.22,.61,.36,1) .08s both}
+.hero .lede{animation:heroFadeUp .6s cubic-bezier(.22,.61,.36,1) .2s both}
+.hero-actions{animation:heroFadeUp .6s cubic-bezier(.22,.61,.36,1) .3s both}
+.hero .diff-row{animation:heroFadeUp .6s cubic-bezier(.22,.61,.36,1) .4s both}
+@media(prefers-reduced-motion:reduce){.hero .min-callout,.hero .eyebrow,.hero h1,.hero .lede,.hero-actions,.hero .diff-row{animation:none}}
+
 /* TRUST BAR */
 .trustbar{background:#000;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 0}
 .trustbar .container{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center}
@@ -924,7 +933,7 @@ footer{background:#000;color:var(--mute);padding:80px 0 30px;border-top:1px soli
 @media(min-width:680px){#pwaInstallBar{left:auto;right:20px;bottom:20px;max-width:380px}}
 
 </style>
-<link rel="stylesheet" href="/mobile.css?v=20260528-reorder" media="screen">
+<link rel="stylesheet" href="/mobile.css?v=20260528-phase6" media="screen">
 </head>
 <body class="page-home">
 <!-- Google Tag Manager (noscript) -->
@@ -1833,7 +1842,7 @@ window.addEventListener('load', function(){
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   gsap.registerPlugin(ScrollTrigger);
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.matchMedia('(max-width: 880px)').matches) return;
+  var isDesktop = !window.matchMedia('(max-width: 880px)').matches;
 
   // Fade-up on section headers
   gsap.utils.toArray('section').forEach(function(section){
@@ -1878,6 +1887,9 @@ window.addEventListener('load', function(){
       }
     });
   });
+
+  // Desktop-only effects below (parallax + sticky-nav scrub � battery-heavy on phones)
+  if (!isDesktop) return;
 
   // Hero parallax (subtle)
   var heroBg = document.querySelector('.hero-bg');
