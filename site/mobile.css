@@ -590,6 +590,20 @@ input[type="checkbox"], input[type="radio"] {
   .stats-row, .stat-row, .stats-big-grid { grid-template-columns: 1fr !important; }
 }
 
+/* ---- 5a. FLEET GALLERY <img> CHILDREN (Phase 7 i6) — make div.g
+   tiles work with <img> children instead of CSS background-image,
+   so the photos are indexable by Google Image Search. ---- */
+.gallery .g img,
+.gallery .g.main img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  border: 0 !important;
+}
+.gallery .g { overflow: hidden; }
+
 /* ---- 5b. RELATED LINKS BLOCK (Phase 7 i4) — cream cross-link cluster
    added at the bottom of city/fleet/service pages for contextual SEO ---- */
 .related-links-block { background: #faf4df; padding: 60px 0; border-top: 1px solid #e3d6b8; border-bottom: 1px solid #e3d6b8; color: #1a1424; }
