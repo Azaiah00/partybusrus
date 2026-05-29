@@ -10,3 +10,6 @@ Thumbs.db
 
 # local verification tooling (lighthouse/puppeteer) - do not deploy
 .verify/
+
+# stray local deliverable — keep out of git
+deliverables/Party-Bus-R-Us-Marketing-Plan.html
