@@ -590,6 +590,20 @@ input[type="checkbox"], input[type="radio"] {
   .stats-row, .stat-row, .stats-big-grid { grid-template-columns: 1fr !important; }
 }
 
+/* ---- 5b. RELATED LINKS BLOCK (Phase 7 i4) — cream cross-link cluster
+   added at the bottom of city/fleet/service pages for contextual SEO ---- */
+.related-links-block { background: #faf4df; padding: 60px 0; border-top: 1px solid #e3d6b8; border-bottom: 1px solid #e3d6b8; color: #1a1424; }
+.related-links-block .container { max-width: 820px; text-align: center; }
+.related-links-block h3 { font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 500; margin: 0 0 12px; color: #1a1424; letter-spacing: -.01em; }
+.related-links-block p { font-size: 15.5px; line-height: 1.75; margin: 0 auto; color: #3a3344; max-width: 720px; }
+.related-links-block a { color: #8a6815; font-weight: 500; text-decoration: none; border-bottom: 1px dotted rgba(138,104,21,.4); transition: color .2s, border-color .2s; }
+.related-links-block a:hover { color: #d4af37; border-bottom-color: #d4af37; }
+@media (max-width: 680px) {
+  .related-links-block { padding: 40px 0; }
+  .related-links-block h3 { font-size: 23px; }
+  .related-links-block p { font-size: 14.5px; padding: 0 18px; }
+}
+
 /* ---- 6. KILL ANIMATIONS THAT TANK MOBILE PERF (Phase 6 i3 audit) ---- */
 @media (max-width: 880px) {
   /* Stop the hero ken-burns transform AND the underlying animation
