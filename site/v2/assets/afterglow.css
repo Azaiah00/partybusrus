@@ -1,0 +1,339 @@
+/* =====================================================================
+   PARTY BUS R US — "AFTERGLOW" THEME (Version 2, full site)
+   Layered over each page's existing inline stylesheet. Loaded last in
+   <head> so it wins the cascade. Transforms the V1 class system into the
+   Afterglow language: Anton poster headlines, neon magenta/violet/cyan
+   palette, pill buttons, dark rounded cards, editorial spacing.
+   ===================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+:root{
+  --bg:#07060a; --bg2:#0d0b13; --bg3:#140f1e; --surf:#16111f; --surf2:#1e1729;
+  --line:#2a2138; --line2:#3a2f4e;
+  --text:#f6f1ea; --mute:#b7add0; --dim:#7d7396;
+  --gold:#f4dc88; --gold2:#f4dc88; --gold3:#c9a94a; --wine:#8a2140; --royal:#7b5a9f;
+  --green:#38f5a8; --red:#ff5c72;
+  --neonPink:#ff2d8e; --neonViolet:#a855f7; --neonCyan:#25e3f0; --neonBlue:#3b7bff; --neonGreen:#38f5a8; --neonOrange:#ff5b2e;
+  --gradGold:linear-gradient(135deg,#d4af37,#f4dc88,#b58e1a);
+  --gradNeon:linear-gradient(100deg,#ff2d8e 0%,#a855f7 48%,#25e3f0 100%);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+/* fonts */
+.ag-anton,body .ag-anton{font-family:"Anton",sans-serif!important;text-transform:uppercase;letter-spacing:.01em;line-height:.95}
+
+body{background:var(--bg);color:var(--text)}
+::selection{background:var(--neonPink);color:#fff}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(120% 80% at 50% -10%,transparent 45%,rgba(0,0,0,.5) 100%);mix-blend-mode:multiply}
+
+/* progress + flag (injected by JS) */
+.ag-prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:400;background:var(--gradNeon);box-shadow:0 0 14px rgba(168,85,247,.7)}
+.ag-flag{position:fixed;left:16px;bottom:92px;z-index:190;background:rgba(7,6,10,.82);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:999px;padding:7px 14px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--text);pointer-events:none}
+.ag-flag b{background:var(--gradNeon);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+@media(max-width:680px){.ag-flag{bottom:auto;top:8px;left:8px;font-size:9px;padding:5px 10px}}
+
+/* ---------- BUTTONS: pill + neon ---------- */
+.btn{border-radius:999px!important;letter-spacing:.08em;font-weight:700}
+.btn.gold{background:var(--gradNeon)!important;color:#fff!important;background-size:180% 180%!important}
+.btn.gold:hover{transform:translateY(-1px);box-shadow:0 12px 40px -8px rgba(168,85,247,.6)!important}
+.btn.ghost{border-color:var(--line2)!important;color:#fff!important}
+.btn.ghost:hover{border-color:var(--neonCyan)!important;color:var(--neonCyan)!important;box-shadow:0 0 26px -8px rgba(37,227,240,.6)}
+.btn.wine{background:linear-gradient(120deg,#ff2d8e,#a855f7)!important;color:#fff!important}
+.gw-btn-google,.avail-date-tab,.gallery-filter button,.gw-state-btn,.badge,.min-callout,.diff-pill{border-radius:999px!important}
+
+/* ---------- TOP BAR / NAV ---------- */
+.topbar{background:#000}
+.topbar a{color:var(--neonCyan)}
+nav.main{background:rgba(7,6,10,.72);backdrop-filter:blur(20px) saturate(1.3);-webkit-backdrop-filter:blur(20px) saturate(1.3);border-bottom:1px solid transparent}
+nav.main.scrolled{background:rgba(7,6,10,.95);border-bottom-color:var(--line)}
+.nav-links a{color:#d3cae6;font-weight:600}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-links a:after,.nav-links a.active:after{background:var(--gradNeon);height:2px}
+.dd-menu{background:#0b0712;border-color:var(--line2)}
+.dd-menu a:hover{background:rgba(168,85,247,.12);color:var(--neonCyan)}
+.dd-trigger .caret{color:var(--neonCyan)}
+.mobile-nav{background:rgba(5,4,8,.98)}
+.mobile-nav a{font-family:"Anton",sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.mobile-nav a:hover{color:var(--neonCyan)}
+
+/* ---------- PAGE HERO (interior) — editorial poster ---------- */
+.page-hero{padding:150px 0 90px;border-bottom-color:var(--line)}
+.page-hero-bg{filter:brightness(.5) saturate(1.28) contrast(1.05)}
+.page-hero:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(60% 60% at 82% 15%,rgba(168,85,247,.3),transparent 60%),
+             radial-gradient(50% 60% at 8% 95%,rgba(255,45,142,.24),transparent 60%);mix-blend-mode:screen}
+.page-hero .container{position:relative;z-index:2}
+.page-hero h1{font-family:"Anton",sans-serif;text-transform:uppercase;font-weight:400;letter-spacing:.01em;line-height:.92;font-size:clamp(46px,8vw,120px)}
+.page-hero h1 em{font-family:"Cormorant Garamond",serif;font-style:italic;text-transform:none;font-weight:500;background:var(--gradNeon);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.page-hero p{color:#ddd4ef;font-size:clamp(15px,1.5vw,18px);max-width:600px}
+.breadcrumb{color:var(--dim);font-weight:600;letter-spacing:.14em}
+.breadcrumb .sep{color:var(--neonCyan)}
+.breadcrumb a:hover{color:var(--neonCyan)}
+
+/* ---------- SECTION HEADINGS — Anton poster ---------- */
+section.s{padding:118px 0}
+@media(max-width:680px){section.s{padding:72px 0}}
+.section-head h2{font-family:"Anton",sans-serif;text-transform:uppercase;font-weight:400;letter-spacing:.01em;line-height:.98;font-size:clamp(34px,5.4vw,72px)}
+.section-head h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;text-transform:none;font-weight:500;background:var(--gradNeon);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.section-head .kicker,.kicker{color:var(--neonCyan);font-weight:700;letter-spacing:.2em}
+.section-head p{color:var(--mute)}
+
+/* ---------- MARQUEE ---------- */
+.marquee{background:linear-gradient(90deg,#050308,#1a0a24 50%,#050308);border-color:var(--line)}
+.marquee-item{color:#cfc6de;font-style:italic}
+.marquee-item:before{content:"◆";color:var(--neonPink);font-size:9px;font-style:normal;filter:drop-shadow(0 0 6px var(--neonPink))}
+
+/* ---------- PRESS / TRUST ---------- */
+.press-strip{background:#050308;border-color:var(--line)}
+.press-strip .label{color:var(--gold3)}
+.press-logo{color:#8a80a0;border-bottom-color:var(--line)}
+.press-logo:hover{color:var(--neonCyan)}
+.trustbar{background:#050308;border-color:var(--line)}
+.trust-item .ico{border-color:var(--neonViolet);color:var(--neonCyan)}
+
+/* ---------- BIG STATS — Anton numbers ---------- */
+.stats-big{background:linear-gradient(120deg,#160e24,#241140 55%,#120a1f);border-color:var(--line)}
+.stats-big:before{background:radial-gradient(circle,rgba(37,227,240,.12) 0%,transparent 70%)}
+.stats-big:after{background:radial-gradient(circle,rgba(255,45,142,.12) 0%,transparent 70%)}
+.stats-big .item{border-color:var(--line)}
+.stats-big .item .big{font-family:"Anton",sans-serif;font-weight:400;letter-spacing:.01em;background:linear-gradient(180deg,#fff,#d7c8ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.stat-item .n{font-family:"Anton",sans-serif;font-weight:400;background:linear-gradient(180deg,#fff,#d7c8ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+/* ---------- rounded image frames ---------- */
+.showcase-tile,.led-tile,.gallery .g,.gallery-grid .gi,.blog-card .img,.video-mockup,.featured-post .img{border-radius:14px!important;overflow:hidden}
+.showcase-tile{border-color:var(--line)!important}
+.led-tile:hover{box-shadow:0 0 30px -6px rgba(168,85,247,.6)}
+
+/* ======================================================================
+   DARK CARD RETHEME + Anton card titles
+   ====================================================================== */
+.bus-card{background:linear-gradient(180deg,#191125,#100b1a)!important;border:1px solid var(--line)!important;border-radius:20px!important;box-shadow:none}
+.bus-card:hover{transform:translateY(-6px);border-color:var(--neonViolet)!important;box-shadow:0 30px 60px -26px rgba(168,85,247,.5)!important}
+.bus-card .body h3{font-family:"Anton",sans-serif;text-transform:uppercase;letter-spacing:.01em;color:#fff!important;font-size:26px}
+.bus-card .body .cap{color:var(--neonCyan)!important;font-weight:700;letter-spacing:.1em}
+.bus-card .body p{color:#b6abc8!important}
+.bus-card .body .amenities span{color:#d3cae6!important;border-color:var(--line2)!important}
+.bus-card .body .footer{border-top-color:var(--line)!important}
+.bus-card .body .price{color:var(--gold2)!important;font-family:"Anton",sans-serif;text-transform:uppercase;font-size:15px;letter-spacing:.06em}
+.bus-card .body .price small{color:var(--dim)!important;font-family:Inter}
+.bus-card .body .arrow,.bus-card .body .footer .arrow{color:var(--neonPink)!important}
+.bus-card .badge{background:rgba(5,3,8,.72)!important;border:1px solid var(--line2)!important;color:#fff!important}
+
+.services-grid{background:transparent!important;gap:14px!important}
+.service{background:linear-gradient(180deg,#150e20,#100a19)!important;border:1px solid var(--line)!important;border-radius:18px!important}
+.service:hover{transform:translateY(-4px);border-color:var(--neonPink)!important;box-shadow:0 20px 44px -22px rgba(255,45,142,.4)}
+.service:before,.service:hover:before{background:var(--gradNeon)!important;height:3px}
+.service .icon{color:var(--neonViolet)!important;font-family:"Anton",sans-serif;font-style:normal}
+.service h3{font-family:"Anton",sans-serif;text-transform:uppercase;letter-spacing:.01em;color:#fff!important;font-size:20px}
+.service p{color:#a99ec0!important}
+.service .link{color:var(--neonCyan)!important;font-weight:700}
+
+/* featured services & why sections (cream !important -> dark) */
+.section-feature-services{background:#07060a!important}
+.section-feature-services:before,.section-feature-services:after{background:linear-gradient(90deg,transparent,var(--neonPink) 20%,var(--neonViolet) 50%,var(--neonCyan) 80%,transparent)!important}
+.section-feature-services .feature-glow{background:radial-gradient(circle,rgba(168,85,247,.14) 0%,transparent 70%)!important}
+.section-feature-services .feature-glow-2{background:radial-gradient(circle,rgba(255,45,142,.12) 0%,transparent 70%)!important}
+.section-feature-services .service{background:linear-gradient(180deg,#150e20,#100a19)!important;border-color:var(--line)!important;box-shadow:none!important}
+.section-feature-services .service .icon{color:var(--neonViolet)!important}
+.section-feature-services .service .icon:after{background:linear-gradient(90deg,var(--neonPink),transparent)!important}
+.section-feature-services .section-head h2 em{background:var(--gradNeon)!important;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent!important}
+
+.section-feature-why{background:#050308!important}
+.section-feature-why .why-callout{background:linear-gradient(180deg,#150e20,#100a19)!important;border-color:var(--line2)!important;box-shadow:0 40px 90px -40px rgba(168,85,247,.4)!important;border-radius:20px!important}
+.section-feature-why .why-callout:before{background:linear-gradient(90deg,transparent,var(--neonPink) 20%,var(--neonViolet) 50%,var(--neonCyan) 80%,transparent)!important}
+.section-feature-why .why-callout:after{background:linear-gradient(135deg,rgba(168,85,247,.3),transparent 30%,transparent 70%,rgba(37,227,240,.2))!important}
+.section-feature-why .section-head h2 em{background:var(--gradNeon)!important;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent!important}
+
+.why-feature{border-color:var(--line)!important}
+.why-feature .item{background:transparent!important;border-right-color:var(--line)!important;border-bottom-color:var(--line)!important}
+.why-feature .item:hover:before{background:var(--gradNeon)!important}
+.why-feature .item .icon{color:var(--neonViolet)!important;font-family:"Anton",sans-serif;font-style:normal}
+.why-feature .item h4{font-family:"Anton",sans-serif;text-transform:uppercase;letter-spacing:.01em;color:#fff!important;font-size:19px}
+.why-feature .item p{color:#a99ec0!important}
+
+/* ---------- LIGHT SECTIONS -> dark ---------- */
+.s-light{background:#07060a!important;color:var(--text)!important}
+.s-light .section-head h2,.s-light h2,.s-light h3,.s-light h4{color:#fff!important}
+.s-light .section-head .kicker,.s-light .kicker{color:var(--neonCyan)!important}
+.s-light .section-head h2 em,.s-light h2 em,.s-light h3 em{background:var(--gradNeon)!important;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent!important}
+.s-light .section-head p,.s-light p{color:var(--mute)!important}
+.s-light .card,.s-light .testi,.s-light .step,.s-light .gw-card,.s-light .wow,.s-light .blog-card,.s-light .comp,.s-light .tier,.s-light .area-col,.s-light .spec,.s-light .quick-call,.s-light .price-box,.s-light .why-feature,.s-light .why-feature .item,.s-light .avail-widget,.s-light .testimonial-grid .testi,.s-light .bus-card,.s-light .gw-widget,.s-light .comp-table,.s-light .service{background:linear-gradient(180deg,#150e20,#100a19)!important;border-color:var(--line)!important;color:var(--text)!important}
+.s-light .card h4,.s-light .testi .quote,.s-light .step h4,.s-light .blog-card h4,.s-light .area-col h4,.s-light .spec .val,.s-light .price-box .num,.s-light .why-feature .item h4,.s-light .bus-card .body h3,.s-light .service h3{color:#fff!important}
+.s-light .card p,.s-light .step p,.s-light .blog-card p,.s-light .area-col li,.s-light .why-feature .item p,.s-light .bus-card .body p,.s-light .service p,.s-light .testi .author .info span{color:#a99ec0!important}
+.s-light .stat-item .n,.s-light .stats-big .item .big{background:linear-gradient(180deg,#fff,#d7c8ff)!important;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent!important}
+.s-light .btn.ghost{color:#fff!important;border-color:var(--line2)!important}
+.s-light .services-grid{background:transparent!important}
+.s-light .service .icon{color:var(--neonViolet)!important}
+.s-light .service .link{color:var(--neonCyan)!important}
+.s-light .area-col{background:linear-gradient(180deg,#191125,#120b1c)!important;border-color:var(--line)!important;border-radius:16px!important}
+.s-light .area-col h4{color:#fff!important}
+.s-light .area-col h4 .ico{border-color:var(--neonViolet)!important;color:var(--neonCyan)!important}
+.s-light .area-col li{color:#c6bcd0!important;border-color:var(--line)!important}
+.s-light .area-col li small{color:var(--dim)!important}
+.s-light .area-col li:hover{color:var(--neonCyan)!important}
+.s-light .testimonial-grid .testi{border-radius:20px!important}
+.s-light .testimonial-grid .testi .quote{color:#ece6f4!important}
+.s-light .testimonial-grid .testi .author{border-top-color:var(--line)!important}
+.s-light .testimonial-grid .testi .author .avatar{background:var(--gradNeon)!important;border:none!important;color:#fff!important;font-family:"Anton",sans-serif}
+.s-light .testimonial-grid .testi .author .info b{color:#fff!important}
+.s-light .review-summary .pill{background:var(--surf)!important;color:#fff!important;border-color:var(--line)!important}
+.s-light .review-summary .pill .num{color:var(--gold2)!important;font-family:"Anton",sans-serif}
+.s-light .faq-item{border-color:var(--line)!important}
+.s-light .faq-item summary{color:#fff!important}
+.s-light .faq-item summary:hover{color:var(--neonCyan)!important}
+.s-light .faq-item summary .plus{color:var(--neonPink)!important}
+.s-light .faq-item .ans{color:#b6abc8!important}
+.s-light .comp-table thead th{background:#050308!important;color:var(--dim)!important}
+.s-light .comp-table thead th.us{background:var(--gradNeon)!important;color:#fff!important}
+.s-light .comp-table th,.s-light .comp-table td{border-color:var(--line)!important;color:#d6d6cc!important}
+.s-light .comp-table tbody td:first-child{color:#fff!important}
+.s-light .comp-table .yes{color:var(--neonGreen)!important}
+.s-light .comp-table .no{color:var(--dim)!important}
+.s-light .pricing-incl{color:#cfc6de!important}
+.s-light .pricing-incl span:before{color:var(--neonGreen)!important}
+.s-light .step .num{color:var(--gold3)!important;font-family:"Anton",sans-serif;font-style:normal}
+.s-light .gw-widget{background:#0c0c12!important;border-color:var(--line2)!important}
+.s-light .gw-card{background:rgba(255,255,255,.03)!important;border-color:var(--line)!important}
+.s-light .gw-card .meta b{color:#fff!important}
+.s-light .gw-card .review-text{color:#d8d8cc!important}
+.s-light .gw-rating .big,.s-light .gw-logo .g-label{color:#fff!important}
+
+/* ---------- FAQ summary Anton ---------- */
+.faq-item summary{font-family:"Anton",sans-serif;text-transform:uppercase;letter-spacing:.01em;font-size:clamp(17px,2.2vw,24px);line-height:1.1}
+.faq-item{border-color:var(--line)}
+.faq-item summary:hover{color:var(--neonCyan)}
+.faq-item summary .plus{color:var(--neonPink)}
+.faq-item .ans{color:#b6abc8}
+
+/* ---------- TESTIMONIALS (dark) ---------- */
+.testi{background:linear-gradient(180deg,#191125,#100b1a);border-color:var(--line);border-radius:20px}
+.testi:hover{border-color:var(--neonPink);transform:translateY(-4px)}
+.testi .quote{color:#ece6f4}
+.testi .author .avatar{background:var(--gradNeon);border:none;color:#fff;font-family:"Anton",sans-serif}
+.testi .stars{color:var(--gold)}
+.review-summary .pill{background:var(--surf);border-color:var(--line)}
+.review-summary .pill .num{color:var(--gold2);font-family:"Anton",sans-serif}
+
+/* ---------- PRICING / COMPARE / STEPS ---------- */
+.pricing-teaser{background:linear-gradient(135deg,#160e24,#241140 55%,#160e24)}
+.pricing-teaser:before{background:radial-gradient(circle,rgba(168,85,247,.2) 0%,transparent 70%)}
+.pricing-grid{border-color:var(--line2);background:rgba(7,6,10,.5)}
+.pricing-col{border-color:var(--line)}
+.pricing-col .cap{color:var(--neonCyan)}
+.pricing-col h4{font-family:"Anton",sans-serif;text-transform:uppercase;color:#fff}
+.pricing-col .price{font-family:"Anton",sans-serif;background:var(--gradNeon);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.pricing-incl span:before{content:"✓";color:var(--neonGreen)}
+.comp-table{background:linear-gradient(180deg,#150e20,#100a19);border-color:var(--line2);border-radius:14px;overflow:hidden}
+.comp-table thead th{background:#050308;color:var(--dim);font-family:Inter}
+.comp-table thead th.us{background:var(--gradNeon);color:#fff}
+.comp-table tbody tr:hover td{background:rgba(168,85,247,.06)}
+.comp-table .yes{color:var(--neonGreen)}
+.comp-table .vehicle{font-family:"Anton",sans-serif;text-transform:uppercase}
+.step .num{font-family:"Anton",sans-serif;font-style:normal;color:var(--gold3)}
+.step h4{font-family:"Anton",sans-serif;text-transform:uppercase;color:#fff}
+
+/* ---------- MIDCTA / FINAL ---------- */
+.midcta{background:#050308;border-color:var(--line)}
+.midcta:before{background:linear-gradient(90deg,transparent,var(--neonViolet) 50%,transparent)}
+.midcta-text strong{color:var(--neonCyan);font-family:Inter}
+.final-cta:before{background:linear-gradient(135deg,rgba(7,6,10,.85),rgba(7,6,10,.62))}
+.final-cta:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(50% 60% at 75% 25%,rgba(168,85,247,.4),transparent 60%),radial-gradient(45% 55% at 20% 90%,rgba(255,45,142,.3),transparent 60%);mix-blend-mode:screen}
+.final-cta .container{position:relative;z-index:2}
+.final-cta h2{font-family:"Anton",sans-serif;text-transform:uppercase;font-weight:400;line-height:.95}
+.final-cta h2 em{font-family:"Cormorant Garamond",serif;text-transform:none;font-style:italic;background:var(--gradNeon);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+/* ---------- DETAIL / FLEET-DETAIL ---------- */
+.detail-side .price-box{background:linear-gradient(180deg,#191125,#120b1c);border-color:var(--neonViolet);border-radius:20px;box-shadow:0 20px 50px -30px rgba(168,85,247,.6)}
+.detail-side .price-box .from{color:var(--neonCyan)}
+.detail-side .price-box .num{font-family:"Anton",sans-serif;text-transform:uppercase}
+.detail-side .quick-call{background:var(--bg2);border-color:var(--line);border-radius:16px}
+.detail-side .quick-call b{font-family:"Anton",sans-serif;text-transform:uppercase}
+.detail-content h3{font-family:"Anton",sans-serif;text-transform:uppercase;color:#fff}
+.spec{background:var(--bg2);border-color:var(--line);border-radius:14px}
+.spec .lbl{color:var(--neonCyan)}
+.spec .val{font-family:"Anton",sans-serif;text-transform:uppercase}
+.amenity-list li{background:var(--bg2);border-left-color:var(--neonPink);color:#d8d0e4;border-radius:0 8px 8px 0}
+.gallery .g:hover{opacity:1;box-shadow:0 0 26px -6px rgba(168,85,247,.6)}
+
+/* ---------- CITY ---------- */
+.routes{background:linear-gradient(180deg,#150e20,#100a19);border-color:var(--line);border-radius:16px}
+.routes h3{font-family:"Anton",sans-serif;text-transform:uppercase;color:#fff}
+.route{border-color:var(--line)}
+.route .to{color:#fff}
+.route .meta{color:var(--neonCyan)}
+.city-content h3{font-family:"Anton",sans-serif;text-transform:uppercase;color:#fff}
+
+/* ---------- PRICE TABLE ---------- */
+.price-table{background:linear-gradient(180deg,#150e20,#100a19);border-color:var(--line2);border-radius:14px;overflow:hidden}
+.price-table th{background:#050308;color:var(--neonCyan)}
+.price-table tr:hover td{background:rgba(168,85,247,.06)}
+.price-table .vehicle{font-family:"Anton",sans-serif;text-transform:uppercase;color:#fff}
+.price-table .rate{color:var(--gold2);font-family:"Anton",sans-serif}
+
+/* ---------- QUOTE FORM ---------- */
+.quote-form{background:linear-gradient(180deg,#150e20,#100a19);border-color:var(--line2);border-radius:20px}
+.quote-form h3{font-family:"Anton",sans-serif;text-transform:uppercase;color:#fff}
+.field label{color:var(--neonCyan)}
+.field input,.field select,.field textarea{background:var(--bg2);border-color:var(--line2);color:#fff;border-radius:12px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--neonViolet);box-shadow:0 0 0 3px rgba(168,85,247,.15)}
+.contact-card{background:var(--bg2);border-color:var(--line);border-radius:16px}
+.contact-card .lbl{color:var(--neonCyan)}
+.contact-card .val{font-family:"Anton",sans-serif;text-transform:uppercase}
+.quote-side h3{font-family:"Anton",sans-serif;text-transform:uppercase;color:#fff}
+
+/* ---------- BLOG ---------- */
+.blog-card{background:linear-gradient(180deg,#191125,#120b1c)!important;border-color:var(--line)!important;box-shadow:none!important;border-radius:16px}
+.blog-card:hover{transform:translateY(-4px);border-color:var(--neonViolet)!important;box-shadow:0 26px 54px -22px rgba(168,85,247,.5)!important}
+.blog-card .cat{color:var(--neonCyan)!important;font-weight:700}
+.blog-card h4{font-family:"Anton",sans-serif;text-transform:uppercase;letter-spacing:.01em;color:#fff!important;font-size:20px}
+.blog-card p{color:#b6abc8!important}
+.featured-post{background:linear-gradient(180deg,#191125,#120b1c);border-color:var(--neonViolet);border-radius:18px;overflow:hidden}
+.featured-post .cat{color:var(--neonCyan)}
+.featured-post h3{font-family:"Anton",sans-serif;text-transform:uppercase;color:#fff}
+.article-meta b{color:var(--neonCyan)}
+.article h2{font-family:"Anton",sans-serif;text-transform:uppercase;color:#fff}
+.article h3{color:var(--gold2)}
+.article blockquote{border-left-color:var(--neonPink)}
+.article .price-callout{background:var(--bg2);border-color:var(--neonViolet);border-radius:14px}
+.article .price-callout b{color:var(--gold2);font-family:"Anton",sans-serif;text-transform:uppercase}
+
+/* ---------- GALLERY / TEAM / CREDS / STATS-BAR ---------- */
+.gallery-grid .gi{border-color:var(--line)}
+.gallery-filter button{border-color:var(--line2);color:#d3cae6}
+.gallery-filter button.active,.gallery-filter button:hover{background:var(--gradNeon);color:#fff;border-color:transparent}
+.team-card .photo{background:linear-gradient(135deg,#1a1226,#241934);border-color:var(--line2);color:var(--neonViolet);border-radius:14px}
+.team-card h4{font-family:"Anton",sans-serif;text-transform:uppercase;color:#fff}
+.team-card .role{color:var(--neonCyan)}
+.cred-row{border-color:var(--line)}
+.cred-row .seal{color:var(--neonCyan);border-color:var(--neonViolet)}
+.cred-row h4{font-family:"Anton",sans-serif;text-transform:uppercase;color:#fff}
+.stats-bar{border-color:var(--line2)}
+.stat-item{border-color:var(--line)}
+
+/* ---------- AVAILABILITY ---------- */
+.avail-widget{background:linear-gradient(180deg,#150e20,#0c0812);border-color:var(--neonViolet);border-radius:20px}
+.avail-widget:before{background:radial-gradient(circle,rgba(168,85,247,.1) 0%,transparent 70%)}
+.avail-header h3{font-family:"Anton",sans-serif;text-transform:uppercase}
+.avail-header h3 em{color:var(--gold2)}
+.avail-date-tab.active,.avail-date-tab:hover{background:var(--gradNeon);color:#fff;border-color:transparent}
+.avail-bus-row{border-color:var(--line)}
+.avail-bus-row .bk-btn.gold{background:var(--gradNeon);color:#fff;border-color:transparent}
+
+/* ---------- FLOAT CTA / FOOTER ---------- */
+.float-cta a.gold,.float-cta .fc-quote{background:var(--gradNeon)!important;color:#fff!important}
+.float-cta .fc-call{background:var(--wine)!important}
+footer{background:#000;border-color:var(--line)}
+.footer-col h5{color:var(--neonCyan)}
+.footer-col a:hover{color:var(--gold2)}
+.social a:hover,.foot-social a:hover{border-color:var(--neonPink);color:#fff;box-shadow:0 0 18px -4px var(--neonPink)}
+.lang-toggle a.on{background:var(--gradNeon);color:#fff}
+.live-now{color:var(--neonGreen)}
+.live-now .live-dot{background:var(--neonGreen);box-shadow:0 0 10px var(--neonGreen)}
+
+/* ---------- reveal + aurora helpers (JS-driven) ---------- */
+.ag-rv{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.ag-rv.ag-in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.ag-rv{opacity:1!important;transform:none!important}}
+.nl-aurora{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.nl-aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;mix-blend-mode:screen}
+.nl-aurora .b1{width:520px;height:520px;background:radial-gradient(circle,var(--neonViolet),transparent 65%);top:-140px;right:-100px}
+.nl-aurora .b2{width:440px;height:440px;background:radial-gradient(circle,var(--neonPink),transparent 65%);bottom:-160px;left:-70px}

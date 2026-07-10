@@ -551,11 +551,15 @@ footer{background:#000;padding:80px 0 34px;border-top:1px solid var(--line)}
   if(fs && !reduce){
     var kids=[].slice.call(fs.children);
     kids.forEach(function(c){var cl=c.cloneNode(true);cl.setAttribute('aria-hidden','true');cl.setAttribute('tabindex','-1');fs.appendChild(cl);});
+    fs.style.scrollBehavior='auto';
     var half=fs.scrollWidth/2, pos=0, paused=false, speed=0.6;
-    ['mouseenter','pointerdown','touchstart','focusin'].forEach(function(ev){fs.addEventListener(ev,function(){paused=true;},{passive:true});});
-    ['mouseleave','pointerup','touchend'].forEach(function(ev){fs.addEventListener(ev,function(){pos=fs.scrollLeft;paused=false;},{passive:true});});
-    setTimeout(function(){half=fs.scrollWidth/2;},1400);
-    (function drift(){ if(!paused){ pos+=speed; if(pos>=half) pos-=half; fs.scrollLeft=pos; } requestAnimationFrame(drift); })();
+    fs.addEventListener('mouseenter',function(){paused=true;});
+    fs.addEventListener('mouseleave',function(){pos=fs.scrollLeft;paused=false;});
+    fs.addEventListener('touchstart',function(){paused=true;},{passive:true});
+    fs.addEventListener('touchend',function(){pos=fs.scrollLeft;paused=false;});
+    window.addEventListener('resize',function(){half=fs.scrollWidth/2;});
+    setTimeout(function(){half=fs.scrollWidth/2;},1500);
+    (function drift(){ if(!paused){ pos+=speed; if(half>0&&pos>=half) pos-=half; fs.scrollLeft=pos; } requestAnimationFrame(drift); })();
   }
 })();
 </script>
