@@ -22,6 +22,7 @@
 .ag-anton,body .ag-anton{font-family:"Anton",sans-serif!important;text-transform:uppercase;letter-spacing:.01em;line-height:.95}
 
 body{background:var(--bg);color:var(--text)}
+img{image-orientation:from-image}
 ::selection{background:var(--neonPink);color:#fff}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(120% 80% at 50% -10%,transparent 45%,rgba(0,0,0,.5) 100%);mix-blend-mode:multiply}
 
