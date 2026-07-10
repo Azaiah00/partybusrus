@@ -60,3 +60,29 @@
     });
   }
 })();
+
+/* =====================================================================
+   SAFETY-NET REVEAL — guarantees scroll-reveal grid/section items are
+   never left stuck at opacity:0 (an inherited quirk of the original
+   animation script on below-fold grids). Runs after the page's own
+   GSAP has had its chance; reveals any still-hidden item as it enters
+   the viewport, preserving the on-scroll feel.
+   ===================================================================== */
+(function(){
+  var sel='.fleet-grid>*,.services-grid>*,.testimonial-grid>*,.area-grid>*,.led-grid>*,'
+        +'.stats-big-grid>*,.blog-grid>*,.gw-grid>*,.why-feature>*,.bus-grid>*,.tier-grid>*,'
+        +'.feature-grid>*,.section-head>*';
+  function reveal(el){el.style.transition='opacity .6s ease,transform .6s ease';el.style.opacity='1';el.style.transform='none';}
+  function run(){
+    var items=[].slice.call(document.querySelectorAll(sel)).filter(function(el){
+      return parseFloat(getComputedStyle(el).opacity)<0.99;});
+    if(!items.length) return;
+    if(!('IntersectionObserver' in window)){items.forEach(reveal);return;}
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){reveal(e.target);io.unobserve(e.target);}});},
+      {threshold:0.01,rootMargin:'0px 0px -4% 0px'});
+    items.forEach(function(el){io.observe(el);});
+  }
+  if(document.readyState==='complete'){setTimeout(run,700);}
+  else{window.addEventListener('load',function(){setTimeout(run,700);});}
+})();

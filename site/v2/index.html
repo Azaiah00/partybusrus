@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Party Bus R Us | DMV's Premier Party Bus &amp; Limo Bus Fleet</title>
 <meta name="description" content="Premium party bus and limo bus rental across Washington DC, Maryland, and Northern Virginia. Weddings, bachelorettes, proms, winery tours. Custom quote in under 60 minutes.">
-<meta name="description" content="Redesign prototype: hybrid luxury + party-energy homepage for Party Bus R Us with GSAP scroll animations.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -907,6 +906,20 @@ footer{background:#050308;color:var(--mute);padding:76px 0 28px;border-top:1px s
   }
 
   ScrollTrigger.refresh();
+})();
+</script>
+<script>
+(function(){
+  var sel='.fleet-grid>*,.services-grid>*,.testimonial-grid>*,.area-grid>*,.led-grid>*,#fleetGrid>*,#svcGrid>*,#testiGrid>*,.showcase-grid>*,.why-grid>*,.stats-grid>*,.steps-grid>*,.section-head>*';
+  function reveal(el){el.style.transition='opacity .6s ease,transform .6s ease';el.style.opacity='1';el.style.transform='none';}
+  function run(){
+    var items=[].slice.call(document.querySelectorAll(sel)).filter(function(el){return parseFloat(getComputedStyle(el).opacity)<0.99;});
+    if(!items.length) return;
+    if(!('IntersectionObserver' in window)){items.forEach(reveal);return;}
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){reveal(e.target);io.unobserve(e.target);}});},{threshold:0.01,rootMargin:'0px 0px -4% 0px'});
+    items.forEach(function(el){io.observe(el);});
+  }
+  if(document.readyState==='complete'){setTimeout(run,700);}else{window.addEventListener('load',function(){setTimeout(run,700);});}
 })();
 </script>
 </body>
