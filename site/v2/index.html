@@ -131,7 +131,7 @@ section{position:relative}
 /* FLEET horizontal scroll */
 .fleet{background:var(--ink)}
 .fleet-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:44px}
-.fleet-scroll{display:flex;gap:22px;overflow-x:auto;scroll-behavior:auto;padding:6px 46px 24px;margin:0 -46px;-webkit-overflow-scrolling:touch}
+.fleet-scroll{overflow:hidden;padding:6px 46px 24px;margin:0 -46px}.fleet-track{display:flex;gap:22px;width:max-content;animation:fleetdrift 60s linear infinite}.fleet-scroll:hover .fleet-track{animation-play-state:paused}@keyframes fleetdrift{from{transform:translateX(0)}to{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.fleet-track{animation:none}}
 .fleet-scroll::-webkit-scrollbar{height:6px}
 .fleet-scroll::-webkit-scrollbar-thumb{background:var(--line2);border-radius:999px}
 @media(max-width:760px){.fleet-scroll{padding:6px 22px 22px;margin:0 -22px}}
@@ -546,21 +546,16 @@ footer{background:#000;padding:80px 0 34px;border-top:1px solid var(--line)}
     });
   }
 
-  // FLEET slow auto-scroll — continuous drift showcasing the vehicles
+  // FLEET auto-scroll — CSS marquee (bulletproof)
   var fs=document.querySelector('.fleet-scroll');
-  if(fs && !reduce){
+  if(fs && !fs.querySelector('.fleet-track')){
+    var track=document.createElement('div'); track.className='fleet-track';
     var kids=[].slice.call(fs.children);
-    kids.forEach(function(c){var cl=c.cloneNode(true);cl.setAttribute('aria-hidden','true');cl.setAttribute('tabindex','-1');fs.appendChild(cl);});
-    fs.style.scrollBehavior='auto';
-    var half=fs.scrollWidth/2, pos=0, paused=false, speed=0.6;
-    fs.addEventListener('mouseenter',function(){paused=true;});
-    fs.addEventListener('mouseleave',function(){pos=fs.scrollLeft;paused=false;});
-    fs.addEventListener('touchstart',function(){paused=true;},{passive:true});
-    fs.addEventListener('touchend',function(){pos=fs.scrollLeft;paused=false;});
-    window.addEventListener('resize',function(){half=fs.scrollWidth/2;});
-    setTimeout(function(){half=fs.scrollWidth/2;},1500);
-    (function drift(){ if(!paused){ pos+=speed; if(half>0&&pos>=half) pos-=half; fs.scrollLeft=pos; } requestAnimationFrame(drift); })();
+    kids.forEach(function(c){track.appendChild(c);});
+    kids.forEach(function(c){var cl=c.cloneNode(true);cl.setAttribute('aria-hidden','true');cl.setAttribute('tabindex','-1');track.appendChild(cl);});
+    fs.appendChild(track);
   }
+
 })();
 </script>
 </body>
