@@ -62,35 +62,31 @@
 })();
 
 /* =====================================================================
-   RELIABILITY FIX (definitive)
-   The original page animation uses GSAP fromTo/from for grid + heading
-   reveals. On every ScrollTrigger.refresh() (which fires on resize) those
-   tweens re-apply opacity:0, so grids flicker back to hidden and get stuck
-   (this also affected the original v1 site). CSS/observers can't win because
-   GSAP re-asserts each frame. Fix: after load, kill ONLY the reveal-related
-   ScrollTriggers (matched by their trigger element) and clear GSAP's inline
-   props, so those items stay permanently visible. Counters, hero parallax,
-   and any pinned/scrub sections keep their own triggers untouched.
+   RELIABILITY FIX (final)
+   The original page animation re-hides grid + heading reveals on every
+   ScrollTrigger.refresh() (fires on resize) and sometimes leaves them stuck
+   at opacity:0 on load. This affected the original v1 site too. Rather than
+   fight GSAP frame-by-frame, we force the reveal items permanently visible
+   (opacity:1 !important) and re-assert after load, resize, and every refresh.
+   Trade-off: the grid/section fade-in is disabled; all other motion (hero
+   reveal, pinned LED section, counters, marquee, hovers, magnetic buttons,
+   progress bar, aurora) is untouched.
    ===================================================================== */
 (function(){
   var revealSel='.fleet-grid>*,.services-grid>*,.testimonial-grid>*,.area-grid>*,.led-grid>*,'
       +'.stats-big-grid>*,.blog-grid>*,.gw-grid>*,.why-feature>*,.bus-grid>*,.tier-grid>*,'
       +'.feature-grid>*,.section-head>*';
-  var trigSel='.fleet-grid,.services-grid,.testimonial-grid,.area-grid,.led-grid,.stats-big-grid,'
-      +'.blog-grid,.gw-grid,.why-feature,.bus-grid,.tier-grid,.feature-grid,.section-head,section';
-  function showAll(){document.querySelectorAll(revealSel).forEach(function(el){el.style.opacity='1';el.style.transform='none';});}
-  function fix(){
-    if(!window.gsap||!window.ScrollTrigger){showAll();return;}
-    try{
-      window.ScrollTrigger.getAll().forEach(function(st){
-        var t=st.trigger;
-        if(t && t.matches && t.matches(trigSel)) st.kill(false);
-      });
-      document.querySelectorAll(revealSel).forEach(function(el){
-        window.gsap.set(el,{clearProps:'opacity,transform,translate,rotate,scale'});
-      });
-    }catch(e){showAll();}
+  function reveal(){
+    var els=document.querySelectorAll(revealSel);
+    for(var i=0;i<els.length;i++){
+      els[i].style.setProperty('opacity','1','important');
+      els[i].style.removeProperty('transform');
+      els[i].style.removeProperty('translate');
+    }
   }
-  function schedule(){setTimeout(fix,250);setTimeout(fix,1000);setTimeout(fix,2600);}
-  if(document.readyState==='complete') schedule(); else window.addEventListener('load',schedule);
+  reveal();
+  document.addEventListener('DOMContentLoaded',reveal);
+  window.addEventListener('load',function(){reveal();[300,900,1800,3000].forEach(function(t){setTimeout(reveal,t);});});
+  window.addEventListener('resize',function(){requestAnimationFrame(reveal);setTimeout(reveal,120);});
+  if(window.ScrollTrigger&&window.ScrollTrigger.addEventListener){window.ScrollTrigger.addEventListener('refresh',function(){requestAnimationFrame(reveal);});}
 })();

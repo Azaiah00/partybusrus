@@ -909,21 +909,17 @@ footer{background:#050308;color:var(--mute);padding:76px 0 28px;border-top:1px s
 })();
 </script>
 <script>
-/* Reliability: keep grid/section reveals from getting stuck on refresh,
-   while preserving the pinned LED section (#led), hero parallax and confetti. */
+/* Reliability: keep grid/section reveals from getting stuck/flickering on
+   refresh; forces reveal items visible. Hero word reveal, pinned LED section,
+   confetti, counters and marquee are untouched (not in the selector). */
 (function(){
   var revealSel='#fleetGrid>*,#svcGrid>*,#testiGrid>*,.showcase-grid>*,.area-grid>*,.why-grid>*,.stats-grid>*,.steps-grid>*,.section-head>*,.reveal';
-  var trigSel='#fleetGrid,#svcGrid,#testiGrid,.showcase-grid,.area-grid,.why-grid,.stats-grid,.steps-grid,.section-head,.reveal,.comp';
-  function showAll(){document.querySelectorAll(revealSel).forEach(function(el){el.style.opacity='1';el.style.transform='none';});}
-  function fix(){
-    if(!window.gsap||!window.ScrollTrigger){showAll();return;}
-    try{
-      window.ScrollTrigger.getAll().forEach(function(st){var t=st.trigger;if(t&&t.matches&&t.matches(trigSel))st.kill(false);});
-      document.querySelectorAll(revealSel).forEach(function(el){window.gsap.set(el,{clearProps:'opacity,transform,translate,rotate,scale'});});
-    }catch(e){showAll();}
-  }
-  function schedule(){setTimeout(fix,250);setTimeout(fix,1000);setTimeout(fix,2600);}
-  if(document.readyState==='complete') schedule(); else window.addEventListener('load',schedule);
+  function reveal(){var els=document.querySelectorAll(revealSel);for(var i=0;i<els.length;i++){els[i].style.setProperty('opacity','1','important');els[i].style.removeProperty('transform');els[i].style.removeProperty('translate');}}
+  reveal();
+  document.addEventListener('DOMContentLoaded',reveal);
+  window.addEventListener('load',function(){reveal();[300,900,1800,3000].forEach(function(t){setTimeout(reveal,t);});});
+  window.addEventListener('resize',function(){requestAnimationFrame(reveal);setTimeout(reveal,120);});
+  if(window.ScrollTrigger&&window.ScrollTrigger.addEventListener){window.ScrollTrigger.addEventListener('refresh',function(){requestAnimationFrame(reveal);});}
 })();
 </script>
 </body>
