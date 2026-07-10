@@ -18,7 +18,7 @@
   --ease:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;color-scheme:dark}
 body{background:var(--ink);color:var(--cream);font-family:"Inter",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block;image-orientation:from-image}
@@ -168,7 +168,7 @@ section{position:relative}
 .tile .cp .k{display:block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:5px}
 .tile .cp .t{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:20px;color:#fff;line-height:1.1}
 .tile.big{grid-row:span 2}
-.tile.big .cp .t{font-size:30px}
+.tile.big .cp .t{font-size:20px}
 .tile.wide{grid-column:span 2}
 @media(max-width:520px){.tile.wide,.tile.big{grid-column:span 1;grid-row:span 1}}
 
@@ -188,7 +188,7 @@ section{position:relative}
 .led-dots{display:flex;gap:9px;justify-content:center;margin-top:16px}
 .led-dots i{width:9px;height:9px;border-radius:50%;background:#3a2f4e;transition:.3s}
 .led-spacer{height:220vh}
-@media(max-width:760px){.led-spacer{height:0}.led-sticky{position:relative;height:auto;padding:70px 0}.led-frame{width:88vw}.led-copy{position:relative;margin-bottom:24px}.led-name{position:relative;margin-top:22px}}
+@media(max-width:760px){.led{padding:0}.led-spacer{height:0}.led-sticky{position:relative;height:auto;display:block;padding:56px 20px;overflow:visible}.led-glow{display:none}.led-copy{position:relative;top:auto;left:auto;right:auto;margin:0 0 22px;padding:0}.led-copy .h2{font-size:clamp(30px,8vw,42px)}.led-frame{position:relative;width:100%;margin:0 auto}.led-name{position:relative;bottom:auto;margin:22px auto 0}}
 
 /* SERVICES editorial index */
 .svc-index{border-top:1px solid var(--line)}
