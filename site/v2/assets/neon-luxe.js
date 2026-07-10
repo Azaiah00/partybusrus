@@ -62,27 +62,36 @@
 })();
 
 /* =====================================================================
-   SAFETY-NET REVEAL — guarantees scroll-reveal grid/section items are
-   never left stuck at opacity:0 (an inherited quirk of the original
-   animation script on below-fold grids). Runs after the page's own
-   GSAP has had its chance; reveals any still-hidden item as it enters
-   the viewport, preserving the on-scroll feel.
+   SAFETY-NET REVEAL (robust, timing-independent)
+   Guarantees scroll-reveal grid/section items are never left stuck at
+   opacity:0 (an inherited quirk of the original animation script on
+   below-fold grids). Observes ALL candidate items and reveals any that
+   are still hidden when they enter the viewport, plus an in-view sweep.
    ===================================================================== */
 (function(){
   var sel='.fleet-grid>*,.services-grid>*,.testimonial-grid>*,.area-grid>*,.led-grid>*,'
         +'.stats-big-grid>*,.blog-grid>*,.gw-grid>*,.why-feature>*,.bus-grid>*,.tier-grid>*,'
         +'.feature-grid>*,.section-head>*';
   function reveal(el){el.style.transition='opacity .6s ease,transform .6s ease';el.style.opacity='1';el.style.transform='none';}
+  var done=false;
   function run(){
-    var items=[].slice.call(document.querySelectorAll(sel)).filter(function(el){
-      return parseFloat(getComputedStyle(el).opacity)<0.99;});
-    if(!items.length) return;
+    if(done) return; done=true;
+    var items=[].slice.call(document.querySelectorAll(sel));
+    if(!items.length){done=false;return;}
     if(!('IntersectionObserver' in window)){items.forEach(reveal);return;}
     var io=new IntersectionObserver(function(es){es.forEach(function(e){
-      if(e.isIntersecting){reveal(e.target);io.unobserve(e.target);}});},
-      {threshold:0.01,rootMargin:'0px 0px -4% 0px'});
+      if(e.isIntersecting && parseFloat(getComputedStyle(e.target).opacity)<0.99){
+        reveal(e.target); io.unobserve(e.target);
+      }});},{threshold:0.01,rootMargin:'0px 0px -4% 0px'});
     items.forEach(function(el){io.observe(el);});
   }
-  if(document.readyState==='complete'){setTimeout(run,700);}
-  else{window.addEventListener('load',function(){setTimeout(run,700);});}
+  if(document.readyState!=='loading') run(); else document.addEventListener('DOMContentLoaded',run);
+  window.addEventListener('load',run);
+  // in-view backstop: reveal anything visible but still hidden shortly after load
+  window.addEventListener('load',function(){setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      var r=el.getBoundingClientRect();
+      if(r.top<innerHeight && r.bottom>0 && parseFloat(getComputedStyle(el).opacity)<0.99) reveal(el);
+    });
+  },2200);});
 })();
