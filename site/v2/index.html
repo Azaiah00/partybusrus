@@ -909,22 +909,21 @@ footer{background:#050308;color:var(--mute);padding:76px 0 28px;border-top:1px s
 })();
 </script>
 <script>
+/* Reliability: keep grid/section reveals from getting stuck on refresh,
+   while preserving the pinned LED section (#led), hero parallax and confetti. */
 (function(){
-  var sel='.fleet-grid>*,.services-grid>*,.testimonial-grid>*,.area-grid>*,.led-grid>*,#fleetGrid>*,#svcGrid>*,#testiGrid>*,.showcase-grid>*,.why-grid>*,.stats-grid>*,.steps-grid>*,.section-head>*';
-  function reveal(el){el.style.transition='opacity .6s ease,transform .6s ease';el.style.opacity='1';el.style.transform='none';}
-  var done=false;
-  function run(){
-    if(done) return; done=true;
-    var items=[].slice.call(document.querySelectorAll(sel));
-    if(!items.length){done=false;return;}
-    if(!('IntersectionObserver' in window)){items.forEach(reveal);return;}
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){
-      if(e.isIntersecting && parseFloat(getComputedStyle(e.target).opacity)<0.99){reveal(e.target);io.unobserve(e.target);}});},{threshold:0.01,rootMargin:'0px 0px -4% 0px'});
-    items.forEach(function(el){io.observe(el);});
+  var revealSel='#fleetGrid>*,#svcGrid>*,#testiGrid>*,.showcase-grid>*,.area-grid>*,.why-grid>*,.stats-grid>*,.steps-grid>*,.section-head>*,.reveal';
+  var trigSel='#fleetGrid,#svcGrid,#testiGrid,.showcase-grid,.area-grid,.why-grid,.stats-grid,.steps-grid,.section-head,.reveal,.comp';
+  function showAll(){document.querySelectorAll(revealSel).forEach(function(el){el.style.opacity='1';el.style.transform='none';});}
+  function fix(){
+    if(!window.gsap||!window.ScrollTrigger){showAll();return;}
+    try{
+      window.ScrollTrigger.getAll().forEach(function(st){var t=st.trigger;if(t&&t.matches&&t.matches(trigSel))st.kill(false);});
+      document.querySelectorAll(revealSel).forEach(function(el){window.gsap.set(el,{clearProps:'opacity,transform,translate,rotate,scale'});});
+    }catch(e){showAll();}
   }
-  if(document.readyState!=='loading') run(); else document.addEventListener('DOMContentLoaded',run);
-  window.addEventListener('load',run);
-  window.addEventListener('load',function(){setTimeout(function(){document.querySelectorAll(sel).forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0&&parseFloat(getComputedStyle(el).opacity)<0.99)reveal(el);});},2200);});
+  function schedule(){setTimeout(fix,250);setTimeout(fix,1000);setTimeout(fix,2600);}
+  if(document.readyState==='complete') schedule(); else window.addEventListener('load',schedule);
 })();
 </script>
 </body>
