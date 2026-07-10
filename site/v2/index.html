@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Party Bus R Us | DMV's Premier Party Bus &amp; Limo Bus Fleet</title>
+<meta name="description" content="Premium party bus and limo bus rental across Washington DC, Maryland, and Northern Virginia. Weddings, bachelorettes, proms, winery tours. Custom quote in under 60 minutes.">
+<meta name="description" content="Redesign prototype: hybrid luxury + party-energy homepage for Party Bus R Us with GSAP scroll animations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Luxury base (kept from brand) */
+  --bg:#0a0710; --bg2:#100a1a; --bg3:#170f24; --surf:#1b1327; --surf2:#241934;
+  --line:#2c2340; --line2:#3d3054; --text:#f7f2ea; --mute:#c6bcd0; --dim:#8c81a0;
+  --gold:#d4af37; --gold2:#f4dc88; --gold3:#b88f1a;
+  /* Neon LED accents (pulled from the real bus interiors) */
+  --neonPink:#ff2e97; --neonViolet:#a855f7; --neonCyan:#22d3ee; --neonBlue:#3b7bff; --neonGreen:#38f5a8;
+  --gradGold:linear-gradient(135deg,#d4af37 0%,#f4dc88 50%,#b58e1a 100%);
+  --gradNeon:linear-gradient(120deg,#ff2e97 0%,#a855f7 45%,#22d3ee 100%);
+  --gradNeonSoft:linear-gradient(120deg,rgba(255,46,151,.9),rgba(168,85,247,.9),rgba(34,211,238,.9));
+  --ease:cubic-bezier(.2,.6,.2,1);
+  --easeOut:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.serif{font-family:"Cormorant Garamond",Georgia,serif}
+a{color:inherit;text-decoration:none;transition:color .25s var(--ease)}
+img{max-width:100%;display:block}
+.container{max-width:1280px;margin:0 auto;padding:0 32px}
+@media(max-width:680px){.container{padding:0 20px}}
+::selection{background:var(--neonPink);color:#fff}
+
+/* ambient grain + vignette on the whole page */
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(120% 80% at 50% -10%,transparent 40%,rgba(0,0,0,.55) 100%);mix-blend-mode:multiply}
+
+/* SCROLL PROGRESS BAR */
+.progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:300;background:var(--gradNeon);box-shadow:0 0 12px rgba(168,85,247,.8)}
+
+/* PROTOTYPE FLAG */
+.proto-flag{position:fixed;left:14px;bottom:14px;z-index:400;background:rgba(10,7,16,.82);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:999px;padding:8px 15px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);font-weight:600;box-shadow:0 8px 30px -10px rgba(0,0,0,.7)}
+.proto-flag b{color:var(--neonCyan)}
+@media(max-width:680px){.proto-flag{font-size:9.5px;padding:6px 11px;left:10px;bottom:10px}}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px 30px;border-radius:999px;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:none;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s,color .25s;white-space:nowrap;position:relative;will-change:transform}
+.btn.gold{background:var(--gradGold);color:#1a0e00}
+.btn.gold:hover{box-shadow:0 10px 34px -8px rgba(212,175,55,.6)}
+.btn.neon{background:var(--gradNeon);color:#fff;background-size:180% 180%;animation:neonShift 6s ease infinite}
+.btn.neon:hover{box-shadow:0 10px 40px -6px rgba(168,85,247,.65)}
+@keyframes neonShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.btn.ghost{background:transparent;color:#fff;border:1px solid var(--line2)}
+.btn.ghost:hover{border-color:var(--neonCyan);color:var(--neonCyan);box-shadow:0 0 24px -6px rgba(34,211,238,.5)}
+.btn.lg{padding:17px 38px;font-size:13.5px}
+.btn .arrow{font-size:14px;line-height:1;transition:transform .25s var(--ease)}
+.btn:hover .arrow{transform:translateX(4px)}
+
+/* TOP BAR */
+.topbar{background:#050308;color:#a89db8;font-size:12px;padding:8px 0;letter-spacing:.04em;position:relative;z-index:20}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.topbar a{color:var(--gold2)}.topbar a:hover{color:#fff}
+@media(max-width:680px){.topbar .tb-left{display:none}}
+
+/* NAV */
+nav.main{position:sticky;top:0;z-index:100;background:rgba(10,7,16,.72);backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);border-bottom:1px solid transparent;transition:all .35s var(--ease)}
+nav.main.scrolled{background:rgba(10,7,16,.94);border-bottom-color:var(--line);box-shadow:0 10px 40px -20px rgba(0,0,0,.9)}
+nav.main .container{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;gap:32px;transition:padding .35s var(--ease)}
+nav.main.scrolled .container{padding-top:9px;padding-bottom:9px}
+.logo{display:flex;align-items:center;cursor:pointer;flex:0 0 auto;min-width:170px}
+.logo img{height:54px;width:auto;transition:height .35s var(--ease);filter:drop-shadow(0 2px 10px rgba(212,175,55,.25))}
+nav.main.scrolled .logo img{height:44px}
+@media(max-width:980px){.logo img{height:44px}}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:12.5px;letter-spacing:.09em;color:#d8d0e4;text-transform:uppercase;font-weight:500;position:relative;padding:6px 0}
+.nav-links a:after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--gradNeon);transition:width .3s var(--ease)}
+.nav-links a:hover{color:#fff}.nav-links a:hover:after{width:100%}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.menu-btn{display:none;background:transparent;border:none;color:#fff;font-size:24px;cursor:pointer}
+@media(max-width:1040px){.nav-links{display:none}.menu-btn{display:block}.nav-cta .btn.ghost{display:none}}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;isolation:isolate}
+.hero-media{position:absolute;inset:0;z-index:-3;will-change:transform}
+.hero-media img{width:100%;height:120%;object-fit:cover;object-position:center 40%;filter:brightness(.5) saturate(1.25) contrast(1.05)}
+.hero-media:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(10,7,16,.92) 0%,rgba(10,7,16,.72) 42%,rgba(10,7,16,.35) 100%)}
+/* aurora blobs */
+.aurora{position:absolute;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;mix-blend-mode:screen}
+.aurora .a1{width:640px;height:640px;background:radial-gradient(circle,var(--neonViolet),transparent 65%);top:-160px;right:-120px;animation:drift1 18s ease-in-out infinite}
+.aurora .a2{width:520px;height:520px;background:radial-gradient(circle,var(--neonPink),transparent 65%);bottom:-180px;left:-80px;animation:drift2 22s ease-in-out infinite}
+.aurora .a3{width:460px;height:460px;background:radial-gradient(circle,var(--neonCyan),transparent 65%);top:30%;left:40%;opacity:.4;animation:drift3 26s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-60px,50px) scale(1.12)}}
+@keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,-40px) scale(1.15)}}
+@keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-40px,-50px) scale(1.2)}}
+/* cursor spotlight (desktop) */
+.spotlight{position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(240px circle at var(--mx,50%) var(--my,40%),rgba(168,85,247,.14),transparent 70%);opacity:0;transition:opacity .4s}
+.hero:hover .spotlight{opacity:1}
+
+.hero-inner{position:relative;z-index:2;padding:120px 0 90px;width:100%}
+.hero-live{display:inline-flex;align-items:center;gap:10px;padding:8px 16px 8px 12px;border-radius:999px;background:rgba(56,245,168,.08);border:1px solid rgba(56,245,168,.4);color:#c9ffe6;font-size:12px;font-weight:600;letter-spacing:.04em;margin-bottom:26px;backdrop-filter:blur(6px)}
+.hero-live .dot{width:9px;height:9px;border-radius:50%;background:var(--neonGreen);box-shadow:0 0 12px var(--neonGreen);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+.hero .eyebrow{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold2);margin-bottom:20px;font-weight:600}
+.hero .eyebrow:before{content:"";width:34px;height:2px;background:var(--gradNeon)}
+.hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(52px,8.5vw,116px);line-height:.96;letter-spacing:-.03em;font-weight:500;margin-bottom:26px;max-width:14ch}
+.hero h1 .word{display:inline-block;overflow:hidden;vertical-align:top}
+.hero h1 .word i{display:inline-block;font-style:normal}
+.hero h1 .accent{font-style:italic;font-weight:400;background:var(--gradNeon);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;background-size:200% auto;animation:neonShift 5s linear infinite}
+.hero .lede{font-size:clamp(16px,1.5vw,19.5px);color:#d8d0e4;max-width:600px;margin-bottom:38px;font-weight:300;line-height:1.6}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.hero-eq{display:inline-flex;align-items:flex-end;gap:4px;height:34px;margin-left:6px}
+.hero-eq span{width:4px;background:var(--gradNeon);border-radius:2px;animation:eq 1s ease-in-out infinite}
+.hero-eq span:nth-child(2){animation-delay:.2s}.hero-eq span:nth-child(3){animation-delay:.4s}.hero-eq span:nth-child(4){animation-delay:.1s}.hero-eq span:nth-child(5){animation-delay:.35s}
+@keyframes eq{0%,100%{height:8px}50%{height:32px}}
+.diff-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px;max-width:720px}
+.diff-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;background:rgba(27,19,39,.5);border:1px solid var(--line2);backdrop-filter:blur(8px);border-radius:999px;color:#e8e2f0;font-size:12.5px;font-weight:500;line-height:1;white-space:nowrap;transition:.25s var(--ease)}
+.diff-pill:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--neonCyan);box-shadow:0 0 8px var(--neonCyan)}
+.diff-pill:hover{border-color:var(--neonPink);color:#fff;transform:translateY(-2px)}
+.hero-scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;color:var(--mute);font-size:10px;letter-spacing:.3em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:10px}
+.hero-scroll:after{content:"";width:1px;height:32px;background:linear-gradient(180deg,var(--neonCyan),transparent);animation:scrollpulse 2s ease-in-out infinite}
+@keyframes scrollpulse{0%,100%{transform:scaleY(.4);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+/* MARQUEE */
+.marquee{background:#050308;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;position:relative}
+.marquee:before,.marquee:after{content:"";position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+.marquee:before{left:0;background:linear-gradient(90deg,#050308,transparent)}
+.marquee:after{right:0;background:linear-gradient(270deg,#050308,transparent)}
+.marquee-track{display:flex;gap:0;width:max-content;animation:scrollx 40s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-item{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:22px;color:#cfc6de;padding:0 34px;white-space:nowrap;display:inline-flex;align-items:center;gap:34px}
+.marquee-item:after{content:"◆";color:var(--neonPink);font-size:9px;font-style:normal;filter:drop-shadow(0 0 6px var(--neonPink))}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+
+/* SECTION SHELL */
+section.s{padding:110px 0;position:relative}
+@media(max-width:680px){section.s{padding:68px 0}}
+.section-head{margin-bottom:58px;max-width:720px}
+.section-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;margin-bottom:18px;color:var(--neonCyan)}
+.kicker:before{content:"";width:26px;height:2px;background:var(--gradNeon)}
+.section-head.center .kicker:before{display:none}
+.section-head h2{font-family:"Cormorant Garamond",serif;font-size:clamp(38px,5.4vw,66px);line-height:1.03;letter-spacing:-.01em;font-weight:500;color:#fff;margin-bottom:18px}
+.section-head h2 em{font-style:italic;font-weight:400;background:var(--gradNeon);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.section-head h2 .gold{background:var(--gradGold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-style:italic;font-weight:400}
+.section-head p{color:#bdb2ce;font-size:17px;font-weight:300;line-height:1.65}
+
+/* reveal helper */
+.reveal{opacity:0}
+
+/* STATS */
+.stats{background:linear-gradient(180deg,#0a0710,#100a1a);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+@media(max-width:780px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat{padding:56px 28px;text-align:center;border-right:1px solid var(--line);position:relative;overflow:hidden}
+.stat:last-child{border-right:none}
+@media(max-width:780px){.stat:nth-child(2){border-right:none}.stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line)}}
+.stat:before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--gradNeon);transition:width .5s var(--ease)}
+.stat:hover:before{width:70%}
+.stat .big{font-family:"Cormorant Garamond",serif;font-size:clamp(46px,5vw,70px);font-weight:600;line-height:1;background:var(--gradGold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.stat .lbl{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#fff;font-weight:600}
+.stat .sub{font-size:12.5px;color:var(--dim);margin-top:6px}
+
+/* PRESS */
+.press{padding:44px 0;background:#050308;border-bottom:1px solid var(--line)}
+.press .label{text-align:center;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold3);margin-bottom:26px}
+.press-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px 46px}
+.press-logo{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:20px;color:#8a80a0;transition:.3s var(--ease)}
+.press-logo:hover{color:var(--gold2);text-shadow:0 0 18px rgba(244,220,136,.4)}
+
+/* SHOWCASE (Step inside) */
+.showcase-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:270px;gap:14px}
+@media(max-width:880px){.showcase-grid{grid-template-columns:1fr 1fr;grid-auto-rows:210px}}
+@media(max-width:520px){.showcase-grid{grid-template-columns:1fr;grid-auto-rows:230px}}
+.tile{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#120a1c}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease);filter:saturate(1.15)}
+.tile:hover img{transform:scale(1.07)}
+.tile:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(8,5,14,.85));transition:.4s}
+.tile .cap{position:absolute;left:20px;right:20px;bottom:18px;z-index:2}
+.tile .cap .k{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--neonCyan);font-weight:700;margin-bottom:5px;display:block}
+.tile .cap .t{font-family:"Cormorant Garamond",serif;font-size:21px;color:#fff;line-height:1.1}
+.tile.feature{grid-row:span 2}
+.tile.feature .cap .t{font-size:30px}
+.tile.wide{grid-column:span 2}
+@media(max-width:520px){.tile.wide,.tile.feature{grid-column:span 1;grid-row:span 1}}
+.tile:before{content:"";position:absolute;inset:0;z-index:3;border-radius:4px;box-shadow:inset 0 0 0 1px transparent;transition:.4s;pointer-events:none}
+.tile:hover:before{box-shadow:inset 0 0 30px -4px rgba(168,85,247,.5),inset 0 0 0 1px rgba(168,85,247,.5)}
+.note-strip{margin-top:34px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;padding:22px 28px;background:rgba(27,19,39,.6);border:1px solid var(--line2);border-radius:6px}
+.note-strip b{color:var(--gold2)}
+
+/* FLEET */
+.fleet-wrap{background:linear-gradient(180deg,#100a1a,#0a0710)}
+.fleet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.bus-card{background:linear-gradient(180deg,#181022,#120b1c);border:1px solid var(--line);border-radius:20px;overflow:hidden;cursor:pointer;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s;position:relative;color:inherit;display:block}
+.bus-card:hover{transform:translateY(-6px);border-color:var(--neonViolet);box-shadow:0 30px 60px -26px rgba(168,85,247,.5)}
+.bus-card .img{aspect-ratio:4/3;background-size:cover;background-position:center;position:relative;overflow:hidden}
+.bus-card .img:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,7,16,.6))}
+.bus-card .img .ph{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .8s var(--ease)}
+.bus-card:hover .img .ph{transform:scale(1.06)}
+.badge{position:absolute;top:14px;left:14px;z-index:2;background:rgba(5,3,8,.72);color:#fff;padding:6px 12px;border-radius:999px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;border:1px solid var(--line2);backdrop-filter:blur(6px)}
+.badge.hot{background:linear-gradient(120deg,#ff5b2e,#ff2e97);border:none}
+.bus-card .body{padding:22px 24px 26px}
+.bus-card .body h3{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:500;color:#fff;margin-bottom:4px}
+.bus-card .body .cap{font-size:11.5px;color:var(--neonCyan);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;font-weight:600}
+.bus-card .body p{color:#b6abc8;font-size:13.5px;line-height:1.55;margin-bottom:16px}
+.amenities{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.amenities span{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#cfc6de;padding:4px 10px;border:1px solid var(--line2);border-radius:999px}
+.bus-card .foot{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--line)}
+.bus-card .foot .view{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold2);font-weight:600}
+.bus-card .foot .view small{display:block;color:var(--dim);font-size:10px;letter-spacing:.04em;margin-top:2px;text-transform:none}
+.bus-card .foot .arw{color:var(--neonPink);font-size:18px}
+
+/* LED PINNED SHOWPIECE */
+.led{position:relative;height:100vh;overflow:hidden;background:#050308}
+.led-bgcolor{position:absolute;inset:0;z-index:0;opacity:.55;transition:background .1s linear;mix-blend-mode:screen}
+.led-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:1}
+.led-frame{position:relative;width:min(78vw,760px);aspect-ratio:16/10;border-radius:12px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 40px 120px -30px rgba(0,0,0,.9)}
+.led-frame .slide{position:absolute;inset:0;opacity:0;transition:opacity .5s ease}
+.led-frame .slide img{width:100%;height:100%;object-fit:cover}
+.led-frame .slide.on{opacity:1}
+.led-glow{position:absolute;inset:-40px;z-index:-1;filter:blur(60px);opacity:.6;transition:background .2s}
+.led-copy{position:absolute;left:0;right:0;top:9%;text-align:center;z-index:2;pointer-events:none;padding:0 20px}
+.led-copy .kicker{justify-content:center}.led-copy .kicker:before{display:none}
+.led-copy h2{font-family:"Cormorant Garamond",serif;font-size:clamp(34px,5vw,60px);color:#fff;font-weight:500;line-height:1.02}
+.led-copy h2 em{font-style:italic}
+.led-label{position:absolute;left:0;right:0;bottom:11%;text-align:center;z-index:2;pointer-events:none}
+.led-label .lname{font-family:"Cormorant Garamond",serif;font-size:clamp(30px,4vw,44px);font-weight:500;transition:color .3s;text-shadow:0 0 30px currentColor}
+.led-label .lsub{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#cfc6de;margin-top:8px}
+.led-dots{display:flex;gap:9px;justify-content:center;margin-top:20px}
+.led-dots i{width:9px;height:9px;border-radius:50%;background:#4a3d63;transition:.3s}
+.led-dots i.on{transform:scale(1.3)}
+.led-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:3;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
+@media(max-width:680px){.led{height:auto;padding:70px 0}.led-stage{position:relative}.led-frame{width:88vw}.led-copy{position:relative;margin-bottom:26px}.led-label{position:relative;margin-top:24px}}
+
+/* SPLIT: service area + services teaser */
+.area-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:820px){.area-grid{grid-template-columns:1fr}}
+.area-col{background:linear-gradient(180deg,#181022,#120b1c);border:1px solid var(--line);border-radius:8px;padding:28px 26px;transition:.35s var(--ease)}
+.area-col:hover{border-color:var(--neonCyan);box-shadow:0 20px 50px -30px rgba(34,211,238,.5)}
+.area-col h4{font-family:"Cormorant Garamond",serif;font-size:24px;color:#fff;font-weight:500;margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.area-col h4 .ico{width:40px;height:40px;flex:0 0 40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;font-family:Inter;background:rgba(168,85,247,.12);border:1px solid var(--neonViolet);color:#e6d5ff}
+.area-col ul{list-style:none;columns:2;column-gap:18px}
+.area-col li{font-size:14px;color:#c6bcd0;padding:6px 0;border-bottom:1px solid var(--line);break-inside:avoid}
+.area-col li small{color:var(--dim);font-size:10.5px;margin-left:5px}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:1040px){.svc-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.svc-grid{grid-template-columns:1fr}}
+.svc{background:linear-gradient(180deg,#150e20,#100a19);border:1px solid var(--line);border-radius:18px;padding:28px 24px;cursor:pointer;transition:.35s var(--ease);position:relative;overflow:hidden}
+.svc:hover{transform:translateY(-4px);border-color:var(--neonPink)}
+.svc:before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:var(--gradNeon);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.svc:hover:before{transform:scaleX(1)}
+.svc .no{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:26px;color:var(--gold3);margin-bottom:14px}
+.svc h3{font-family:"Cormorant Garamond",serif;font-size:21px;color:#fff;font-weight:500;margin-bottom:9px}
+.svc p{color:#a99ec0;font-size:13px;line-height:1.55;margin-bottom:14px}
+.svc .lnk{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--neonCyan);font-weight:600}
+.svc-more{text-align:center;margin-top:40px}
+
+/* WHY */
+.why{background:#050308;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+@media(max-width:900px){.why-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.why-grid{grid-template-columns:1fr}}
+.why-item{padding:38px 30px;border-right:1px solid var(--line);position:relative;transition:background .35s}
+.why-item:last-child{border-right:none}
+.why-item:hover{background:rgba(168,85,247,.05)}
+.why-item .ic{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:20px;width:46px;height:46px;border-radius:50%;border:1px solid var(--neonViolet);color:var(--neonViolet);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.why-item h4{font-family:"Cormorant Garamond",serif;font-size:21px;color:#fff;font-weight:500;margin-bottom:10px}
+.why-item p{color:#a99ec0;font-size:13.5px;line-height:1.6}
+
+/* COMPARISON */
+.comp{width:100%;border-collapse:collapse;background:linear-gradient(180deg,#150e20,#100a19);border:1px solid var(--line2);border-radius:10px;overflow:hidden}
+.comp th,.comp td{padding:16px 20px;text-align:left;border-bottom:1px solid var(--line);font-size:14px}
+.comp thead th{background:#050308;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
+.comp thead th.us{background:var(--gradNeon);color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.3)}
+.comp tbody td:first-child{color:#e8e2f0}
+.comp .yes{color:var(--neonGreen);font-weight:500}
+.comp .no{color:#8a80a0}
+.comp tbody tr:hover td{background:rgba(168,85,247,.05)}
+.comp tr:last-child td{border-bottom:none}
+@media(max-width:680px){.comp th,.comp td{padding:12px 12px;font-size:12.5px}}
+
+/* PRICING STEPS */
+.steps-band{background:linear-gradient(135deg,#160e24,#241237 55%,#160e24);position:relative;overflow:hidden}
+.steps-band:before{content:"";position:absolute;top:-160px;right:-120px;width:520px;height:520px;background:radial-gradient(circle,rgba(168,85,247,.22),transparent 70%);filter:blur(20px)}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:12px}
+@media(max-width:780px){.steps-grid{grid-template-columns:1fr}}
+.step{padding:34px 30px;background:rgba(10,7,16,.5);border:1px solid var(--line2);border-radius:10px;backdrop-filter:blur(6px)}
+.step.mid{border-color:var(--neonViolet);box-shadow:0 0 40px -14px rgba(168,85,247,.6)}
+.step .cap{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--neonCyan);font-weight:600;margin-bottom:12px}
+.step h4{font-family:"Cormorant Garamond",serif;font-size:24px;color:#fff;font-weight:500;margin-bottom:14px}
+.step .big{font-family:"Cormorant Garamond",serif;font-size:34px;background:var(--gradGold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:600;margin-bottom:8px}
+.step .sub{font-size:13px;color:#b6abc8;line-height:1.55}
+.incl{display:flex;flex-wrap:wrap;gap:14px 26px;justify-content:center;margin-top:36px;color:#cfc6de;font-size:13.5px}
+.incl span{display:inline-flex;align-items:center;gap:8px}
+.incl span:before{content:"✓";color:var(--neonGreen)}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.testi{background:linear-gradient(180deg,#150e20,#100a19);border:1px solid var(--line);border-radius:20px;padding:30px 28px;transition:.35s var(--ease)}
+.testi:hover{border-color:var(--neonPink);transform:translateY(-4px)}
+.testi .stars{color:var(--gold);letter-spacing:.14em;margin-bottom:16px;font-size:15px}
+.testi .q{font-family:"Cormorant Garamond",serif;font-size:19px;font-style:italic;line-height:1.5;color:#ece6f4;margin-bottom:20px}
+.testi .who{display:flex;align-items:center;gap:13px;padding-top:16px;border-top:1px solid var(--line)}
+.testi .who .av{width:42px;height:42px;flex:0 0 42px;border-radius:50%;background:var(--gradNeon);display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:600;color:#fff;font-size:18px}
+.testi .who b{display:block;font-size:14px;color:#fff}
+.testi .who span{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+
+/* FAQ */
+.faq{max-width:860px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item summary{padding:24px 0;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;list-style:none;color:#fff;font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:500;transition:color .25s}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{color:var(--neonCyan)}
+.faq-item .plus{flex:0 0 30px;font-size:22px;color:var(--neonPink);transition:transform .35s var(--ease)}
+.faq-item[open] .plus{transform:rotate(45deg)}
+.faq-item .ans{padding:0 0 26px;color:#b6abc8;font-size:15px;line-height:1.7;max-width:760px}
+
+/* FINAL CTA */
+.final{position:relative;overflow:hidden;padding:150px 0;text-align:center}
+.final-media{position:absolute;inset:0;z-index:-2}
+.final-media img{width:100%;height:100%;object-fit:cover;filter:brightness(.4) saturate(1.2)}
+.final-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,7,16,.8),rgba(10,7,16,.72))}
+.final .aurora{z-index:-1;opacity:.7}
+.final h2{font-family:"Cormorant Garamond",serif;font-size:clamp(42px,6.5vw,84px);font-weight:500;color:#fff;line-height:1.02;margin-bottom:18px}
+.final h2 em{font-style:italic;background:var(--gradNeon);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.final p{font-size:18px;color:#d8d0e4;margin-bottom:34px;font-weight:300}
+.final-actions{display:inline-flex;gap:14px;flex-wrap:wrap;justify-content:center}
+#confetti{position:absolute;inset:0;z-index:1;pointer-events:none}
+
+/* FOOTER */
+footer{background:#050308;color:var(--mute);padding:76px 0 28px;border-top:1px solid var(--line);position:relative;z-index:2}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:34px;margin-bottom:50px}
+@media(max-width:980px){.foot-grid{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:600px){.foot-grid{grid-template-columns:1fr 1fr}}
+.foot-col h5{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--neonCyan);margin-bottom:18px;font-weight:600}
+.foot-col a{display:block;font-size:13.5px;padding:5px 0;color:#b6abc8}
+.foot-col a:hover{color:var(--gold2)}
+.foot-logo img{max-width:230px;margin-bottom:14px;filter:drop-shadow(0 2px 8px rgba(212,175,55,.2))}
+.foot-bottom{padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--dim)}
+.foot-social{display:flex;gap:10px;margin-top:16px}
+.foot-social a{width:36px;height:36px;border:1px solid var(--line2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:"Cormorant Garamond",serif;font-style:italic;color:#cfc6de;transition:.25s}
+.foot-social a:hover{border-color:var(--neonPink);color:#fff;box-shadow:0 0 18px -4px var(--neonPink)}
+
+/* MOBILE NAV */
+.mnav{position:fixed;inset:0;background:rgba(8,5,14,.98);backdrop-filter:blur(18px);z-index:200;display:none;flex-direction:column;padding:28px}
+.mnav.open{display:flex}
+.mnav .close{position:absolute;top:22px;right:24px;background:none;border:none;color:#fff;font-size:30px;cursor:pointer}
+.mnav .links{margin-top:70px;display:flex;flex-direction:column;gap:4px;overflow-y:auto}
+.mnav a{font-family:"Cormorant Garamond",serif;font-size:27px;color:#fff;padding:10px 0;border-bottom:1px solid var(--line)}
+.mnav a:hover{color:var(--neonCyan)}
+
+/* FLOATING CTA */
+.float-cta{position:fixed;right:16px;bottom:16px;z-index:150;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.float-cta a{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.06em;box-shadow:0 10px 30px -8px rgba(0,0,0,.7)}
+.fc-call{background:var(--wine,#8a2535);background:#8a2535;color:#fff}
+.fc-text{background:#1b1327;color:#fff;border:1px solid var(--line2)}
+.fc-quote{background:var(--gradNeon);color:#fff}
+@media(max-width:680px){.float-cta a .lbl{display:none}.float-cta a{padding:13px;border-radius:50%}}
+
+
+/* FLOATING INVITE CARDS — Partiful-inspired; fills hero right + adds party energy */
+.hero-invite{position:absolute;right:5.5%;top:50%;transform:translateY(-50%);z-index:2;width:346px;display:flex;flex-direction:column;gap:16px;pointer-events:none}
+@media(max-width:1120px){.hero-invite{display:none}}
+.hi-card{background:rgba(20,14,30,.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line2);border-radius:22px;padding:22px 24px;box-shadow:0 34px 80px -34px rgba(0,0,0,.85);position:relative;overflow:hidden}
+.hi-1{transform:rotate(-6deg);animation:hiFloat1 7s ease-in-out infinite}
+.hi-2{transform:rotate(4deg) translateX(34px);animation:hiFloat2 8s ease-in-out infinite;background:linear-gradient(135deg,rgba(255,46,151,.24),rgba(168,85,247,.2));border-color:rgba(168,85,247,.5)}
+@keyframes hiFloat1{0%,100%{transform:rotate(-6deg) translateY(0)}50%{transform:rotate(-6deg) translateY(-13px)}}
+@keyframes hiFloat2{0%,100%{transform:rotate(4deg) translateX(34px) translateY(0)}50%{transform:rotate(4deg) translateX(34px) translateY(11px)}}
+.hi-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.hi-logo{width:34px;height:34px;border-radius:11px;background:var(--gradNeon);display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-weight:600;font-size:16px;color:#fff}
+.hi-live{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--neonGreen)}
+.hi-live i{width:8px;height:8px;border-radius:50%;background:var(--neonGreen);box-shadow:0 0 10px var(--neonGreen)}
+.hi-title{font-family:"Cormorant Garamond",serif;font-size:24px;color:#fff;line-height:1.1;margin-bottom:6px}
+.hi-meta{font-size:12.5px;color:#c6bcd0;margin-bottom:14px}
+.hi-tags{display:flex;gap:6px;flex-wrap:wrap}
+.hi-tags span{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#e8e2f0;padding:4px 10px;border:1px solid var(--line2);border-radius:999px}
+.hi-title2{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:27px;color:#fff;line-height:1.05;margin-bottom:6px}
+.hi-sub{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#efe0ff;font-weight:600}
+@media(prefers-reduced-motion:reduce){.hi-1,.hi-2{animation:none}}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .reveal{opacity:1!important}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="proto-flag">Version 2 · <b>Neon Luxe</b> · preview</div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container">
+    <span class="tb-left">Operating 24/7 across DC, Maryland &amp; Northern Virginia</span>
+    <span>Call or text <a href="tel:+17033994394">(703) 399-4394</a> · <a href="sms:+17033994394" style="text-decoration:underline">Text us 💬</a> · <a href="/v2/es/" style="color:#d4c08a">Español</a></span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="main" id="nav">
+  <div class="container">
+    <a class="logo" href="/v2/"><img src="/logo/wordmark-cream.png" alt="Party Bus R Us"></a>
+    <div class="nav-links">
+      <a href="#top">Home</a>
+      <a href="#fleet">Fleet</a>
+      <a href="#services">Services</a>
+      <a href="#area">Service Area</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn ghost" href="tel:+17033994394">(703) 399-4394</a>
+      <a class="btn neon" href="/v2/quote.html" data-magnetic>Get a Quote <span class="arrow">→</span></a>
+      <button class="menu-btn" onclick="document.querySelector('.mnav').classList.add('open')">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="mnav">
+  <button class="close" onclick="document.querySelector('.mnav').classList.remove('open')">✕</button>
+  <div class="links">
+    <a href="#top" onclick="document.querySelector('.mnav').classList.remove('open')">Home</a>
+    <a href="#fleet" onclick="document.querySelector('.mnav').classList.remove('open')">Fleet</a>
+    <a href="#services" onclick="document.querySelector('.mnav').classList.remove('open')">Services</a>
+    <a href="#area" onclick="document.querySelector('.mnav').classList.remove('open')">Service Area</a>
+    <a href="#reviews" onclick="document.querySelector('.mnav').classList.remove('open')">Reviews</a>
+    <a href="#faq" onclick="document.querySelector('.mnav').classList.remove('open')">FAQ</a>
+    <a href="/v2/quote.html" onclick="document.querySelector('.mnav').classList.remove('open')">Get a Quote</a>
+  </div>
+</div>
+
+<span id="top"></span>
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-media" id="heroMedia"><img src="/IMG_0894-1920.webp" alt="Party bus at night in the DMV"></div>
+  <div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <div class="spotlight" id="spotlight"></div>
+  <div class="hero-inner container">
+    <div class="hero-live"><span class="dot"></span> Available tonight — 2 buses open</div>
+    <div class="eyebrow">DMV's Most-Booked Party Bus &amp; Limo Bus Fleet</div>
+    <h1 id="heroH1"><span class="word"><i>Move</i></span> <span class="word"><i>the</i></span> <span class="word"><i>moment</i></span><br><span class="word"><i class="accent">forward.</i></span></h1>
+    <p class="lede">Meticulously maintained party and limo buses for the DMV's biggest nights — weddings, bachelorettes, proms, quinceañeras, winery days, concerts, and tailgates. Day or night, across DC, Maryland &amp; Northern Virginia.</p>
+    <div class="hero-actions">
+      <a href="/v2/quote.html" class="btn neon lg" data-magnetic>Reserve Your Bus <span class="arrow">→</span></a>
+      <a href="#fleet" class="btn ghost lg">Explore the Fleet</a>
+      <span class="hero-eq"><span></span><span></span><span></span><span></span><span></span></span>
+    </div>
+    <div class="diff-row">
+      <span class="diff-pill">Bilingual EN / ES</span>
+      <span class="diff-pill">WhatsApp booking</span>
+      <span class="diff-pill">24/7 dispatch</span>
+      <span class="diff-pill">Real interior photos</span>
+      <span class="diff-pill">BYOB-friendly</span>
+    </div>
+  </div>
+  <div class="hero-invite" aria-hidden="true">
+    <div class="hi-card hi-1">
+      <div class="hi-top"><span class="hi-logo">P</span><span class="hi-live"><i></i> Confirmed</span></div>
+      <div class="hi-title">Diamond 24 · Star Ceiling</div>
+      <div class="hi-meta">Saturday · 9:00 PM · Georgetown pickup</div>
+      <div class="hi-tags"><span>25 pax</span><span>LED</span><span>Wet bar</span><span>Dance pole</span></div>
+    </div>
+    <div class="hi-card hi-2">
+      <div class="hi-title2">Your night, locked in.</div>
+      <div class="hi-sub">Quote in under 60 seconds</div>
+    </div>
+  </div>
+  <a class="hero-scroll" href="#stats">Scroll</a>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track" id="marquee">
+    <span class="marquee-item">Arlington</span><span class="marquee-item">Bethesda</span><span class="marquee-item">Georgetown</span><span class="marquee-item">Tysons</span><span class="marquee-item">Alexandria</span><span class="marquee-item">Leesburg</span><span class="marquee-item">Silver Spring</span><span class="marquee-item">Rockville</span><span class="marquee-item">Vienna</span><span class="marquee-item">McLean</span><span class="marquee-item">Capitol Hill</span><span class="marquee-item">Reston</span><span class="marquee-item">Ashburn</span><span class="marquee-item">National Harbor</span><span class="marquee-item">Annapolis</span><span class="marquee-item">Frederick</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats" id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat"><div class="big" data-count="24/7">24/7</div><div class="lbl">Dispatch</div><div class="sub">real humans, any hour</div></div>
+      <div class="stat"><div class="big">20–35</div><div class="lbl">Passenger Capacity</div><div class="sub">per vehicle, fleet-wide</div></div>
+      <div class="stat"><div class="big" data-count="60min">60min</div><div class="lbl">Quote Response</div><div class="sub">during business hours</div></div>
+      <div class="stat"><div class="big" data-count="100%">100%</div><div class="lbl">Premium Fleet</div><div class="sub">deep-cleaned every booking</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS -->
+<div class="press">
+  <div class="container">
+    <div class="label">— Trusted by planners, venues &amp; couples across the DMV —</div>
+    <div class="press-grid reveal">
+      <span class="press-logo">DAR Constitution Hall</span>
+      <span class="press-logo">Salamander Resort</span>
+      <span class="press-logo">Stone Tower Winery</span>
+      <span class="press-logo">The Hay-Adams</span>
+      <span class="press-logo">Top of the Town</span>
+      <span class="press-logo">Lansdowne Resort</span>
+    </div>
+  </div>
+</div>
+
+<!-- SHOWCASE -->
+<section class="s" id="inside">
+  <div class="container">
+    <div class="section-head center">
+      <span class="kicker">Step Inside</span>
+      <h2>This is what you're <em>booking.</em></h2>
+      <p>LED-lit interiors, leather perimeter seating, full bars, four-screen entertainment, club-grade sound, and lighting presets that turn a Tuesday into a celebration.</p>
+    </div>
+    <div class="showcase-grid">
+      <div class="tile feature"><img src="/IMG_0873.webp" alt="Star ceiling interior" loading="lazy"><div class="cap"><span class="k">Featured · The Diamond 24</span><span class="t">Star ceiling, fiber-optic, white leather throne seating</span></div></div>
+      <div class="tile"><img src="/IMG_0877.webp" alt="Dance pole and wood floor" loading="lazy"><div class="cap"><span class="t">Dance pole &amp; wood floor</span></div></div>
+      <div class="tile"><img src="/IMG_0880.webp" alt="Club-grade LED" loading="lazy"><div class="cap"><span class="t">Club-grade LED</span></div></div>
+      <div class="tile"><img src="/IMG_0885.webp" alt="Captain seating" loading="lazy"><div class="cap"><span class="t">Captain seating</span></div></div>
+      <div class="tile"><img src="/IMG_0895.webp" alt="Wet bar and glassware" loading="lazy"><div class="cap"><span class="t">Wet bar &amp; glassware</span></div></div>
+      <div class="tile wide"><img src="/IMG_0899.webp" alt="Showroom view lights up" loading="lazy"><div class="cap"><span class="t">Showroom view — lights up</span></div></div>
+      <div class="tile"><img src="/IMG_0901.webp" alt="Diamond leather blue LED" loading="lazy"><div class="cap"><span class="t">Diamond leather — blue LED</span></div></div>
+    </div>
+    <div class="note-strip reveal">
+      <div style="font-size:14px;color:#cfc6de"><b>Real fleet photos.</b> These are actual Party Bus R Us vehicles, not stock imagery.</div>
+      <a href="#fleet" class="btn ghost">See the Fleet <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section class="s fleet-wrap" id="fleet">
+  <div class="container">
+    <div class="section-head center">
+      <span class="kicker">Choose Your Bus</span>
+      <h2>Every way to <em>arrive.</em></h2>
+      <p>Pick by headcount, mood, or the photo that makes the group chat say yes. Every bus includes a professional chauffeur, full LED lighting, premium sound, and a four-hour minimum.</p>
+    </div>
+    <div class="fleet-grid" id="fleetGrid">
+      <a href="/v2/fleet/bus-35pax.html" class="bus-card"><div class="img"><span class="badge hot">Flagship · Largest</span><div class="ph" style="background-image:url('/IMG_0908.webp')"></div></div><div class="body"><h3>The Imperial 35</h3><div class="cap">35 Passengers · Limo Bus</div><p>Private restroom, dual 4K TVs, full-length bar, dance pole, and a fiber-optic star ceiling for larger groups.</p><div class="amenities"><span>Restroom</span><span>Star ceiling</span><span>Dance pole</span></div><div class="foot"><span class="view">View Details<small>4-hour minimum</small></span><span class="arw">→</span></div></div></a>
+      <a href="/v2/fleet/bus-32pax.html" class="bus-card"><div class="img"><span class="badge">Brewery &amp; Birthdays</span><div class="ph" style="background-image:url('/IMG_0904.webp')"></div></div><div class="body"><h3>The Empire 32</h3><div class="cap">32 Passengers · Limo Bus</div><p>Green captain seating, mood-cycle LED, hardwood floor, and a full bar for high-energy group nights.</p><div class="amenities"><span>Captain seats</span><span>Wet bar</span><span>Mood LED</span></div><div class="foot"><span class="view">View Details<small>4-hour minimum</small></span><span class="arw">→</span></div></div></a>
+      <a href="/v2/fleet/bus-30pax.html" class="bus-card"><div class="img"><span class="badge hot">Most Booked</span><div class="ph" style="background-image:url('/IMG_0888.webp')"></div></div><div class="body"><h3>The Signature 30</h3><div class="cap">30 Passengers · Limo Bus</div><p>Color-shifting LED ceiling, wood floor, full bar, dance pole, and calibrated sound for all-purpose events.</p><div class="amenities"><span>Wet bar</span><span>Dance pole</span><span>Wood floor</span></div><div class="foot"><span class="view">View Details<small>4-hour minimum</small></span><span class="arw">→</span></div></div></a>
+      <a href="/v2/fleet/bus-28pax.html" class="bus-card"><div class="img"><span class="badge">Prom &amp; Crawls</span><div class="ph" style="background-image:url('/IMG_0896.webp')"></div></div><div class="body"><h3>The Cavalier 28</h3><div class="cap">28 Passengers · Party Bus</div><p>Deep blue LED, premium leather, chrome dance pole, and full bar for groups that want polish and energy.</p><div class="amenities"><span>Blue LED</span><span>Premium leather</span><span>Dance pole</span></div><div class="foot"><span class="view">View Details<small>4-hour minimum</small></span><span class="arw">→</span></div></div></a>
+      <a href="/v2/fleet/bus-25pax.html" class="bus-card"><div class="img"><span class="badge">Wedding Favorite</span><div class="ph" style="background-image:url('/IMG_0883.webp')"></div></div><div class="body"><h3>The Bridal 25</h3><div class="cap">25 Passengers · Party Bus</div><p>Diamond-quilted leather, wood floor, soft amber preset, and champagne-ready styling for wedding parties.</p><div class="amenities"><span>Diamond leather</span><span>Wood floor</span><span>Amber LED</span></div><div class="foot"><span class="view">View Details<small>4-hour minimum</small></span><span class="arw">→</span></div></div></a>
+      <a href="/v2/fleet/bus-24pax.html" class="bus-card"><div class="img"><span class="badge">Premium Star Ceiling</span><div class="ph" style="background-image:url('/IMG_0875.webp');background-position:center 40%"></div></div><div class="body"><h3>The Diamond 24</h3><div class="cap">24 Passengers · Party Bus</div><p>Fiber-optic star ceiling, white leather throne seating, leather walls, and polished chrome details.</p><div class="amenities"><span>Star ceiling</span><span>Throne seats</span><span>Leather walls</span></div><div class="foot"><span class="view">View Details<small>4-hour minimum</small></span><span class="arw">→</span></div></div></a>
+      <a href="/v2/fleet/bus-20pax.html" class="bus-card"><div class="img"><span class="badge">Nightlife</span><div class="ph" style="background-image:url('/IMG_0872.webp')"></div></div><div class="body"><h3>The Midnight 20</h3><div class="cap">20 Passengers · Party Bus</div><p>Mid-size party bus with purple LED, dance pole, captain seating, wet bar, and calibrated sound.</p><div class="amenities"><span>Purple LED</span><span>Dance pole</span><span>Wet bar</span></div><div class="foot"><span class="view">View Details<small>4-hour minimum</small></span><span class="arw">→</span></div></div></a>
+    </div>
+    <div style="text-align:center;margin-top:44px"><a href="/v2/fleet.html" class="btn ghost lg">Compare All Vehicles <span class="arrow">→</span></a></div>
+  </div>
+</section>
+
+<!-- LED PINNED SHOWPIECE -->
+<section class="led" id="led">
+  <div class="led-bgcolor" id="ledBg"></div>
+  <div class="led-copy">
+    <span class="kicker">Every mood, every color</span>
+    <h2>One bus. <em>Infinite</em> vibes.</h2>
+  </div>
+  <div class="led-stage">
+    <div class="led-frame">
+      <div class="led-glow" id="ledGlow"></div>
+      <div class="slide on" data-color="#3b7bff"><img src="/PHOTO-2026-05-18-20-17-5.jpg" alt="Cool blue LED"></div>
+      <div class="slide" data-color="#a855f7"><img src="/PHOTO-2026-05-18-20-17-02.jpg" alt="Royal purple LED"></div>
+      <div class="slide" data-color="#38f5a8"><img src="/PHOTO-2026-05-18-20-17-11.jpg" alt="Emerald green LED"></div>
+      <div class="slide" data-color="#ff2e97"><img src="/PHOTO-2026-05-18-20-17-3.jpg" alt="Crimson red LED"></div>
+    </div>
+  </div>
+  <div class="led-label">
+    <div class="lname" id="ledName" style="color:#3b7bff">Cool Blue</div>
+    <div class="lsub">Set the tone — tell your driver, or use the in-bus controls</div>
+    <div class="led-dots" id="ledDots"><i class="on"></i><i></i><i></i><i></i></div>
+  </div>
+  <div class="led-hint">Keep scrolling to change the vibe</div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="s" id="area">
+  <div class="container">
+    <div class="section-head center">
+      <span class="kicker">Where We Drive</span>
+      <h2>The entire DMV. <em>And then some.</em></h2>
+      <p>Pickup anywhere in DC, Maryland, or Northern Virginia at no extra charge. Out-of-town trips — beach, ski, Baltimore, Atlantic City — by request.</p>
+    </div>
+    <div class="area-grid">
+      <div class="area-col"><h4><span class="ico">DC</span>Washington, DC</h4><ul><li>Georgetown</li><li>Capitol Hill</li><li>Adams Morgan</li><li>Dupont Circle</li><li>U Street</li><li>Navy Yard</li><li>The Wharf</li><li>NoMa</li></ul></div>
+      <div class="area-col"><h4><span class="ico">VA</span>Northern Virginia</h4><ul><li>Arlington</li><li>Alexandria</li><li>Tysons / McLean</li><li>Vienna</li><li>Fairfax</li><li>Reston</li><li>Ashburn</li><li>Leesburg</li></ul></div>
+      <div class="area-col"><h4><span class="ico">MD</span>Maryland</h4><ul><li>Bethesda</li><li>Silver Spring</li><li>Rockville</li><li>Potomac</li><li>Gaithersburg</li><li>National Harbor</li><li>Frederick</li><li>Annapolis</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="s" id="services" style="background:linear-gradient(180deg,#0a0710,#100a1a)">
+  <div class="container">
+    <div class="section-head center">
+      <span class="kicker">What We Do Best</span>
+      <h2>The DMV's most <em>memorable</em> nights.</h2>
+      <p>Every booking is treated as a single event with one client. From the first reply to the final drop-off, you'll work with people who care that the night lands.</p>
+    </div>
+    <div class="svc-grid" id="svcGrid">
+      <div class="svc"><div class="no">I.</div><h3>Wedding Shuttle</h3><p>Bride, groom &amp; guest transport with day-of coordination, multi-stop routing, and signage.</p><span class="lnk">Explore weddings →</span></div>
+      <div class="svc"><div class="no">II.</div><h3>Bachelorette &amp; Bachelor</h3><p>DC nightlife, Loudoun wineries, Wharf bar crawls. BYOB friendly — leave the driving to us.</p><span class="lnk">Plan the night →</span></div>
+      <div class="svc"><div class="no">III.</div><h3>Prom &amp; Schools</h3><p>Parent-vetted, background-checked drivers, live GPS shareable to parents. The safe choice.</p><span class="lnk">Book for prom →</span></div>
+      <div class="svc"><div class="no">IV.</div><h3>Quinceañeras</h3><p>La fiesta de los quince con el transporte que se merece. Hablamos español.</p><span class="lnk">Reservar →</span></div>
+      <div class="svc"><div class="no">V.</div><h3>Birthdays</h3><p>21st, 30th, 40th, 50th. Dinner-then-nightlife routes through U Street, 14th &amp; the Wharf.</p><span class="lnk">Plan the birthday →</span></div>
+      <div class="svc"><div class="no">VI.</div><h3>College &amp; Greek</h3><p>Formals, semi-formals, date nights. We've moved chapters from UVA, UMD, GMU &amp; Georgetown.</p><span class="lnk">Book the chapter →</span></div>
+      <div class="svc"><div class="no">VII.</div><h3>Winery Tours</h3><p>Loudoun's 40+ wineries, Maryland Wine Trail, Old Town crawls. Pre-planned or design your own.</p><span class="lnk">See routes →</span></div>
+      <div class="svc"><div class="no">VIII.</div><h3>Concerts &amp; Sports</h3><p>Capital One Arena, Nationals Park, The Anthem, Wolf Trap. Drop-off, tailgate, after-party.</p><span class="lnk">Plan the night →</span></div>
+    </div>
+    <div class="svc-more"><a href="/v2/services/" class="btn ghost lg">All 20+ Services <span class="arrow">→</span></a></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="s why" id="why">
+  <div class="container">
+    <div class="section-head center">
+      <span class="kicker">Why We Stand Apart</span>
+      <h2>Booked because we're <em>different.</em></h2>
+      <p>The DMV has plenty of party bus operators — most are price-floors with a phone number. Here's what a purpose-built fleet and a team that takes the night seriously gets you instead.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item"><div class="ic">i.</div><h4>Quote inside 60 minutes</h4><p>Tell us your event — date, hours, headcount, pickup ZIP. We respond with a custom all-in quote in under an hour during business hours.</p></div>
+      <div class="why-item"><div class="ic">ii.</div><h4>15 minutes early. Every time.</h4><p>Driver arrives 15 minutes before every pickup, tracked by GPS. Late by more than 10? We owe you 30 minutes back.</p></div>
+      <div class="why-item"><div class="ic">iii.</div><h4>Custom every booking</h4><p>We tailor the bus, route, timing, and in-cabin setup to your group's vibe — not a generic rate-card service.</p></div>
+      <div class="why-item"><div class="ic">iv.</div><h4>Real people, all night</h4><p>24/7 dispatch with a line that rings to a human. Driver numbers shared with the booking party.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="s" id="compare">
+  <div class="container">
+    <div class="section-head center">
+      <span class="kicker">How We Compare</span>
+      <h2>The receipts vs. the <em>industry norm.</em></h2>
+      <p>We've worked next to most DMV party bus operators. Here's what's different — and what to watch for in their quotes.</p>
+    </div>
+    <table class="comp reveal">
+      <thead><tr><th>Feature</th><th class="us">Party Bus R Us</th><th>Typical DMV operator</th></tr></thead>
+      <tbody>
+        <tr><td>Quote response time</td><td class="yes">✓ Within 60 minutes</td><td class="no">1–3 days</td></tr>
+        <tr><td>All-in pricing (gratuity, fuel, decor)</td><td class="yes">✓ Quoted as one number</td><td class="no">Added at invoicing (+18–22%)</td></tr>
+        <tr><td>Real interior photos of every bus</td><td class="yes">✓ Our actual fleet</td><td class="no">Stock or exterior-only</td></tr>
+        <tr><td>WhatsApp &amp; text booking</td><td class="yes">✓ WhatsApp, SMS or call</td><td class="no">Phone or web form only</td></tr>
+        <tr><td>Spanish-language service</td><td class="yes">✓ Full team bilingual</td><td class="no">Rare</td></tr>
+        <tr><td>24/7 dispatch with real humans</td><td class="yes">✓ Yes — 24/7</td><td class="no">Business hours only</td></tr>
+        <tr><td>Driver background &amp; drug screening</td><td class="yes">✓ Documented</td><td class="no">Claimed — rarely documented</td></tr>
+      </tbody>
+    </table>
+    <div style="text-align:center;margin-top:28px"><a href="/v2/quote.html" class="btn neon lg" data-magnetic>Get a Real Quote in 60 Seconds <span class="arrow">→</span></a></div>
+  </div>
+</section>
+
+<!-- PRICING STEPS -->
+<section class="s steps-band" id="quote">
+  <div class="container" style="position:relative;z-index:2">
+    <div class="section-head center">
+      <span class="kicker">How We Quote</span>
+      <h2>Every booking is custom. <em>Every quote is fast.</em></h2>
+      <p>Every night is different. So we quote every booking individually — tailored to your event, hours, headcount, and bus preference.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step"><div class="cap">Step I</div><h4>Tell us your event</h4><div class="big">60 sec</div><div class="sub">Date · hours · headcount · pickup ZIP · event type. That's it.</div></div>
+      <div class="step mid"><div class="cap">Step II — where we add value</div><h4>We match the bus</h4><div class="big">The fleet</div><div class="sub">We recommend the right vehicle based on your group size and vibe.</div></div>
+      <div class="step"><div class="cap">Step III</div><h4>Your custom quote</h4><div class="big">≤ 60 min</div><div class="sub">All-in pricing. Gratuity, fuel, decor included. Valid 14 days.</div></div>
+    </div>
+    <div class="incl"><span>4-hour minimum</span><span>Gratuity included</span><span>No fuel surcharge</span><span>No hidden fees</span><span>Refundable deposit</span></div>
+    <div style="text-align:center;margin-top:40px"><a href="/v2/quote.html" class="btn gold lg" data-magnetic>Get Your Custom Quote <span class="arrow">→</span></a></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="s" id="reviews">
+  <div class="container">
+    <div class="section-head center">
+      <span class="kicker">What Clients Are Saying</span>
+      <h2>Real <em>moments,</em> real reviews</h2>
+      <p>From bachelorettes to birthdays to brewery crawls — here's what our riders had to say.</p>
+    </div>
+    <div class="testi-grid" id="testiGrid">
+      <div class="testi"><div class="stars">★★★★★</div><p class="q">"Absolutely made our bachelorette weekend. Driver was on time, the LEDs were everything, and the bar was loaded. Worth every penny."</p><div class="who"><div class="av">S</div><div><b>Sarah M.</b><span>Bachelorette · Loudoun</span></div></div></div>
+      <div class="testi"><div class="stars">★★★★★</div><p class="q">"Booked for my 30th and it set the entire tone. Pulled up and everyone outside was staring. Easy 10/10."</p><div class="who"><div class="av">J</div><div><b>Jasmine R.</b><span>Birthday · DC Nightlife</span></div></div></div>
+      <div class="testi"><div class="stars">★★★★★</div><p class="q">"Booked them for our wedding shuttle. Clean, on time, professional — and the bridal party loved riding back with the LEDs going."</p><div class="who"><div class="av">M</div><div><b>Maria + David L.</b><span>Wedding · Maryland</span></div></div></div>
+      <div class="testi"><div class="stars">★★★★★</div><p class="q">"Wineries day trip with 12 of my girls. Driver navigated everything, we just rode and drank. Speakers were unreal."</p><div class="who"><div class="av">A</div><div><b>Ashley T.</b><span>Group Trip · VA Wineries</span></div></div></div>
+      <div class="testi"><div class="stars">★★★★★</div><p class="q">"Brewery crawl for my buddy's bachelor party. Bus was spotless, driver was patient with all our stops, we ALL made it home safe."</p><div class="who"><div class="av">D</div><div><b>Derrick K.</b><span>Bachelor · NoVA</span></div></div></div>
+      <div class="testi"><div class="stars">★★★★★</div><p class="q">"Corporate happy-hour shuttle from Tysons to the city. Polished, on time, the team loved it. Already booked the holiday party."</p><div class="who"><div class="av">R</div><div><b>Rachel B.</b><span>Corporate · Tysons</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="s" id="faq" style="background:linear-gradient(180deg,#100a1a,#0a0710)">
+  <div class="container">
+    <div class="section-head center">
+      <span class="kicker">Common Questions</span>
+      <h2>Everything you'd want to know <em>before booking.</em></h2>
+    </div>
+    <div class="faq">
+      <details class="faq-item" open><summary>How far in advance should we book?<span class="plus">+</span></summary><div class="ans">For weddings: 4–6 months ahead. For prom: book by February for May–June dates. For bachelorette / nightlife: 2–4 weeks. For NYE, Halloween, July 4: at least 60 days. Last-minute openings appear weekly — text us if your date is tight.</div></details>
+      <details class="faq-item"><summary>Is BYOB allowed?<span class="plus">+</span></summary><div class="ans">Yes, in Virginia and Maryland — you're welcome to bring your own. By state law we cannot sell or serve alcohol on the bus. In DC proper, alcohol service requires an ABRA permit. All passengers must be 21+ for alcohol on board.</div></details>
+      <details class="faq-item"><summary>What's included in the hourly rate?<span class="plus">+</span></summary><div class="ans">Everything except your bar. The rate includes vehicle, professional chauffeur, 18% gratuity, fuel, basic decor (lighting, sound), pre-route planning, and 15 minutes pre-arrival. You cover BYOB, food, custom decor, and tolls outside the DMV.</div></details>
+      <details class="faq-item"><summary>What's the cancellation policy?<span class="plus">+</span></summary><div class="ans">Full refund 30+ days before your event. 50% refund 14–30 days. Deposit forfeit inside 14 days. Weather or driver-cancelled bookings get full refunds or reschedule at no charge.</div></details>
+      <details class="faq-item"><summary>Are your drivers and buses licensed?<span class="plus">+</span></summary><div class="ans">All drivers hold commercial CDLs with passenger endorsement and undergo background checks &amp; drug screening. Every vehicle is inspected weekly and deep-cleaned between every booking.</div></details>
+      <details class="faq-item"><summary>Do you serve outside the DMV?<span class="plus">+</span></summary><div class="ans">Our home base is DC / Maryland / Northern Virginia. We routinely run to Baltimore, Annapolis, Frederick, and the Eastern Shore. Beach and ski trips are available with advance booking.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="final">
+  <div class="final-media"><img src="/IMG_0909-1920.webp" alt="Party bus night"></div>
+  <div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <canvas id="confetti"></canvas>
+  <div class="container" style="position:relative;z-index:2">
+    <h2>The night you've been planning <em>starts here.</em></h2>
+    <p>Get a real quote in under 60 seconds. No back-and-forth. No hidden fees.</p>
+    <div class="final-actions">
+      <a href="/v2/quote.html" class="btn neon lg" data-magnetic>Get Instant Quote <span class="arrow">→</span></a>
+      <a class="btn ghost lg" href="tel:+17033994394">Call (703) 399-4394</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-logo"><img src="/logo/wordmark-cream.png" alt="Party Bus R Us"></div>
+        <p style="color:#b6abc8;font-size:14px">The DMV's premier party bus &amp; limo bus fleet.</p>
+        <p style="font-size:12.5px;color:var(--dim);margin-top:12px">6601 Stonecrest Lane, Fairfax, VA 22030<br>Serving DC, Maryland &amp; Northern Virginia</p>
+        <div class="foot-social"><a>Ig</a><a>Tk</a><a>Fb</a><a>Yt</a><a>G</a></div>
+      </div>
+      <div class="foot-col"><h5>Fleet</h5><a href="/v2/fleet.html">All Vehicles</a><a href="/v2/fleet/bus-35pax.html">Imperial 35</a><a href="/v2/fleet/bus-30pax.html">Signature 30</a><a href="/v2/fleet/bus-24pax.html">Diamond 24</a><a href="/v2/fleet/bus-20pax.html">Midnight 20</a></div>
+      <div class="foot-col"><h5>Services</h5><a href="/v2/services/weddings.html">Weddings</a><a href="/v2/services/bachelorette.html">Bachelorette</a><a href="/v2/services/prom.html">Prom</a><a href="/v2/services/winery-tours.html">Winery Tours</a><a href="/v2/services/corporate.html">Corporate</a></div>
+      <div class="foot-col"><h5>Service Area</h5><a href="/v2/cities/georgetown-dc.html">Georgetown, DC</a><a href="/v2/cities/arlington-va.html">Arlington, VA</a><a href="/v2/cities/tysons-mclean-va.html">Tysons, VA</a><a href="/v2/cities/bethesda-md.html">Bethesda, MD</a><a href="/v2/cities/">All Locations</a></div>
+      <div class="foot-col"><h5>Company</h5><a href="/v2/about.html">About Us</a><a href="/v2/reviews.html">Reviews</a><a href="/v2/quote.html">Get a Quote</a><a href="/v2/blog/">Journal</a><a href="/v2/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Party Bus R Us · 6601 Stonecrest Lane, Fairfax, VA 22030</span>
+      <div style="display:flex;gap:14px"><a href="/v2/">Version 2 (Neon Luxe)</a><a href="/">Version 1 (current)</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING CTA -->
+<div class="float-cta">
+  <a class="fc-call" href="tel:+17033994394"><span>☎</span><span class="lbl">Call</span></a>
+  <a class="fc-text" href="sms:+17033994394"><span>💬</span><span class="lbl">Text</span></a>
+  <a class="fc-quote" href="/v2/quote.html"><span>▸</span><span class="lbl">Quote</span></a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isDesktop = !window.matchMedia('(max-width:900px)').matches;
+
+  /* Scroll progress bar */
+  var prog = document.getElementById('progress');
+  function onScroll(){
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight);
+    prog.style.width = (pct*100) + '%';
+  }
+  document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* Nav scrolled state */
+  var nav = document.getElementById('nav');
+  document.addEventListener('scroll', function(){
+    if (window.scrollY > 40) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+  }, {passive:true});
+
+  /* Seamless marquee: duplicate content */
+  var mq = document.getElementById('marquee');
+  if (mq) mq.innerHTML += mq.innerHTML;
+
+  /* Hero cursor spotlight */
+  if (isDesktop && !reduce){
+    var hero = document.querySelector('.hero'), sp = document.getElementById('spotlight');
+    hero.addEventListener('mousemove', function(e){
+      var r = hero.getBoundingClientRect();
+      sp.style.setProperty('--mx', (e.clientX - r.left)+'px');
+      sp.style.setProperty('--my', (e.clientY - r.top)+'px');
+    });
+  }
+
+  /* Magnetic buttons (desktop) */
+  if (isDesktop && !reduce){
+    document.querySelectorAll('[data-magnetic]').forEach(function(btn){
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        var x = e.clientX - r.left - r.width/2, y = e.clientY - r.top - r.height/2;
+        btn.style.transform = 'translate('+x*0.3+'px,'+y*0.4+'px)';
+      });
+      btn.addEventListener('mouseleave', function(){ btn.style.transform=''; });
+    });
+  }
+
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || reduce){
+    document.querySelectorAll('.reveal').forEach(function(el){el.style.opacity=1;});
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* Hero headline word reveal */
+  gsap.set('.hero h1 .word i', {yPercent:120});
+  gsap.to('.hero h1 .word i', {yPercent:0, duration:1, ease:'power4.out', stagger:0.09, delay:0.15});
+  gsap.from('.hero-live, .hero .eyebrow, .hero .lede, .hero-actions, .diff-row', {y:26, opacity:0, duration:0.9, ease:'power3.out', stagger:0.12, delay:0.35});
+
+  /* Hero parallax on the image */
+  gsap.to('#heroMedia', {yPercent:18, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
+
+  /* Section-head reveals */
+  gsap.utils.toArray('.section-head').forEach(function(head){
+    gsap.from(head.children, {y:34, opacity:0, duration:0.9, ease:'power3.out', stagger:0.1,
+      scrollTrigger:{trigger:head, start:'top 82%'}});
+  });
+
+  /* Generic .reveal fade */
+  gsap.utils.toArray('.reveal').forEach(function(el){
+    gsap.fromTo(el, {y:24, opacity:0}, {y:0, opacity:1, duration:0.8, ease:'power2.out',
+      scrollTrigger:{trigger:el, start:'top 88%'}});
+  });
+
+  /* Grid staggers */
+  [['#fleetGrid','> *'],['#svcGrid','> *'],['#testiGrid','> *'],['.showcase-grid','> *'],['.area-grid','> *'],['.why-grid','> *'],['.stats-grid','> *'],['.steps-grid','> *']].forEach(function(pair){
+    var grid = document.querySelector(pair[0]); if(!grid) return;
+    gsap.from(grid.querySelectorAll(':scope '+pair[1]), {y:30, opacity:0, duration:0.7, ease:'power2.out', stagger:0.07,
+      scrollTrigger:{trigger:grid, start:'top 85%'}});
+  });
+
+  /* Comparison rows */
+  gsap.from('.comp tbody tr', {x:-16, opacity:0, duration:0.5, ease:'power2.out', stagger:0.05,
+    scrollTrigger:{trigger:'.comp', start:'top 80%'}});
+
+  /* Stat number count-up */
+  document.querySelectorAll('.stat .big').forEach(function(el){
+    var raw = el.textContent.trim(); var m = raw.match(/(\d[\d,]*)/); if(!m) return;
+    var target = parseInt(m[1].replace(/,/g,''),10); if(isNaN(target)) return;
+    var pre = raw.slice(0, raw.indexOf(m[0])), suf = raw.slice(raw.indexOf(m[0])+m[0].length);
+    var o={v:0};
+    gsap.to(o,{v:target, duration:1.6, ease:'power2.out',
+      scrollTrigger:{trigger:el, start:'top 88%'},
+      onUpdate:function(){ el.textContent = pre + Math.round(o.v) + suf; }});
+  });
+
+  /* ===== LED PINNED SCROLL SHOWPIECE ===== */
+  var slides = gsap.utils.toArray('#led .slide');
+  var colors = slides.map(function(s){return s.getAttribute('data-color');});
+  var names = ['Cool Blue','Royal Purple','Emerald Green','Crimson Red'];
+  var ledBg = document.getElementById('ledBg');
+  var ledGlow = document.getElementById('ledGlow');
+  var ledName = document.getElementById('ledName');
+  var dots = document.querySelectorAll('#ledDots i');
+  function setLed(i){
+    slides.forEach(function(s,idx){ s.classList.toggle('on', idx===i); });
+    dots.forEach(function(d,idx){ d.classList.toggle('on', idx===i); d.style.background = idx===i?colors[i]:'#4a3d63'; });
+    ledBg.style.background = 'radial-gradient(circle at 50% 55%,'+colors[i]+',transparent 60%)';
+    ledGlow.style.background = colors[i];
+    ledName.textContent = names[i]; ledName.style.color = colors[i];
+  }
+  setLed(0);
+  if (isDesktop){
+    ScrollTrigger.create({
+      trigger:'#led', start:'top top', end:'+=280%', pin:true, scrub:0.4,
+      onUpdate:function(self){
+        var i = Math.min(slides.length-1, Math.floor(self.progress * slides.length));
+        setLed(i);
+      }
+    });
+  } else {
+    // mobile: auto-cycle
+    var ci=0; setInterval(function(){ ci=(ci+1)%slides.length; setLed(ci); }, 2200);
+  }
+
+  /* ===== Confetti burst on final CTA ===== */
+  var canvas = document.getElementById('confetti'); if (canvas){
+    var ctx = canvas.getContext('2d'), parts=[], W,H, fired=false, raf;
+    var palette=['#ff2e97','#a855f7','#22d3ee','#f4dc88','#38f5a8'];
+    function size(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; }
+    function burst(){
+      parts=[];
+      for(var i=0;i<130;i++){
+        parts.push({x:W/2+(Math.random()-.5)*140, y:H*0.4, vx:(Math.random()-.5)*9, vy:Math.random()*-11-3,
+          s:Math.random()*7+4, c:palette[i%palette.length], r:Math.random()*6.28, vr:(Math.random()-.5)*0.3, life:1});
+      }
+      cancelAnimationFrame(raf); loop();
+    }
+    function loop(){
+      ctx.clearRect(0,0,W,H); var alive=false;
+      parts.forEach(function(p){
+        p.vy+=0.22; p.x+=p.vx; p.y+=p.vy; p.r+=p.vr; p.life-=0.008;
+        if(p.life>0 && p.y<H+20){ alive=true;
+          ctx.save(); ctx.globalAlpha=Math.max(0,p.life); ctx.translate(p.x,p.y); ctx.rotate(p.r);
+          ctx.fillStyle=p.c; ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*0.6); ctx.restore();
+        }
+      });
+      if(alive) raf=requestAnimationFrame(loop);
+    }
+    size(); window.addEventListener('resize', size);
+    ScrollTrigger.create({trigger:'#final', start:'top 60%', onEnter:function(){ if(!fired && !reduce){ fired=true; size(); burst(); } }});
+  }
+
+  ScrollTrigger.refresh();
+})();
+</script>
+</body>
+</html>
