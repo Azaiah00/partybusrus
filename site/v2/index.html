@@ -229,7 +229,7 @@ section{position:relative}
 @media(max-width:640px){.cmp th,.cmp td{padding:12px;font-size:12px}}
 
 /* REVIEWS */
-.rev-scroll{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 46px 24px;margin:0 -46px}
+.rev-scroll{overflow:hidden;padding:6px 46px 24px;margin:0 -46px}.rev-track{display:flex;gap:20px;width:max-content;animation:revdrift 55s linear infinite}.rev-scroll:hover .rev-track{animation-play-state:paused}@keyframes revdrift{from{transform:translateX(0)}to{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.rev-track{animation:none}}
 @media(max-width:760px){.rev-scroll{padding:6px 22px 22px;margin:0 -22px}}
 .rev-scroll::-webkit-scrollbar{height:6px}.rev-scroll::-webkit-scrollbar-thumb{background:var(--line2);border-radius:999px}
 .rcard{scroll-snap-align:start;flex:0 0 clamp(280px,34vw,420px);background:linear-gradient(180deg,#191125,#100b1a);border:1px solid var(--line);border-radius:20px;padding:32px 30px;display:flex;flex-direction:column}
@@ -554,6 +554,15 @@ footer{background:#000;padding:80px 0 34px;border-top:1px solid var(--line)}
     kids.forEach(function(c){track.appendChild(c);});
     kids.forEach(function(c){var cl=c.cloneNode(true);cl.setAttribute('aria-hidden','true');cl.setAttribute('tabindex','-1');track.appendChild(cl);});
     fs.appendChild(track);
+  }
+  // REVIEWS auto-scroll — CSS marquee (same as fleet)
+  var rs=document.querySelector('.rev-scroll');
+  if(rs && !rs.querySelector('.rev-track')){
+    var rtrack=document.createElement('div'); rtrack.className='rev-track';
+    var rk=[].slice.call(rs.children);
+    rk.forEach(function(c){rtrack.appendChild(c);});
+    rk.forEach(function(c){var cl=c.cloneNode(true);cl.setAttribute('aria-hidden','true');cl.setAttribute('tabindex','-1');rtrack.appendChild(cl);});
+    rs.appendChild(rtrack);
   }
 
 })();
