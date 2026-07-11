@@ -1,5 +1,18 @@
 User-agent: *
 Allow: /
 Disallow: /thank-you.html
+Disallow: /404.html
 
-Sitemap: https://partybusrus.vercel.app/sitemap.xml
+# AI answer engines
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://partybusrus.com/sitemap.xml

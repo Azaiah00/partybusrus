@@ -340,3 +340,14 @@ footer{background:#000;border-color:var(--line)}
 .nl-aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;mix-blend-mode:screen}
 .nl-aurora .b1{width:520px;height:520px;background:radial-gradient(circle,var(--neonViolet),transparent 65%);top:-140px;right:-100px}
 .nl-aurora .b2{width:440px;height:440px;background:radial-gradient(circle,var(--neonPink),transparent 65%);bottom:-160px;left:-70px}
+
+/* ==== Afterglow v2 polish: icons, stars, mobile lock ==== */
+.fc-icon svg,.cta-ico{width:16px;height:16px;vertical-align:-3px;display:inline-block}
+.float-cta .fc-icon{display:inline-flex;line-height:0}
+.menu-btn svg,.close svg,.mobile-nav .close svg{display:inline-block;vertical-align:middle}
+.starrow{display:inline-flex;gap:2px;line-height:0;vertical-align:middle}
+.starrow svg{display:block}
+.stars .starrow svg,.st .starrow svg,.testi .stars .starrow svg{width:15px;height:15px}
+html{overflow-x:hidden;overscroll-behavior-x:none}
+body{overflow-x:hidden}
+@media(max-width:760px){html,body{overflow-x:hidden;overscroll-behavior-x:none;max-width:100%}}
