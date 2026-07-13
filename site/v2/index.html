@@ -50,7 +50,10 @@ img{max-width:100%;display:block;image-orientation:from-image}
 .rv.in{opacity:1;transform:none}
 .rv2{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease) .12s,transform .9s var(--ease) .12s}
 .rv2.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.rv,.rv2{opacity:1;transform:none;transition:none}}
+/* Mobile and reduced-motion visitors should never depend on JavaScript reveals. */
+@media(max-width:760px),(prefers-reduced-motion:reduce){
+  .rv,.rv2{opacity:1!important;transform:none!important;transition:none!important}
+}
 
 /* progress + flag */
 .prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:400;background:var(--grad);box-shadow:0 0 14px rgba(168,85,247,.7)}
