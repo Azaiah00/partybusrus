@@ -1,36 +1,39 @@
 # Party Bus R Us V2 — SEO and Launch Action Plan
 
-## Phase 1 — Before domain launch (critical)
+## Completed in the current implementation
 
-1. Point apex and `www` DNS to Vercel, add both domains, choose one canonical host, and force HTTPS plus a single-hop host redirect.
-2. Promote V2 to root so every sitemap/canonical/schema URL returns the intended V2 page. Permanently redirect `/v2/*` to its root equivalent.
-3. Re-crawl all 90 indexable URLs; confirm 200 status, canonical self-reference, robots access, sitemap accuracy, and no redirect chains.
-4. Standardize the official email, address/service-area treatment, price range, gratuity, business hours, founding facts, and review count everywhere.
-5. Connect the quote form to the existing Real Estate Advancement Supabase project, add spam protection, test success/failure handling, and retain FormSubmit only as a temporary fallback if desired.
-6. Replace `GTM-XXXXXXX`, install GA4 conversion events, verify Google Search Console and Bing Webmaster Tools, and submit the sitemap.
+- Standardized official email, address, price range, 20% gratuity, and 24/7 hours.
+- Created Washington DC, Maryland, and Northern Virginia regional hubs.
+- Consolidated the combined Tysons/McLean URL into the dedicated Tysons page and updated internal links.
+- Linked FAQ and gallery throughout normal navigation.
+- Retained only the confirmed Instagram profile.
+- Improved homepage responsive image delivery and intrinsic sizing.
+- Corrected BlogPosting author schema and removed truncated schema article bodies.
+- Clarified that the established old website and new website represent the same company and fleet.
+- Updated the sitemap, redirects, canonical references, `llms.txt`, and GEO/AEO content structure.
 
-## Phase 2 — First two weeks (high impact)
+## Before domain launch — critical
 
-1. Claim/complete Google Business Profile as the correct service-area business type; match NAP, categories, services, hours, photos, and website exactly.
-2. Create regional hubs for Washington DC, Maryland, and Northern Virginia.
-3. Consolidate the overlapping Tysons/McLean URLs and update every internal link.
-4. Link FAQ and gallery from relevant visible pages; add contextual links among city, service, and fleet pages.
-5. Add explicit image dimensions, responsive WebP/AVIF sources, and priority loading only for the true LCP hero.
-6. Validate representative schema with Google Rich Results Test and Schema.org Validator.
-7. Replace generic social links in static source with Instagram only.
+1. Point apex and `www` DNS to Vercel; select one canonical host and force HTTPS.
+2. Promote V2 to root and permanently redirect `/v2/*` to root equivalents.
+3. Connect the quote form to the Real Estate Advancement Supabase project, with server-side validation, spam protection, success/failure monitoring, and a tested fallback.
+4. Install GA4/GTM conversion tracking for quote starts/submissions, calls, texts, WhatsApp, and Instagram.
+5. Verify Google Search Console and Bing Webmaster Tools, submit the sitemap, and inspect representative URLs.
+6. Re-crawl the final domain and confirm all canonical URLs return 200 without redirect chains.
 
-## Phase 3 — Authority and AI-search growth (month 1–2)
+## First 30 days — authority and conversion
 
-1. Build consistent citations on Bing Places, Apple Business Connect, Yelp, LinkedIn, transportation/wedding directories, and relevant DMV organizations.
-2. Implement an ethical review-request process and link testimonials to their source.
-3. Add author profiles, primary-source citations, visible published/updated dates, and verified operator credentials.
-4. Publish answer-first sections and tables for cost, minimums, bus size, BYOB rules, booking lead time, routes, wedding logistics, and prom safety.
-5. Add original local photography/video for key cities and services and keep media metadata/captions specific.
+1. Complete Google Business Profile as the correct service-area business type with matching facts, services, hours, photos, and site URL.
+2. Align Bing Places, Apple Business Connect, Yelp, and important transportation/wedding directories.
+3. Start a compliant review-request program and connect on-site testimonials to their original sources.
+4. Add Frederick's complete public author profile and verifiable operating/safety credentials.
+5. Measure final-domain Core Web Vitals and add dimensions/responsive variants to the remaining legacy images.
+6. Publish genuinely distinct pages for the next highest-value city/service combinations based on Search Console evidence.
 
-## Phase 4 — Measurement and iteration (ongoing)
+## Ongoing
 
-1. Monitor Search Console indexing, queries, click-through rates, page experience, and sitemap errors weekly after launch.
-2. Monitor GBP calls, directions, website clicks, reviews, and local rankings by city.
-3. Measure quote starts, completions, phone clicks, SMS clicks, WhatsApp clicks, and Instagram referrals in GA4.
-4. Run PageSpeed/CrUX checks on the final domain and fix LCP, INP, and CLS regressions.
-5. Refresh pricing, legal/BYOB, venue, and route information at least quarterly.
+1. Monitor indexing, queries, click-through rate, conversions, GBP activity, reviews, and local rankings weekly.
+2. Compare the two websites by call/quote conversion and query overlap; keep their content distinct.
+3. Refresh pricing, gratuity, route, venue, BYOB, and legal information quarterly.
+4. Add original event/fleet photos, descriptive captions, primary sources, and concise answer blocks.
+5. Test mobile quoting on real iPhone and Android devices after every major release.

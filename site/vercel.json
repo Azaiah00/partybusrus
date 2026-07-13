@@ -10,7 +10,11 @@
     { "source": "/fleet/bus-luxury-12", "destination": "/fleet/bus-20pax", "permanent": true },
     { "source": "/fleet/bus-luxury-12.html", "destination": "/fleet/bus-20pax.html", "permanent": true },
     { "source": "/fleet/bus-mini-10", "destination": "/fleet/bus-20pax", "permanent": true },
-    { "source": "/fleet/bus-mini-10.html", "destination": "/fleet/bus-20pax.html", "permanent": true }
+    { "source": "/fleet/bus-mini-10.html", "destination": "/fleet/bus-20pax.html", "permanent": true },
+    { "source": "/cities/tysons-mclean-va", "destination": "/cities/tysons-va", "permanent": true },
+    { "source": "/cities/tysons-mclean-va.html", "destination": "/cities/tysons-va.html", "permanent": true },
+    { "source": "/v2/cities/tysons-mclean-va", "destination": "/v2/cities/tysons-va", "permanent": true },
+    { "source": "/v2/cities/tysons-mclean-va.html", "destination": "/v2/cities/tysons-va.html", "permanent": true }
   ],
   "rewrites": [
     { "source": "/cities", "destination": "/cities/index.html" },
