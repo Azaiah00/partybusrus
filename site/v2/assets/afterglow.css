@@ -354,3 +354,7 @@ footer{background:#000;border-color:var(--line)}
 html{overflow-x:hidden;overscroll-behavior-x:none}
 body{overflow-x:hidden}
 @media(max-width:760px){html,body{overflow-x:hidden;overscroll-behavior-x:none;max-width:100%}}
+
+/* Keep the full-screen mobile drawer above conversion controls. */
+.mobile-nav{z-index:260!important}
+.mobile-menu-open .float-cta{visibility:hidden!important;pointer-events:none!important}

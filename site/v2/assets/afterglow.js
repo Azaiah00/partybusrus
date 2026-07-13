@@ -68,6 +68,49 @@
     });
   }
 
+  /* The shared V2 pages use the older .mobile-nav/.menu-btn naming. Give
+     that drawer the same accessible state, keyboard and focus behavior. */
+  var legacyNav=document.querySelector('.mobile-nav');
+  var legacyOpen=document.querySelector('.menu-btn');
+  var legacyClose=legacyNav&&legacyNav.querySelector('.close');
+  if(legacyNav&&legacyOpen&&legacyClose){
+    if(!legacyNav.id) legacyNav.id='mobile-navigation';
+    legacyOpen.setAttribute('aria-label','Open menu');
+    legacyOpen.setAttribute('aria-controls',legacyNav.id);
+    legacyOpen.setAttribute('aria-expanded','false');
+    legacyClose.setAttribute('aria-label','Close menu');
+    legacyNav.setAttribute('aria-hidden','true');
+    function openLegacyMenu(){
+      legacyNav.classList.add('open');
+      legacyNav.setAttribute('aria-hidden','false');
+      legacyOpen.setAttribute('aria-expanded','true');
+      document.body.classList.add('mobile-menu-open');
+      document.body.style.overflow='hidden';
+      legacyClose.focus();
+    }
+    function closeLegacyMenu(returnFocus){
+      legacyNav.classList.remove('open');
+      legacyNav.setAttribute('aria-hidden','true');
+      legacyOpen.setAttribute('aria-expanded','false');
+      document.body.classList.remove('mobile-menu-open');
+      document.body.style.overflow='';
+      if(returnFocus) legacyOpen.focus();
+    }
+    legacyOpen.addEventListener('click',openLegacyMenu);
+    legacyClose.addEventListener('click',function(){ closeLegacyMenu(true); });
+    legacyNav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ closeLegacyMenu(false); }); });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&legacyNav.classList.contains('open')) closeLegacyMenu(true);
+      if(e.key==='Tab'&&legacyNav.classList.contains('open')){
+        var focusable=legacyNav.querySelectorAll('a[href],button:not([disabled])');
+        if(!focusable.length) return;
+        var first=focusable[0],last=focusable[focusable.length-1];
+        if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+      }
+    });
+  }
+
   /* nav solidify */
   var nav=document.querySelector('nav.main');
   if(nav){var s=function(){nav.classList.toggle('scrolled',window.scrollY>40);};document.addEventListener('scroll',s,{passive:true});s();}

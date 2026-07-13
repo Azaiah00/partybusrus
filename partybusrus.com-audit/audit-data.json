@@ -1,0 +1,38 @@
+{
+  "summary": {
+    "health_score": 79,
+    "business_type": "Local service-area party bus and limousine operator",
+    "top_findings": [
+      "Custom domain and V2 root cutover are incomplete",
+      "Business identity facts conflict across several sources",
+      "Regional DC, Maryland, and Northern Virginia hub pages are missing",
+      "Image dimensions and responsive delivery need improvement",
+      "Off-site local authority and verified reviews remain limited"
+    ],
+    "quick_wins": [
+      "Link the orphan FAQ and gallery pages",
+      "Standardize NAP, gratuity, hours, and price range",
+      "Replace generic social source links with Instagram only",
+      "Consolidate overlapping Tysons and McLean pages",
+      "Add image dimensions and true-LCP priority hints"
+    ]
+  },
+  "categories": [
+    {"name":"Technical SEO","score":83,"what_works":["Complete metadata","Valid canonicals and sitemap model","Crawlable static HTML","AI crawlers allowed"],"findings":[{"title":"Launch routing mismatch","severity":"Critical","description":"V2 is under /v2 while canonical assets target future root-domain URLs.","recommendation":"Serve V2 at root and redirect /v2 equivalents before sitemap submission."}]},
+    {"name":"Content Quality","score":86,"what_works":["39 localized city pages","20 service pages","Detailed local guides"],"findings":[{"title":"Authority evidence","severity":"High","description":"Some claims and testimonials lack visible source proof.","recommendation":"Add verified review sources, author credentials, and primary citations."}]},
+    {"name":"On-Page SEO","score":88,"what_works":["No missing or duplicate titles/descriptions/H1s","Strong exact-location targeting"],"findings":[{"title":"Regional hub gap","severity":"High","description":"No dedicated DC, Maryland, or Northern Virginia regional commercial hubs.","recommendation":"Create three authoritative regional landing pages."}]},
+    {"name":"Schema / Structured Data","score":82,"what_works":["198 valid JSON-LD blocks","Broad Service, FAQ, BlogPosting, WebSite and LocalBusiness coverage"],"findings":[{"title":"Fact consistency","severity":"High","description":"Email, price range, address, hours, gratuity, and review claims are not fully consistent.","recommendation":"Standardize and verify all visible and structured facts."}]},
+    {"name":"Performance (CWV)","score":62,"what_works":["WebP assets","Static HTML","Reasonable individual photo sizes"],"findings":[{"title":"Unverified field performance","severity":"High","description":"No final-domain CrUX data; 87 images lack intrinsic dimensions and no responsive sources are used.","recommendation":"Measure the final domain and implement width/height, srcset/sizes, and LCP prioritization."}]},
+    {"name":"AI Search Readiness","score":65,"what_works":["Crawler access","Detailed answer passages","FAQ and llms.txt present"],"findings":[{"title":"Entity authority","severity":"High","description":"Conflicting facts and a competing same-name entity weaken machine confidence.","recommendation":"Unify NAP/entity data and build corroborating third-party citations."}]},
+    {"name":"Images","score":58,"what_works":["All 269 images have alt text","Real fleet photography"],"findings":[{"title":"Responsive image delivery","severity":"Medium","description":"87 images lack width/height and no img uses srcset/sizes.","recommendation":"Add intrinsic dimensions and responsive WebP/AVIF variants."}]}
+  ],
+  "action_plan": {
+    "phases": [
+      {"name":"Phase 1: Critical Fixes","timeframe":"Before launch","items":["Connect domain and HTTPS","Promote V2 to root","Standardize entity facts","Connect Supabase quote storage","Install analytics and webmaster tools"]},
+      {"name":"Phase 2: High-Impact Improvements","timeframe":"Weeks 1-2","items":["Regional hub pages","Tysons/McLean consolidation","Image optimization","Schema validation","Contextual internal linking"]},
+      {"name":"Phase 3: Content & Authority","timeframe":"Month 2","items":["Business citations","Verified review program","Author credentials","Primary-source citations","Answer-first content tables"]},
+      {"name":"Phase 4: Monitoring & Iteration","timeframe":"Ongoing","items":["GSC and GBP monitoring","GA4 conversion tracking","CrUX/Lighthouse checks","Quarterly factual refreshes"]}
+    ]
+  },
+  "artifacts": {"findings_dir":"findings/","screenshots_dir":"screenshots/"}
+}
