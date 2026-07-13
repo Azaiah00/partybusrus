@@ -1,7 +1,7 @@
 /* =====================================================================
    PARTY BUS R US — "AFTERGLOW" enhancements (Version 2, full site)
    Additive, runs alongside each page's existing script. Adds: scroll
-   progress bar, version flag, neon aurora behind heroes, magnetic
+   progress bar, neon aurora behind heroes, magnetic
    buttons, nav solidify — and neutralizes the original GSAP grid reveal
    so content is never left stuck/flickering (proven fix).
    ===================================================================== */
@@ -14,8 +14,59 @@
   function prog(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;bar.style.width=(m>0?h.scrollTop/m*100:0)+'%';}
   document.addEventListener('scroll',prog,{passive:true}); prog();
 
-  /* version flag */
-  var flag=document.createElement('div'); flag.className='ag-flag'; flag.innerHTML='V2 · <b>Afterglow</b> · preview'; document.body.appendChild(flag);
+  /* Remove design-review labels from production pages. */
+  document.querySelectorAll('.flag,.mockup-flag,.ag-flag').forEach(function(el){ el.remove(); });
+
+  /* Keep social links honest: Instagram is active; unreleased profiles are hidden. */
+  document.querySelectorAll('a[href="https://www.instagram.com/"],a[href="https://instagram.com/"]').forEach(function(a){
+    a.href='https://www.instagram.com/partybusrus/';
+    a.target='_blank';
+    a.rel='noopener noreferrer';
+    if(!a.getAttribute('aria-label')) a.setAttribute('aria-label','Party Bus R Us on Instagram');
+  });
+  ['facebook.com/','tiktok.com/','youtube.com/'].forEach(function(host){
+    document.querySelectorAll('a[href="https://www.'+host+'"],a[href="https://'+host+'"]').forEach(function(a){ a.remove(); });
+  });
+
+  /* Accessible mobile navigation, including focus management and Escape support. */
+  var mobileNav=document.querySelector('.mnav');
+  var menuOpen=document.querySelector('.burger');
+  var menuClose=mobileNav&&mobileNav.querySelector('.x');
+  if(mobileNav&&menuOpen&&menuClose){
+    if(!mobileNav.id) mobileNav.id='mobile-navigation';
+    menuOpen.setAttribute('aria-label','Open menu');
+    menuOpen.setAttribute('aria-controls',mobileNav.id);
+    menuOpen.setAttribute('aria-expanded','false');
+    menuClose.setAttribute('aria-label','Close menu');
+    mobileNav.setAttribute('aria-hidden','true');
+    function openMenu(){
+      mobileNav.classList.add('open');
+      mobileNav.setAttribute('aria-hidden','false');
+      menuOpen.setAttribute('aria-expanded','true');
+      document.body.style.overflow='hidden';
+      menuClose.focus();
+    }
+    function closeMenu(returnFocus){
+      mobileNav.classList.remove('open');
+      mobileNav.setAttribute('aria-hidden','true');
+      menuOpen.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';
+      if(returnFocus) menuOpen.focus();
+    }
+    menuOpen.addEventListener('click',openMenu);
+    menuClose.addEventListener('click',function(){ closeMenu(true); });
+    mobileNav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ closeMenu(false); }); });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&mobileNav.classList.contains('open')) closeMenu(true);
+      if(e.key==='Tab'&&mobileNav.classList.contains('open')){
+        var focusable=mobileNav.querySelectorAll('a[href],button:not([disabled])');
+        if(!focusable.length) return;
+        var first=focusable[0],last=focusable[focusable.length-1];
+        if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+      }
+    });
+  }
 
   /* nav solidify */
   var nav=document.querySelector('nav.main');

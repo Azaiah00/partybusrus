@@ -7,6 +7,9 @@
    ===================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
+/* Production cleanup: design-review badges must never be customer-facing. */
+.flag,.mockup-flag,.ag-flag{display:none!important}
+
 :root{
   --bg:#07060a; --bg2:#0d0b13; --bg3:#140f1e; --surf:#16111f; --surf2:#1e1729;
   --line:#2a2138; --line2:#3a2f4e;

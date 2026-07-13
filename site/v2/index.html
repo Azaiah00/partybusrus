@@ -309,7 +309,6 @@ footer{background:#000;padding:80px 0 34px;border-top:1px solid var(--line)}
 </head>
 <body>
 <div class="prog" id="prog"></div>
-<div class="flag">V2 · <b>Afterglow</b> · preview</div>
 
 <div class="topbar"><div class="wrap"><span class="tl">Operating 24/7 across DC · Maryland · Northern Virginia</span><span>Call or text <a href="tel:+17033994394">(703) 399-4394</a> · <a href="/v2/es/">Español</a></span></div></div>
 
@@ -325,12 +324,12 @@ footer{background:#000;padding:80px 0 34px;border-top:1px solid var(--line)}
   <div class="ncta">
     <a class="pill ink" href="tel:+17033994394">(703) 399-4394</a>
     <a class="pill grad" href="/v2/quote.html">Get a Quote <span class="ar">→</span></a>
-    <button class="burger" onclick="document.querySelector('.mnav').classList.add('open')"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <button class="burger" aria-label="Open menu" aria-controls="mobile-navigation" aria-expanded="false" onclick="document.querySelector('.mnav').classList.add('open');document.querySelector('.mnav').setAttribute('aria-hidden','false');this.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';document.querySelector('.mnav .x').focus()"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
 </div></nav>
 
-<div class="mnav">
-  <button class="x" onclick="document.querySelector('.mnav').classList.remove('open')"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<div class="mnav" id="mobile-navigation" aria-hidden="true">
+  <button class="x" aria-label="Close menu" onclick="document.querySelector('.mnav').classList.remove('open');document.querySelector('.mnav').setAttribute('aria-hidden','true');document.querySelector('.burger').setAttribute('aria-expanded','false');document.body.style.overflow='';document.querySelector('.burger').focus()"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <div class="lk" onclick="document.querySelector('.mnav').classList.remove('open')">
     <a href="/v2/fleet.html">Fleet</a><a href="/v2/services/">Services</a><a href="/v2/cities/">Service Area</a><a href="/v2/reviews.html">Reviews</a><a href="#faq">FAQ</a><a href="/v2/quote.html">Get a Quote</a>
   </div>
@@ -582,6 +581,30 @@ footer{background:#000;padding:80px 0 34px;border-top:1px solid var(--line)}
     rk.forEach(function(c){rtrack.appendChild(c);});
     rk.forEach(function(c){var cl=c.cloneNode(true);cl.setAttribute('aria-hidden','true');cl.setAttribute('tabindex','-1');rtrack.appendChild(cl);});
     rs.appendChild(rtrack);
+  }
+
+  // Accessible mobile-menu keyboard behavior and state cleanup.
+  var mobileNav=document.querySelector('.mnav');
+  var menuButton=document.querySelector('.burger');
+  if(mobileNav&&menuButton){
+    function closeMobileMenu(returnFocus){
+      mobileNav.classList.remove('open');
+      mobileNav.setAttribute('aria-hidden','true');
+      menuButton.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';
+      if(returnFocus) menuButton.focus();
+    }
+    mobileNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){closeMobileMenu(false);});});
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&mobileNav.classList.contains('open')) closeMobileMenu(true);
+      if(e.key==='Tab'&&mobileNav.classList.contains('open')){
+        var focusable=mobileNav.querySelectorAll('a[href],button:not([disabled])');
+        if(!focusable.length) return;
+        var first=focusable[0],last=focusable[focusable.length-1];
+        if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+      }
+    });
   }
 
 })();
