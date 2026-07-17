@@ -13,3 +13,6 @@ Thumbs.db
 
 # stray local deliverable — keep out of git
 deliverables/Party-Bus-R-Us-Marketing-Plan.html
+
+# V1 archive snapshot (browseable local copy; V1 also preserved via git tag v1-final)
+archive/v1-site-snapshot-*.zip

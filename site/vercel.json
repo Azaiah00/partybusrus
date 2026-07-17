@@ -3,62 +3,156 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/fleet/bus-40pax", "destination": "/fleet/bus-35pax", "permanent": true },
-    { "source": "/fleet/bus-40pax.html", "destination": "/fleet/bus-35pax.html", "permanent": true },
-    { "source": "/fleet/bus-15pax", "destination": "/fleet/bus-20pax", "permanent": true },
-    { "source": "/fleet/bus-15pax.html", "destination": "/fleet/bus-20pax.html", "permanent": true },
-    { "source": "/fleet/bus-luxury-12", "destination": "/fleet/bus-20pax", "permanent": true },
-    { "source": "/fleet/bus-luxury-12.html", "destination": "/fleet/bus-20pax.html", "permanent": true },
-    { "source": "/fleet/bus-mini-10", "destination": "/fleet/bus-20pax", "permanent": true },
-    { "source": "/fleet/bus-mini-10.html", "destination": "/fleet/bus-20pax.html", "permanent": true },
-    { "source": "/cities/tysons-mclean-va", "destination": "/cities/tysons-va", "permanent": true },
-    { "source": "/cities/tysons-mclean-va.html", "destination": "/cities/tysons-va.html", "permanent": true },
-    { "source": "/v2/cities/tysons-mclean-va", "destination": "/v2/cities/tysons-va", "permanent": true },
-    { "source": "/v2/cities/tysons-mclean-va.html", "destination": "/v2/cities/tysons-va.html", "permanent": true }
+    {
+      "source": "/fleet/bus-40pax",
+      "destination": "/fleet/bus-35pax",
+      "permanent": true
+    },
+    {
+      "source": "/fleet/bus-40pax.html",
+      "destination": "/fleet/bus-35pax.html",
+      "permanent": true
+    },
+    {
+      "source": "/fleet/bus-15pax",
+      "destination": "/fleet/bus-20pax",
+      "permanent": true
+    },
+    {
+      "source": "/fleet/bus-15pax.html",
+      "destination": "/fleet/bus-20pax.html",
+      "permanent": true
+    },
+    {
+      "source": "/fleet/bus-luxury-12",
+      "destination": "/fleet/bus-20pax",
+      "permanent": true
+    },
+    {
+      "source": "/fleet/bus-luxury-12.html",
+      "destination": "/fleet/bus-20pax.html",
+      "permanent": true
+    },
+    {
+      "source": "/fleet/bus-mini-10",
+      "destination": "/fleet/bus-20pax",
+      "permanent": true
+    },
+    {
+      "source": "/fleet/bus-mini-10.html",
+      "destination": "/fleet/bus-20pax.html",
+      "permanent": true
+    },
+    {
+      "source": "/cities/tysons-mclean-va",
+      "destination": "/cities/tysons-va",
+      "permanent": true
+    },
+    {
+      "source": "/cities/tysons-mclean-va.html",
+      "destination": "/cities/tysons-va.html",
+      "permanent": true
+    },
+    {
+      "source": "/v2/cities/tysons-mclean-va",
+      "destination": "/cities/tysons-va",
+      "statusCode": 301
+    },
+    {
+      "source": "/v2/cities/tysons-mclean-va.html",
+      "destination": "/cities/tysons-va.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/v2",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/v2/:path*",
+      "destination": "/:path*",
+      "statusCode": 301
+    }
   ],
   "rewrites": [
-    { "source": "/cities", "destination": "/cities/index.html" },
-    { "source": "/services", "destination": "/services/index.html" }
+    {
+      "source": "/cities",
+      "destination": "/cities/index.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/services/index.html"
+    }
   ],
   "headers": [
     {
       "source": "/(.*)\\.(jpg|jpeg|png|webp|avif|svg|ico|gif)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)\\.(woff|woff2|ttf|otf|eot)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/sw.js",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     },
     {
       "source": "/manifest.json",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600" },
-        { "key": "Content-Type", "value": "application/manifest+json" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/manifest+json"
+        }
       ]
     },
     {
       "source": "/icon-(.*)\\.png",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "geolocation=(self), camera=(), microphone=(), payment=(self)" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "geolocation=(self), camera=(), microphone=(), payment=(self)"
+        }
       ]
     }
   ]
