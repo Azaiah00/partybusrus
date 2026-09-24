@@ -1,59 +1,73 @@
-// Party Bus R Us — Service Worker
-// Strategy: network-first for HTML (always fresh), cache-first for assets
-
-const CACHE_VERSION = 'pbru-v8-2026-07-17-afterglow-launch';
+// Party Bus R Us: cache public static files only. Forms and HTML stay on the network.
+const CACHE_PREFIX = 'pbru-';
+const CACHE_VERSION = 'pbru-v10-2026-09-24-analytics';
 const STATIC_ASSETS = [
-  '/',
-  '/manifest.json',
-  '/apple-touch-icon.png',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/favicon-32.png'
+  '/manifest.json', '/apple-touch-icon.png', '/icon-192.png', '/icon-512.png',
+  '/favicon-32.png', '/assets/fonts/fonts.css'
 ];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_VERSION).then((cache) => cache.addAll(STATIC_ASSETS))
-      .then(() => self.skipWaiting())
-  );
-});
+function isPublicAsset(request, url) {
+  if (request.method !== 'GET' || url.origin !== self.location.origin) return false;
+  // Always read current activation/rollback settings, including versioned URLs.
+  if (url.pathname === '/assets/analytics-config.js') return false;
+  if (url.pathname === '/api' || url.pathname.startsWith('/api/')) return false;
+  if (request.mode === 'navigate' || request.headers.get('authorization') || request.cache === 'no-store') return false;
+  if ([...url.searchParams.keys()].some(key => key !== 'v')) return false;
+  return url.pathname === '/manifest.json' || /\.(?:css|js|woff2?|png|jpe?g|webp|avif|gif|svg|ico)$/i.test(url.pathname);
+}
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter(k => k !== CACHE_VERSION).map(k => caches.delete(k)))
-    ).then(() => self.clients.claim())
-  );
-});
+function mayCache(response) {
+  return response && response.status === 200 && response.type === 'basic' && !response.redirected &&
+    !/private|no-store/i.test(response.headers.get('cache-control') || '');
+}
 
-self.addEventListener('fetch', (event) => {
-  const req = event.request;
-  if (req.method !== 'GET') return;
-  const url = new URL(req.url);
-
-  // Don't intercept analytics, form posts, or cross-origin requests we don't own
-  if (url.origin !== self.location.origin) return;
-
-  // HTML: network-first (always fresh content)
-  if (req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html')) {
-    event.respondWith(
-      fetch(req).then((res) => {
-        const copy = res.clone();
-        caches.open(CACHE_VERSION).then(c => c.put(req, copy));
-        return res;
-      }).catch(() => caches.match(req).then(r => r || caches.match('/')))
-    );
-    return;
+async function assetResponse(request) {
+  let cache;
+  try {
+    cache = await caches.open(CACHE_VERSION);
+    const cached = await cache.match(request);
+    if (cached) return cached;
+  } catch { /* Continue on the network if browser storage is unavailable. */ }
+  const response = await fetch(request);
+  if (cache && mayCache(response)) {
+    try { await cache.put(request, response.clone()); } catch { /* Storage is optional. */ }
   }
+  return response;
+}
 
-  // Assets: cache-first
-  event.respondWith(
-    caches.match(req).then((cached) => cached || fetch(req).then((res) => {
-      if (res && res.status === 200 && res.type === 'basic') {
-        const copy = res.clone();
-        caches.open(CACHE_VERSION).then(c => c.put(req, copy));
-      }
-      return res;
-    }))
-  );
+self.addEventListener('install', event => {
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_VERSION);
+    await Promise.all(STATIC_ASSETS.map(async url => {
+      try {
+        const response = await fetch(new Request(url, { cache: 'reload', credentials: 'omit' }));
+        if (mayCache(response)) await cache.put(url, response);
+      } catch { /* A failed optional asset must not block a safer worker update. */ }
+    }));
+    await self.skipWaiting();
+  })());
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(key => key.startsWith(CACHE_PREFIX) && key !== CACHE_VERSION).map(key => caches.delete(key)));
+    await self.clients.claim();
+  })());
+});
+
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  const url = new URL(request.url);
+  if (request.method !== 'GET' || url.origin !== self.location.origin) return;
+  if (request.mode === 'navigate') {
+    // Preserve real 404 and other network statuses. Never substitute the homepage or a success page.
+    event.respondWith(fetch(request).catch(() => new Response(
+      '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Connection unavailable | Party Bus R Us</title><body><main><h1>Connection unavailable</h1><p>This page cannot load right now. Reconnect and try again.</p><p>A quote request is not a confirmed reservation. If you already sent a request, contact us before sending it again.</p><p><a href="tel:+17033994394">Call (703) 399-4394</a></p></main></body></html>',
+      { status: 503, statusText: 'Service Unavailable', headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } }
+    )));
+  } else if (isPublicAsset(request, url)) {
+    event.respondWith(assetResponse(request));
+  }
+  // All non-static requests, cross-origin calls, and POSTs bypass this worker.
 });

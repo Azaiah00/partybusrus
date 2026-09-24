@@ -1,0 +1,11 @@
+✔ activation purges the previous cached configuration without deleting other apps (32.7323ms)
+✔ analytics activation and rollback configuration always bypass the service worker cache (2.7262ms)
+✔ ordinary public assets retain cache support (3.1366ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 45.9517

@@ -1,231 +1,92 @@
-# Analytics Setup Guide — Party Bus R Us
+# Analytics and enquiry operations
 
-This site has analytics scaffolding installed on every page, but with **placeholder IDs**. Before going live in production, you must replace each placeholder with a real ID from the corresponding platform. This document explains what each placeholder represents, how to get the real ID, and how to swap them in.
+Updated 2026-09-24. This replaces the former placeholder/GTM/Meta/CallRail and Netlify Forms instructions.
 
----
+## Activation status
 
-## 1. What's installed (overview)
+**The verified GA4 stream is configured in the review branch; production has not been released.** The owner authorized creation in their selected signed-in account and completed the agreement step. The Party Bus R Us property contains the Party Bus R Us Website stream for `https://www.partybusrus.com`. Its public Measurement ID, `G-TM8WLPFQC3`, is now in `assets/analytics-config.js`. Google showed no received data at setup, as expected before deployment. No production Analytics receipt or mailbox delivery is claimed. The site uses direct GA4, without an additional GTM container snippet, Meta Pixel or CallRail installation.
 
-Every HTML page on the site (~59 pages) has been instrumented with four analytics/tracking layers:
+Use the existing Party Bus R Us property and stream for future changes; do not create duplicates. This newly created property has no historical traffic and cannot attribute earlier calls or emails. Search Console and Google Business Profile access remain separate requirements. Public Measurement IDs are safe to include here; private account identifiers, API secrets, credentials and customer data are not.
 
-| Layer | Purpose | Placeholder |
+Only an uppercase GA4 web Measurement ID with the shape `G-` followed by ten letters/digits passes validation. Common placeholder, test and demo strings are rejected. The collector only loads on the exact `partybusrus.com` and `www.partybusrus.com` hosts. Localhost and preview deployments cannot send data even if an ID is set. The test suite uses a fake DOM without networking; its fixture ID is never production configuration.
+
+## One shared installation
+
+Every real page must include these scripts in this order, before the quote script:
+
+```html
+<script defer src="/assets/analytics-config.js"></script>
+<script defer src="/assets/analytics.js"></script>
+```
+
+Use this direct GA4 installation once. Do not add a second Google tag through GTM, retain old inline `gtag`/`fbq` stubs or reinstall old generic submit handlers. The shared code prevents duplicate includes and queues a single explicit `page_view` for each document. It sets `send_page_view: false` on the configuration to avoid a second default page view.
+
+**Enhanced Measurement is saved off in the web stream**, avoiding duplicate automatic form interactions, outbound clicks, site search and history pageviews. Google Signals and user-provided data collection remain off. Property-level ad personalization is saved off in all 307 available regions, in addition to the script-level restrictions. No connected site tags were present. Optional account data sharing was left off during setup, and optional product emails were declined at the owner's request. Recheck these settings before changing providers or tags.
+
+Eleven event-scoped custom dimensions were created and verified in the property: `contact_method`, `cta_id`, `placement`, `page_type`, `passenger_band`, `error_code`, `direction`, `step`, `event_type`, `field_name` and `vehicle_id`. These make the corresponding event parameters available for reporting. No click, submission attempt or provider return was promoted to a confirmed-lead key event. Actual report values still require production collection and processing.
+
+## Consent and storage
+
+With a valid production configuration, no Google loader, GA cookie or event queue is created before an affirmative choice. A compact nonmodal notice offers equally accessible allow/off buttons. An “Analytics privacy choices” control in the footer lets a visitor change the choice. No consent banner is shown while analytics is unconfigured or on preview hosts.
+
+An explicit granted/denied preference is stored under `pbru_analytics_consent_v1` in localStorage with a timestamp and a 180-day lifetime. This preference is functional storage, not a tracking identifier. Missing, corrupt, future-dated or expired preference data does not authorize collection. Storage failures are caught and do not interrupt booking.
+
+On denial/withdrawal the script sets Google's `ga-disable-MEASUREMENT_ID` flag, discards queued events, updates consent if the library was started, clears script-accessible `_ga`, `_ga_*`, `_gid`, `_gat*` cookies at the root host/domain scopes, clears saved form provenance and rejects future calls to its event API. Another open tab's withdrawal is respected through the storage event. Cookies on inaccessible domains/paths or HttpOnly cookies cannot be removed by browser JavaScript; none are created by this implementation. Withdrawal cannot recall requests already sent. Verify Google's actual runtime behavior in browser network tests before activation; unit tests cannot prove a third-party library's behavior.
+
+Separate local quote context is stored in same-tab sessionStorage under `pbru_form_source_v1`: original landing path, external referrer hostname and sanitized `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`. It contains no cookie/client ID, contact details, complete referrer URL, arbitrary query strings, advertising click IDs or device fingerprint. It is used only as context with the quote the visitor requests. With analytics unconfigured, this source context remains locally available to the form. With analytics configured, source retention waits for analytics consent. Denial/withdrawal clears it and prevents subsequent storage. Browser session restoration may restore sessionStorage; it is not a fixed retention guarantee.
+
+Campaign labels permit only short alphanumeric/underscore/hyphen tokens and reject phone-like digit runs, email addresses, full URLs and free text. Use labels such as `google`, `organic`, `fall-weddings` and `hero-a`; do not place customer information in marketing URLs. Analytics page URLs omit every query string and fragment, and referrers contain the external hostname only. Update the privacy policy to describe these real data flows before activation, honoring the site's existing promise to update policy and offer a choice.
+
+## Shared event API
+
+```js
+PBRUAnalytics.track('quote_step_view', {
+  form_id: 'quote-form', step: 2, direction: 'forward'
+});
+const source = PBRUAnalytics.getAttribution();
+// { source_page, source_referrer, utm_source, utm_medium,
+//   utm_campaign, utm_content, utm_term }, or {} if unavailable/denied.
+PBRUAnalytics.openConsentPreferences();
+PBRUAnalytics.getDebugState();
+```
+
+The API returns false when a tracking call is unknown, unconfigured or not consented; discarded events are never replayed after a later grant. `getAttribution()` returns a copy. `getDebugState()` shows configuration/consent, counts of queued events and the last event name, without field contents. **Queued is not received:** `deliveryVerified` is always false because this script cannot verify the Google account. Console debug output is restricted to localhost and the config's explicit debug flag; localhost collection remains disabled.
+
+| Event | Allowed caller parameters | Meaning |
 |---|---|---|
-| **Google Tag Manager (GTM)** | Container that lets you add/edit other tags without code changes | `GTM-XXXXXXX` |
-| **Google Analytics 4 (GA4)** | Pageviews, events, audience, conversion tracking | `G-XXXXXXXXXX` |
-| **Meta (Facebook) Pixel** | Audience building + conversion tracking for Facebook/Instagram ads | `XXXXXXXXXXXXXXX` (15 digits) |
-| **CallRail** | Dynamic phone-number swap to attribute calls to traffic source | `XXXXXXXXX` (account) + `XXXXXXXXXXXXXXXXXXXX` (script) |
+| `page_view` | Internal only | Once per document after consent; sanitized page URL |
+| `cta_click` | `cta_id`, `placement`, `destination_path` | Quote CTA intent; delegated automatically |
+| `contact_click` | `contact_method`, `placement` | Call, SMS, email or WhatsApp link intent; delegated automatically |
+| `quote_start` | `form_id` | First meaningful quote interaction |
+| `quote_step_view` | `form_id`, integer `step` 1–3, `direction` | Initial/next/back step view |
+| `quote_validation_error` | `form_id`, `step`, `field_name`, `error_code` | Validation prevented progression; no field contents |
+| `quote_submit_attempt` | `form_id`, `event_type`, `passenger_band`, `vehicle_id` | Valid form handed to the provider, before acceptance |
+| `quote_submit_error` | `form_id`, `error_code` | Detectable handoff error; no provider-delivery claim |
+| `quote_provider_return` | `form_id` | Guarded return after a pending attempt; still not verified inbox delivery |
 
-Plus **conversion + interaction events** wired up: click-to-call, mailto clicks, CTA button clicks, scroll depth (25/50/75/100%), and quote-form submissions.
+Each custom event adds a sanitized page path/type. Unknown parameters are dropped; personal names, email, telephone, pickup/destination, free-text notes and raw hrefs must never be passed. Field names and categorized errors are acceptable. `generate_lead`, `lead_confirmed`, `CompleteRegistration` and arbitrary events are intentionally unavailable in this frontend API. Do not mark all funnel events as primary enquiries. A call click is not a connected call, and an email click is not a received email.
 
-The thank-you page (`/thank-you.html`) fires an additional `lead_confirmed` conversion event on load.
+## Current quote delivery
 
----
+The form uses a normal POST to FormSubmit.co for `info@partybusrus.com`, with CAPTCHA, honeypot and autoresponse retained. It is not Netlify Forms. Do not replace native submission with AJAX merely to obtain a client success signal: FormSubmit documents different CAPTCHA/autoresponse behavior for AJAX. The custom thank-you route is a user confirmation surface, not an authenticated delivery receipt.
 
-## 2. Placeholder reference
+Confirm the recipient is activated and find a recent legitimate enquiry in the provider/archive or mailbox. Then run one clearly labeled authorized end-to-end test and verify provider acceptance, inbox arrival, ability to reply and customer confirmation. This work has not sent a test enquiry or inspected the mailbox. FormSubmit documents a 30-day submission archive and webhook support; access remains account-specific. See [FormSubmit documentation](https://formsubmit.co/documentation).
 
-Below is exactly what each placeholder looks like in the code, and what to replace it with.
+For a future primary `generate_lead` event, implement provider/backend receipt with an opaque unique enquiry ID and server-side deduplication. Keep personal data in the booking system. Import qualified/quoted/booked outcomes only through an explicitly configured secure integration, with consent and platform requirements verified. Do not put private Measurement Protocol secrets or CRM credentials in static JavaScript. There is no such server integration in the current scope.
 
-### Google Tag Manager
-- **Placeholder:** `GTM-XXXXXXX`
-- **Real ID format:** `GTM-XXXXXXX` (7 alphanumeric characters after the dash, e.g. `GTM-K3LM9PQ`)
-- **Where:** Appears in head GTM snippet AND in the `<noscript>` iframe directly after `<body>`.
+## QA and activation checklist
 
-### Google Analytics 4
-- **Placeholder:** `G-XXXXXXXXXX`
-- **Real ID format:** `G-XXXXXXXXXX` (10 alphanumeric characters, e.g. `G-AB12CD34EF`)
-- **Where:** Appears twice in the head gtag block — in the script src URL and in the `gtag('config', ...)` call.
+1. Run `node --test scripts/test-analytics.mjs` from the project root. This covers no-ID mode, consent, production-host restriction, duplicate inclusion, first-source persistence, sanitization, malformed/blocked storage, withdrawal, contact events and direct thank-you visits. It does not contact external services.
+2. Confirm all real-page templates include the two shared scripts once and old inline tracking is absent. Check form scripts load afterward. Confirm homepage and inner pages use the same implementation.
+3. In a production browser session with a verified ID, confirm zero Google requests before choice/after denial; allow and verify exactly one loader/pageview. Inspect network payloads for no raw query, personal data or unexpected Enhanced Measurement events.
+4. Verify GA4 DebugView/Realtime receipt and the intended property's ID. Test consent withdrawal and reload; no further events/cookies should be produced after withdrawal. Verify keyboard interaction and small-screen notice layout without obstructing the form.
+5. Navigate from a campaign-tagged landing page through a fleet/service page to quote. Verify original sanitized source and selected vehicle reach hidden quote fields and the eventual provider record when consent/source rules allow.
+6. Check invalid inputs, back/forward navigation, duplicate submission protection, stale pending sessions, direct thank-you and refreshed thank-you paths. None should become primary accepted-lead events.
+7. Obtain one authorized delivery test and its recipient/provider receipt. Only then describe quote delivery as verified. No real calls/messages should be made for click-event checks.
+8. Keep a dated baseline in a weekly dashboard: Search Console nonbrand/branded clicks and impressions, GA4 sessions/landing pages, valid enquiries, answered/missed/qualified calls, quotes, bookings and actual booking value. Identify staff-entered outcomes separately from frontend intent. Website analytics cannot prove all business sources on its own.
 
-### Meta Pixel
-- **Placeholder:** `XXXXXXXXXXXXXXX` (15 X's)
-- **Real ID format:** 15-16 digit numeric ID (e.g. `123456789012345`)
-- **Where:** Appears in `fbq('init', ...)` AND in the `<noscript>` fallback `<img>` src.
+## Rollback and maintenance
 
-### CallRail (optional)
-- **Placeholders:** `XXXXXXXXX` (company ID, 9 chars) AND `XXXXXXXXXXXXXXXXXXXX` (swap script ID, 20 chars)
-- **Real format:** `//cdn.callrail.com/companies/123456789/abc123def456ghi789jk/12/swap.js`
-- **Where:** One line in the head analytics block.
+Set `measurementId` back to empty and deploy to stop starting the collector on subsequent page loads. The configuration has a `no-store` response header and bypasses the service worker cache, including versioned URLs. Service worker v10 clears the earlier v9 cache on activation. Existing open tabs require withdrawal or reload; empty configuration cannot revoke already-delivered data, and an older active worker may need its update followed by a reload. Keep the shared API installed so form functions continue safely without collection. Review this guide whenever a provider, event contract, host, consent behavior or form workflow changes.
 
----
-
-## 3. How to get each ID
-
-### 3a. Google Tag Manager (FREE)
-1. Go to https://tagmanager.google.com — sign in with the Google account you want to own the property.
-2. Click **Create Account**.
-3. Account Name: `Party Bus R Us`. Country: United States.
-4. Container Name: `partybusrus.com`. Target platform: **Web**.
-5. Accept terms. The next screen shows your **Container ID**, formatted like `GTM-K3LM9PQ`.
-6. You'll also see two install snippets — you can ignore them (the snippets are already in our HTML; we just need the ID).
-
-### 3b. Google Analytics 4 (FREE)
-1. Go to https://analytics.google.com — sign in with the same Google account.
-2. Click **Admin** (gear, bottom-left) > **Create > Property**.
-3. Property name: `Party Bus R Us`. Time zone: `Eastern Time`. Currency: `USD`.
-4. Business details: industry `Travel`, size as appropriate. Business objectives: pick `Generate leads` and `Examine user behavior`.
-5. Choose **Web** as the platform. Website URL: `https://www.partybusrus.com`. Stream name: `Party Bus R Us — Main`.
-6. After it creates the stream, you'll see a **Measurement ID** like `G-AB12CD34EF`. That's the one.
-
-### 3c. Meta Pixel (FREE)
-1. Go to https://business.facebook.com — sign in with the Facebook account that owns/will own the ad account.
-2. **Business Settings** > **Data Sources** > **Datasets** (formerly "Pixels").
-3. Click **Add** > Give it a name like `Party Bus R Us Pixel` > **Create**.
-4. The Pixel ID appears at the top — it's a 15-16 digit number like `123456789012345`. Copy it.
-5. You can skip the "Set up the Pixel" wizard since the code is already on the site.
-
-### 3d. CallRail (PAID — $45/mo minimum) — OPTIONAL
-CallRail provides dynamic number insertion (DNI), which swaps the displayed phone number based on visitor source. Useful when you start running paid ads and want to attribute calls to a specific channel.
-
-**Skip this for now if you're not running paid ads yet.** The Pixel + GA4 already capture click-to-call events as conversions. You can come back to CallRail later.
-
-If/when ready:
-1. Sign up at https://www.callrail.com (Lite plan is $45/mo, includes 10 tracking numbers).
-2. Create your first **Source > Online** with a "swap target" set to your main displayed number (`703-399-4394`).
-3. After setup, go to **Settings > Integrations > JavaScript snippet** to get the swap script URL. It looks like `//cdn.callrail.com/companies/123456789/abc...jk/12/swap.js`.
-4. The two ID strings in our placeholder represent the company ID (first segment) and script ID (second segment).
-
-If you're not using CallRail, you can either:
-- Leave the placeholder line in (the request will 404 silently — minor wasted request, no functional impact), OR
-- Delete that one line from all pages (see Section 4).
-
----
-
-## 4. How to replace the placeholders across all files
-
-The placeholders appear in all 59 HTML files. The fastest way to replace them is a project-wide find/replace.
-
-### Option A — VS Code / Cursor (recommended)
-1. Open the `site/` folder.
-2. Press `Ctrl+Shift+H` (Windows/Linux) or `Cmd+Shift+H` (Mac) to open project-wide find/replace.
-3. Make sure **"files to include"** is set to `**/*.html` (or limit to `site/**/*.html`).
-4. For each placeholder, do find > replace > **Replace All**:
-   - Find `GTM-XXXXXXX` → Replace with your real GTM ID (e.g. `GTM-K3LM9PQ`).
-   - Find `G-XXXXXXXXXX` → Replace with your real GA4 ID (e.g. `G-AB12CD34EF`).
-   - Find `XXXXXXXXXXXXXXX` → Replace with your real Meta Pixel ID (e.g. `123456789012345`).
-   - For CallRail, the line to edit looks like `cdn.callrail.com/companies/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXX/12/swap.js`. Replace the two `X` strings with your actual company ID and script ID, or delete the entire `<script async src="//cdn.callrail.com/...swap.js"></script>` line if you're not using CallRail.
-
-**Important — order matters.** Replace `GTM-XXXXXXX` and `G-XXXXXXXXXX` and the CallRail IDs BEFORE the Meta Pixel `XXXXXXXXXXXXXXX`, because the 15-X Meta string could partially match other X-strings. (In practice the placeholders are sized differently so it's usually fine, but to be safe, do the Meta one last.)
-
-### Option B — PowerShell one-liner (Windows)
-From inside the `site/` folder:
-```powershell
-$replacements = @{
-    'GTM-XXXXXXX'       = 'GTM-K3LM9PQ'        # your real GTM ID
-    'G-XXXXXXXXXX'      = 'G-AB12CD34EF'       # your real GA4 ID
-    'XXXXXXXXXXXXXXX'   = '123456789012345'    # your real Meta Pixel ID
-}
-Get-ChildItem -Recurse -Filter *.html | ForEach-Object {
-    $content = Get-Content $_.FullName -Raw
-    foreach ($k in $replacements.Keys) {
-        $content = $content.Replace($k, $replacements[$k])
-    }
-    Set-Content -Path $_.FullName -Value $content -NoNewline
-}
-```
-Edit the IDs in the `$replacements` hashtable first, then run.
-
-### Option C — `sed` (Mac/Linux)
-```bash
-cd site/
-find . -name "*.html" -exec sed -i '' \
-  -e 's/GTM-XXXXXXX/GTM-K3LM9PQ/g' \
-  -e 's/G-XXXXXXXXXX/G-AB12CD34EF/g' \
-  -e 's/XXXXXXXXXXXXXXX/123456789012345/g' \
-  {} +
-```
-On Linux, use `sed -i` (no empty quotes after `-i`).
-
----
-
-## 5. How to verify tracking is working (after deploy)
-
-### 5a. Browser DevTools — quickest gut check
-1. Visit the live site (or local preview).
-2. Open DevTools > **Network** tab > filter on `collect`.
-3. You should see requests to:
-   - `google-analytics.com/g/collect` (GA4 hits)
-   - `facebook.com/tr` (Meta Pixel hits)
-   - `googletagmanager.com/gtm.js?id=GTM-...` (GTM container load)
-4. Click a `tel:` link — you should see a new `gtag` request fire with `event=click_to_call`.
-
-### 5b. GA4 — Realtime
-1. Open Google Analytics > select your Party Bus R Us property > **Reports > Realtime**.
-2. In a separate tab, load any page on the site.
-3. Within ~10-30 seconds, you should see your session appear ("1 user in last 30 minutes").
-4. Click around — pageviews and `scroll_depth` / `cta_click` events should show under the **Event count by Event name** card.
-
-### 5c. Meta Pixel — Pixel Helper extension
-1. Install the **Meta Pixel Helper** Chrome extension.
-2. Visit a site page. Click the extension icon.
-3. You should see "1 pixel found on this page" with one PageView event. Errors are explained inline.
-4. Submit a test quote → load thank-you → you should see CompleteRegistration fire there.
-
-### 5d. GTM — Preview mode
-1. In Tag Manager, click **Preview** (top-right).
-2. Enter the URL of the site, click **Connect**.
-3. A debug pane opens. As you click around, events fire and show up in the "Tags Fired" panel.
-4. Once you've added GA4 / Meta tags inside GTM, this is the place to confirm they're firing as expected.
-
-### 5e. CallRail (if installed)
-1. Visit any page on the site. Look at the phone number displayed in the header / CTA buttons.
-2. It should change to a tracking number (e.g. a CallRail-issued local DC/VA number).
-3. CallRail dashboard > **Call Log** will record the source of any call placed via that swapped number.
-
----
-
-## 6. What gets tracked automatically
-
-Once the placeholders are replaced, the following events fire automatically on every page (no extra setup in GTM/GA4 needed):
-
-| Event | Trigger | GA4 event name | Meta Pixel event |
-|---|---|---|---|
-| Pageview | Page load | `page_view` (auto) | `PageView` |
-| Click-to-call | Any click on `<a href="tel:...">` | `click_to_call` | `Contact` |
-| Email click | Any click on `<a href="mailto:...">` | `email_click` | — |
-| CTA click | Any click on `a.btn`, `a.cta`, `.hero-actions a`, `.final-cta a` | `cta_click` | — |
-| Scroll depth | 25%, 50%, 75%, 100% scrolled | `scroll_depth` (value = depth) | — |
-| Quote form submit | Submission of `form[name="quote-form"]` | `generate_lead` | `Lead` |
-| Lead confirmed | Load of `/thank-you.html` | `lead_confirmed` | `CompleteRegistration` |
-
-You can mark `generate_lead` and `lead_confirmed` as **Conversions** in GA4 (Admin > Events > toggle "Mark as conversion").
-You should also mark `Lead` and `CompleteRegistration` as **Custom Conversions** in Meta Events Manager.
-
----
-
-## 7. Performance optimizations applied
-
-Same pass that added analytics also:
-
-1. **Lazy-loaded all `<img>` tags** below the first one on each page (`loading="lazy" decoding="async"`). This defers offscreen images so they don't block initial render.
-2. **Compressed the 3 heaviest images** in place under `site/`:
-   - `IMG_5053.JPG`: 4.5 MB → ~375 KB
-   - `IMG_3095.jpeg`: 2.2 MB → ~298 KB
-   - `IMG_2366.jpeg`: 1.7 MB → ~308 KB
-3. **Generated WebP versions** alongside each (smaller, modern format):
-   - `IMG_5053.webp`, `IMG_3095.webp`, `IMG_2366.webp`
-   - Currently unused — to wire them in, wrap the existing `<img>` tags in `<picture>` blocks with a `<source srcset="...webp" type="image/webp">` above the `<img>`. Browsers that support WebP will use the smaller file; others fall back to the JPEG.
-
-Originals of the three compressed images remain in the **project root** untouched, so you can re-derive at different quality settings if needed.
-
----
-
-## 8. Roll-back / disabling
-
-To temporarily disable all analytics without removing code:
-- **GTM:** Pause the container in Tag Manager (or set ID to `GTM-XXXXXXX` — invalid container = no requests).
-- **GA4:** Comment out the gtag `config` line in the head block.
-- **Meta Pixel:** Comment out the `fbq('init', ...)` line.
-- **CallRail:** Remove or comment the swap.js `<script>` line.
-
-To strip analytics entirely from all files, look for the markers `<!-- ====== ANALYTICS SCAFFOLDING ====== -->` and `<!-- ====== END ANALYTICS SCAFFOLDING ====== -->` and delete the block between them (plus the GTM noscript right after `<body>` and the event tracking script before `</body>`).
-
----
-
-## 9. Privacy / compliance notes
-
-- **`anonymize_ip: true`** is set on GA4 by default. Good for GDPR-leaning safety, no impact on your reporting.
-- **No consent banner is installed yet.** If you ever take bookings from EU/UK visitors, or you start marketing in California heavily, you should add a cookie consent solution (e.g. CookieYes free tier, Termly, or Iubenda). At that point you'd gate the analytics scripts behind consent — happy to wire that in later.
-- **CallRail** records call audio by default. If you enable it, update your privacy policy to disclose call recording and ensure your greeting plays a "this call may be recorded" message where required by state law.
-
----
-
-**Questions or ready to deploy?** Once Frederick has the four real IDs in hand, replacing them is a 2-minute job. Then push to production and verify per Section 5.
+References: [Google consent implementation](https://developers.google.com/tag-platform/security/guides/consent), [GA4 recommended lead events](https://developers.google.com/analytics/devguides/collection/ga4/reference/events#generate_lead), [Google PII guidance](https://support.google.com/analytics/answer/6366371). This guide describes the implementation, not a legal compliance certification.

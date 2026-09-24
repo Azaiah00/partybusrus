@@ -1,9 +1,8 @@
 User-agent: *
 Allow: /
-Disallow: /thank-you.html
-Disallow: /404.html
 
-# AI answer engines
+# Utility pages use noindex in HTML so crawlers can read the directive.
+# Search access is allowed. Training access is a separate operator choice.
 User-agent: GPTBot
 Allow: /
 User-agent: OAI-SearchBot
@@ -15,4 +14,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://partybusrus.com/sitemap.xml
+Sitemap: https://www.partybusrus.com/sitemap.xml

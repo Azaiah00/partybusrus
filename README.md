@@ -1,73 +1,31 @@
-# Party Bus R Us · Project Folder
+# Party Bus R Us
 
-Last updated: May 19, 2026 · **Production-ready multi-page site + comprehensive strategy delivered**
+Current implementation: September 24, 2026. Static website hosted on Vercel at https://www.partybusrus.com.
 
-## What's here
+The revised site is implemented and tested locally. [Draft pull request #1](https://github.com/Azaiah00/partybusrus/pull/1) is open and Vercel has successfully built its protected preview. Authenticated hosted QA passes across all 92 linked pages, nine redirect cases and ten mobile layouts. Production has not been updated. The verified business-owned GA4 stream is configured in this branch, with consent required and preview collection disabled. Production event receipt remains unverified.
 
-This folder contains everything for the Party Bus R Us website launch and marketing plan.
+## Current files
 
-### Quick navigation
+- `site/`: current static website source, including shared assets and Vercel configuration. Existing archived generators do not reproduce these revisions.
+- `partybusrus.com-audit/2026-09-24/implementation/IMPLEMENTATION-AND-QA.md`: changes, QA results and external completion requirements.
+- `partybusrus.com-audit/2026-09-24/FULL-AUDIT-REPORT.md`: original live-site audit baseline.
+- `site/ANALYTICS-SETUP.md`: current GA4 consent, event and source configuration; no placeholder collectors.
+- `scripts/`: preview and repeatable verification tools. Page migration scripts document this implementation and should not be rerun as generators.
+- `deliverables/`, `archive/`, `source-photos/`, `PhotosVideos/` and logo folders: historical plans and original assets. Older Netlify instructions, tracking placeholders and launch-ready claims are superseded by the current implementation report.
 
-| What you want | Where to find it |
-|---|---|
-| **Deploy the site** | `site/` — drag onto Netlify |
-| **The master plan** | `deliverables/100-Percent-Audit-Strategy.html` |
-| **Robert's review** | `deliverables/Robert-Review-Guide.html` |
-| **Multi-site strategy** | `deliverables/Multi-Site-Strategy.html` |
-| **Original audit** | `deliverables/Audit-Strategy.html` |
-| **Photo shoot plan** | `deliverables/Party-Bus-Photo-Shoot-Gameplan.pdf` |
-| **Tracking ID setup** | `site/ANALYTICS-SETUP.md` |
-| **Deploy checklist** | `site/PRODUCTION-READY-HANDOFF.md` |
+## Preview and verify
 
-### Folder structure
+Use Node.js 20 or newer. The static website has no build step. From the repository root, run:
 
-**`site/` — PRODUCTION DEPLOY**
-68 HTML pages, fully optimized for SEO, with analytics scaffolding, sitemap, robots, Netlify Forms wiring. Drag this folder onto Netlify. **Do not edit by hand** — it is the live deploy artifact.
+```sh
+npm ci
+npm run preview
+```
 
-**`deliverables/` — Strategy & reference documents**
-- `100-Percent-Audit-Strategy.html` — master 14-section playbook (audit, competitors, Google Ads plan, IG playbook, 30/90-day roadmap)
-- `Audit-Strategy.html` — original detailed audit
-- `Robert-Review-Guide.html` — 5-minute walkthrough for Robert
-- `Multi-Site-Strategy.html` — partylimobusdc + partybusrus dual-domain plan
-- `Party-Bus-Photo-Shoot-Gameplan.pdf` — printable shoot-day checklist (8 pages)
+Open http://127.0.0.1:4173/. In another terminal, run `npm test` for the full local suite. HTTP checks require the running preview server. Individual quote and analytics checks are available as `npm run test:quote` and `npm run test:analytics`; `npm run seo:check` checks normalization without writing files.
 
-**`source-photos/` — Original photos**
-High-res bus photos. The `site/` folder has its own optimized copies — these are the originals/source for future edits and reshoots.
+`npm ci` installs only the pinned development accessibility library. Adding `?qa=1` to a preview page runs the optional browser accessibility report. These helpers are not shipped in `site/`. The other checks use only Node's built-in modules. The preview binds to localhost and rejects form submissions.
 
-**`logo/` — Production logos**
-Favicon, lockup, monogram, wordmark. Referenced by `site/` and by the HTML deliverables (which use `../logo/` paths).
+## Before live release
 
-**`Logos/` — Logo design archive**
-Round 1 (18 generated) + Round 2 (5 refined) logo concepts. See `Logos/README.md` for the full breakdown.
-
-**`archive/` — Superseded files, kept for reference**
-- `Website-Mockup.html` — the old single-page SPA, superseded by `site/`
-- `Website-Mockup.html.bak`, `Website-Mockup.html.preconversion` — backups from the SPA-to-multipage conversion
-- `scripts/` — build scripts that generated the multi-page site (`build_multipage.py`, `generate_city_pages.py`)
-- `old-deploy/deploy/` — earlier mid-state deploy folder, now superseded
-- `temp-videos/` — raw VIDEO-*.mp4 footage from the May 18 shoot (not used by `site/`)
-
-## Where we are right now
-
-- **68-page multi-page site** ready to deploy (was a 1-page SPA)
-- **All Robert's separation requirements met** — no years language, no insurance, no City Coachways, Fairfax address, info@partybusrus.com email plan
-- **Form is functional** — wired to Netlify Forms
-- **Analytics ready** — GA4 + GTM + Meta Pixel + CallRail scaffolding (placeholders for Frederick to fill)
-- **Real blog content** — 10 posts with real bus photos, no stock
-- **Sitemap + robots + clean URLs**
-- **Performance optimized** — favicon fixed, large images compressed + WebP
-
-## What's next
-
-1. Get tracking IDs (see `site/ANALYTICS-SETUP.md`)
-2. Deploy `site/` to Netlify
-3. Submit sitemap to Google Search Console
-4. Take photos of the red leather bus + more exteriors (see `deliverables/Party-Bus-Photo-Shoot-Gameplan.pdf`)
-5. Launch Google Ads pilot ($2,400/mo) once tracking is verified
-6. Start the Instagram cadence (5 reels/week — see Section 7 of the master playbook)
-
-## Sharing with Robert
-
-Open `deliverables/Robert-Review-Guide.html` locally to preview, then either:
-- Drag the `site/` folder onto [tiiny.host](https://tiiny.host) for a public preview link, **or**
-- Send the deployed Netlify URL once `site/` is live.
+Review the branch and its deployment preview in the existing Vercel project. The GA4 property, stream and eleven reporting dimensions are configured; see `site/ANALYTICS-SETUP.md`. Confirm an actual FormSubmit inquiry reaches the business inbox. After release, verify production URLs, consent, GA receipt and the native CAPTCHA/autoresponse workflow. Do not treat browser clicks or a form handoff as a confirmed lead or booking. Use Search Console and business records to measure SEO and booking performance.

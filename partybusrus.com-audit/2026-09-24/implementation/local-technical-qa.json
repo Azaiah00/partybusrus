@@ -1,0 +1,869 @@
+{
+  "generated_at": "2026-09-24T22:11:53.247Z",
+  "scope": "local static source only; not deployed/live performance or provider delivery verification",
+  "passed": true,
+  "page_count": 95,
+  "indexable_pages": 92,
+  "sitemap_urls": 92,
+  "failure_count": 0,
+  "warning_count": 0,
+  "failures": [],
+  "warnings": [],
+  "pages": [
+    {
+      "file": "site\\404.html",
+      "route": "/404",
+      "canonical": "https://www.partybusrus.com/404",
+      "noindex": true,
+      "redirected": false,
+      "title": "Page Not Found | Party Bus R Us",
+      "schema_blocks": 1
+    },
+    {
+      "file": "site\\about.html",
+      "route": "/about",
+      "canonical": "https://www.partybusrus.com/about",
+      "noindex": false,
+      "redirected": false,
+      "title": "About Party Bus R Us | Owner-Operated DMV Party Bus Fleet",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\blog\\30th-birthday-party-bus-ideas-dc.html",
+      "route": "/blog/30th-birthday-party-bus-ideas-dc",
+      "canonical": "https://www.partybusrus.com/blog/30th-birthday-party-bus-ideas-dc",
+      "noindex": false,
+      "redirected": false,
+      "title": "30th Birthday Party Bus Ideas DC MD VA | Party Bus R Us",
+      "schema_blocks": 3
+    },
+    {
+      "file": "site\\blog\\bachelorette-party-bus-dc-planning-guide.html",
+      "route": "/blog/bachelorette-party-bus-dc-planning-guide",
+      "canonical": "https://www.partybusrus.com/blog/bachelorette-party-bus-dc-planning-guide",
+      "noindex": false,
+      "redirected": false,
+      "title": "Bachelorette Party Bus DC Guide | Party Bus R Us",
+      "schema_blocks": 3
+    },
+    {
+      "file": "site\\blog\\corporate-shuttle-tysons-to-dc.html",
+      "route": "/blog/corporate-shuttle-tysons-to-dc",
+      "canonical": "https://www.partybusrus.com/blog/corporate-shuttle-tysons-to-dc",
+      "noindex": false,
+      "redirected": false,
+      "title": "Corporate Shuttle Tysons to DC | Party Bus R Us",
+      "schema_blocks": 3
+    },
+    {
+      "file": "site\\blog\\dc-brewery-crawl-by-bus.html",
+      "route": "/blog/dc-brewery-crawl-by-bus",
+      "canonical": "https://www.partybusrus.com/blog/dc-brewery-crawl-by-bus",
+      "noindex": false,
+      "redirected": false,
+      "title": "DC Brewery Crawl by Party Bus | Party Bus R Us",
+      "schema_blocks": 3
+    },
+    {
+      "file": "site\\blog\\how-much-does-a-party-bus-cost-dmv.html",
+      "route": "/blog/how-much-does-a-party-bus-cost-dmv",
+      "canonical": "https://www.partybusrus.com/blog/how-much-does-a-party-bus-cost-dmv",
+      "noindex": false,
+      "redirected": false,
+      "title": "How Much Does a Party Bus Cost in the DMV? | Party Bus R Us",
+      "schema_blocks": 3
+    },
+    {
+      "file": "site\\blog\\how-to-pick-a-party-bus-operator-in-the-dmv.html",
+      "route": "/blog/how-to-pick-a-party-bus-operator-in-the-dmv",
+      "canonical": "https://www.partybusrus.com/blog/how-to-pick-a-party-bus-operator-in-the-dmv",
+      "noindex": false,
+      "redirected": false,
+      "title": "How to Pick a DMV Party Bus Operator | Party Bus R Us Journal",
+      "schema_blocks": 3
+    },
+    {
+      "file": "site\\blog\\index.html",
+      "route": "/blog",
+      "canonical": "https://www.partybusrus.com/blog",
+      "noindex": false,
+      "redirected": false,
+      "title": "The Journal | Party Bus R Us Blog | DMV Event Planning",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\blog\\loudoun-winery-tour-bus-routes.html",
+      "route": "/blog/loudoun-winery-tour-bus-routes",
+      "canonical": "https://www.partybusrus.com/blog/loudoun-winery-tour-bus-routes",
+      "noindex": false,
+      "redirected": false,
+      "title": "Loudoun Winery Bus Route Planning | Party Bus R Us",
+      "schema_blocks": 3
+    },
+    {
+      "file": "site\\blog\\prom-party-bus-safety-checklist.html",
+      "route": "/blog/prom-party-bus-safety-checklist",
+      "canonical": "https://www.partybusrus.com/blog/prom-party-bus-safety-checklist",
+      "noindex": false,
+      "redirected": false,
+      "title": "Prom Party Bus Safety Checklist (DMV) | Party Bus R Us",
+      "schema_blocks": 3
+    },
+    {
+      "file": "site\\blog\\quinceanera-party-bus-northern-virginia.html",
+      "route": "/blog/quinceanera-party-bus-northern-virginia",
+      "canonical": "https://www.partybusrus.com/blog/quinceanera-party-bus-northern-virginia",
+      "noindex": false,
+      "redirected": false,
+      "title": "Quinceañera Party Bus Northern Virginia | Party Bus R Us",
+      "schema_blocks": 3
+    },
+    {
+      "file": "site\\blog\\wedding-shuttle-vs-trolley-vs-party-bus.html",
+      "route": "/blog/wedding-shuttle-vs-trolley-vs-party-bus",
+      "canonical": "https://www.partybusrus.com/blog/wedding-shuttle-vs-trolley-vs-party-bus",
+      "noindex": false,
+      "redirected": false,
+      "title": "Wedding Shuttle vs Trolley vs Party Bus | Party Bus R Us",
+      "schema_blocks": 3
+    },
+    {
+      "file": "site\\cities\\adams-morgan-dc.html",
+      "route": "/cities/adams-morgan-dc",
+      "canonical": "https://www.partybusrus.com/cities/adams-morgan-dc",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Adams Morgan, DC | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\alexandria-va.html",
+      "route": "/cities/alexandria-va",
+      "canonical": "https://www.partybusrus.com/cities/alexandria-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Alexandria, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\annapolis-md.html",
+      "route": "/cities/annapolis-md",
+      "canonical": "https://www.partybusrus.com/cities/annapolis-md",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Annapolis, MD | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\arlington-va.html",
+      "route": "/cities/arlington-va",
+      "canonical": "https://www.partybusrus.com/cities/arlington-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Arlington, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\ashburn-va.html",
+      "route": "/cities/ashburn-va",
+      "canonical": "https://www.partybusrus.com/cities/ashburn-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Ashburn, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\bethesda-md.html",
+      "route": "/cities/bethesda-md",
+      "canonical": "https://www.partybusrus.com/cities/bethesda-md",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Bethesda, MD | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\bowie-md.html",
+      "route": "/cities/bowie-md",
+      "canonical": "https://www.partybusrus.com/cities/bowie-md",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Bowie, MD | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\burke-va.html",
+      "route": "/cities/burke-va",
+      "canonical": "https://www.partybusrus.com/cities/burke-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Burke, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\capitol-hill-dc.html",
+      "route": "/cities/capitol-hill-dc",
+      "canonical": "https://www.partybusrus.com/cities/capitol-hill-dc",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Capitol Hill, DC | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\college-park-md.html",
+      "route": "/cities/college-park-md",
+      "canonical": "https://www.partybusrus.com/cities/college-park-md",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in College Park, MD | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\columbia-md.html",
+      "route": "/cities/columbia-md",
+      "canonical": "https://www.partybusrus.com/cities/columbia-md",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Columbia, MD | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\dupont-circle-dc.html",
+      "route": "/cities/dupont-circle-dc",
+      "canonical": "https://www.partybusrus.com/cities/dupont-circle-dc",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Dupont Circle, DC | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\fairfax-va.html",
+      "route": "/cities/fairfax-va",
+      "canonical": "https://www.partybusrus.com/cities/fairfax-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Fairfax, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\falls-church-va.html",
+      "route": "/cities/falls-church-va",
+      "canonical": "https://www.partybusrus.com/cities/falls-church-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Falls Church, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\foggy-bottom-dc.html",
+      "route": "/cities/foggy-bottom-dc",
+      "canonical": "https://www.partybusrus.com/cities/foggy-bottom-dc",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Foggy Bottom, DC | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\frederick-md.html",
+      "route": "/cities/frederick-md",
+      "canonical": "https://www.partybusrus.com/cities/frederick-md",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Frederick, MD | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\gaithersburg-md.html",
+      "route": "/cities/gaithersburg-md",
+      "canonical": "https://www.partybusrus.com/cities/gaithersburg-md",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Gaithersburg, MD | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\georgetown-dc.html",
+      "route": "/cities/georgetown-dc",
+      "canonical": "https://www.partybusrus.com/cities/georgetown-dc",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Georgetown, DC | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\germantown-md.html",
+      "route": "/cities/germantown-md",
+      "canonical": "https://www.partybusrus.com/cities/germantown-md",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Germantown, MD | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\h-street-dc.html",
+      "route": "/cities/h-street-dc",
+      "canonical": "https://www.partybusrus.com/cities/h-street-dc",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in H Street, DC | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\herndon-va.html",
+      "route": "/cities/herndon-va",
+      "canonical": "https://www.partybusrus.com/cities/herndon-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Herndon, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\index.html",
+      "route": "/cities",
+      "canonical": "https://www.partybusrus.com/cities",
+      "noindex": false,
+      "redirected": false,
+      "title": "Service Area Cities | DC, MD, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\leesburg-va.html",
+      "route": "/cities/leesburg-va",
+      "canonical": "https://www.partybusrus.com/cities/leesburg-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Leesburg, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\manassas-va.html",
+      "route": "/cities/manassas-va",
+      "canonical": "https://www.partybusrus.com/cities/manassas-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Manassas, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\maryland.html",
+      "route": "/cities/maryland",
+      "canonical": "https://www.partybusrus.com/cities/maryland",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental Maryland | Party Bus R Us",
+      "schema_blocks": 1
+    },
+    {
+      "file": "site\\cities\\mclean-va.html",
+      "route": "/cities/mclean-va",
+      "canonical": "https://www.partybusrus.com/cities/mclean-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in McLean, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\national-harbor-md.html",
+      "route": "/cities/national-harbor-md",
+      "canonical": "https://www.partybusrus.com/cities/national-harbor-md",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental at National Harbor, MD | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\navy-yard-dc.html",
+      "route": "/cities/navy-yard-dc",
+      "canonical": "https://www.partybusrus.com/cities/navy-yard-dc",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Navy Yard, DC | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\noma-dc.html",
+      "route": "/cities/noma-dc",
+      "canonical": "https://www.partybusrus.com/cities/noma-dc",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in NoMa, DC | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\northern-virginia.html",
+      "route": "/cities/northern-virginia",
+      "canonical": "https://www.partybusrus.com/cities/northern-virginia",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental Northern Virginia | Party Bus R Us",
+      "schema_blocks": 1
+    },
+    {
+      "file": "site\\cities\\potomac-md.html",
+      "route": "/cities/potomac-md",
+      "canonical": "https://www.partybusrus.com/cities/potomac-md",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Potomac, MD | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\reston-va.html",
+      "route": "/cities/reston-va",
+      "canonical": "https://www.partybusrus.com/cities/reston-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Reston, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\rockville-md.html",
+      "route": "/cities/rockville-md",
+      "canonical": "https://www.partybusrus.com/cities/rockville-md",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Rockville, MD | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\silver-spring-md.html",
+      "route": "/cities/silver-spring-md",
+      "canonical": "https://www.partybusrus.com/cities/silver-spring-md",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Silver Spring, MD | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\springfield-va.html",
+      "route": "/cities/springfield-va",
+      "canonical": "https://www.partybusrus.com/cities/springfield-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Springfield, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\sterling-va.html",
+      "route": "/cities/sterling-va",
+      "canonical": "https://www.partybusrus.com/cities/sterling-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Sterling, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\the-wharf-dc.html",
+      "route": "/cities/the-wharf-dc",
+      "canonical": "https://www.partybusrus.com/cities/the-wharf-dc",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental at The Wharf, DC | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\tysons-mclean-va.html",
+      "route": "/cities/tysons-mclean-va",
+      "canonical": "https://www.partybusrus.com/cities/tysons-va",
+      "noindex": false,
+      "redirected": true,
+      "title": "Party Bus Rental in Tysons & McLean, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\tysons-va.html",
+      "route": "/cities/tysons-va",
+      "canonical": "https://www.partybusrus.com/cities/tysons-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Tysons, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\u-street-dc.html",
+      "route": "/cities/u-street-dc",
+      "canonical": "https://www.partybusrus.com/cities/u-street-dc",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in U Street, DC | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\vienna-va.html",
+      "route": "/cities/vienna-va",
+      "canonical": "https://www.partybusrus.com/cities/vienna-va",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental in Vienna, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\cities\\washington-dc.html",
+      "route": "/cities/washington-dc",
+      "canonical": "https://www.partybusrus.com/cities/washington-dc",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rental Washington DC | Party Bus R Us",
+      "schema_blocks": 1
+    },
+    {
+      "file": "site\\contact.html",
+      "route": "/contact",
+      "canonical": "https://www.partybusrus.com/contact",
+      "noindex": false,
+      "redirected": false,
+      "title": "Contact Party Bus R Us | DMV Group Transportation",
+      "schema_blocks": 3
+    },
+    {
+      "file": "site\\es\\index.html",
+      "route": "/es",
+      "canonical": "https://www.partybusrus.com/es",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus R Us | Renta de Party Bus en DC, MD, VA",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\faq.html",
+      "route": "/faq",
+      "canonical": "https://www.partybusrus.com/faq",
+      "noindex": false,
+      "redirected": false,
+      "title": "FAQ | Party Bus R Us | DMV Limo Bus Questions Answered",
+      "schema_blocks": 1
+    },
+    {
+      "file": "site\\fleet\\bus-20pax.html",
+      "route": "/fleet/bus-20pax",
+      "canonical": "https://www.partybusrus.com/fleet/bus-20pax",
+      "noindex": false,
+      "redirected": false,
+      "title": "The Midnight 20 | 20-Passenger Party Bus | Party Bus R Us",
+      "schema_blocks": 3
+    },
+    {
+      "file": "site\\fleet\\bus-24pax.html",
+      "route": "/fleet/bus-24pax",
+      "canonical": "https://www.partybusrus.com/fleet/bus-24pax",
+      "noindex": false,
+      "redirected": false,
+      "title": "Diamond 24 | 24-Passenger Party Bus | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\fleet\\bus-25pax.html",
+      "route": "/fleet/bus-25pax",
+      "canonical": "https://www.partybusrus.com/fleet/bus-25pax",
+      "noindex": false,
+      "redirected": false,
+      "title": "The Bridal 25 | 25-Passenger Party Bus | Party Bus R Us",
+      "schema_blocks": 3
+    },
+    {
+      "file": "site\\fleet\\bus-28pax.html",
+      "route": "/fleet/bus-28pax",
+      "canonical": "https://www.partybusrus.com/fleet/bus-28pax",
+      "noindex": false,
+      "redirected": false,
+      "title": "The Cavalier 28 | 28-Passenger Party Bus | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\fleet\\bus-30pax.html",
+      "route": "/fleet/bus-30pax",
+      "canonical": "https://www.partybusrus.com/fleet/bus-30pax",
+      "noindex": false,
+      "redirected": false,
+      "title": "The Signature 30 | 30-Passenger Limo Bus | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\fleet\\bus-32pax.html",
+      "route": "/fleet/bus-32pax",
+      "canonical": "https://www.partybusrus.com/fleet/bus-32pax",
+      "noindex": false,
+      "redirected": false,
+      "title": "The Empire 32 | 32-Passenger Party Bus | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\fleet\\bus-35pax.html",
+      "route": "/fleet/bus-35pax",
+      "canonical": "https://www.partybusrus.com/fleet/bus-35pax",
+      "noindex": false,
+      "redirected": false,
+      "title": "Imperial 35 | 35-Pax Limo Bus with Restroom | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\fleet.html",
+      "route": "/fleet",
+      "canonical": "https://www.partybusrus.com/fleet",
+      "noindex": false,
+      "redirected": false,
+      "title": "Our Fleet | Party Bus R Us | DC, MD & VA Limo Buses",
+      "schema_blocks": 1
+    },
+    {
+      "file": "site\\gallery.html",
+      "route": "/gallery",
+      "canonical": "https://www.partybusrus.com/gallery",
+      "noindex": false,
+      "redirected": false,
+      "title": "Gallery | Party Bus R Us | DMV Limo Bus Interiors & Real Nights",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\index.html",
+      "route": "/",
+      "canonical": "https://www.partybusrus.com/",
+      "noindex": false,
+      "redirected": false,
+      "title": "Party Bus Rentals in DC, Maryland &amp; Northern VA | Party Bus R Us",
+      "schema_blocks": 1
+    },
+    {
+      "file": "site\\pricing.html",
+      "route": "/pricing",
+      "canonical": "https://www.partybusrus.com/pricing",
+      "noindex": false,
+      "redirected": false,
+      "title": "Pricing & Quotes | Party Bus R Us",
+      "schema_blocks": 1
+    },
+    {
+      "file": "site\\privacy.html",
+      "route": "/privacy",
+      "canonical": "https://www.partybusrus.com/privacy",
+      "noindex": false,
+      "redirected": false,
+      "title": "Privacy Policy | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\quote.html",
+      "route": "/quote",
+      "canonical": "https://www.partybusrus.com/quote",
+      "noindex": false,
+      "redirected": false,
+      "title": "Request a Party Bus Quote | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\reviews.html",
+      "route": "/reviews",
+      "canonical": "https://www.partybusrus.com/reviews",
+      "noindex": false,
+      "redirected": false,
+      "title": "Reviews & Feedback | Party Bus R Us",
+      "schema_blocks": 1
+    },
+    {
+      "file": "site\\services\\airport-shuttle.html",
+      "route": "/services/airport-shuttle",
+      "canonical": "https://www.partybusrus.com/services/airport-shuttle",
+      "noindex": false,
+      "redirected": false,
+      "title": "DMV Airport Shuttle | DCA, IAD, BWI | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\anniversaries.html",
+      "route": "/services/anniversaries",
+      "canonical": "https://www.partybusrus.com/services/anniversaries",
+      "noindex": false,
+      "redirected": false,
+      "title": "Anniversary Limo & Party Bus DC, MD, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\bachelorette.html",
+      "route": "/services/bachelorette",
+      "canonical": "https://www.partybusrus.com/services/bachelorette",
+      "noindex": false,
+      "redirected": false,
+      "title": "Bachelorette & Bachelor Party Buses | DMV | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\birthdays.html",
+      "route": "/services/birthdays",
+      "canonical": "https://www.partybusrus.com/services/birthdays",
+      "noindex": false,
+      "redirected": false,
+      "title": "Adult Birthday Party Bus DC, MD, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\brewery-crawls.html",
+      "route": "/services/brewery-crawls",
+      "canonical": "https://www.partybusrus.com/services/brewery-crawls",
+      "noindex": false,
+      "redirected": false,
+      "title": "DC & NoVA Brewery Crawl Bus | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\casino-trips.html",
+      "route": "/services/casino-trips",
+      "canonical": "https://www.partybusrus.com/services/casino-trips",
+      "noindex": false,
+      "redirected": false,
+      "title": "DMV Casino Trip Bus | MGM, Charles Town | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\college-greek.html",
+      "route": "/services/college-greek",
+      "canonical": "https://www.partybusrus.com/services/college-greek",
+      "noindex": false,
+      "redirected": false,
+      "title": "College & Greek Party Bus | DMV | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\concerts-sports.html",
+      "route": "/services/concerts-sports",
+      "canonical": "https://www.partybusrus.com/services/concerts-sports",
+      "noindex": false,
+      "redirected": false,
+      "title": "DMV Concert, Sports & Show Bus | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\corporate.html",
+      "route": "/services/corporate",
+      "canonical": "https://www.partybusrus.com/services/corporate",
+      "noindex": false,
+      "redirected": false,
+      "title": "DMV Corporate Shuttle & Event Bus | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\dc-monument-tours.html",
+      "route": "/services/dc-monument-tours",
+      "canonical": "https://www.partybusrus.com/services/dc-monument-tours",
+      "noindex": false,
+      "redirected": false,
+      "title": "DC Monument & Sightseeing Tour Bus | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\funerals.html",
+      "route": "/services/funerals",
+      "canonical": "https://www.partybusrus.com/services/funerals",
+      "noindex": false,
+      "redirected": false,
+      "title": "Funeral & Memorial Transportation DMV | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\holiday-light-tours.html",
+      "route": "/services/holiday-light-tours",
+      "canonical": "https://www.partybusrus.com/services/holiday-light-tours",
+      "noindex": false,
+      "redirected": false,
+      "title": "DMV Holiday Light Tours by Bus | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\index.html",
+      "route": "/services",
+      "canonical": "https://www.partybusrus.com/services",
+      "noindex": false,
+      "redirected": false,
+      "title": "All Services | DMV Party Bus Rental | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\nye-packages.html",
+      "route": "/services/nye-packages",
+      "canonical": "https://www.partybusrus.com/services/nye-packages",
+      "noindex": false,
+      "redirected": false,
+      "title": "New Year's Eve Party Bus Packages DMV | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\out-of-town.html",
+      "route": "/services/out-of-town",
+      "canonical": "https://www.partybusrus.com/services/out-of-town",
+      "noindex": false,
+      "redirected": false,
+      "title": "Out-of-Town & Multi-Day Bus Trips | DMV | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\prom.html",
+      "route": "/services/prom",
+      "canonical": "https://www.partybusrus.com/services/prom",
+      "noindex": false,
+      "redirected": false,
+      "title": "Prom & School Limo Bus Rental | DMV | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\quinceaneras.html",
+      "route": "/services/quinceaneras",
+      "canonical": "https://www.partybusrus.com/services/quinceaneras",
+      "noindex": false,
+      "redirected": false,
+      "title": "Quinceanera & Sweet 16 Party Bus | DMV | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\sweet-16.html",
+      "route": "/services/sweet-16",
+      "canonical": "https://www.partybusrus.com/services/sweet-16",
+      "noindex": false,
+      "redirected": false,
+      "title": "Sweet 16 Party Bus DC, MD, VA | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\weddings.html",
+      "route": "/services/weddings",
+      "canonical": "https://www.partybusrus.com/services/weddings",
+      "noindex": false,
+      "redirected": false,
+      "title": "Wedding Shuttle Service | DMV | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\services\\winery-tours.html",
+      "route": "/services/winery-tours",
+      "canonical": "https://www.partybusrus.com/services/winery-tours",
+      "noindex": false,
+      "redirected": false,
+      "title": "Loudoun Winery Tour Bus | DMV | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\terms.html",
+      "route": "/terms",
+      "canonical": "https://www.partybusrus.com/terms",
+      "noindex": false,
+      "redirected": false,
+      "title": "Terms of Service | Party Bus R Us",
+      "schema_blocks": 2
+    },
+    {
+      "file": "site\\thank-you.html",
+      "route": "/thank-you",
+      "canonical": "https://www.partybusrus.com/thank-you",
+      "noindex": true,
+      "redirected": false,
+      "title": "Your Quote Request | Party Bus R Us",
+      "schema_blocks": 1
+    },
+    {
+      "file": "site\\weddings-portfolio.html",
+      "route": "/weddings-portfolio",
+      "canonical": "https://www.partybusrus.com/weddings-portfolio",
+      "noindex": false,
+      "redirected": false,
+      "title": "Wedding Transport Photo Gallery | Party Bus R Us",
+      "schema_blocks": 2
+    }
+  ]
+}

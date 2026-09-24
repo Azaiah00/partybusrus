@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "checks": [
+    "SW removes only old pbru caches",
+    "offline quote is 503/no-store",
+    "network404 preserved",
+    "non200/private asset responses not cached",
+    "public versioned font cached",
+    "sensitive query/auth/API/POST bypass worker",
+    "4 local WOFF2 faces valid",
+    "Latin and Latin-ext with Inter400..700 and swap",
+    "2 official OFL licenses present"
+  ]
+}

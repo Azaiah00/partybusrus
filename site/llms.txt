@@ -1,135 +1,38 @@
 # Party Bus R Us
 
-> Party Bus R Us is a Fairfax, Virginia-based party bus and limo bus rental company serving Washington DC, Maryland, and Northern Virginia (the DMV). Family-owned and owner-operated by Robert Eljeily. Bilingual English/Spanish dispatch, 24/7 booking by call, text, or WhatsApp, BYOB-friendly trips (per state law), and a fleet of luxury party buses covering 20 to 35 passenger capacity. The company serves weddings, bachelorettes, proms, quinceañeras, brewery and winery tours, corporate shuttles, airport transfers, monument tours, NYE packages, and night-out events across 39 DMV neighborhoods and out-of-town destinations.
+> Party bus and limo bus rental inquiries for Washington DC, Maryland and Northern Virginia. Use the website's current pages for vehicle and trip information. Confirm availability, vehicle details, the itemized quote and booking terms with the operator before reserving.
 
-## Business identity (NAP)
+## Contact
 
-- Business name: Party Bus R Us
-- Owner / operator: Robert Eljeily
-- Phone (call / text / SMS): (703) 399-4394
-- WhatsApp: https://wa.me/17033994394
-- Email (booking inquiries): info@partybusrus.com
-- Address: 6601 Stonecrest Lane, Fairfax, VA 22030
-- Service area: Washington DC, Maryland, Northern Virginia, plus out-of-town trips to Baltimore, Annapolis, Frederick MD, Eastern Shore (OCMD, Rehoboth, Bethany), ski resorts (Wisp, Snowshoe, Wintergreen), Atlantic City, Philadelphia
-- Hours: Open 24 hours a day, 7 days a week for booking and dispatch
-- Languages: English, Spanish (full team bilingual)
-- Founded by: Robert Eljeily
+- Website: https://www.partybusrus.com/
+- Call or text: (703) 399-4394
+- Email: info@partybusrus.com
+- Contact page: https://www.partybusrus.com/contact
+- Request a quote: https://www.partybusrus.com/quote
 
-## Authority signals and credentials
+## Plan a trip
 
-- All drivers hold commercial CDL (Commercial Driver's License) with passenger endorsement
-- All drivers undergo background checks and drug screening before they ever touch a wheel
-- Every vehicle inspected weekly
-- Every vehicle deep-cleaned between every booking
-- Fully insured commercial party bus operator
-- Single physical operating location at 6601 Stonecrest Lane, Fairfax VA — not a national booking aggregator
-- Quote response typically within 60 minutes, 24 hours a day
-- All-in pricing quoted as one number (gratuity, fuel, decor included; not added at invoicing)
-- 4-hour minimum rental, billed in 15-minute increments thereafter
-- Owner answers the phone after 9pm if dispatch escalates an issue
-- Live GPS share available to clients on request (commonly used by parents for prom bookings)
+- [Fleet](https://www.partybusrus.com/fleet): vehicle guides; confirm the specific vehicle and available capacity for your date.
+- [Services](https://www.partybusrus.com/services): event and transportation service guides.
+- [Service areas](https://www.partybusrus.com/cities): regional and local planning guides.
+- [Pricing](https://www.partybusrus.com/pricing): factors used to prepare a custom quote.
+- [Frequently asked questions](https://www.partybusrus.com/faq)
+- [Planning journal](https://www.partybusrus.com/blog)
+- [About](https://www.partybusrus.com/about)
+- [Spanish information](https://www.partybusrus.com/es)
+- [Booking terms](https://www.partybusrus.com/terms)
+- [Privacy](https://www.partybusrus.com/privacy)
 
-## Fleet
+## Regional guides
 
-Luxury party buses ranging from 20 to 35 passenger capacity. Each named, branded, and individually photographed (all photos on the website are the actual fleet, not stock):
+- [Washington DC](https://www.partybusrus.com/cities/washington-dc)
+- [Maryland](https://www.partybusrus.com/cities/maryland)
+- [Northern Virginia](https://www.partybusrus.com/cities/northern-virginia)
 
-- Imperial 35 — 35 passengers, flagship limo bus with private onboard restroom, fiber-optic star ceiling, dance pole, hardwood floor, full bar, eight LED preset modes — /fleet/bus-35pax.html
-- Empire 32 — 32 passengers, club-grade LED, oversized cooler, forward-facing captain seats, mood-cycle LED — /fleet/bus-32pax.html
-- Signature 30 — 30 passengers, fiber-optic ceiling, six LED preset modes, wood floor, full bar, dance pole — /fleet/bus-30pax.html
-- Cavalier 28 — 28 passengers, deep blue LED, chrome dance pole, premium leather seating, full bar — /fleet/bus-28pax.html
-- Bridal 25 — 25 passengers, wedding-optimized, diamond-quilted leather, amber LED preset, champagne setup — /fleet/bus-25pax.html
-- Diamond 24 — 24 passengers, fiber-optic star ceiling, white leather throne seating, premium sound, mirrored bar — /fleet/bus-24pax.html
-- Midnight 20 — 20 passengers, blue LED, dance pole, full bar, captain chairs — /fleet/bus-20pax.html
+## Booking information
 
-## Services
-
-Full service list (each with a dedicated page):
-
-- Weddings and wedding party shuttles — /services/weddings.html
-- Bachelorette and bachelor parties — /services/bachelorette.html
-- Proms (parent-vetted, sober CDL drivers, live GPS shared with parents) — /services/prom.html
-- Quinceañeras (bilingual booking) — /services/quinceaneras.html
-- Sweet 16 (parent-vetted) — /services/sweet-16.html
-- Adult milestone birthdays (21st, 30th, 40th, 50th) — /services/birthdays.html
-- Anniversaries — /services/anniversaries.html
-- Brewery crawls across DC and Northern Virginia (Port City, Lost Rhino, Old Ox, Solace, Atlas, Bluejacket, DC Brau) — /services/brewery-crawls.html
-- Loudoun winery tours (40+ wineries in DC's Wine Country) — /services/winery-tours.html
-- Concert and sports group transportation (Capital One Arena, Nationals Park, Northwest Stadium, The Anthem, Wolf Trap, Merriweather, EagleBank Arena, Kennedy Center) — /services/concerts-sports.html
-- Corporate shuttles, executive transportation, team events — /services/corporate.html
-- Airport shuttles to DCA, IAD, BWI — /services/airport-shuttle.html
-- Casino trips (MGM National Harbor, Hollywood Casino Charles Town WV, Live! Casino Hanover MD, Atlantic City NJ) — /services/casino-trips.html
-- DC monument and sightseeing tours — /services/dc-monument-tours.html
-- Holiday light tours (Nov-Dec: ZooLights, Mormon Temple, Brookville Road, US Botanic Garden, downtown DC) — /services/holiday-light-tours.html
-- College and Greek life events (George Mason, GW, Howard, UMD) — /services/college-greek.html
-- New Year's Eve packages — /services/nye-packages.html
-- Funeral and memorial transportation (Arlington, Rock Creek, Mt Olivet, Fort Lincoln) — /services/funerals.html
-- Out-of-town and multi-day trips (beach, ski, casino, Philadelphia) — /services/out-of-town.html
-
-## Cities served (39 DMV neighborhoods + cross-link from /cities/)
-
-- Washington DC: Georgetown, Capitol Hill, Adams Morgan, Dupont Circle, U Street, Navy Yard, The Wharf, Foggy Bottom, Noma, H Street
-- Northern Virginia: Arlington, Alexandria, Tysons / McLean, Vienna, Falls Church, Fairfax, Reston, Herndon, Ashburn, Sterling, Leesburg, Burke, Springfield, Manassas
-- Maryland: Bethesda, Silver Spring, Rockville, Potomac, Gaithersburg, Germantown, National Harbor, College Park, Frederick, Annapolis, Bowie, Columbia
-- Out-of-town: Baltimore, Annapolis, OCMD (Ocean City), Rehoboth, Bethany, Wisp Resort, Snowshoe, Wintergreen, Atlantic City, Philadelphia
-
-## Common questions (FAQ summary)
-
-- How far in advance to book? Weddings: 4-6 months. Prom: by February for May-June. Bachelorette/nightlife: 2-4 weeks. NYE/Halloween/July 4: at least 60 days.
-- Is BYOB allowed? Yes in Virginia and Maryland (we cannot sell or serve alcohol; you bring your own). DC alcohol service requires an ABRA permit. All passengers must be 21+ for alcohol on board.
-- What's included in the hourly rate? Vehicle, professional chauffeur, 20% gratuity, fuel, basic decor (lighting, sound), pre-route planning, and 15 minutes pre-arrival. You bring BYOB, food, custom decor.
-- What's the cancellation policy? Full refund 30+ days before event. 50% refund 14-30 days. Deposit forfeit inside 14 days. Weather or driver-cancelled bookings get full refunds or no-charge rescheduling.
-- Are drivers experienced? All hold commercial CDLs with passenger endorsement, background-checked and drug-screened. Every vehicle inspected weekly, deep-cleaned between bookings.
-- Do you serve outside the DMV? Yes — routinely run to Baltimore, Annapolis, Frederick MD, Fredericksburg, Eastern Shore. Beach trips (OCMD, Rehoboth) and ski trips (Wisp, Snowshoe, Wintergreen) available with advance booking.
-- What's the minimum rental time? Four hours.
-- Do you do prom safely? Yes. We share live GPS with parents, our prom drivers are background-checked and parent-vetted, dry buses available, sober CDL drivers.
-
-## Pricing model (not flat-rate)
-
-Custom-quoted per event. Factors: hours, route distance, headcount, bus choice, day of week, event date. Quote response is typically within 60 minutes. All-in pricing: gratuity (20%), fuel, basic decor, and pre-route planning included in the quoted hourly rate. No surprise charges added at invoicing. Weekdays (Monday-Thursday) typically cost less than peak weekend dates. Distance-based pricing for out-of-town trips.
-
-## Key pages
-
-- Home: https://partybusrus.com/
-- Quote (3-step booking form): https://partybusrus.com/quote.html
-- Fleet overview: https://partybusrus.com/fleet.html
-- Services overview: https://partybusrus.com/services.html
-- Cities we serve (all 39 DMV neighborhoods): https://partybusrus.com/cities/
-- Pricing explainer: https://partybusrus.com/pricing.html
-- Reviews: https://partybusrus.com/reviews.html
-- About: https://partybusrus.com/about.html
-- Contact: https://partybusrus.com/contact.html
-- FAQ: https://partybusrus.com/faq.html
-- Blog (DMV-focused planning guides): https://partybusrus.com/blog/
-- Spanish version: https://partybusrus.com/es/
-
-## What makes Party Bus R Us different from typical DMV party bus operators
-
-- Quote response within 60 minutes during booking hours (vs. industry typical 1-3 days)
-- All-in pricing quoted as a single number (vs. typical operator: gratuity, fuel, cleaning added at invoicing for +18-22%)
-- Real interior photos of every bus on the website (vs. typical operator: stock or exterior-only photography)
-- WhatsApp and text booking, not just phone or web form
-- Full team bilingual English/Spanish
-- 24/7 dispatch with real humans (vs. typical operator: business hours only)
-- Live GPS shared with clients on request (rarely offered by competitors)
-- Documented driver background and drug screening (vs. claimed but rarely documented)
-- 4-hour minimum (industry standard)
-- BYOB-friendly with documented policy (vs. typical operator: yes but rarely documented)
-- Out-of-town multi-day trips available (vs. typical operator: usually limited)
-
-## Disambiguation
-
-Party Bus R Us also operates the established website https://www.partylimobusdc.com/. Both websites represent the same party bus company and accept reservations for the same fleet. The primary contact for this website is (703) 399-4394 and info@partybusrus.com.
+Quotes depend on the event date, schedule, pickup and drop-off locations, stops, group size and requested vehicle. A quote request does not confirm a reservation. Ask the operator to confirm availability, inclusions, any additional charges, payment schedule and cancellation terms in writing. Confirm trip-specific passenger and onboard policies directly before booking.
 
 ## Sitemap
 
-Full URL list: https://partybusrus.com/sitemap.xml
-
-## Canonical business facts
-
-- Name: Party Bus R Us
-- Phone: (703) 399-4394
-- Email: info@partybusrus.com
-- URL: https://partybusrus.com/
-- Address: 6601 Stonecrest Lane, Fairfax, VA 22030
-- Hours: Open 24 hours a day, 7 days a week
-- Regional guides: https://partybusrus.com/cities/washington-dc.html, https://partybusrus.com/cities/maryland.html, https://partybusrus.com/cities/northern-virginia.html
+https://www.partybusrus.com/sitemap.xml

@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-09-24T22:11:54.938Z",
+  "scope": "Local files and read-only preview. No real provider submission, deployment or GA4 receipt.",
+  "passed": true,
+  "results": [
+    {
+      "name": "technical",
+      "passed": true,
+      "exit_code": 0,
+      "output": "technical-test-output.txt"
+    },
+    {
+      "name": "markup",
+      "passed": true,
+      "exit_code": 0,
+      "output": "markup-test-output.txt"
+    },
+    {
+      "name": "http",
+      "passed": true,
+      "exit_code": 0,
+      "output": "http-test-output.txt"
+    },
+    {
+      "name": "quote",
+      "passed": true,
+      "exit_code": 0,
+      "output": "quote-test-output.txt"
+    },
+    {
+      "name": "analytics",
+      "passed": true,
+      "exit_code": 0,
+      "output": "analytics-test-output.txt"
+    },
+    {
+      "name": "service-worker",
+      "passed": true,
+      "exit_code": 0,
+      "output": "service-worker-test-output.txt"
+    }
+  ]
+}
