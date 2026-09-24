@@ -2,7 +2,7 @@
 
 Current implementation: September 24, 2026. Static website hosted on Vercel at https://www.partybusrus.com.
 
-The revised site is implemented and tested locally. [Draft pull request #1](https://github.com/Azaiah00/partybusrus/pull/1) is open and Vercel has successfully built its protected preview. Authenticated hosted QA now passes across all 92 linked pages, nine redirect cases and ten mobile layouts. Production has not been updated. Analytics remains off until the real business-owned GA4 ID is configured.
+The revised site is implemented and tested locally. [Draft pull request #1](https://github.com/Azaiah00/partybusrus/pull/1) is open and Vercel has successfully built its protected preview. Authenticated hosted QA passes across all 92 linked pages, nine redirect cases and ten mobile layouts. Production has not been updated. The verified business-owned GA4 stream is configured in this branch, with consent required and preview collection disabled. Production event receipt remains unverified.
 
 ## Current files
 
@@ -28,4 +28,4 @@ Open http://127.0.0.1:4173/. In another terminal, run `npm test` for the full lo
 
 ## Before live release
 
-Review the branch and its deployment preview in the existing Vercel project. Configure the verified GA4 ID and confirm an actual FormSubmit inquiry reaches the business inbox. After release, verify production URLs, consent, GA receipt and the native CAPTCHA/autoresponse workflow. Do not treat browser clicks or a form handoff as a confirmed lead or booking. Use Search Console and business records to measure SEO and booking performance.
+Review the branch and its deployment preview in the existing Vercel project. The GA4 property, stream and eleven reporting dimensions are configured; see `site/ANALYTICS-SETUP.md`. Confirm an actual FormSubmit inquiry reaches the business inbox. After release, verify production URLs, consent, GA receipt and the native CAPTCHA/autoresponse workflow. Do not treat browser clicks or a form handoff as a confirmed lead or booking. Use Search Console and business records to measure SEO and booking performance.

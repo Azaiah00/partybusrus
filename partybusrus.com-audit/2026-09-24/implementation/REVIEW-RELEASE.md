@@ -6,7 +6,7 @@
 - Vercel preview: https://partybusrus-git-codex-seo-design-4e39ef-freds-projects-a353dcff.vercel.app
 - Verified deployment dashboard: https://vercel.com/freds-projects-a353dcff/partybusrus/2RqkDT1XKBp6D34QFfQPvEX6KGdP
 
-The Vercel build passed. After the account owner signed in, the authenticated browser completed the hosted review below. Production has not been updated. Subsequent documentation commits record these findings; they do not change the website application code.
+The Vercel build passed. After the account owner signed in, the authenticated browser completed the hosted review below. Production has not been updated. Later changes add Google's privacy disclosure link, the verified Analytics stream configuration and a cache fix for future activation/rollback changes. The complete local suite was rerun after those changes.
 
 ## Hosted verification
 
@@ -23,13 +23,13 @@ See `hosted-preview-qa.json` for the complete route list, results and limitation
 ## Completed locally
 
 - 95 HTML files, 92 indexable URLs, zero reported static SEO or markup failures/warnings.
-- 173 HTTP checks; 14 quote and 14 analytics behavior tests pass.
+- 173 HTTP checks; 14 quote and 15 analytics behavior tests pass, along with three service-worker cache regression tests.
 - 27 representative browser layouts plus additional journal pointer/keyboard navigation checks.
 - Pinned optional accessibility dependency installs with `npm ci`; the full `npm test` suite passes.
 
 ## Outstanding checks
 
-1. Supply the business-owned GA4 Measurement ID, or explicitly authorize inspection of the relevant Google Analytics account. Automatic approval review blocked opening Analytics because private account data could be exposed. Analytics remains off until the verified ID is configured; actual consent and Realtime/DebugView receipt still require verification on the production host.
+1. Verify production consent and Realtime/DebugView receipt after release. The earlier account-access blocker is resolved: the owner authorized access and creation, and the real website stream ID is configured. Enhanced Measurement, Google Signals, user-provided data and ad personalization are off; eleven reporting dimensions are saved. Preview hosts deliberately cannot send data. This newly created property cannot attribute earlier calls or emails.
 2. Confirm native FormSubmit CAPTCHA completion and actual inquiry/autoresponse delivery with the business inbox. No real test inquiry has been sent. Prior browser security policy blocked an interactive quote action, and no workaround was attempted.
 3. Review and authorize the production release, then repeat production URL, consent and provider-delivery checks. Retain the previous deployment for rollback.
 4. Connect Search Console and reconcile inquiries against business records before attributing results to organic search.

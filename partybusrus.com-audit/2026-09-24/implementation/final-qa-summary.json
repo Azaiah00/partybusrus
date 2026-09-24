@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T18:04:54.567Z",
+  "generated_at": "2026-09-24T22:11:54.938Z",
   "scope": "Local files and read-only preview. No real provider submission, deployment or GA4 receipt.",
   "passed": true,
   "results": [
@@ -32,6 +32,12 @@
       "passed": true,
       "exit_code": 0,
       "output": "analytics-test-output.txt"
+    },
+    {
+      "name": "service-worker",
+      "passed": true,
+      "exit_code": 0,
+      "output": "service-worker-test-output.txt"
     }
   ]
 }

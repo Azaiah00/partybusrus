@@ -5,6 +5,9 @@ import test from 'node:test';
 
 const script = readFileSync(new URL('../site/assets/analytics.js', import.meta.url), 'utf8');
 const configSource = readFileSync(new URL('../site/assets/analytics-config.js', import.meta.url), 'utf8');
+const configScope = { Object }; configScope.window = configScope;
+vm.runInNewContext(configSource, configScope);
+const shippingConfig = configScope.PBRU_ANALYTICS_CONFIG;
 // VM-only fixture ID: no network facility exists in this fake DOM.
 const ID = 'G-A1B2C3D4E5';
 const CONSENT = 'pbru_analytics_consent_v1';
@@ -69,17 +72,30 @@ function boot(options = {}) {
   };
 }
 
-test('shipping config is empty: no collector, queues or prompt; local quote source is useful', () => {
-  const scope = { Object }; scope.window = scope;
-  vm.runInNewContext(configSource, scope);
-  assert.equal(scope.PBRU_ANALYTICS_CONFIG.measurementId, '');
-  const app = boot({ config: scope.PBRU_ANALYTICS_CONFIG, url: 'https://www.partybusrus.com/?utm_source=google&utm_medium=organic', referrer: 'https://www.google.com/search?q=party+bus' });
+test('empty rollback configuration has no collector, queue or prompt; local quote source is useful', () => {
+  const app = boot({ config: { measurementId: '' }, url: 'https://www.partybusrus.com/?utm_source=google&utm_medium=organic', referrer: 'https://www.google.com/search?q=party+bus' });
   assert.equal(app.scripts().length, 0);
   assert.equal(app.context.dataLayer, undefined);
   assert.equal(app.elements.some(el => el.id === 'pbru-consent'), false);
   assert.equal(app.api.getAttribution().source_referrer, 'www.google.com');
   assert.equal(app.api.getAttribution().utm_source, 'google');
   assert.equal(app.api.track('quote_start', { form_id: 'quote-form' }), false);
+});
+
+test('shipping configuration uses the verified stream only after consent and supports withdrawal', () => {
+  assert.equal(shippingConfig.measurementId, 'G-TM8WLPFQC3');
+  assert.equal(shippingConfig.debug, false);
+  const app = boot({ config: shippingConfig });
+  assert.equal(app.scripts().length, 0);
+  assert.equal(app.context.dataLayer, undefined);
+  assert.ok(app.elements.find(el => el.id === 'pbru-consent'));
+  app.api.setConsent('granted');
+  assert.equal(app.scripts().length, 1);
+  assert.ok(app.scripts()[0].src.endsWith('id=' + shippingConfig.measurementId));
+  assert.equal(app.events().filter(event => event.name === 'page_view').length, 1);
+  app.api.setConsent('denied');
+  assert.equal(app.context['ga-disable-' + shippingConfig.measurementId], true);
+  assert.equal(app.api.track('quote_start', {}), false);
 });
 
 test('valid production ID stays fully off until affirmative consent', () => {
@@ -113,7 +129,7 @@ test('repeated consent and duplicate script include do not duplicate loader/page
 
 test('preview and local hosts never load collectors, even with consent', () => {
   for (const url of ['http://localhost:3000/', 'https://pbru-preview.vercel.app/', 'https://partybusrus.com.evil.example/']) {
-    const app = boot({ url, config: { measurementId: ID, debug: true } });
+    const app = boot({ url, config: shippingConfig });
     app.api.setConsent('granted');
     assert.equal(app.scripts().length, 0, url);
     assert.equal(app.context.dataLayer, undefined, url);

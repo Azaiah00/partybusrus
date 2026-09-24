@@ -4,9 +4,9 @@ Updated 2026-09-24. This replaces the former placeholder/GTM/Meta/CallRail and N
 
 ## Activation status
 
-The shared implementation is ready for configuration and QA, but **analytics is not active**. `assets/analytics-config.js` intentionally has an empty `measurementId`. There is no GTM, Meta Pixel or CallRail installation. No real ID was supplied or verified, and no analytics delivery or mailbox receipt is claimed.
+**The verified GA4 stream is configured in the review branch; production has not been released.** The owner authorized creation in their selected signed-in account and completed the agreement step. The Party Bus R Us property contains the Party Bus R Us Website stream for `https://www.partybusrus.com`. Its public Measurement ID, `G-TM8WLPFQC3`, is now in `assets/analytics-config.js`. Google showed no received data at setup, as expected before deployment. No production Analytics receipt or mailbox delivery is claimed. The site uses direct GA4, without an additional GTM container snippet, Meta Pixel or CallRail installation.
 
-Before changing this configuration, locate the business-owned existing GA4 property/web data stream, Search Console domain property and Google Business Profile. Check account ownership and historical data before creating duplicates. Public Measurement IDs are safe to include here; API secrets, credentials and customer data are not.
+Use the existing Party Bus R Us property and stream for future changes; do not create duplicates. This newly created property has no historical traffic and cannot attribute earlier calls or emails. Search Console and Google Business Profile access remain separate requirements. Public Measurement IDs are safe to include here; private account identifiers, API secrets, credentials and customer data are not.
 
 Only an uppercase GA4 web Measurement ID with the shape `G-` followed by ten letters/digits passes validation. Common placeholder, test and demo strings are rejected. The collector only loads on the exact `partybusrus.com` and `www.partybusrus.com` hosts. Localhost and preview deployments cannot send data even if an ID is set. The test suite uses a fake DOM without networking; its fixture ID is never production configuration.
 
@@ -21,7 +21,9 @@ Every real page must include these scripts in this order, before the quote scrip
 
 Use this direct GA4 installation once. Do not add a second Google tag through GTM, retain old inline `gtag`/`fbq` stubs or reinstall old generic submit handlers. The shared code prevents duplicate includes and queues a single explicit `page_view` for each document. It sets `send_page_view: false` on the configuration to avoid a second default page view.
 
-In the owned GA4 web stream, review **Enhanced Measurement before activation**. Disable automatic form interactions, outbound clicks, site search, history pageviews and other overlapping automatic measurements; use this explicit event schema so link URLs, search terms and form content are not inadvertently collected. Disable Google Signals/advertising personalization unless separately authorized and implemented. The script already disables those settings for this stream.
+**Enhanced Measurement is saved off in the web stream**, avoiding duplicate automatic form interactions, outbound clicks, site search and history pageviews. Google Signals and user-provided data collection remain off. Property-level ad personalization is saved off in all 307 available regions, in addition to the script-level restrictions. No connected site tags were present. Optional account data sharing was left off during setup, and optional product emails were declined at the owner's request. Recheck these settings before changing providers or tags.
+
+Eleven event-scoped custom dimensions were created and verified in the property: `contact_method`, `cta_id`, `placement`, `page_type`, `passenger_band`, `error_code`, `direction`, `step`, `event_type`, `field_name` and `vehicle_id`. These make the corresponding event parameters available for reporting. No click, submission attempt or provider return was promoted to a confirmed-lead key event. Actual report values still require production collection and processing.
 
 ## Consent and storage
 
@@ -85,6 +87,6 @@ For a future primary `generate_lead` event, implement provider/backend receipt w
 
 ## Rollback and maintenance
 
-Set `measurementId` back to empty and deploy to stop starting the collector on subsequent page loads. Existing open tabs require withdrawal or reload; empty configuration cannot revoke already-delivered data. Keep the shared API installed so form functions continue safely without collection. Review this guide whenever a provider, event contract, host, consent behavior or form workflow changes.
+Set `measurementId` back to empty and deploy to stop starting the collector on subsequent page loads. The configuration has a `no-store` response header and bypasses the service worker cache, including versioned URLs. Service worker v10 clears the earlier v9 cache on activation. Existing open tabs require withdrawal or reload; empty configuration cannot revoke already-delivered data, and an older active worker may need its update followed by a reload. Keep the shared API installed so form functions continue safely without collection. Review this guide whenever a provider, event contract, host, consent behavior or form workflow changes.
 
 References: [Google consent implementation](https://developers.google.com/tag-platform/security/guides/consent), [GA4 recommended lead events](https://developers.google.com/analytics/devguides/collection/ga4/reference/events#generate_lead), [Google PII guidance](https://support.google.com/analytics/answer/6366371). This guide describes the implementation, not a legal compliance certification.

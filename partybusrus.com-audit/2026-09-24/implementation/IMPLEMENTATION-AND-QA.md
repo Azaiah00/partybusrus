@@ -9,10 +9,10 @@
 - Fixed canonical URLs, social URLs, internal links, sitemap URLs, supported schema types and crawl discovery. All existing content URLs are retained, with historical aliases preserved.
 - Replaced JavaScript-only discovery links with native links. Removed unverified rating markup, fixed availability claims, fabricated-looking video controls, response-time promises and contradictory booking policies.
 - Corrected capacity/safety guidance, stale venue examples, misleading photo captions and unsupported testimonial/trip claims. Existing real photographs are reused; they do not establish specific vehicle identity, capacity or current amenities.
-- Consolidated analytics into one consent-aware GA4 implementation. No account ID was invented. The shipping configuration is empty, so external analytics collection is off.
+- Consolidated analytics into one consent-aware GA4 implementation. The owner authorized and completed account creation; the actual website stream ID is verified and configured. Enhanced Measurement and ad personalization are off, eleven event-scoped reporting dimensions are saved, and preview hosts cannot collect. Production release and event receipt remain pending.
 - Made the quote form work as a three-step enhancement to a native form. Vehicle, event and city preferences carry through; contact details and notes are not saved as a draft. Basic trip choices use short-lived tab session storage.
 - Preserved FormSubmit’s native CAPTCHA and autoresponse flow. Added validation, offline feedback, duplicate-attempt protection and safe source fields. Form attempts and guarded provider returns are diagnostics, not accepted leads.
-- Improved cache behavior, added missing image dimensions, used existing WebP alternatives and retired heavy animation/tracking scaffolding. The service worker preserves real errors and avoids caching forms or HTML.
+- Improved cache behavior, added missing image dimensions, used existing WebP alternatives and retired heavy animation/tracking scaffolding. The service worker preserves real errors and avoids caching forms or HTML. Version 10 also bypasses the activation/rollback configuration and clears the previous cache; the configuration response is marked no-store.
 
 ## Verification
 
@@ -22,7 +22,8 @@
 | Markup and JavaScript compilation | 95 pages; seven external scripts; 0 failures, 0 warnings | `markup-qa.json` |
 | Local HTTP pages, assets, redirects and missing-page behavior | 173 checks passed, including 95 pages and 65 distinct assets | `http-qa.json` |
 | Quote behavior | 14 tests passed | `scripts/test-quote.mjs`; `../tracking/QUOTE-INTEGRATION-QA.md` |
-| Analytics behavior | 14 tests passed | `scripts/test-analytics.mjs` |
+| Analytics behavior | 15 tests passed, including the actual shipping configuration in a network-free harness | `scripts/test-analytics.mjs` |
+| Analytics cache regression | Three tests passed: previous-cache cleanup, configuration bypass and unchanged public-asset caching | `scripts/test-service-worker.mjs` |
 | Service worker and fonts | All nine recorded checks passed | `sw-font-qa.json` |
 | Browser accessibility and layout | 27 page/viewport combinations; 0 reported automated violations after fixes | `browser-qa.json` |
 | Hosted preview | 92 linked pages, nine query-preserving redirects and ten mobile layouts passed; menus and journal keyboard navigation verified | `hosted-preview-qa.json` |
@@ -37,7 +38,7 @@ Automated accessibility results include incomplete contrast checks on images/com
 ## Required external completion
 
 1. **Release review:** GitHub publishing access was verified with network access on September 24. The earlier restricted-environment authentication result did not establish that the saved login was invalid. The changes are in draft pull request #1 and the Vercel preview build succeeded; production has not been updated. The owner signed in and the authenticated browser verified all 92 linked pages, nine redirect cases and ten mobile layouts. Raw unauthenticated requests still reach the expected preview protection. Check the deployment preview in the existing Vercel project, then repeat production URL and form checks after the approved release.
-2. **GA4 and Search Console:** provide the business-owned GA4 measurement ID and appropriate account access. Follow `site/ANALYTICS-SETUP.md`, verify consent behavior and Realtime/DebugView receipt, and review automatic enhanced measurement. Search Console is needed to measure organic performance and inspect indexing.
+2. **GA4 receipt and Search Console:** the owner-authorized GA4 property and website stream are created, the real Measurement ID is configured and eleven reporting dimensions are saved. Follow `site/ANALYTICS-SETUP.md` to verify production consent behavior and Realtime/DebugView receipt after release. This new property has no historical data. Search Console is still needed to measure organic performance and inspect indexing.
 3. **Lead delivery and attribution:** confirm the FormSubmit recipient and a real delivered inquiry/autoresponse. Browser click events cannot establish completed calls or delivered emails. Completed-call attribution needs a verified call-tracking integration; accepted leads and bookings need a provider/server/CRM receipt path.
 4. **Business proof:** confirm approved vehicle capacities/features, booking terms and review sources. Contradictory policies now defer to the written quote and booking agreement. No external business listings or sibling-site contact details were changed without those facts.
 

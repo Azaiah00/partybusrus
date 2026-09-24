@@ -1,22 +1,23 @@
-✔ shipping config is empty: no collector, queues or prompt; local quote source is useful (6.5498ms)
-✔ valid production ID stays fully off until affirmative consent (2.4907ms)
-✔ repeated consent and duplicate script include do not duplicate loader/page view (8.6732ms)
-✔ preview and local hosts never load collectors, even with consent (3.9228ms)
-✔ invalid IDs and placeholder/test IDs never collect (12.787ms)
-✔ source persists across internal navigation, never forwards raw URLs or PII (6.0005ms)
-✔ consent denial and withdrawal clear source/GA cookies and stop all later events (4.6017ms)
-✔ withdrawal in another tab disables this tab; stale/deleted consent does not enable (2.9423ms)
-✔ malformed, expired and future consent remain off; malformed source is safely replaced (8.7794ms)
-✔ expired consent cleans old analytics cookies and previously saved provenance (2.2715ms)
-✔ blocked storage never breaks page, consent or safe in-memory source (1.8226ms)
-✔ event allowlist excludes success claims and PII; accepted params remain useful (2.5575ms)
-✔ delegated contact links work for nested and dynamically-added targets, never expose href (2.5959ms)
-✔ direct thank-you visits emit no lead or provider-return claims (1.8223ms)
-ℹ tests 14
+✔ empty rollback configuration has no collector, queue or prompt; local quote source is useful (3.4307ms)
+✔ shipping configuration uses the verified stream only after consent and supports withdrawal (1.8697ms)
+✔ valid production ID stays fully off until affirmative consent (1.0151ms)
+✔ repeated consent and duplicate script include do not duplicate loader/page view (3.9221ms)
+✔ preview and local hosts never load collectors, even with consent (4.1153ms)
+✔ invalid IDs and placeholder/test IDs never collect (6.6355ms)
+✔ source persists across internal navigation, never forwards raw URLs or PII (1.6534ms)
+✔ consent denial and withdrawal clear source/GA cookies and stop all later events (4.1508ms)
+✔ withdrawal in another tab disables this tab; stale/deleted consent does not enable (1.7775ms)
+✔ malformed, expired and future consent remain off; malformed source is safely replaced (4.9009ms)
+✔ expired consent cleans old analytics cookies and previously saved provenance (0.9915ms)
+✔ blocked storage never breaks page, consent or safe in-memory source (1.4412ms)
+✔ event allowlist excludes success claims and PII; accepted params remain useful (1.368ms)
+✔ delegated contact links work for nested and dynamically-added targets, never expose href (2.1814ms)
+✔ direct thank-you visits emit no lead or provider-return claims (1.7339ms)
+ℹ tests 15
 ℹ suites 0
-ℹ pass 14
+ℹ pass 15
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 83.13
+ℹ duration_ms 53.8723

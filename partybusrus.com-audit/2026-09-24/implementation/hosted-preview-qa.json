@@ -241,6 +241,6 @@
     "Loaded-image checks do not establish that every offscreen lazy image downloaded.",
     "Hosted robots.txt navigation was blocked by the browser client; no workaround was attempted. The live raw sitemap/config-file checks were not completed. Local static checks cover those files.",
     "No hosted axe injection, field Core Web Vitals, rankings, GA receipt, CAPTCHA completion, mailbox delivery or autoresponse receipt was established.",
-    "Automatic approval review blocked access to Google Analytics. A public Measurement ID or explicit account-access authorization is required."
+    "At the time of this hosted crawl, Analytics access was pending. Later owner authorization resolved that blocker; the verified stream is now configured. Production event receipt is still unverified; see ANALYTICS-SETUP.md."
   ]
 }

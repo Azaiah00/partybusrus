@@ -1,6 +1,6 @@
 // Party Bus R Us: cache public static files only. Forms and HTML stay on the network.
 const CACHE_PREFIX = 'pbru-';
-const CACHE_VERSION = 'pbru-v9-2026-09-24-refined';
+const CACHE_VERSION = 'pbru-v10-2026-09-24-analytics';
 const STATIC_ASSETS = [
   '/manifest.json', '/apple-touch-icon.png', '/icon-192.png', '/icon-512.png',
   '/favicon-32.png', '/assets/fonts/fonts.css'
@@ -8,6 +8,8 @@ const STATIC_ASSETS = [
 
 function isPublicAsset(request, url) {
   if (request.method !== 'GET' || url.origin !== self.location.origin) return false;
+  // Always read current activation/rollback settings, including versioned URLs.
+  if (url.pathname === '/assets/analytics-config.js') return false;
   if (url.pathname === '/api' || url.pathname.startsWith('/api/')) return false;
   if (request.mode === 'navigate' || request.headers.get('authorization') || request.cache === 'no-store') return false;
   if ([...url.searchParams.keys()].some(key => key !== 'v')) return false;

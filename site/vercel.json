@@ -96,6 +96,15 @@
   ],
   "headers": [
     {
+      "source": "/assets/analytics-config.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
       "source": "/(.*)\\.(jpg|jpeg|png|webp|avif|svg|ico|gif)",
       "headers": [
         {
