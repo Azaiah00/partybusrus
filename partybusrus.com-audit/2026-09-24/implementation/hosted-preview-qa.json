@@ -1,0 +1,246 @@
+{
+  "date": "2026-09-24",
+  "scope": "Authenticated Vercel preview browser checks after owner sign-in; not production traffic, real provider delivery, or a full accessibility certification",
+  "commit": "4b28f6a3049ee852dc6985d3d79cbf82f71825f5",
+  "preview": "https://partybusrus-git-codex-seo-design-4e39ef-freds-projects-a353dcff.vercel.app",
+  "method": "Native browser navigation and read-only rendered DOM inspection. No session credentials extracted, no protection disabled, no contact links triggered, no form submitted.",
+  "passed": true,
+  "page_count": 92,
+  "paths": [
+    "/",
+    "/about",
+    "/blog",
+    "/blog/30th-birthday-party-bus-ideas-dc",
+    "/blog/bachelorette-party-bus-dc-planning-guide",
+    "/blog/corporate-shuttle-tysons-to-dc",
+    "/blog/dc-brewery-crawl-by-bus",
+    "/blog/how-much-does-a-party-bus-cost-dmv",
+    "/blog/how-to-pick-a-party-bus-operator-in-the-dmv",
+    "/blog/loudoun-winery-tour-bus-routes",
+    "/blog/prom-party-bus-safety-checklist",
+    "/blog/quinceanera-party-bus-northern-virginia",
+    "/blog/wedding-shuttle-vs-trolley-vs-party-bus",
+    "/cities",
+    "/cities/adams-morgan-dc",
+    "/cities/alexandria-va",
+    "/cities/annapolis-md",
+    "/cities/arlington-va",
+    "/cities/ashburn-va",
+    "/cities/bethesda-md",
+    "/cities/bowie-md",
+    "/cities/burke-va",
+    "/cities/capitol-hill-dc",
+    "/cities/college-park-md",
+    "/cities/columbia-md",
+    "/cities/dupont-circle-dc",
+    "/cities/fairfax-va",
+    "/cities/falls-church-va",
+    "/cities/foggy-bottom-dc",
+    "/cities/frederick-md",
+    "/cities/gaithersburg-md",
+    "/cities/georgetown-dc",
+    "/cities/germantown-md",
+    "/cities/h-street-dc",
+    "/cities/herndon-va",
+    "/cities/leesburg-va",
+    "/cities/manassas-va",
+    "/cities/maryland",
+    "/cities/mclean-va",
+    "/cities/national-harbor-md",
+    "/cities/navy-yard-dc",
+    "/cities/noma-dc",
+    "/cities/northern-virginia",
+    "/cities/potomac-md",
+    "/cities/reston-va",
+    "/cities/rockville-md",
+    "/cities/silver-spring-md",
+    "/cities/springfield-va",
+    "/cities/sterling-va",
+    "/cities/the-wharf-dc",
+    "/cities/tysons-va",
+    "/cities/u-street-dc",
+    "/cities/vienna-va",
+    "/cities/washington-dc",
+    "/contact",
+    "/es",
+    "/faq",
+    "/fleet",
+    "/fleet/bus-20pax",
+    "/fleet/bus-24pax",
+    "/fleet/bus-25pax",
+    "/fleet/bus-28pax",
+    "/fleet/bus-30pax",
+    "/fleet/bus-32pax",
+    "/fleet/bus-35pax",
+    "/gallery",
+    "/pricing",
+    "/privacy",
+    "/quote",
+    "/reviews",
+    "/services",
+    "/services/airport-shuttle",
+    "/services/anniversaries",
+    "/services/bachelorette",
+    "/services/birthdays",
+    "/services/brewery-crawls",
+    "/services/casino-trips",
+    "/services/college-greek",
+    "/services/concerts-sports",
+    "/services/corporate",
+    "/services/dc-monument-tours",
+    "/services/funerals",
+    "/services/holiday-light-tours",
+    "/services/nye-packages",
+    "/services/out-of-town",
+    "/services/prom",
+    "/services/quinceaneras",
+    "/services/sweet-16",
+    "/services/weddings",
+    "/services/winery-tours",
+    "/terms",
+    "/weddings-portfolio"
+  ],
+  "checks": {
+    "single_h1": 92,
+    "canonical_matches_production_route": 92,
+    "stylesheets_loaded": 92,
+    "horizontal_overflow_cases": 0,
+    "broken_loaded_images": 0,
+    "final_console_errors_or_warnings": 0
+  },
+  "rechecks": "Four Maryland pages were rechecked after initial snapshots preceded stylesheet completion. All finished layouts passed.",
+  "redirects": [
+    {
+      "from": "/fleet/bus-40pax",
+      "to": "/fleet/bus-35pax",
+      "query_preserved": "?qa_preserve=1",
+      "passed": true
+    },
+    {
+      "from": "/fleet/bus-15pax.html",
+      "to": "/fleet/bus-20pax",
+      "query_preserved": "?qa_preserve=1",
+      "passed": true
+    },
+    {
+      "from": "/cities/tysons-mclean-va",
+      "to": "/cities/tysons-va",
+      "query_preserved": "?qa_preserve=1",
+      "passed": true
+    },
+    {
+      "from": "/v2/cities/tysons-mclean-va.html",
+      "to": "/cities/tysons-va",
+      "query_preserved": "?qa_preserve=1",
+      "passed": true
+    },
+    {
+      "from": "/v2/services/weddings",
+      "to": "/services/weddings",
+      "query_preserved": "?qa_preserve=1",
+      "passed": true
+    },
+    {
+      "from": "/services.html",
+      "to": "/services",
+      "query_preserved": "?qa_preserve=1",
+      "passed": true
+    },
+    {
+      "from": "/cities.html",
+      "to": "/cities",
+      "query_preserved": "?qa_preserve=1",
+      "passed": true
+    },
+    {
+      "from": "/blog/index.html",
+      "to": "/blog",
+      "query_preserved": "?qa_preserve=1",
+      "passed": true
+    },
+    {
+      "from": "/fleet/",
+      "to": "/fleet",
+      "query_preserved": "?qa_preserve=1",
+      "passed": true
+    }
+  ],
+  "mobile": [
+    {
+      "path": "/",
+      "width": 390,
+      "document_width": 375,
+      "passed": true
+    },
+    {
+      "path": "/fleet",
+      "width": 390,
+      "document_width": 375,
+      "passed": true
+    },
+    {
+      "path": "/services/weddings",
+      "width": 390,
+      "document_width": 375,
+      "passed": true
+    },
+    {
+      "path": "/cities/arlington-va",
+      "width": 390,
+      "document_width": 375,
+      "passed": true
+    },
+    {
+      "path": "/blog",
+      "width": 390,
+      "document_width": 375,
+      "passed": true
+    },
+    {
+      "path": "/quote",
+      "width": 390,
+      "document_width": 375,
+      "passed": true
+    },
+    {
+      "path": "/es",
+      "width": 390,
+      "document_width": 375,
+      "passed": true
+    },
+    {
+      "path": "/fleet",
+      "width": 320,
+      "document_width": 305,
+      "passed": true
+    },
+    {
+      "path": "/blog",
+      "width": 320,
+      "document_width": 305,
+      "passed": true
+    },
+    {
+      "path": "/quote",
+      "width": 320,
+      "document_width": 305,
+      "passed": true
+    }
+  ],
+  "interactions": {
+    "homepage_mobile_menu": "Open focuses close control; Escape closes and restores opener focus",
+    "shared_mobile_menu": "Same behavior verified on fleet at 320px",
+    "journal_keyboard": "Enter on bachelorette article link opens expected article and H1"
+  },
+  "special_pages": {
+    "missing_page": "Custom 404 experience rendered at deliberately missing URL with noindex, follow",
+    "thank_you": "Direct visit renders neutral planning copy and no delivery/reservation promise, with noindex, follow"
+  },
+  "limits": [
+    "Browser checks do not expose underlying HTTP status codes; local HTTP checks are separate evidence.",
+    "Loaded-image checks do not establish that every offscreen lazy image downloaded.",
+    "Hosted robots.txt navigation was blocked by the browser client; no workaround was attempted. The live raw sitemap/config-file checks were not completed. Local static checks cover those files.",
+    "No hosted axe injection, field Core Web Vitals, rankings, GA receipt, CAPTCHA completion, mailbox delivery or autoresponse receipt was established.",
+    "Automatic approval review blocked access to Google Analytics. A public Measurement ID or explicit account-access authorization is required."
+  ]
+}

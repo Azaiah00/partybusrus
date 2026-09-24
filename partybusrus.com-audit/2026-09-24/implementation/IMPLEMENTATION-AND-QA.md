@@ -1,6 +1,6 @@
 # Implementation and QA — September 24, 2026
 
-**Status: implemented and tested locally; deployed to a protected Vercel preview. Production unchanged.** The original live-site audit remains the baseline. The findings below describe the revised files in `site/`, not production results. [Draft pull request #1](https://github.com/Azaiah00/partybusrus/pull/1) has a successful Vercel build. Hosted QA is pending the account owner signing in; see `REVIEW-RELEASE.md`.
+**Status: implemented and tested locally; deployed to a protected Vercel preview. Production unchanged.** The original live-site audit remains the baseline. The findings below describe the revised files in `site/`, not production results. [Draft pull request #1](https://github.com/Azaiah00/partybusrus/pull/1) has a successful Vercel build. The account owner signed in and hosted browser QA passed; see `hosted-preview-qa.json` and `REVIEW-RELEASE.md`.
 
 ## What changed
 
@@ -25,17 +25,18 @@
 | Analytics behavior | 14 tests passed | `scripts/test-analytics.mjs` |
 | Service worker and fonts | All nine recorded checks passed | `sw-font-qa.json` |
 | Browser accessibility and layout | 27 page/viewport combinations; 0 reported automated violations after fixes | `browser-qa.json` |
-| Browser console | No errors or warnings returned in the final check | Browser tool observation |
+| Hosted preview | 92 linked pages, nine query-preserving redirects and ten mobile layouts passed; menus and journal keyboard navigation verified | `hosted-preview-qa.json` |
+| Browser console | No errors or warnings returned in the final local and hosted checks | Browser tool observation |
 
 Browser checks covered 320, 390, 768 and 1440 pixel widths across representative templates. Screenshots were visually inspected. Homepage and shared mobile menus opened, closed and returned focus correctly; Escape was verified on the homepage. Main mobile quote buttons were visible above the fixed contact bar. The quote page showed the selected Imperial 35 preference; empty-step validation stayed on step one and focused the date field.
 
 The browser security policy blocked the next interactive quote action. No workaround was attempted and no live inquiry was submitted. Remaining quote paths were tested with the automated harness against the actual form markup. This does **not** verify CAPTCHA completion, email delivery, autoresponse receipt or production GA4 receipt.
 
-Automated accessibility results include incomplete contrast checks on images/complex backgrounds; they are recorded in the browser evidence. The results are not a blanket WCAG certification. No production Core Web Vitals or ranking improvement is claimed.
+Automated accessibility results include incomplete contrast checks on images/complex backgrounds; they are recorded in the browser evidence. The results are not a blanket WCAG certification. No production Core Web Vitals or ranking improvement is claimed. Hosted verification inspected rendered pages after authenticated navigation; it does not independently establish HTTP status codes or every offscreen lazy image. A direct hosted robots.txt navigation was blocked by the browser client; the raw sitemap/config-file checks were not completed, and no workaround was attempted. Local static and HTTP checks remain separate evidence.
 
 ## Required external completion
 
-1. **Release review:** GitHub publishing access was verified with network access on September 24. The earlier restricted-environment authentication result did not establish that the saved login was invalid. The changes are in draft pull request #1 and the Vercel preview build succeeded; production has not been updated. Preview requests reach an authentication gate, so hosted QA is pending sign-in. Check the deployment preview in the existing Vercel project, then repeat production URL and form checks after the approved release.
+1. **Release review:** GitHub publishing access was verified with network access on September 24. The earlier restricted-environment authentication result did not establish that the saved login was invalid. The changes are in draft pull request #1 and the Vercel preview build succeeded; production has not been updated. The owner signed in and the authenticated browser verified all 92 linked pages, nine redirect cases and ten mobile layouts. Raw unauthenticated requests still reach the expected preview protection. Check the deployment preview in the existing Vercel project, then repeat production URL and form checks after the approved release.
 2. **GA4 and Search Console:** provide the business-owned GA4 measurement ID and appropriate account access. Follow `site/ANALYTICS-SETUP.md`, verify consent behavior and Realtime/DebugView receipt, and review automatic enhanced measurement. Search Console is needed to measure organic performance and inspect indexing.
 3. **Lead delivery and attribution:** confirm the FormSubmit recipient and a real delivered inquiry/autoresponse. Browser click events cannot establish completed calls or delivered emails. Completed-call attribution needs a verified call-tracking integration; accepted leads and bookings need a provider/server/CRM receipt path.
 4. **Business proof:** confirm approved vehicle capacities/features, booking terms and review sources. Contradictory policies now defer to the written quote and booking agreement. No external business listings or sibling-site contact details were changed without those facts.
