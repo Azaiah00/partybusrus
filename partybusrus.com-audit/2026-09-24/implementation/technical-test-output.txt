@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "page_count": 95,
+  "indexable_pages": 92,
+  "failure_count": 0,
+  "warning_count": 0,
+  "failures": []
+}

@@ -1,0 +1,22 @@
+✔ shipping config is empty: no collector, queues or prompt; local quote source is useful (6.5498ms)
+✔ valid production ID stays fully off until affirmative consent (2.4907ms)
+✔ repeated consent and duplicate script include do not duplicate loader/page view (8.6732ms)
+✔ preview and local hosts never load collectors, even with consent (3.9228ms)
+✔ invalid IDs and placeholder/test IDs never collect (12.787ms)
+✔ source persists across internal navigation, never forwards raw URLs or PII (6.0005ms)
+✔ consent denial and withdrawal clear source/GA cookies and stop all later events (4.6017ms)
+✔ withdrawal in another tab disables this tab; stale/deleted consent does not enable (2.9423ms)
+✔ malformed, expired and future consent remain off; malformed source is safely replaced (8.7794ms)
+✔ expired consent cleans old analytics cookies and previously saved provenance (2.2715ms)
+✔ blocked storage never breaks page, consent or safe in-memory source (1.8226ms)
+✔ event allowlist excludes success claims and PII; accepted params remain useful (2.5575ms)
+✔ delegated contact links work for nested and dynamically-added targets, never expose href (2.5959ms)
+✔ direct thank-you visits emit no lead or provider-return claims (1.8223ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 83.13

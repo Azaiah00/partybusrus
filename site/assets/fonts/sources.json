@@ -1,0 +1,53 @@
+{
+  "css_source": "https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400..700&display=swap",
+  "subsets": [
+    "latin",
+    "latin-ext"
+  ],
+  "display": "swap",
+  "faces": 4,
+  "sources": [
+    {
+      "family": "Anton",
+      "subset": "latin-ext",
+      "source": "https://fonts.gstatic.com/s/anton/v27/1Ptgg87LROyAm3K9-C8QSw.woff2",
+      "filename": "anton-latin-ext-0d17b7880f38.woff2",
+      "bytes": 31356,
+      "sha256": "0d17b7880f389deeb6663a52fa4eadc6d9116bdda725f0aa1f3d404fbb7d3d59"
+    },
+    {
+      "family": "Anton",
+      "subset": "latin",
+      "source": "https://fonts.gstatic.com/s/anton/v27/1Ptgg87LROyAm3Kz-C8.woff2",
+      "filename": "anton-latin-d0fa07ff63dd.woff2",
+      "bytes": 18612,
+      "sha256": "d0fa07ff63dd60cbc0e2f58e29c802dca2a5ae0276c999f59c6111ab7bbaec3b"
+    },
+    {
+      "family": "Inter",
+      "subset": "latin-ext",
+      "source": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2",
+      "filename": "inter-latin-ext-34b9c504cab7.woff2",
+      "bytes": 85068,
+      "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956"
+    },
+    {
+      "family": "Inter",
+      "subset": "latin",
+      "source": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+      "filename": "inter-latin-3100e775e861.woff2",
+      "bytes": 48256,
+      "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    },
+    {
+      "family": "anton",
+      "license_source": "https://raw.githubusercontent.com/google/fonts/main/ofl/anton/OFL.txt",
+      "license_file": "anton-OFL.txt"
+    },
+    {
+      "family": "inter",
+      "license_source": "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/OFL.txt",
+      "license_file": "inter-OFL.txt"
+    }
+  ]
+}

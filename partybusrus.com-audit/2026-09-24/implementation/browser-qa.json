@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-24",
+  "scope": "Local browser preview; representative templates, not a full accessibility certification",
+  "tool": "Codex browser with local development axe-core helper",
+  "final_checks": 27,
+  "automated_violations": 0,
+  "horizontal_overflow_cases": 0,
+  "broken_loaded_image_cases": 0,
+  "final_console_errors_or_warnings": 0,
+  "columns": ["path", "viewport_width", "automated_violations", "incomplete_contrast_nodes"],
+  "results": [
+    ["/",390,0,35],["/fleet",390,0,41],["/fleet/bus-35pax",390,0,10],
+    ["/services/weddings",390,0,7],["/cities/arlington-va",390,0,27],
+    ["/blog",390,0,51],["/blog/prom-party-bus-safety-checklist",390,0,6],
+    ["/es",390,0,38],["/cities/washington-dc",390,0,44],
+    ["/pricing",390,0,8],["/faq",390,0,7],["/contact",390,0,8],
+    ["/privacy",390,0,6],["/reviews",390,0,8],["/gallery",390,0,8],
+    ["/",1440,0,35],["/fleet",1440,0,43],["/services/weddings",1440,0,8],
+    ["/cities/washington-dc",1440,0,43],["/blog",1440,0,53],["/es",1440,0,41],
+    ["/fleet",320,0,41],["/services/weddings",320,0,6],["/cities/washington-dc",320,0,48],
+    ["/fleet",768,0,41],["/services/weddings",768,0,6],["/cities/washington-dc",768,0,43]
+  ],
+  "manual_checks": [
+    "Homepage menu at320: opens, focus moves to close, Escape closes and focus returns",
+    "Shared menu at768: opens and closes with focus return",
+    "Homepage primary CTA visible above mobile contact bar at320 and390",
+    "City/service hero quote links carry correct preference and sit above fixed bar at390",
+    "Desktop navigation clipping corrected and inspected at1440",
+    "Quote at390 shows bus preference, empty continue stays on step1 and focuses date"
+  ],
+  "limits": [
+    "Browser security policy blocked the subsequent quote Tomorrow button action; no workaround or live submission",
+    "Automated incomplete contrast nodes require manual assessment, especially photographic backgrounds",
+    "Screenshots inspected inline; this file does not claim saved screenshot artifacts",
+    "No production delivery, GA4 receipt, field performance or ranking verification"
+  ]
+}

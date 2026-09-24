@@ -1,0 +1,13 @@
+{
+  "date": "2026-09-24",
+  "scope": "Additional local journal QA after making each article card a single native link target",
+  "checks": {
+    "card_pointer_navigation": "Passed: first article card opened the bachelorette guide",
+    "link_keyboard_navigation": "Passed: Enter opened the same guide and its expected H1",
+    "journal_card_count": 10,
+    "mobile_viewport": { "width": 390, "height": 844, "document_width": 375, "horizontal_overflow": false },
+    "automated_accessibility": { "violations": [], "passes": 20, "incomplete": [{ "id": "color-contrast", "nodes": 52 }, { "id": "link-in-text-block", "nodes": 1 }] },
+    "desktop_visual_review": "Passed; normal viewport restored after responsive inspection"
+  },
+  "limitations": "Incomplete automated rules require human assessment. No form was submitted and no call, text, email or WhatsApp action was triggered."
+}

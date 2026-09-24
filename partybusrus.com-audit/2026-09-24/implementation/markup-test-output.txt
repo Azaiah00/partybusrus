@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "pages": 95,
+  "external_scripts_compiled": 7,
+  "failure_count": 0,
+  "warning_count": 0,
+  "failures": []
+}

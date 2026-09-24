@@ -5,7 +5,7 @@
    Afterglow language: Anton poster headlines, neon magenta/violet/cyan
    palette, pill buttons, dark rounded cards, editorial spacing.
    ===================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 
 /* Production cleanup: design-review badges must never be customer-facing. */
 .flag,.mockup-flag,.ag-flag{display:none!important}

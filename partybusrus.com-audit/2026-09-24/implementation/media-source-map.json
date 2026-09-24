@@ -1,0 +1,370 @@
+[
+  {
+    "src": "/IMG_0894-1920.webp",
+    "uses": [
+      {
+        "page": "site/index.html",
+        "alt": "Party bus at night in the DMV"
+      }
+    ],
+    "width": 1920,
+    "height": 1440
+  },
+  {
+    "src": "/IMG_0875.webp",
+    "uses": [
+      {
+        "page": "site/index.html",
+        "alt": "Star ceiling interior"
+      },
+      {
+        "page": "site/index.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-24pax.html",
+        "alt": "Interior photograph shown for the Diamond 24 fleet option"
+      }
+    ],
+    "width": 1200,
+    "height": 1600
+  },
+  {
+    "src": "/IMG_0888.webp",
+    "uses": [
+      {
+        "page": "site/index.html",
+        "alt": "Dance pole"
+      },
+      {
+        "page": "site/index.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-30pax.html",
+        "alt": "Interior photograph shown for the Signature 30 fleet option"
+      }
+    ],
+    "width": 1200,
+    "height": 1600
+  },
+  {
+    "src": "/IMG_0896.webp",
+    "uses": [
+      {
+        "page": "site/index.html",
+        "alt": "Club-grade LED"
+      },
+      {
+        "page": "site/index.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-28pax.html",
+        "alt": "Interior photograph shown for the Cavalier 28 fleet option"
+      }
+    ],
+    "width": 1200,
+    "height": 1600
+  },
+  {
+    "src": "/IMG_0904.webp",
+    "uses": [
+      {
+        "page": "site/index.html",
+        "alt": "Captain seating"
+      },
+      {
+        "page": "site/index.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-32pax.html",
+        "alt": "Interior photograph shown for the Empire 32 fleet option"
+      }
+    ],
+    "width": 1200,
+    "height": 1600
+  },
+  {
+    "src": "/IMG_0872.webp",
+    "uses": [
+      {
+        "page": "site/index.html",
+        "alt": "Wet bar"
+      },
+      {
+        "page": "site/index.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-20pax.html",
+        "alt": "Interior photograph shown for the Midnight 20 fleet option"
+      }
+    ],
+    "width": 1200,
+    "height": 900
+  },
+  {
+    "src": "/IMG_0908.webp",
+    "uses": [
+      {
+        "page": "site/index.html",
+        "alt": "Showroom"
+      },
+      {
+        "page": "site/index.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-35pax.html",
+        "alt": "Interior photograph shown for the Imperial 35 fleet option"
+      }
+    ],
+    "width": 1200,
+    "height": 900
+  },
+  {
+    "src": "/IMG_0883.webp",
+    "uses": [
+      {
+        "page": "site/index.html",
+        "alt": "Blue LED"
+      },
+      {
+        "page": "site/index.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-25pax.html",
+        "alt": "Interior photograph shown for the Bridal 25 fleet option"
+      }
+    ],
+    "width": 1200,
+    "height": 900
+  },
+  {
+    "src": "/IMG_0909-1920.webp",
+    "uses": [
+      {
+        "page": "site/index.html",
+        "alt": "Party bus night"
+      }
+    ],
+    "width": 1920,
+    "height": 1440
+  },
+  {
+    "src": "/IMG_0157.JPG",
+    "uses": [
+      {
+        "page": "site/gallery.html",
+        "alt": "Signature 30 limo bus interior with color-shifting LED ceiling"
+      }
+    ],
+    "width": 1200,
+    "height": 1600
+  },
+  {
+    "src": "/IMG_8127.JPG",
+    "uses": [
+      {
+        "page": "site/gallery.html",
+        "alt": "Midnight 20 party bus with deep blue LED preset"
+      }
+    ],
+    "width": 768,
+    "height": 1024
+  },
+  {
+    "src": "/IMG_0154.JPG",
+    "uses": [
+      {
+        "page": "site/gallery.html",
+        "alt": "Bridal 25 with diamond-quilted leather and wood floor"
+      }
+    ],
+    "width": 1080,
+    "height": 1921
+  },
+  {
+    "src": "/IMG_8575.JPG",
+    "uses": [
+      {
+        "page": "site/gallery.html",
+        "alt": "Wedding shuttle pickup with full bridal party"
+      }
+    ],
+    "width": 1920,
+    "height": 1440
+  },
+  {
+    "src": "/IMG_8576.JPG",
+    "uses": [
+      {
+        "page": "site/gallery.html",
+        "alt": "Luxury party bus exterior at sunset"
+      }
+    ],
+    "width": 1512,
+    "height": 2016
+  },
+  {
+    "src": "/IMG_8577.JPG",
+    "uses": [
+      {
+        "page": "site/gallery.html",
+        "alt": "Group boarding a Party Bus R Us limo bus"
+      }
+    ],
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "src": "/PHOTO-2026-05-18-20-17-02.jpg",
+    "uses": [
+      {
+        "page": "site/gallery.html",
+        "alt": "Royal purple LED interior with water-light ceiling"
+      }
+    ],
+    "width": 1200,
+    "height": 1600
+  },
+  {
+    "src": "/PHOTO-2026-05-18-20-17-3.jpg",
+    "uses": [
+      {
+        "page": "site/gallery.html",
+        "alt": "Crimson red LED interior with captain chair"
+      }
+    ],
+    "width": 1200,
+    "height": 1600
+  },
+  {
+    "src": "/PHOTO-2026-05-18-20-17-5.jpg",
+    "uses": [
+      {
+        "page": "site/gallery.html",
+        "alt": "Cool blue LED interior with captain chair"
+      }
+    ],
+    "width": 1200,
+    "height": 1600
+  },
+  {
+    "src": "/PHOTO-2026-05-18-20-17-11.jpg",
+    "uses": [
+      {
+        "page": "site/gallery.html",
+        "alt": "Emerald green LED interior with wood table"
+      }
+    ],
+    "width": 1600,
+    "height": 1200
+  },
+  {
+    "src": "/IMG_2366.jpeg",
+    "uses": [
+      {
+        "page": "site/gallery.html",
+        "alt": "Diamond 24 with star-ceiling fiber optic and mirrored bar"
+      }
+    ],
+    "width": 1440,
+    "height": 1920
+  },
+  {
+    "src": "/IMG_3095.jpeg",
+    "uses": [
+      {
+        "page": "site/gallery.html",
+        "alt": "Cavalier 28 executive bus interior with two-tone grey leather"
+      }
+    ],
+    "width": 1440,
+    "height": 1920
+  },
+  {
+    "src": "/IMG_8576-768.webp",
+    "uses": [
+      {
+        "page": "site/gallery.html",
+        "alt": "CSS background"
+      }
+    ],
+    "width": 768,
+    "height": 1024
+  },
+  {
+    "src": "/IMG_0894.webp",
+    "uses": [
+      {
+        "page": "site/fleet/bus-20pax.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-24pax.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-25pax.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-28pax.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-30pax.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-32pax.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-35pax.html",
+        "alt": "CSS background"
+      }
+    ],
+    "width": 1600,
+    "height": 1200
+  },
+  {
+    "src": "/IMG_0909-768.webp",
+    "uses": [
+      {
+        "page": "site/fleet/bus-20pax.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-24pax.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-25pax.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-28pax.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-30pax.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-32pax.html",
+        "alt": "CSS background"
+      },
+      {
+        "page": "site/fleet/bus-35pax.html",
+        "alt": "CSS background"
+      }
+    ],
+    "width": 768,
+    "height": 576
+  }
+]

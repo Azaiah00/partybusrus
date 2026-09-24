@@ -1,0 +1,9 @@
+{
+  "scope": "Local read-only preview HTTP; does not submit forms or verify Vercel production routing",
+  "generated_at": "2026-09-24T18:04:53.861Z",
+  "passed": true,
+  "check_count": 173,
+  "page_count": 95,
+  "asset_count": 65,
+  "failures": []
+}

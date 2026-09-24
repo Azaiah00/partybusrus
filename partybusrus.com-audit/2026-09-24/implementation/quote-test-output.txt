@@ -1,0 +1,22 @@
+✔ markup has native provider, required integration IDs and no false success/geolocation code (8.6797ms)
+✔ empty form stays on first step and focuses required date (10.2922ms)
+✔ step navigation validates, announces and focuses step headings (5.6136ms)
+✔ past date and invalid email/phone cannot be submitted (4.7387ms)
+✔ seven vehicle preferences supported; only recognized query selections populate (7.4898ms)
+✔ source copied to hidden fields and contact details never stored in draft (7.8906ms)
+✔ only known area handoffs populate editable pickup and never overwrite existing location (98.4614ms)
+✔ corrupt, expired and future drafts are discarded without breaking form (12.6491ms)
+✔ native valid submission emits one attempt, retains draft, prevents duplicate (4.0314ms)
+✔ offline and honeypot attempts never leave page or create pending return (4.0748ms)
+✔ clear form removes safe draft/pending state, resets validity and recovers submit (2.4217ms)
+✔ blocked storage permits native form submission without false return token (3.4664ms)
+✔ guarded provider return consumes token once and never emits accepted lead (3.1867ms)
+✔ direct, unrelated, stale, future, mismatched and malformed returns stay neutral (10.9365ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 217.5917
