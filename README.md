@@ -2,7 +2,7 @@
 
 Current implementation: September 24, 2026. Static website hosted on Vercel at https://www.partybusrus.com.
 
-The revised site is implemented and tested locally. GitHub publishing access is verified; the changes are being prepared for review on a separate branch. Production has not been updated. Analytics remains off until the real business-owned GA4 ID is configured.
+The revised site is implemented and tested locally. [Draft pull request #1](https://github.com/Azaiah00/partybusrus/pull/1) is open and Vercel has successfully built its protected preview. Hosted QA requires the account owner to sign in. Production has not been updated. Analytics remains off until the real business-owned GA4 ID is configured.
 
 ## Current files
 

@@ -1,6 +1,6 @@
 # Implementation and QA — September 24, 2026
 
-**Status: implemented and tested locally; not deployed.** The original live-site audit remains the baseline. The findings below describe the revised files in `site/`, not production results.
+**Status: implemented and tested locally; deployed to a protected Vercel preview. Production unchanged.** The original live-site audit remains the baseline. The findings below describe the revised files in `site/`, not production results. [Draft pull request #1](https://github.com/Azaiah00/partybusrus/pull/1) has a successful Vercel build. Hosted QA is pending the account owner signing in; see `REVIEW-RELEASE.md`.
 
 ## What changed
 
@@ -35,7 +35,7 @@ Automated accessibility results include incomplete contrast checks on images/com
 
 ## Required external completion
 
-1. **Release review:** GitHub publishing access was verified with network access on September 24. The earlier restricted-environment authentication result did not establish that the saved login was invalid. Changes are being prepared on a separate review branch; production has not been updated. Check the deployment preview in the existing Vercel project, then repeat production URL and form checks after the approved release.
+1. **Release review:** GitHub publishing access was verified with network access on September 24. The earlier restricted-environment authentication result did not establish that the saved login was invalid. The changes are in draft pull request #1 and the Vercel preview build succeeded; production has not been updated. Preview requests reach an authentication gate, so hosted QA is pending sign-in. Check the deployment preview in the existing Vercel project, then repeat production URL and form checks after the approved release.
 2. **GA4 and Search Console:** provide the business-owned GA4 measurement ID and appropriate account access. Follow `site/ANALYTICS-SETUP.md`, verify consent behavior and Realtime/DebugView receipt, and review automatic enhanced measurement. Search Console is needed to measure organic performance and inspect indexing.
 3. **Lead delivery and attribution:** confirm the FormSubmit recipient and a real delivered inquiry/autoresponse. Browser click events cannot establish completed calls or delivered emails. Completed-call attribution needs a verified call-tracking integration; accepted leads and bookings need a provider/server/CRM receipt path.
 4. **Business proof:** confirm approved vehicle capacities/features, booking terms and review sources. Contradictory policies now defer to the written quote and booking agreement. No external business listings or sibling-site contact details were changed without those facts.

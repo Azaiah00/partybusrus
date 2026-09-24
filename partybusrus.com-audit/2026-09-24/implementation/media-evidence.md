@@ -1,6 +1,6 @@
 # Photo-label QA — 24 September 2026
 
-Reviewed 24 distinct local images used by the homepage, gallery and seven fleet pages. Evidence: `media-contact-1.png`, `media-contact-2.png`, and `media-source-map.json` recording current page associations, old alt labels and dimensions. These are inspection thumbnails, not changed production images.
+Reviewed 24 distinct local images used by the homepage, gallery and seven fleet pages. Evidence: `media-contact-1.png`, `media-contact-2.png`, and `media-source-map.json` recording current page associations, old alt labels and dimensions. These are local inspection thumbnails, not changed production images. The contact sheets remain local QA artifacts and are not included in the public review branch; the written findings and source map are included.
 
 ## Corrections made in gallery main content
 

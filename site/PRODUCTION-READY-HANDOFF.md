@@ -1,6 +1,6 @@
 # Current release status — September 24, 2026
 
-The revised website is tested locally and is being prepared for review on a separate GitHub branch. Production has not been updated. GitHub publishing access is verified. The current host is Vercel; earlier Netlify deployment and placeholder tracking instructions are superseded.
+The revised website is tested locally, with [draft pull request #1](https://github.com/Azaiah00/partybusrus/pull/1) open and a successful Vercel preview build. The preview requires Vercel sign-in before hosted QA can continue. Production has not been updated. GitHub publishing access is verified. The current host is Vercel; earlier Netlify deployment and placeholder tracking instructions are superseded.
 
 See the project report at `partybusrus.com-audit/2026-09-24/implementation/IMPLEMENTATION-AND-QA.md` and `ANALYTICS-SETUP.md` for verification scope and remaining requirements.
 
