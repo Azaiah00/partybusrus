@@ -51,11 +51,15 @@ function boot(options = {}) {
     set: value => { cookieWrites.push(value); }
   });
   const location = new URL(options.url || 'https://www.partybusrus.com/');
+  const navigations = [], timers = new Map(); let timerId = 0;
+  location.assign = value => { navigations.push(value); };
   const sessionStorage = options.session || storage();
   const localStorage = options.local || storage();
   const context = {
     document, location, URL, URLSearchParams, console,
     sessionStorage, localStorage,
+    setTimeout: fn => { timers.set(++timerId, fn); return timerId; },
+    clearTimeout: id => { timers.delete(id); },
     PBRU_ANALYTICS_CONFIG: options.config ?? { measurementId: ID },
     addEventListener(name, fn) { windowListeners[name] = fn; }
   };
@@ -63,10 +67,14 @@ function boot(options = {}) {
   vm.createContext(context);
   vm.runInContext(script, context);
   return {
-    context, api: context.PBRUAnalytics, document, elements, sessionStorage, localStorage, cookieWrites,
+    context, api: context.PBRUAnalytics, document, elements, sessionStorage, localStorage, cookieWrites, navigations,
     scripts: () => document.head.children.filter(el => el.tagName === 'SCRIPT'),
     events: () => (context.dataLayer || []).filter(args => args[0] === 'event').map(args => ({ name: args[1], params: args[2] })),
-    click: target => documentListeners.click({ target }),
+    click: (target, overrides = {}) => {
+      const event = { target, button: 0, defaultPrevented: false, preventDefault() { this.defaultPrevented = true; }, ...overrides };
+      documentListeners.click(event); return event;
+    },
+    flushTimers: () => { for (const [id, fn] of [...timers]) { timers.delete(id); fn(); } },
     storageChange: (key, newValue) => windowListeners.storage({ key, newValue }),
     rerun: () => vm.runInContext(script, context)
   };
@@ -249,6 +257,57 @@ test('delegated contact links work for nested and dynamically-added targets, nev
     assert.equal(JSON.stringify(event).includes('private'), false);
   }
   assert.equal(app.events().filter(event => event.name === 'contact_click').length, 4);
+});
+
+function quoteLink(attributes = {}) {
+  const values = { href: '/quote?vehicle=bus-35pax', ...attributes };
+  return {
+    getAttribute: key => values[key] ?? null,
+    hasAttribute: key => Object.hasOwn(values, key),
+    closest: () => null
+  };
+}
+
+test('consented quote navigation waits for event processing, preserves preferences and runs once', () => {
+  const app = boot(); app.api.setConsent('granted');
+  const link = quoteLink();
+  const event = app.click({ closest: () => link });
+  assert.equal(event.defaultPrevented, true);
+  assert.deepEqual(app.navigations, []);
+  const click = app.events().find(item => item.name === 'cta_click');
+  assert.equal(click.params.destination_path, '/quote');
+  assert.equal(click.params.event_timeout, 250);
+  click.params.event_callback();
+  click.params.event_callback();
+  app.flushTimers();
+  assert.deepEqual(app.navigations, ['https://www.partybusrus.com/quote?vehicle=bus-35pax']);
+});
+
+test('blocked or unresponsive Analytics cannot prevent quote navigation', () => {
+  const app = boot(); app.api.setConsent('granted');
+  const link = quoteLink();
+  app.click({ closest: () => link });
+  app.flushTimers();
+  assert.equal(app.navigations.length, 1);
+  app.events().find(item => item.name === 'cta_click').params.event_callback();
+  assert.equal(app.navigations.length, 1);
+});
+
+test('consent-off, modifier, new-tab, download and canceled quote clicks retain native behavior', () => {
+  for (const scenario of [
+    { consent: false }, { event: { ctrlKey: true } }, { event: { metaKey: true } },
+    { event: { shiftKey: true } }, { event: { altKey: true } }, { event: { button: 1 } },
+    { attributes: { target: '_blank' } }, { attributes: { download: '' } },
+    { event: { defaultPrevented: true } }
+  ]) {
+    const app = boot(); if (scenario.consent !== false) app.api.setConsent('granted');
+    const link = quoteLink(scenario.attributes);
+    const event = app.click({ closest: () => link }, scenario.event);
+    assert.equal(event.defaultPrevented, scenario.event?.defaultPrevented ?? false);
+    app.flushTimers();
+    assert.deepEqual(app.navigations, []);
+    if (scenario.consent === false) assert.equal(app.events().length, 0);
+  }
 });
 
 test('direct thank-you visits emit no lead or provider-return claims', () => {
