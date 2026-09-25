@@ -15,7 +15,7 @@ function boot() {
       skipWaiting: async () => {}, clients: { claim: async () => {} }
     },
     caches: {
-      keys: async () => ['pbru-v9-2026-09-24-refined', 'pbru-v10-2026-09-24-analytics', 'unrelated-app'],
+      keys: async () => ['pbru-v9-2026-09-24-refined', 'pbru-v10-2026-09-24-analytics', 'pbru-v11-2026-09-24-consent', 'unrelated-app'],
       delete: async key => { deleted.push(key); return true; },
       open: async () => ({ match: async request => { hits.push(request.url); return cached; } })
     },
@@ -29,7 +29,7 @@ test('activation purges the previous cached configuration without deleting other
   const app = boot(); let completion;
   app.listeners.activate({ waitUntil: promise => { completion = promise; } });
   await completion;
-  assert.deepEqual(app.deleted, ['pbru-v9-2026-09-24-refined']);
+  assert.deepEqual(app.deleted, ['pbru-v9-2026-09-24-refined', 'pbru-v10-2026-09-24-analytics']);
 });
 
 test('analytics activation and rollback configuration always bypass the service worker cache', () => {
