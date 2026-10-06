@@ -1,0 +1,194 @@
+{
+  "generated_at": "2026-09-24T22:26:41.618Z",
+  "release_commit": "b07a0bf038eb349cd9835422b537b67f3c76ed08",
+  "scope": "Public production HTTP and source parity checks; no form submission, browser automation, credentials or private account requests. robots.txt excluded because of the earlier browser-client block.",
+  "passed": true,
+  "page_count": 95,
+  "asset_count": 61,
+  "check_count": 169,
+  "configuration": [
+    {
+      "path": "/assets/analytics-config.js",
+      "status": 200,
+      "cache_control": "no-store",
+      "matches_reviewed_source": true,
+      "sha256": "3e0d115739bf571adc461fb114ed321b74dff176f257a76edbed5eddc70a6855"
+    },
+    {
+      "path": "/sw.js",
+      "status": 200,
+      "cache_control": "public, max-age=0, must-revalidate",
+      "matches_reviewed_source": true,
+      "sha256": "5d98186acea38d249ba21b7571db4758b5f1e212f75107ada04a812e7bf15ddc"
+    }
+  ],
+  "failures": [],
+  "initial_findings": [
+    {
+      "path": "/es",
+      "type": "page",
+      "expected": 200,
+      "error": "fetch failed"
+    },
+    {
+      "path": "/fleet/bus-40pax.html?qa_preserve=1",
+      "type": "redirect",
+      "expected": 308,
+      "location": "/fleet/bus-40pax?qa_preserve=1",
+      "actual": 308
+    },
+    {
+      "path": "/fleet/bus-15pax.html?qa_preserve=1",
+      "type": "redirect",
+      "expected": 308,
+      "location": "/fleet/bus-15pax?qa_preserve=1",
+      "actual": 308
+    },
+    {
+      "path": "/fleet/bus-luxury-12.html?qa_preserve=1",
+      "type": "redirect",
+      "expected": 308,
+      "location": "/fleet/bus-luxury-12?qa_preserve=1",
+      "actual": 308
+    },
+    {
+      "path": "/fleet/bus-mini-10.html?qa_preserve=1",
+      "type": "redirect",
+      "expected": 308,
+      "location": "/fleet/bus-mini-10?qa_preserve=1",
+      "actual": 308
+    },
+    {
+      "path": "/cities/tysons-mclean-va.html?qa_preserve=1",
+      "type": "redirect",
+      "expected": 308,
+      "location": "/cities/tysons-mclean-va?qa_preserve=1",
+      "actual": 308
+    }
+  ],
+  "rechecks": [
+    {
+      "path": "/es",
+      "reason": "Retry initial transport failure",
+      "hops": [
+        {
+          "url": "https://www.partybusrus.com/es",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "passed": true
+    },
+    {
+      "path": "/fleet/bus-40pax.html?qa_preserve=1",
+      "reason": "Verify the complete Vercel clean-URL redirect chain",
+      "hops": [
+        {
+          "url": "https://www.partybusrus.com/fleet/bus-40pax.html?qa_preserve=1",
+          "status": 308,
+          "location": "/fleet/bus-40pax?qa_preserve=1"
+        },
+        {
+          "url": "https://www.partybusrus.com/fleet/bus-40pax?qa_preserve=1",
+          "status": 308,
+          "location": "/fleet/bus-35pax?qa_preserve=1"
+        },
+        {
+          "url": "https://www.partybusrus.com/fleet/bus-35pax?qa_preserve=1",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "passed": true
+    },
+    {
+      "path": "/fleet/bus-15pax.html?qa_preserve=1",
+      "reason": "Verify the complete Vercel clean-URL redirect chain",
+      "hops": [
+        {
+          "url": "https://www.partybusrus.com/fleet/bus-15pax.html?qa_preserve=1",
+          "status": 308,
+          "location": "/fleet/bus-15pax?qa_preserve=1"
+        },
+        {
+          "url": "https://www.partybusrus.com/fleet/bus-15pax?qa_preserve=1",
+          "status": 308,
+          "location": "/fleet/bus-20pax?qa_preserve=1"
+        },
+        {
+          "url": "https://www.partybusrus.com/fleet/bus-20pax?qa_preserve=1",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "passed": true
+    },
+    {
+      "path": "/fleet/bus-luxury-12.html?qa_preserve=1",
+      "reason": "Verify the complete Vercel clean-URL redirect chain",
+      "hops": [
+        {
+          "url": "https://www.partybusrus.com/fleet/bus-luxury-12.html?qa_preserve=1",
+          "status": 308,
+          "location": "/fleet/bus-luxury-12?qa_preserve=1"
+        },
+        {
+          "url": "https://www.partybusrus.com/fleet/bus-luxury-12?qa_preserve=1",
+          "status": 308,
+          "location": "/fleet/bus-20pax?qa_preserve=1"
+        },
+        {
+          "url": "https://www.partybusrus.com/fleet/bus-20pax?qa_preserve=1",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "passed": true
+    },
+    {
+      "path": "/fleet/bus-mini-10.html?qa_preserve=1",
+      "reason": "Verify the complete Vercel clean-URL redirect chain",
+      "hops": [
+        {
+          "url": "https://www.partybusrus.com/fleet/bus-mini-10.html?qa_preserve=1",
+          "status": 308,
+          "location": "/fleet/bus-mini-10?qa_preserve=1"
+        },
+        {
+          "url": "https://www.partybusrus.com/fleet/bus-mini-10?qa_preserve=1",
+          "status": 308,
+          "location": "/fleet/bus-20pax?qa_preserve=1"
+        },
+        {
+          "url": "https://www.partybusrus.com/fleet/bus-20pax?qa_preserve=1",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "passed": true
+    },
+    {
+      "path": "/cities/tysons-mclean-va.html?qa_preserve=1",
+      "reason": "Verify the complete Vercel clean-URL redirect chain",
+      "hops": [
+        {
+          "url": "https://www.partybusrus.com/cities/tysons-mclean-va.html?qa_preserve=1",
+          "status": 308,
+          "location": "/cities/tysons-mclean-va?qa_preserve=1"
+        },
+        {
+          "url": "https://www.partybusrus.com/cities/tysons-mclean-va?qa_preserve=1",
+          "status": 308,
+          "location": "/cities/tysons-va?qa_preserve=1"
+        },
+        {
+          "url": "https://www.partybusrus.com/cities/tysons-va?qa_preserve=1",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "rechecked_at": "2026-09-24T22:29:38.364Z"
+}

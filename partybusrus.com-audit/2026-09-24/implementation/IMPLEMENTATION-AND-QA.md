@@ -1,6 +1,6 @@
 # Implementation and QA — September 24, 2026
 
-**Status: implemented and tested locally; deployed to a protected Vercel preview. Production unchanged.** The original live-site audit remains the baseline. The findings below describe the revised files in `site/`, not production results. [Draft pull request #1](https://github.com/Azaiah00/partybusrus/pull/1) has a successful Vercel build. The account owner signed in and hosted browser QA passed; see `hosted-preview-qa.json` and `REVIEW-RELEASE.md`.
+**Status: the owner-approved revision is live following merged pull request #1.** The original live-site audit remains the baseline. Hosted browser QA passed before release. Production HTTP checks passed, and Google Realtime received consented page views and the initial quote-step event. See `REVIEW-RELEASE.md` and `production-release-qa.json` for precise scope. A follow-up corrects mobile consent spacing and gives quote-button tracking up to 250ms to process before same-tab navigation.
 
 ## What changed
 
@@ -22,7 +22,7 @@
 | Markup and JavaScript compilation | 95 pages; seven external scripts; 0 failures, 0 warnings | `markup-qa.json` |
 | Local HTTP pages, assets, redirects and missing-page behavior | 173 checks passed, including 95 pages and 65 distinct assets | `http-qa.json` |
 | Quote behavior | 14 tests passed | `scripts/test-quote.mjs`; `../tracking/QUOTE-INTEGRATION-QA.md` |
-| Analytics behavior | 15 tests passed, including the actual shipping configuration in a network-free harness | `scripts/test-analytics.mjs` |
+| Analytics behavior | 18 tests passed, including shipping configuration, navigation callback/fallback and native modifier/new-tab behavior | `scripts/test-analytics.mjs` |
 | Analytics cache regression | Three tests passed: previous-cache cleanup, configuration bypass and unchanged public-asset caching | `scripts/test-service-worker.mjs` |
 | Service worker and fonts | All nine recorded checks passed | `sw-font-qa.json` |
 | Browser accessibility and layout | 27 page/viewport combinations; 0 reported automated violations after fixes | `browser-qa.json` |
@@ -37,8 +37,8 @@ Automated accessibility results include incomplete contrast checks on images/com
 
 ## Required external completion
 
-1. **Release review:** GitHub publishing access was verified with network access on September 24. The earlier restricted-environment authentication result did not establish that the saved login was invalid. The changes are in draft pull request #1 and the Vercel preview build succeeded; production has not been updated. The owner signed in and the authenticated browser verified all 92 linked pages, nine redirect cases and ten mobile layouts. Raw unauthenticated requests still reach the expected preview protection. Check the deployment preview in the existing Vercel project, then repeat production URL and form checks after the approved release.
-2. **GA4 receipt and Search Console:** the owner-authorized GA4 property and website stream are created, the real Measurement ID is configured and eleven reporting dimensions are saved. Follow `site/ANALYTICS-SETUP.md` to verify production consent behavior and Realtime/DebugView receipt after release. This new property has no historical data. Search Console is still needed to measure organic performance and inspect indexing.
+1. **Production follow-up:** the owner approved release, PR #1 merged and Vercel deployed successfully. Production HTTP checks covered 95 pages and related assets/redirects, including a genuine missing-page 404. Browser checks verified consent-dependent tag loading and Realtime receipt for page views and the initial quote step. Validate the follow-up mobile notice and quote-click event after deployment; network payload/cookie inspection and real form delivery remain separate checks.
+2. **GA4 and Search Console:** the owner-authorized GA4 property and website stream are created, the real Measurement ID is configured and eleven reporting dimensions are saved. Follow `site/ANALYTICS-SETUP.md` for the event contract and consent controls. This new property cannot backfill earlier traffic. Search Console is still needed to measure organic performance and inspect indexing.
 3. **Lead delivery and attribution:** confirm the FormSubmit recipient and a real delivered inquiry/autoresponse. Browser click events cannot establish completed calls or delivered emails. Completed-call attribution needs a verified call-tracking integration; accepted leads and bookings need a provider/server/CRM receipt path.
 4. **Business proof:** confirm approved vehicle capacities/features, booking terms and review sources. Contradictory policies now defer to the written quote and booking agreement. No external business listings or sibling-site contact details were changed without those facts.
 

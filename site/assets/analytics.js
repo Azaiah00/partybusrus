@@ -153,9 +153,14 @@
 
   function command() { window.dataLayer.push(arguments); }
 
-  function send(name, values) {
+  function send(name, values, onProcessed) {
     if (!configured || consent !== 'granted' || !started || window['ga-disable-' + id]) return false;
-    command('event', name, Object.assign({ send_to: id, transport_type: 'beacon' }, values));
+    var parameters = Object.assign({ send_to: id, transport_type: 'beacon' }, values);
+    if (typeof onProcessed === 'function') {
+      parameters.event_callback = onProcessed;
+      parameters.event_timeout = 250;
+    }
+    command('event', name, parameters);
     eventCount += 1;
     lastEvent = name;
     if (debug && window.console) window.console.debug('[PBRU analytics]', name, values);
@@ -165,6 +170,30 @@
   function track(name, values) {
     var clean = sanitizeEvent(name, values);
     return clean ? send(name, clean) : false;
+  }
+
+  function quoteClick(event, target, destination, values) {
+    // Let the tag process this event before a same-tab navigation unloads it.
+    // Consent-off, modified clicks and other browsing contexts stay native.
+    var sameTab = !target.getAttribute('target') || target.getAttribute('target') === '_self';
+    if (!configured || consent !== 'granted' || !started || event.defaultPrevented ||
+      event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey ||
+      !sameTab || target.hasAttribute('download')) {
+      track('cta_click', values);
+      return;
+    }
+    var navigated = false;
+    var timer;
+    function proceed() {
+      if (navigated) return;
+      navigated = true;
+      window.clearTimeout(timer);
+      location.assign(destination.href);
+    }
+    event.preventDefault();
+    // Independent of Google's callback: blocking/offline analytics must never trap a click.
+    timer = window.setTimeout(proceed, 250);
+    if (!send('cta_click', sanitizeEvent('cta_click', values), proceed)) proceed();
   }
 
   function start() {
@@ -264,7 +293,8 @@
   function showPanel(manual) {
     if (!configured || panel) return false;
     previousFocus = manual ? document.activeElement : null;
-    panel = document.createElement('section');
+    // Keep legacy page-wide section spacing away from the consent notice.
+    panel = document.createElement('div');
     panel.id = 'pbru-consent';
     panel.setAttribute('role', 'region');
     panel.setAttribute('aria-label', 'Analytics privacy choices');
@@ -315,7 +345,7 @@
     try {
       var destination = new URL(href, location.origin);
       if (destination.origin === location.origin && /^\/quote(?:\.html)?\/?$/.test(destination.pathname)) {
-        track('cta_click', { cta_id: campaign(target.getAttribute('data-cta')) || 'request_quote',
+        quoteClick(event, target, destination, { cta_id: campaign(target.getAttribute('data-cta')) || 'request_quote',
           placement: placement, destination_path: '/quote' });
       }
     } catch (_) {}

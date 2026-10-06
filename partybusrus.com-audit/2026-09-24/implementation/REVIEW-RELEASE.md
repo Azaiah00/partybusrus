@@ -1,37 +1,27 @@
-# Review release — September 24, 2026
+# Production release and follow-up — September 24, 2026
 
-- Pull request: https://github.com/Azaiah00/partybusrus/pull/1
-- Branch: `codex/seo-design-tracking-audit`
-- Hosted site verified at commit: `4b28f6a3049ee852dc6985d3d79cbf82f71825f5`
-- Vercel preview: https://partybusrus-git-codex-seo-design-4e39ef-freds-projects-a353dcff.vercel.app
-- Verified deployment dashboard: https://vercel.com/freds-projects-a353dcff/partybusrus/2RqkDT1XKBp6D34QFfQPvEX6KGdP
+The owner approved publication. PR #1 merged at production commit b07a0bf038eb349cd9835422b537b67f3c76ed08, and Vercel successfully deployed https://www.partybusrus.com/.
 
-The Vercel build passed. After the account owner signed in, the authenticated browser completed the hosted review below. Production has not been updated. Later changes add Google's privacy disclosure link, the verified Analytics stream configuration and a cache fix for future activation/rollback changes. The complete local suite was rerun after those changes.
+## Verified production results
 
-## Hosted verification
+- Public HTTP checks: 95 pages, 61 assets and redirect/missing-page cases, 169 checks total. One transient request passed on retry. Five historical .html URLs have a two-step Vercel clean-URL redirect chain; final destinations and query preservation passed. Actual missing-page status: 404.
+- The public Analytics configuration and service worker matched reviewed source. Analytics configuration returned Cache-Control: no-store.
+- Browser consent checks: no Google loader before consent, after denial/reload, or after withdrawal/reload. Exactly one loader after allowing analytics.
+- Google Realtime received the consented home and quote page views and quote_step_view, plus first_visit and session_start. This does not establish every event, network payload, cookie operation or email delivery.
+- The earlier complete hosted review covered 92 linked indexable routes, nine redirects and ten mobile layouts. See hosted-preview-qa.json for that separate evidence.
 
-- Crawled all 92 linked, indexable page routes through native browser navigation. The observed route list matches the local indexable-page inventory.
-- Every page had one H1, the expected production-domain canonical, loaded stylesheets, no horizontal overflow and no broken loaded images in the final inspection.
-- Nine historical/clean URL redirects reached the expected destinations and preserved a test query parameter.
-- Ten mobile layouts at 390px or 320px passed the same layout checks. Homepage and shared menus opened, focused their close controls, closed with Escape and restored focus to their openers.
-- The journal article link opened the expected article using Enter.
-- A missing URL showed the custom 404 experience and noindex metadata. A direct thank-you visit showed neutral planning copy without claiming a delivered inquiry or reservation.
-- The final browser console check returned no errors or warnings. Normal viewport settings were restored.
+## Follow-up in this branch
 
-See `hosted-preview-qa.json` for the complete route list, results and limitations. These browser checks do not expose underlying HTTP status codes, guarantee every lazy image has downloaded, or constitute a new full accessibility audit. A direct robots.txt navigation was blocked by the browser client; raw hosted sitemap/config checks were not completed. Local static and HTTP checks cover those files. No protection was disabled and no session credentials were extracted.
+The mobile consent notice previously inherited an important page-wide section padding rule. It now uses a div with the same accessible region role so its intended spacing applies. Service worker v11 invalidates v9/v10 cached scripts.
 
-## Completed locally
+Quote-button events were absent in two Realtime checks while the resulting page views and quote-step events arrived. Consented same-tab quote links now wait for event processing or an independent 250ms fallback before navigating. Modified/new-tab/download links and consent-off visits retain native behavior. Destination preferences are preserved. This is a best-effort delivery improvement; production receipt must be checked after deployment.
 
-- 95 HTML files, 92 indexable URLs, zero reported static SEO or markup failures/warnings.
-- 173 HTTP checks; 14 quote and 15 analytics behavior tests pass, along with three service-worker cache regression tests.
-- 27 representative browser layouts plus additional journal pointer/keyboard navigation checks.
-- Pinned optional accessibility dependency installs with `npm ci`; the full `npm test` suite passes.
+Validation: 18 analytics tests, three cache regression tests and all 95 pages' markup/JavaScript checks pass. Tests cover callback/fallback navigation, once-only navigation, blocked analytics, preserved preferences, consent-off and modifier behavior. Production verification of this follow-up is recorded in the continuation notes after deployment.
 
-## Outstanding checks
+## Remaining measurement work
 
-1. Verify production consent and Realtime/DebugView receipt after release. The earlier account-access blocker is resolved: the owner authorized access and creation, and the real website stream ID is configured. Enhanced Measurement, Google Signals, user-provided data and ad personalization are off; eleven reporting dimensions are saved. Preview hosts deliberately cannot send data. This newly created property cannot attribute earlier calls or emails.
-2. Confirm native FormSubmit CAPTCHA completion and actual inquiry/autoresponse delivery with the business inbox. No real test inquiry has been sent. Prior browser security policy blocked an interactive quote action, and no workaround was attempted.
-3. Review and authorize the production release, then repeat production URL, consent and provider-delivery checks. Retain the previous deployment for rollback.
-4. Connect Search Console and reconcile inquiries against business records before attributing results to organic search.
+The owner uses phone and email, with no booking/CRM system identified. Search Console is not connected. Completed calls, delivered inquiries, qualified leads, bookings and revenue require business-side records or a verified integration. No paid phone-tracking service, call recording, CRM or ad pixel has been installed. No real form or customer confirmation email was sent during QA.
 
-The implementation report records the full scope and remaining business-proof requirements. Automated accessibility results include incomplete rules and do not constitute full WCAG certification. Photo contact sheets remain local; written evidence is included in the review branch.
+The earlier browser policy block on a quote form date action remains respected. Hosted robots.txt was not retried through another mechanism after the browser-client block. The production HTTP record excludes it. Local static and HTTP checks remain separate evidence.
+
+The site is live; no blanket claim that every tracking event or business outcome is verified is made.
