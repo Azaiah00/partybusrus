@@ -1,8 +1,8 @@
 # Party Bus R Us
 
-Current implementation: September 24, 2026. Static website hosted on Vercel at https://www.partybusrus.com.
+Current release verified: October 6, 2026. Static website hosted on Vercel at https://www.partybusrus.com.
 
-The revised site is live following the owner-approved merge of [pull request #1](https://github.com/Azaiah00/partybusrus/pull/1). Hosted QA covered all 92 linked pages, nine redirect cases and ten mobile layouts. Production HTTP checks passed across 95 pages, assets, redirect chains and missing-page behavior. Google Analytics received the consented home/quote page views and initial quote-step event. Preview collection stays disabled; actual inquiry delivery and booking attribution remain separate checks.
+The revised site is live following the owner-approved merge of [pull request #1](https://github.com/Azaiah00/partybusrus/pull/1), with the mobile consent and quote-click follow-up published in [pull request #2](https://github.com/Azaiah00/partybusrus/pull/2). Earlier hosted QA covered all 92 linked pages, nine redirect cases and ten mobile layouts. Production HTTP checks passed across 95 pages, assets, redirect chains and missing-page behavior. October 6 checks confirmed the follow-up's live source parity, mobile notice layout and Google Analytics receipt of a native quote-click test, alongside page views and quote-step views. Preview collection stays disabled; actual inquiry delivery and booking attribution remain separate checks.
 
 ## Current files
 
@@ -28,4 +28,4 @@ Open http://127.0.0.1:4173/. In another terminal, run `npm test` for the full lo
 
 ## Remaining measurement work
 
-The GA4 property, stream and eleven reporting dimensions are configured; see `site/ANALYTICS-SETUP.md`. Live tag loading follows consent, and Realtime receipt is verified for page views and the initial quote step. Confirm an actual FormSubmit inquiry and autoresponse arrive, then connect Search Console and the business's phone/booking records. Do not treat browser clicks or a form handoff as a confirmed lead or booking. See the implementation release report for exact QA limits and follow-up fixes.
+The GA4 property, stream and eleven reporting dimensions are configured; see `site/ANALYTICS-SETUP.md`. Live tag loading follows consent, and Realtime receipt is verified for page views, the initial quote step and a native quote-click test. Confirm an actual FormSubmit inquiry and autoresponse arrive, then inspect Search Console with authorized access and connect the business's phone/email inquiry records. Do not treat browser clicks or a form handoff as a confirmed lead or booking. See the implementation release report for exact QA limits.
