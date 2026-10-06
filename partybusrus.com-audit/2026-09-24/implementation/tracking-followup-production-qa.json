@@ -1,0 +1,73 @@
+{
+  "generated_at": "2026-10-06T15:53:49.774Z",
+  "release_commit": "fc3d8f1a12b817889342b5d1fd9605814bfdc242",
+  "reviewed_head": "0f262a4ca21bc867a3913b6bd9c7d45a5ad43fc4",
+  "scope": "Public production asset HTTP/source-parity checks only; no account access, form submission, or robots.txt request.",
+  "passed": true,
+  "checks": [
+    {
+      "path": "/assets/analytics.js",
+      "status": 200,
+      "matches_reviewed_source": true,
+      "cache_control": "public, max-age=0, must-revalidate",
+      "config_uncached": null,
+      "sha256": "2c61aa235008a81f72fc64086a050539857932034f67cf367e65d74f1bf1a5ac"
+    },
+    {
+      "path": "/assets/analytics-config.js",
+      "status": 200,
+      "matches_reviewed_source": true,
+      "cache_control": "no-store",
+      "config_uncached": true,
+      "sha256": "3e0d115739bf571adc461fb114ed321b74dff176f257a76edbed5eddc70a6855"
+    },
+    {
+      "path": "/sw.js",
+      "status": 200,
+      "matches_reviewed_source": true,
+      "cache_control": "public, max-age=0, must-revalidate",
+      "config_uncached": null,
+      "sha256": "84b3002ea0ca1c73d8bcb9a14a5c13b9c1c26d2f476a144d8de289391fe53eb5"
+    }
+  ],
+  "browser_observations": {
+    "observed_date": "2026-10-06",
+    "method": "CUA native browser UI and read-only DOM inspection",
+    "mobile": {
+      "outer_width": 320,
+      "content_width": 305,
+      "scroll_width": 305,
+      "notice_tag": "DIV",
+      "padding": "16px",
+      "button_min_height": 44,
+      "controls_fit": true
+    },
+    "consent": {
+      "google_loaders_after_withdrawal_and_reload": 0,
+      "google_loaders_after_allow": 1,
+      "test_session_final_choice": "denied"
+    },
+    "quote_navigation": {
+      "destination": "/quote",
+      "native_input_succeeded": true,
+      "console_errors_or_warnings": 0
+    },
+    "realtime_received_events": [
+      "cta_click",
+      "page_view",
+      "quote_step_view",
+      "first_visit",
+      "session_start",
+      "user_engagement"
+    ],
+    "receipt_limit": "CTA receipt was observed after native browser input. Earlier locator/keyboard checks navigated but did not independently verify receipt for those input methods.",
+    "not_verified": [
+      "All event types",
+      "Complete network payload inspection",
+      "Complete cookie inspection",
+      "Real inquiry delivery",
+      "Autoresponse delivery",
+      "Completed calls or bookings"
+    ]
+  }
+}
