@@ -1,6 +1,6 @@
 // Party Bus R Us: cache public static files only. Forms and HTML stay on the network.
 const CACHE_PREFIX = 'pbru-';
-const CACHE_VERSION = 'pbru-v11-2026-09-24-consent';
+const CACHE_VERSION = 'pbru-v12-2026-10-06-attribution';
 const STATIC_ASSETS = [
   '/manifest.json', '/apple-touch-icon.png', '/icon-192.png', '/icon-512.png',
   '/favicon-32.png', '/assets/fonts/fonts.css'

@@ -168,6 +168,53 @@ test('source persists across internal navigation, never forwards raw URLs or PII
   assert.equal(home.scripts().length, 0);
 });
 
+test('current campaign overrides do not reuse original quote attribution on a later arrival', () => {
+  const session = storage(), local = storage();
+  const first = boot({ session, local, url: 'https://www.partybusrus.com/?utm_source=newsletter&utm_medium=email&utm_campaign=september' });
+  first.api.setConsent('granted');
+  const later = boot({ session, local, url: 'https://www.partybusrus.com/quote?utm_source=facebook&utm_medium=social&utm_campaign=october&utm_content=bus-photo&utm_term=group-trips', referrer: 'https://www.facebook.com/' });
+  const view = later.events().find(event => event.name === 'page_view').params;
+  assert.equal(view.campaign_source, 'facebook');
+  assert.equal(view.campaign_medium, 'social');
+  assert.equal(view.campaign_name, 'october');
+  assert.equal(view.campaign_content, 'bus-photo');
+  assert.equal(view.campaign_term, 'group-trips');
+  assert.equal(view.page_location, 'https://www.partybusrus.com/quote');
+  const original = later.api.getAttribution();
+  assert.equal(original.source_page, '/');
+  assert.equal(original.utm_source, 'newsletter');
+  assert.equal(original.utm_medium, 'email');
+  assert.equal(original.utm_campaign, 'september');
+});
+
+test('untagged arrivals omit campaign overrides while retaining original quote source', () => {
+  const session = storage(), local = storage();
+  const first = boot({ session, local, url: 'https://www.partybusrus.com/?utm_source=newsletter&utm_medium=email&utm_campaign=september' });
+  first.api.setConsent('granted');
+  for (const referrer of ['https://www.partybusrus.com/fleet', 'https://www.bing.com/search?q=party-bus']) {
+    const next = boot({ session, local, url: 'https://www.partybusrus.com/quote', referrer });
+    const view = next.events().find(event => event.name === 'page_view').params;
+    assert.deepEqual(Object.keys(view).filter(key => key.startsWith('campaign_')), []);
+    assert.equal(next.api.getAttribution().utm_source, 'newsletter');
+    const config = next.context.dataLayer.find(args => args[0] === 'config')[2];
+    assert.equal(config.page_referrer, referrer.includes('bing.com') ? 'https://www.bing.com/' : '');
+  }
+});
+
+test('unsafe current campaign values are discarded without falling back to old labels', () => {
+  const session = storage(), local = storage();
+  const first = boot({ session, local, url: 'https://www.partybusrus.com/?utm_source=newsletter&utm_medium=email&utm_campaign=september' });
+  first.api.setConsent('granted');
+  const later = boot({ session, local, url: 'https://www.partybusrus.com/quote?utm_source=person%40example.com&utm_medium=social&utm_campaign=7033994394&utm_content=https%3A%2F%2Fprivate.example&utm_term=customer%20notes&email=person%40example.com' });
+  const view = later.events().find(event => event.name === 'page_view').params;
+  assert.equal(view.campaign_medium, 'social');
+  for (const key of ['campaign_source', 'campaign_name', 'campaign_content', 'campaign_term']) assert.equal(view[key], undefined);
+  assert.equal(later.api.getAttribution().utm_campaign, 'september');
+  for (const unsafe of ['person@example.com', '7033994394', 'private.example', 'customer notes']) {
+    assert.equal(JSON.stringify(later.context.dataLayer).includes(unsafe), false);
+  }
+});
+
 test('consent denial and withdrawal clear source/GA cookies and stop all later events', () => {
   const app = boot({ cookies: '_ga=abc; _ga_A1B2C3D4E5=def; _gid=123; booking_session=keep' });
   app.api.setConsent('granted');

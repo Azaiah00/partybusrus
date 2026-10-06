@@ -11,6 +11,9 @@ Thumbs.db
 # local verification tooling (lighthouse/puppeteer) - do not deploy
 .verify/
 
+# Local inquiry workbook may contain private business/customer records.
+/outputs/01a0d426-e4d6-7410-bcb0-f1215d3c7867/
+
 # stray local deliverable — keep out of git
 deliverables/Party-Bus-R-Us-Marketing-Plan.html
 

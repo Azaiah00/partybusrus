@@ -226,9 +226,10 @@
       command('consent', 'update', { analytics_storage: 'granted' });
     }
     if (!pageSent) {
-      var data = getAttribution();
+      // GA describes this arrival; the quote keeps its original source separately.
+      var data = captureSource();
       var view = { page_location: location.origin + safePath(location.pathname), page_type: pageType() };
-      // Supplying sanitized campaign values retains acquisition without raw query strings.
+      // Leave untagged pages to GA's own attribution; never replay stored labels.
       ['source', 'medium', 'campaign', 'content', 'term'].forEach(function (key) {
         if (data['utm_' + key]) view[key === 'campaign' ? 'campaign_name' : 'campaign_' + key] = data['utm_' + key];
       });
