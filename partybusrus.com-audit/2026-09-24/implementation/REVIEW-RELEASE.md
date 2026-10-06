@@ -25,9 +25,15 @@ Validation at reviewed head `0f262a4ca21bc867a3913b6bd9c7d45a5ad43fc4`: 18 analy
 
 Evidence: `tracking-followup-production-qa.json`. These observations do not constitute complete network or cookie inspection and do not verify all tracking events or form delivery.
 
+## Additional campaign correction — October 6
+
+The original source retained for quote requests was also being used as a GA page-view campaign override. A later visit from a different campaign in the same tab therefore sent the old labels. GA now receives only the current page's sanitized campaign labels; the quote retains its original source. Untagged internal and external arrivals omit overrides so Google can manage attribution. Service worker v12 clears earlier cached scripts.
+
+Three regression tests reproduced the old behavior before the fix. Afterward all 38 quote/analytics/cache tests passed (14/21/3). All 95 pages and seven external scripts passed markup/compilation checks with no failures or warnings. An independent code review found no blockers. The browser connection timed out during the follow-up, so account-side receipt of the corrected campaign parameters remains unverified. A fresh public mobile PageSpeed request also returned HTTP 429 quota exhaustion; it supplied no new score.
+
 ## Remaining measurement work
 
-The owner uses phone and email, with no booking/CRM system identified. Search Console inspection permission is pending. The GA4 property cannot backfill traffic from before collection began. Completed calls, delivered inquiries, qualified leads, bookings and revenue require business-side records or a verified integration. No paid phone-tracking service, call recording, CRM or ad pixel has been installed. No real form or customer confirmation email was sent during QA, and delivery/autoresponse remain unverified.
+The owner uses phone and email, with no booking/CRM system identified. Search Console inspection has not completed because the browser connection timed out. The GA4 property cannot backfill traffic from before collection began. Completed calls, delivered inquiries, qualified leads, bookings and revenue require business-side records or a verified integration. Local inquiry workbooks are excluded from Git so future customer records are not included in website releases. No paid phone-tracking service, call recording, CRM or ad pixel has been installed. No real form or customer confirmation email was sent during QA, and delivery/autoresponse remain unverified.
 
 The earlier browser policy block on a quote form date action remains respected. Hosted robots.txt was not retried through another mechanism after the browser-client block. The production HTTP record excludes it. Local static and HTTP checks remain separate evidence.
 
