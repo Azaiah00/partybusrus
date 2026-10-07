@@ -74,6 +74,24 @@ For consented same-tab quote links, navigation waits for the tag's event-process
 
 The form uses a normal POST to FormSubmit.co for `info@partybusrus.com`, with CAPTCHA, honeypot and autoresponse retained. It is not Netlify Forms. Do not replace native submission with AJAX merely to obtain a client success signal: FormSubmit documents different CAPTCHA/autoresponse behavior for AJAX. The custom thank-you route is a user confirmation surface, not an authenticated delivery receipt.
 
+### Readable inquiry emails
+
+The October 7 email-formatting follow-up orders the outgoing notification as contact details, trip details, source context and request reference. Empty optional rows are omitted. Dates, times, passenger bands, durations and vehicle preferences use readable values. The website's original control names and values remain available to validation, draft restoration and analytics; formatting applies to the native submission payload. The exact `email` field is retained for FormSubmit's Reply-To and autoresponse handling. JavaScript-disabled or unsupported browsers retain the original native form payload.
+
+Source information is retained only when the existing consent and sanitization rules provide it. The email uses these readable labels; older messages still have the original field names:
+
+| Email label | Original field | Meaning |
+|---|---|---|
+| Recorded source | `utm_source` | Supplied campaign source label |
+| Recorded referrer | `source_referrer` | Recorded external hostname |
+| Landing page | `source_page` | Original recorded website path |
+| Campaign | `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` | Labeled nonempty campaign values |
+| Reference | `request_reference` | Unique identifier for deduplication and follow-up |
+
+A website address printed by the email provider identifies the submitting site, not the visitor's acquisition source. A recorded referrer is evidence of that referral; it is not a verified booking or independently verified search query. Missing source information stays unknown, never automatically Direct or Google organic. Preserve the reference and original source evidence when entering older submissions into the private inquiry workbook. Record customer-reported source separately and update booking outcomes only from business records. No automatic inbox import is configured.
+
+The provider still controls the email wrapper, header and footer. Local payload tests establish row order and values, not the final rendering in a particular inbox. See the [FormSubmit template options](https://formsubmit.co/email-templates) and [native formdata event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/formdata_event).
+
 On October 7 the owner reported receiving inquiry emails and chose to skip the TEST submission. No test was sent and no independent mailbox/provider receipt inspection occurred; autoresponse and Reply-To behavior are not established. Do not request another test as a completion requirement. If a delivery issue arises later, optional authorized diagnostics can inspect an existing inquiry, recipient activation, inbox arrival, Reply-To, autoresponse and return flow. Keep message contents and contact details out of public records. FormSubmit documents a 30-day submission archive and webhook support; access remains account-specific. See [FormSubmit documentation](https://formsubmit.co/documentation).
 
 For a future primary `generate_lead` event, implement provider/backend receipt with an opaque unique enquiry ID and server-side deduplication. Keep personal data in the booking system. Import qualified/quoted/booked outcomes only through an explicitly configured secure integration, with consent and platform requirements verified. Do not put private Measurement Protocol secrets or CRM credentials in static JavaScript. There is no such server integration in the current scope.

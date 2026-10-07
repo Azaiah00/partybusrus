@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,readdirSync} from 'node:fs';
+import {readFileSync,readdirSync,writeFileSync} from 'node:fs';
 import vm from 'node:vm';
 
 const html = readFileSync(new URL('../site/quote.html', import.meta.url),'utf8');
@@ -18,9 +18,9 @@ function attrs(text) {
   return result;
 }
 function boot(options={}) {
-  const ids={}, names={}, controls=[], events=[], windowEvents={}; let focused=null;
+  const ids={}, names={}, controls=[], events=[], windowEvents={}, payloads=[]; let focused=null;
   function element(a={}) {
-    const el={id:a.id||'',name:a.name||'',type:a.type||'text',required:'required' in a,value:a.value||'',defaultValue:a.value||'',dataset:{},listeners:{},style:{},attributes:{},textContent:'',disabled:false,hidden:false,customError:'',min:a.min||'',
+    const el={id:a.id||'',name:a.name||'',type:a.type||'text',required:'required' in a,value:a.value||'',defaultValue:a.value||'',checked:'checked' in a,defaultChecked:'checked' in a,dataset:{},listeners:{},style:{},attributes:{},textContent:'',disabled:'disabled' in a,hidden:false,customError:'',min:a.min||'',
       addEventListener(name,fn){this.listeners[name]=fn;},
       setAttribute(name,value){this.attributes[name]=String(value);},
       removeAttribute(name){delete this.attributes[name];},
@@ -63,18 +63,26 @@ function boot(options={}) {
   const form=element({id:'quoteForm'});form.elements={namedItem:key=>names[key]};
   form.querySelectorAll=selector=>selector==='.qf-step'?steps:selector==='.qf-next'?buttons.filter(b=>b.className.includes('qf-next')):selector==='.qf-back'?buttons.filter(b=>b.className.includes('qf-back')):selector==='[data-quick]'?buttons.filter(b=>b.dataset.quick):selector==='[aria-invalid]'?controls.filter(el=>'aria-invalid' in el.attributes):[];
   form.querySelector=selector=>selector==='.qf-step.active h3'?steps.find(step=>step.active).heading:steps[Number(selector.match(/data-step="(\d)"/)?.[1])-1];
-  form.reset=()=>controls.forEach(el=>{el.value=el.defaultValue;});
+  form.reset=()=>{form.listeners.reset?.();controls.forEach(el=>{el.value=el.defaultValue;el.checked=el.defaultChecked;});};
   const session=options.session||storage();const local=options.local||storage({'pbru_quote_draft':'private legacy data'});
   const context={document:{getElementById:id=>ids[id]||null},location:new URL(options.url||'https://www.partybusrus.com/quote'),sessionStorage:session,localStorage:local,navigator:{onLine:options.online??true},crypto:{randomUUID:()=> 'test-request-1234'},URLSearchParams,console,
-    PBRUAnalytics:{track:(name,data)=>events.push({name,data}),getAttribution:()=>options.source||{source_page:'/fleet/bus-35pax',utm_source:'google'}},
+    PBRUAnalytics:{track:(name,data)=>events.push({name,data}),getAttribution:()=>typeof options.source==='function'?options.source():options.source||{source_page:'/fleet/bus-35pax',utm_source:'google'}},
     addEventListener:(name,fn)=>windowEvents[name]=fn};context.window=context;
   Object.entries(options.initialValues||{}).forEach(([id,value])=>ids[id].value=value);
-  vm.createContext(context);vm.runInContext(script,context);
+  vm.createContext(context);if(options.enhanced!==false)vm.runInContext(script,context);
   function fire(target,name='click') {let prevented=false;target.listeners[name]?.({target,preventDefault(){prevented=true;}});return prevented;}
-  return {ids,names,steps,form,session,local,context,events,buttons,focused:()=>focused,fire,
+  function formdata() {
+    // Model successful controls from the actual form markup, including only checked radios.
+    const data=new FormData();
+    for(const el of controls)if(el.name&&!el.disabled&&!/^(button|reset|submit)$/.test(el.type)&&(!/^(checkbox|radio)$/.test(el.type)||el.checked))data.append(el.name,el.value);
+    form.listeners.formdata?.({formData:data});
+    return data;
+  }
+  return {ids,names,controls,steps,form,session,local,context,events,buttons,payloads,formdata,focused:()=>focused,fire,
     next:n=>fire(buttons.find(b=>b.dataset.next===String(n))),
     input:id=>fire(ids[id],'input'),
-    submit:()=>fire(form,'submit'),
+    submit:()=>{const prevented=fire(form,'submit');if(!prevented)payloads.push(formdata());return prevented;},
+    contact:value=>controls.filter(el=>el.name==='contact_pref').forEach(el=>{el.checked=el.value===value;}),
     change:id=>{let prevented=false;form.listeners.change({target:ids[id],preventDefault(){prevented=true;}});return prevented;},
     pageshow:()=>windowEvents.pageshow?.()
   };
@@ -186,6 +194,96 @@ test('blocked storage permits native form submission without false return token'
   const app=boot({session:blocked,local:blocked});fill(app);assert.equal(app.submit(),false);
   assert.equal(app.names._next.value,'https://www.partybusrus.com/thank-you');
 });
+function emailEntries(data) {return Array.from(data).filter(([key])=>!key.startsWith('_'));}
+test('outgoing email has ordered readable rows, all recorded attribution and intact provider controls',()=>{
+  const source={source_page:'/blog/how-much-does-a-party-bus-cost-dmv',source_referrer:'chatgpt.com',utm_source:'newsletter',utm_medium:'email',utm_campaign:'autumn_trips',utm_content:'fleet_link',utm_term:'party_bus'};
+  const app=boot({source});fill(app);
+  Object.entries({qfDate:'2096-02-29',qfTime:'15:30',qfHeadcount:'36-plus',qfHours:'9-plus',qfVehicle:'bus-35pax',qfDest:'Example event venue',qfNotes:'Please call after 5 PM.\nTwo planned stops.'}).forEach(([id,value])=>app.ids[id].value=value);
+  app.contact('call');
+  const original=app.formdata(), live=app.controls.map(el=>[el.name,el.value,el.checked]);
+  assert.equal(original.get('contact_pref'),'call');assert.equal(original.getAll('contact_pref').length,1);
+  assert.equal(app.submit(),false);
+  const data=app.payloads[0];
+  assert.deepEqual(emailEntries(data),[
+    ['name','Example Customer'],['email','test@example.test'],['Phone','202-555-0123'],['Preferred contact','Call'],
+    ['Trip date','February 29, 2096'],['Pickup time','3:30 PM'],['Passengers','36+ (ask about multiple vehicles)'],['Duration','9+ hours'],
+    ['Event','Birthday'],['Vehicle','Imperial 35 · up to 35 passengers'],['Pickup','Arlington, VA'],['Stops','Example event venue'],['Notes','Please call after 5 PM.\nTwo planned stops.'],
+    ['Recorded source','newsletter'],['Recorded referrer','chatgpt.com'],['Landing page','/blog/how-much-does-a-party-bus-cost-dmv'],
+    ['Campaign','Medium: email; Campaign: autumn_trips; Content: fleet_link; Term: party_bus'],['Reference','test-request-1234']
+  ]);
+  for(const [key,value] of original)if(key.startsWith('_'))assert.equal(data.get(key),key==='_next'?'https://www.partybusrus.com/thank-you#request=test-request-1234':value,key);
+  assert.equal(data.get('_template'),'table');assert.equal(data.get('_captcha'),'true');assert.ok(data.get('_autoresponse'));assert.equal(data.get('_honey'),'');
+  assert.equal(data.getAll('email').length,1);assert.equal(data.getAll('name').length,1);
+  assert.deepEqual(app.controls.filter(el=>!['_next','request_reference'].includes(el.name)).map(el=>[el.name,el.value,el.checked]),live.filter(([name])=>!['_next','request_reference'].includes(name)));
+});
+test('empty attribution and optional fields produce no blank or invented email rows',()=>{
+  const app=boot({source:{}});fill(app);app.ids.qfDest.value='   ';app.ids.qfNotes.value='\n ';
+  assert.equal(app.submit(),false);
+  const entries=emailEntries(app.payloads[0]);
+  assert.deepEqual(entries.map(([key])=>key),['name','email','Phone','Preferred contact','Trip date','Passengers','Duration','Event','Pickup','Reference']);
+  assert.equal(app.payloads[0].get('Preferred contact'),'Text');assert.equal(app.payloads[0].get('Duration'),'4 hours');
+  assert.equal(entries.some(([,value])=>value===''),false);
+  assert.doesNotMatch(JSON.stringify(entries),/direct|google|utm_|source_page|source_referrer|request_reference/);
+});
+test('all fleet labels and contact preferences reflect the selected successful control',()=>{
+  for(const value of ['bus-20pax','bus-24pax','bus-25pax','bus-28pax','bus-30pax','bus-32pax','bus-35pax']) {
+    const app=boot({source:{}});fill(app);app.ids.qfVehicle.value=value;app.ids.qfHours.value='unsure';app.contact('email');app.submit();
+    assert.equal(app.payloads[0].get('Vehicle'),app.ids.qfVehicle.options.find(option=>option.value===value).text);
+    assert.equal(app.payloads[0].get('Duration'),'Help me plan');assert.equal(app.payloads[0].get('Preferred contact'),'Email');
+  }
+});
+test('date and time formatting keeps the entered calendar day and noon or midnight',()=>{
+  for(const [time,expected] of [['00:00','12:00 AM'],['12:00','12:00 PM'],['23:59','11:59 PM'],['09:05','9:05 AM']]) {
+    const app=boot({source:{}});fill(app);app.ids.qfDate.value='2099-12-31';app.ids.qfTime.value=time;app.submit();
+    assert.equal(app.payloads[0].get('Trip date'),'December 31, 2099');assert.equal(app.payloads[0].get('Pickup time'),expected);
+  }
+});
+test('retry rebuilds current customer fields and source after consent changes',()=>{
+  let source={source_page:'/blog/how-much-does-a-party-bus-cost-dmv',source_referrer:'chatgpt.com'};
+  const app=boot({source:()=>source});fill(app);app.submit();
+  assert.equal(app.payloads[0].get('Recorded referrer'),'chatgpt.com');assert.equal(app.submit(),true);assert.equal(app.payloads.length,1);
+  app.pageshow();source={};app.ids.qfName.value='Another Example';app.contact('call');app.ids.qfNotes.value='New trip note';
+  assert.equal(app.submit(),false);assert.equal(app.payloads.length,2);
+  assert.equal(app.payloads[1].get('name'),'Another Example');assert.equal(app.payloads[1].get('Preferred contact'),'Call');assert.equal(app.payloads[1].get('Notes'),'New trip note');
+  assert.equal(app.payloads[1].has('Recorded referrer'),false);assert.equal(app.payloads[1].has('Landing page'),false);
+  app.pageshow();source={utm_medium:'referral',utm_campaign:'return_visit'};app.submit();
+  assert.equal(app.payloads[2].get('Campaign'),'Medium: referral; Campaign: return_visit');assert.equal(app.payloads[2].has('Recorded source'),false);
+});
+test('formdata inspections and reset or page restoration cannot reuse a prepared submission',()=>{
+  const app=boot();fill(app);
+  assert.equal(app.formdata().has('event_date'),true);assert.equal(app.formdata().has('Trip date'),false);
+  assert.equal(app.fire(app.form,'submit'),false);app.pageshow();
+  assert.equal(app.formdata().has('event_date'),true);assert.equal(app.formdata().has('Trip date'),false);
+  assert.equal(app.fire(app.form,'submit'),false);app.form.reset();
+  assert.equal(app.formdata().has('event_date'),true);assert.equal(app.formdata().has('Trip date'),false);
+  app.pageshow();fill(app);app.submit();
+  assert.equal(app.payloads[0].has('Trip date'),true);assert.equal(app.formdata().has('event_date'),true);
+  app.fire(app.ids.qfClearDraft);fill(app);app.submit();assert.equal(app.payloads[1].get('Preferred contact'),'Text');
+});
+test('format construction failure preserves the entire original native payload',()=>{
+  const app=boot();fill(app);
+  Object.defineProperty(app.ids.qfHeadcount,'options',{get(){throw Error('Formatting unavailable');}});
+  assert.equal(app.submit(),false);
+  const data=app.payloads[0];
+  assert.equal(data.get('name'),'Example Customer');assert.equal(data.get('email'),'test@example.test');assert.equal(data.get('headcount'),'21-24');assert.equal(data.get('phone'),'202-555-0123');
+  assert.equal(data.get('request_reference'),'test-request-1234');assert.equal(data.get('_captcha'),'true');assert.equal(data.has('Trip date'),false);
+});
+test('JavaScript-disabled form retains original native fields and checked preference',()=>{
+  const app=boot({enhanced:false});fill(app);app.contact('call');app.submit();const data=app.payloads[0];
+  assert.equal(app.form.dataset.enhanced,undefined);assert.equal(data.get('name'),'Example Customer');assert.equal(data.get('email'),'test@example.test');
+  assert.equal(data.get('contact_pref'),'call');assert.equal(data.getAll('contact_pref').length,1);assert.equal(data.get('headcount'),'21-24');assert.equal(data.has('Trip date'),false);
+  assert.equal(data.get('_captcha'),'true');assert.equal(data.get('_template'),'table');assert.ok(data.get('_autoresponse'));assert.equal(data.get('_next'),'https://www.partybusrus.com/thank-you');
+  assert.equal(app.events.length,0);
+});
+test('formatted notification details never enter analytics or browser storage',()=>{
+  const app=boot({source:{source_page:'/blog/how-much-does-a-party-bus-cost-dmv',source_referrer:'chatgpt.com'}});fill(app);
+  app.ids.qfDest.value='Fictional destination';app.ids.qfNotes.value='Private synthetic trip note';app.submit();
+  assert.ok(app.payloads[0].get('Notes'));
+  const outsideEmail=JSON.stringify({events:app.events,session:Array.from(app.session.map),local:Array.from(app.local.map)});
+  assert.doesNotMatch(outsideEmail,/Customer|example.test|202-555|Arlington|Fictional destination|Private synthetic trip note|chatgpt.com|how-much-does-a-party-bus-cost-dmv/);
+  assert.deepEqual(Array.from(app.session.map.keys()).sort(),[DRAFT,PENDING].sort());
+  assert.deepEqual(Object.keys(JSON.parse(app.session.getItem(DRAFT)).fields).sort(),['qfDate','qfTime','qfHeadcount','qfHours','qfEventType','qfVehicle'].sort());
+});
 test('guarded provider return consumes token once and never emits accepted lead',()=>{
   const session=storage({[PENDING]:JSON.stringify({id:'test-request-1234',at:Date.now()}),[DRAFT]:'{}'});
   const result=bootReturn({session});
@@ -210,3 +308,11 @@ test('direct, unrelated, stale, future, mismatched and malformed returns stay ne
     assert.equal(result.events.length,0,JSON.stringify(options));assert.equal(result.nodes.returnHeading.textContent,'neutral');
   }
 });
+
+// Explicit opt-in artifact for a local preview; no provider request or default file writes.
+if(process.env.PBRU_QUOTE_EMAIL_SAMPLE_PATH) {
+  const app=boot({source:{source_page:'/blog/how-much-does-a-party-bus-cost-dmv',source_referrer:'chatgpt.com'}});fill(app);
+  Object.entries({qfTime:'18:30',qfVehicle:'bus-24pax',qfName:'Avery Example',qfEmail:'avery@example.test',qfPhone:'202-555-0147',qfDest:'Example celebration venue',qfNotes:'Fictional preview request. Please text about availability.'}).forEach(([id,value])=>app.ids[id].value=value);
+  assert.equal(app.submit(),false);
+  writeFileSync(process.env.PBRU_QUOTE_EMAIL_SAMPLE_PATH,JSON.stringify({synthetic:true,sent:false,provider_controls:Array.from(app.payloads[0]).filter(([key])=>key.startsWith('_')),email_rows:emailEntries(app.payloads[0])},null,2)+'\n');
+}

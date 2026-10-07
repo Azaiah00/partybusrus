@@ -2,7 +2,7 @@
   'use strict';
   var form = document.getElementById('quoteForm');
   if (!form) return;
-  var current = 1, started = false, submitting = false;
+  var current = 1, started = false, submitting = false, preparedSubmission = false;
   var DRAFT = 'pbru_trip_draft_v2', PENDING = 'pbru_quote_pending_v2';
   var safeDraftFields = ['qfDate', 'qfTime', 'qfHeadcount', 'qfHours', 'qfEventType', 'qfVehicle'];
   var names = ['When & how many', 'Your trip', 'Contact details'];
@@ -64,6 +64,58 @@
       var el = form.elements.namedItem(key); if (el) el.value = data[key] || '';
     });
   }
+  function readableDate(value) {
+    var parts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+    if (!parts) return value;
+    var year = Number(parts[1]), month = Number(parts[2]), day = Number(parts[3]);
+    var leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+    var days = [31,leap ? 29 : 28,31,30,31,30,31,31,30,31,30,31];
+    if (month < 1 || month > 12 || day < 1 || day > days[month-1]) return value;
+    return ['January','February','March','April','May','June','July','August','September','October','November','December'][month-1] + ' ' + day + ', ' + parts[1];
+  }
+  function readableTime(value) {
+    var parts = /^(\d{2}):(\d{2})$/.exec(value);
+    if (!parts || Number(parts[1]) > 23 || Number(parts[2]) > 59) return value;
+    var hour = Number(parts[1]);
+    return (hour % 12 || 12) + ':' + parts[2] + (hour < 12 ? ' AM' : ' PM');
+  }
+  function emailRows(data) {
+    function value(key) { var item = data.get(key); return typeof item === 'string' ? item.trim() : ''; }
+    function option(key, id) {
+      var raw = value(key);
+      if (!raw) return '';
+      var match = Array.from(field(id).options).find(function (item) { return item.value === raw; });
+      return match ? match.text : raw;
+    }
+    var preference = value('contact_pref');
+    var contactLabels = {text:'Text',call:'Call',email:'Email'};
+    var rows = [
+      // FormSubmit requires lowercase email for Reply-To and the autoresponse.
+      ['name',value('name')], ['email',value('email')], ['Phone',value('phone')],
+      ['Preferred contact',Object.prototype.hasOwnProperty.call(contactLabels,preference) ? contactLabels[preference] : preference],
+      ['Trip date',readableDate(value('event_date'))], ['Pickup time',readableTime(value('pickup_time'))],
+      ['Passengers',option('headcount','qfHeadcount')], ['Duration',option('hours','qfHours')],
+      ['Event',option('event_type','qfEventType')], ['Vehicle',option('vehicle_preference','qfVehicle')],
+      ['Pickup',value('pickup_location')], ['Stops',value('destinations')], ['Notes',value('notes')],
+      ['Recorded source',value('utm_source')], ['Recorded referrer',value('source_referrer')], ['Landing page',value('source_page')]
+    ];
+    var campaign = [['Medium','utm_medium'],['Campaign','utm_campaign'],['Content','utm_content'],['Term','utm_term']].map(function (pair) {
+      var item = value(pair[1]); return item ? pair[0] + ': ' + item : '';
+    }).filter(Boolean).join('; ');
+    rows.push(['Campaign',campaign],['Reference',value('request_reference')]);
+    return rows.filter(function (row) { return row[1] !== ''; });
+  }
+  form.addEventListener('formdata',function (e) {
+    // A FormData inspection before submission must retain the original fields.
+    if (!preparedSubmission || !submitting) return;
+    preparedSubmission = false;
+    var rows;
+    try { rows = emailRows(e.formData); } catch (_) { return; }
+    // Build every row before changing this outgoing payload; live controls stay intact.
+    ['name','email','phone','contact_pref','event_date','pickup_time','headcount','hours','event_type','vehicle_preference','pickup_location','destinations','notes','source_page','source_referrer','utm_source','utm_medium','utm_campaign','utm_content','utm_term','request_reference'].forEach(function (key) { e.formData.delete(key); });
+    rows.forEach(function (row) { e.formData.append(row[0],row[1]); });
+  });
+  form.addEventListener('reset',function () { preparedSubmission = false; });
   // Retire the old seven-day draft that included contact details and free text.
   try { localStorage.removeItem('pbru_quote_draft'); } catch (_) {}
   field('qfDate').min = dateISO(new Date());
@@ -116,6 +168,7 @@
   });
   form.addEventListener('submit',function (e) {
     if (submitting) { e.preventDefault(); return; }
+    preparedSubmission = false;
     for (var n=1;n<=3;n++) if (!validate(n)) { e.preventDefault(); return; }
     if (form.elements.namedItem('_honey').value) { e.preventDefault(); notice('Please call or text us to request a quote.',true); return; }
     if (navigator.onLine === false) {
@@ -127,10 +180,10 @@
     field('qfReference').value = id;
     var stored = write(PENDING,{id:id,at:Date.now()});
     form.elements.namedItem('_next').value = 'https://www.partybusrus.com/thank-you' + (stored ? '#request='+encodeURIComponent(id) : '');
-    submitting = true; submit.disabled = true; submit.textContent = 'Continue to verification…';
+    submitting = true; preparedSubmission = true; submit.disabled = true; submit.textContent = 'Continue to verification…';
     notice('Opening the secure form verification. Complete that step to send your request. If it fails, return here or call us.');
     track('quote_submit_attempt',{vehicle_id:field('qfVehicle').value || 'undecided',passenger_band:field('qfHeadcount').value,event_type:field('qfEventType').value.toLowerCase().replace(/[^a-z0-9]+/g,'_')});
     // Native FormSubmit handoff retains CAPTCHA and autoresponse. This is NOT an accepted-lead event.
   });
-  window.addEventListener('pageshow',function () { submitting=false;submit.disabled=false;submit.textContent='Send Quote Request →'; });
+  window.addEventListener('pageshow',function () { submitting=false;preparedSubmission=false;submit.disabled=false;submit.textContent='Send Quote Request →'; });
 })();
