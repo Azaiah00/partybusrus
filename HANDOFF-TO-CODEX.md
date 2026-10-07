@@ -1,5 +1,7 @@
 # Party Bus R Us — Mobile Fix Handoff
 
+> **Archived brief — superseded October 7, 2026.** The instructions below describe an earlier version and must not guide current maintenance. Use [the current release handoff](site/PRODUCTION-READY-HANDOFF.md), [Analytics operations](site/ANALYTICS-SETUP.md) and [README](README.md). Production is now `https://www.partybusrus.com`; the old recipient, DNS status, availability claims and draft-storage directions below are historical. This brief is retained as a project record.
+
 ## What I need you to do
 Make `partybusrus.vercel.app` work correctly on mobile (iPhone + Android, all sizes 320px–768px). The site is a static HTML site with no framework. Currently the desktop version works fine but mobile has layout issues.
 
