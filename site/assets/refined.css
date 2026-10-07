@@ -73,3 +73,9 @@ body .blog-card{position:relative;cursor:pointer}
 body .blog-card h4 a:after{content:"";position:absolute;inset:0;z-index:1}
 body .blog-card:focus-within{outline:3px solid #8ad5df;outline-offset:4px}
 body .blog-card h4 a:focus-visible{outline:none!important}
+/* Keep quote states legible across the legacy light inputs and dark form. */
+body .quote-form input::placeholder,body .quote-form textarea::placeholder{color:#685a70;opacity:1}
+body .quote-form .qf-chip:hover,body .quote-form .qf-chip.active{color:#2d2418}
+body .quote-form .qf-radio:has(input:checked){background:#e8cbd6}
+body .quote-form .qf-row .btn.ghost:hover{background:#30232c;color:#f5f0e7!important;filter:none}
+body #pbru-consent :focus-visible,body #pbru-privacy-choice:focus-visible{outline-color:#7156b5!important}

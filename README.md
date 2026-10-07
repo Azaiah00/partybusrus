@@ -1,8 +1,10 @@
 # Party Bus R Us
 
-Current release verified: October 6, 2026. Static website hosted on Vercel at https://www.partybusrus.com.
+Last verified production baseline before this update: October 7, 2026. Static website hosted on Vercel at https://www.partybusrus.com.
 
-The revised site is live following the owner-approved merge of [pull request #1](https://github.com/Azaiah00/partybusrus/pull/1), with the mobile consent and quote-click follow-up published in [pull request #2](https://github.com/Azaiah00/partybusrus/pull/2). Earlier hosted QA covered all 92 linked pages, nine redirect cases and ten mobile layouts. Production HTTP checks passed across 95 pages, assets, redirect chains and missing-page behavior. October 6 checks confirmed the follow-up's live source parity, mobile notice layout and Google Analytics receipt of a native quote-click test, alongside page views and quote-step views. Preview collection stays disabled; actual inquiry delivery and booking attribution remain separate checks.
+The last verified production baseline before this update contains the owner-approved SEO, design and tracking work through [pull request #6](https://github.com/Azaiah00/partybusrus/pull/6), production commit `2343c3ff0f8330b7a0c1aab3dc6171331696ca1e`. Follow-ups corrected mobile consent spacing, quote-click delivery and campaign attribution, added Search Console verification, and removed unverified sitemap modification dates. Vercel reports a successful production deployment. Earlier hosted QA covered all 92 linked pages, nine redirects and ten mobile layouts; the original production HTTP review passed 169 checks. Google Analytics received the tested page, quote-step, native quote-click and distinct campaign events. Preview collection stays disabled; actual inquiry delivery and booking attribution remain separate checks.
+
+The October 7 contrast follow-up improves five quote/consent contrast states and advances the local service worker to v13. Static contrast checks, all three cache tests and 95-page/seven-script markup checks passed. Rendered local checks confirmed placeholder and selected-contact styles without overflow at 1280px and 390px; no console errors or warnings were returned. Hover/focus browser states, actual 200% zoom and physical Safari testing remain unverified. Deployment verification for this follow-up was pending when this handoff was prepared.
 
 ## Current files
 
@@ -10,6 +12,8 @@ The revised site is live following the owner-approved merge of [pull request #1]
 - `partybusrus.com-audit/2026-09-24/implementation/IMPLEMENTATION-AND-QA.md`: changes, QA results and external completion requirements.
 - `partybusrus.com-audit/2026-09-24/FULL-AUDIT-REPORT.md`: original live-site audit baseline.
 - `site/ANALYTICS-SETUP.md`: current GA4 consent, event and source configuration; no placeholder collectors.
+- `site/PRODUCTION-READY-HANDOFF.md`: current release, completed setup and remaining owner actions. `HANDOFF-TO-CODEX.md` is an archived brief, not current instructions.
+- `outputs/`: local-only deliverables, including the inquiry tracker workbook. This directory is excluded from Git; keep customer records there, outside website releases.
 - `scripts/`: preview and repeatable verification tools. Page migration scripts document this implementation and should not be rerun as generators.
 - `deliverables/`, `archive/`, `source-photos/`, `PhotosVideos/` and logo folders: historical plans and original assets. Older Netlify instructions, tracking placeholders and launch-ready claims are superseded by the current implementation report.
 
@@ -30,4 +34,6 @@ Sitemap `lastmod` dates are optional and intentionally omitted until reviewed pe
 
 ## Remaining measurement work
 
-The GA4 property, stream and eleven reporting dimensions are configured; see `site/ANALYTICS-SETUP.md`. Live tag loading follows consent, and Realtime receipt is verified for page views, the initial quote step and a native quote-click test. Confirm an actual FormSubmit inquiry and autoresponse arrive, then inspect Search Console with authorized access and connect the business's phone/email inquiry records. Do not treat browser clicks or a form handoff as a confirmed lead or booking. See the implementation release report for exact QA limits.
+The GA4 property, stream and eleven reporting dimensions are configured; see `site/ANALYTICS-SETUP.md`. On October 7, Search Console showed sitemap **Success** with 92 discovered pages. Discovery is not proof that all pages are indexed. The Web performance report was still processing, so no search-performance baseline is available yet. Keep the verification tag and existing sitemap submission in place.
+
+Confirm one clearly labeled, authorized FormSubmit test reaches the business inbox, supports replying to the sender, sends its customer autoresponse and returns to the expected page. Use the delivered local inquiry workbook for phone/email inquiries and booking outcomes. Do not treat browser clicks or a form handoff as confirmed leads or bookings. Complete network/cookie inspection and remaining accessibility checks are separate from the evidence already recorded; see the implementation report for exact limits.
