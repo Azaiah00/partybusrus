@@ -26,6 +26,8 @@ Open http://127.0.0.1:4173/. In another terminal, run `npm test` for the full lo
 
 `npm ci` installs only the pinned development accessibility library. Adding `?qa=1` to a preview page runs the optional browser accessibility report. These helpers are not shipped in `site/`. The other checks use only Node's built-in modules. The preview binds to localhost and rejects form submissions.
 
+Sitemap `lastmod` dates are optional and intentionally omitted until reviewed per-page dates of substantive content changes are available. Do not copy dates from an older sitemap or substitute build times, filesystem timestamps, or the latest commit date. Verification tags and routine deployment changes alone should not advance a page's content date.
+
 ## Remaining measurement work
 
 The GA4 property, stream and eleven reporting dimensions are configured; see `site/ANALYTICS-SETUP.md`. Live tag loading follows consent, and Realtime receipt is verified for page views, the initial quote step and a native quote-click test. Confirm an actual FormSubmit inquiry and autoresponse arrive, then inspect Search Console with authorized access and connect the business's phone/email inquiry records. Do not treat browser clicks or a form handoff as a confirmed lead or booking. See the implementation release report for exact QA limits.
