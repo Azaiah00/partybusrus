@@ -99,20 +99,16 @@ export function normalizeHTML(html, file) {
   });
   return html.replace(/<!--SEO-BLOCK-(\d+)-->/g, (m, index) => blocks[Number(index)]);
 }
-export function buildSitemap(htmlFiles, original) {
-  const dates = new Map();
-  for (const match of original.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
-    const loc = match[1].match(/<loc>(.*?)<\/loc>/)?.[1];
-    const date = match[1].match(/<lastmod>(.*?)<\/lastmod>/)?.[1];
-    if (loc && date) dates.set(normalizeURL(decode(loc), origin, true), date);
-  }
+export function buildSitemap(htmlFiles) {
+  // Omit optional lastmod until reviewed per-page substantive-change dates exist.
+  // Existing sitemap dates, file timestamps and build times are not reliable sources.
   const urls = new Set();
   for (const file of htmlFiles) {
     const route = routeFor(file), html = fs.readFileSync(file, 'utf8');
     const noindex = [...html.matchAll(/<meta\b[^>]*>/gi)].map(m => attrs(m[0])).some(a => ['robots', 'googlebot'].includes(a.name) && /noindex/i.test(a.content || ''));
     if (!noindex && route === resolvePath(route)) urls.add(origin + route);
   }
-  return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + [...urls].sort().map(u => `  <url>\n    <loc>${encode(u)}</loc>${dates.has(u) ? `\n    <lastmod>${dates.get(u)}</lastmod>` : ''}\n  </url>`).join('\n') + '\n</urlset>\n';
+  return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + [...urls].sort().map(u => `  <url>\n    <loc>${encode(u)}</loc>\n  </url>`).join('\n') + '\n</urlset>\n';
 }
 export function run(write = false) {
   const htmlFiles = files().filter(f => f.endsWith('.html'));
@@ -122,7 +118,7 @@ export function run(write = false) {
     if (before !== after) { changes.push(path.relative(root, file)); if (write) fs.writeFileSync(file, after); }
   }
   const sitemap = path.join(site, 'sitemap.xml');
-  const before = fs.readFileSync(sitemap, 'utf8'), after = buildSitemap(htmlFiles, before);
+  const before = fs.readFileSync(sitemap, 'utf8'), after = buildSitemap(htmlFiles);
   if (before !== after) { changes.push('site/sitemap.xml'); if (write) fs.writeFileSync(sitemap, after); }
   return { mode: write ? 'write' : 'dry-run', html_pages: htmlFiles.length, changed_files: changes.length, files: changes };
 }
