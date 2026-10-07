@@ -38,7 +38,7 @@ function walkSchema(value, file) {
   const types = [].concat(value['@type'] || []);
   if (types.includes('LimousineService')) fail('unsupported_schema_type', file, 'LimousineService');
   if (types.some(t => ['Review', 'AggregateRating'].includes(t)) || value.aggregateRating || value.review || value.reviews) fail('unverified_review_schema', file, types.join(','));
-  if (routeFor(file).startsWith('/fleet/bus-') && types.includes('Product')) fail('fleet_product_schema', file, 'Use the truthful Service representation');
+  if (routeFor(file).startsWith('/fleet/bus-') && types.some(type => ['Product', 'Vehicle'].includes(type))) fail('fleet_product_schema', file, 'Use the truthful Service representation; Vehicle inherits Product');
   for (const [key, v] of Object.entries(value)) {
     if (typeof v === 'string' && /^https?:\/\//.test(v) && ownURL(v)) {
       if (normalizeURL(v, origin, true) !== v) fail('noncanonical_schema_url', file, key + ': ' + v);
