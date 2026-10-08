@@ -9,6 +9,7 @@
     "test": "node scripts/run-qa.mjs",
     "test:quote": "node scripts/test-quote.mjs",
     "test:analytics": "node scripts/test-analytics.mjs",
+    "test:inquiry-sync": "node --test scripts/test-formsubmit-sync-core.mjs scripts/test-formsubmit-sync-adapter.mjs",
     "seo:check": "node scripts/seo-maintenance.mjs"
   },
   "devDependencies": { "axe-core": "4.11.4" }
