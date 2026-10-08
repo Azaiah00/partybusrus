@@ -111,7 +111,7 @@ test('repeat archive creates one capture/inquiry, leaves existing formulas and t
   const [capture] = app.captureRows(), [inquiry] = app.inquiryRows();
   assert.equal(app.captureRows().length, 1); assert.equal(app.inquiryRows().length, 1);
   assert.equal(inquiry[0], 'FS-' + capture[0]); assert.equal(capture[3], inquiry[0]);
-  assert.equal(inquiry[4], 'Unknown'); assert.equal(inquiry[6], ''); assert.equal(inquiry[9], ''); assert.equal(inquiry[10], '');
+  assert.equal(inquiry[4], 'Unknown'); assert.equal(inquiry[5], 'Provider record'); assert.equal(inquiry[6], ''); assert.equal(inquiry[9], ''); assert.equal(inquiry[10], '');
   assert.equal(inquiry[15], 'Inquiry'); assert.equal(inquiry[17], 'Own-site referrer');
   assert.equal(inquiry[8].toISOString(), '2026-11-12T12:00:00.000Z');
   assert.deepEqual(formulaSnapshot(app), formulas); assert.deepEqual(plain([...app.sheets.Submissions.cells]), emails);

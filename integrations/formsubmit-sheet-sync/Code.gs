@@ -229,7 +229,7 @@ function processCaptureRows_(sheets, records, shared, nowIso) {
         if (!isFinite(firstSeen.getTime())) throw captureError_('CAPTURE_TIMESTAMP_INVALID');
         var customer = row[6] === 'Not recorded' ? '' : String(row[6]);
         var notes = 'Captured from FormSubmit archive. Original trip/contact details are in Captured forms. No booking outcome established.';
-        var first = [target, firstSeen, 'Web quote', customer, 'Unknown', 'Provider archive; recorded metadata only', '', '', '', '', '', notes];
+        var first = [target, firstSeen, 'Web quote', customer, 'Unknown', 'Provider record', '', '', '', '', '', notes];
         // Parse only the site's explicit ISO or English-month formats.
         var tripDateIso = FormSubmitSyncCore.tripDateIso(String(row[10] || ''));
         if (tripDateIso) first[8] = new Date(tripDateIso + 'T12:00:00Z');
