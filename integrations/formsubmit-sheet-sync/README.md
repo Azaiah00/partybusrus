@@ -17,7 +17,7 @@ No API key, spreadsheet identifier or customer data belongs in this directory or
 
 ## Install after selecting the owning Google account
 
-1. Import the prepared Live Inquiry Tracker `.xlsx` as a native Google Sheet in the chosen account. Confirm sharing is restricted. Verify all five tabs, historical email and inquiry counts against the private source workbook, existing test exclusions, and the formulas after conversion.
+1. Import the prepared Live Inquiry Tracker `.xlsx` as a native Google Sheet in the chosen account. Confirm sharing is restricted and set its spreadsheet timezone to America/New_York. Verify all five tabs, historical email and inquiry counts against the private source workbook, existing test exclusions, and the formulas after conversion.
 2. Open **Extensions → Apps Script** from that Sheet. Copy `Core.gs` and `Code.gs` into separate script files. Enable display of the manifest in Project Settings and apply `appsscript.json`. Save the project. Do not deploy a web app.
 3. Obtain the FormSubmit archive API key using its official API-key request procedure for the existing quote recipient. FormSubmit delivers it to that mailbox. Do not paste the key into a chat, workbook cell, public URL, repository, or script source.
 4. Reload the Sheet and choose **Inquiry capture → Configure private API key**. Supply the key in the private configuration dialog. The first configuration fixes the capture-start timestamp. Later reconfiguration must retain it.
