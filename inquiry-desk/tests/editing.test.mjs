@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import vm from 'node:vm';
 import {summary,sourceClass,STATUSES} from '../lib/model.mjs';
+import {upcoming,followUps,reminder,backupPayload} from '../lib/workflow.mjs';
 
 // Exercise actual UI event handlers with a small DOM and a controllable network.
-const source=(await readFile(new URL('../public/app.js',import.meta.url),'utf8')).replace(/^import .*?;\n/,'');
+const source=(await readFile(new URL('../public/app.js',import.meta.url),'utf8')).replace(/^import .*?;\r?\n/gm,'');
 async function desk(){
  const nodes=new Map();const listeners=new Map();let settle;
  function element(){return {value:'',hidden:false,disabled:false,dataset:{},events:{},open:false,textContent:'',innerHTML:'',classList:{toggle(){}},addEventListener(k,f){this.events[k]=f;},setAttribute(){},removeAttribute(){},focus(){},scrollIntoView(){},replaceChildren(){},append(){},showModal(){this.open=true;},close(){this.open=false;}};}
@@ -13,7 +14,7 @@ async function desk(){
  const form=$('#detail-form');const customer=Object.assign(element(),{name:'customer',type:'text'});const notes=Object.assign(element(),{name:'notes',type:'textarea'});
  form.elements=[customer,notes,$('#save')];form.elements.customer=customer;
  form.reset=()=>{customer.value='';notes.value='';};
- const context={summary,sourceClass,STATUSES,Intl,Date,URL,AbortController,structuredClone,crypto:{randomUUID:()=> '00000000-0000-4000-8000-000000000001'},navigator:{},setTimeout:()=>1,clearTimeout(){},
+ const context={summary,sourceClass,STATUSES,upcoming,followUps,reminder,backupPayload,Intl,Date,URL,AbortController,structuredClone,crypto:{randomUUID:()=> '00000000-0000-4000-8000-000000000001'},navigator:{},setTimeout:()=>1,clearTimeout(){},
  document:{querySelector:$,querySelectorAll:()=>[],addEventListener(k,f){listeners.set(k,f);}},window:{addEventListener(){},scrollTo(){}},
  fetch:async(_url,options)=> options.method==='GET'?{redirected:false,ok:true,headers:new Headers({'content-type':'application/json'}),json:async()=>({records:[],metadata:{}})}:new Promise(resolve=>{settle=resolve;})};
  vm.runInNewContext(source,context);await new Promise(resolve=>setImmediate(resolve));

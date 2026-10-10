@@ -12,9 +12,21 @@ The generated server-only `lib/deployment.mjs` fixes the store for each deployed
 
 ## Records and evidence
 
-Historical snapshot: emails through October 6, 2026, reviewed October 7. Preserve all 18 source messages, 11 customer groups and one owner-confirmed test; two inferred groups require review. Blank status is unknown, not New. The $1,500 quote is customer-reported, not a confirmed booking. Source classification does not infer Google organic from missing/internal referrers.
+Historical snapshot: emails through October 8, 2026, reviewed October 9. Preserve all 19 source messages, 12 customer groups and one owner-confirmed test; two inferred groups require review. Blank status is unknown, not New. The $1,500 quote is customer-reported, not a confirmed booking. Source classification does not infer Google organic from missing/internal referrers.
 
 The original private Google Sheet remains a historical backup; edits in the desk do not sync back to it. Automatic form capture is NOT configured. Calls and direct emails are manual. No email/call/text is sent by the app until the owner uses a contact link in their own mail/phone app.
+
+## Capture, agenda and recovery
+
+The production-only scheduled `capture` function runs at 00:00, 08:00 and 16:00 UTC. It remains inactive until the specifically authorized provider key is stored server-side as `FORMSUBMIT_ARCHIVE_KEY`. No key is in source, public files or backups. Requesting the key and granting archive access still require the pending owner confirmation. Never activate the obsolete Sheet importer alongside this workflow.
+
+Capture uses immutable eight-hour reservations (at most four requests in a rolling 24 hours), exact fingerprints, reference conflicts, conservative historical matching, preserved raw evidence, and a 40-record batch limit. Conflicting references go to review; prior business outcomes survive. API receipts do not count as received emails. Interrupted/error/stale health is visible. Provider archive retention is limited to 30 days; a gap longer than that requires mailbox reconciliation. Calls and direct emails are not captured by FormSubmit.
+
+Agenda separates scheduled follow-ups from upcoming trip inquiries; unconfirmed trips are labeled. Downloading an ICS reminder does not install it automatically: import the file into a calendar. Follow-ups use 9 AM America/New_York, converted to UTC with daylight-saving rules; there is a 15-minute advance alarm. No push/email/SMS notification service is connected.
+
+Backup downloads a fresh JSON snapshot of current records, original submission evidence and metadata. It does not export every prior cloud version or the separate raw provider capture ledger. Keep it in private storage. Saved versions in each inquiry can restore earlier business fields as a new version while retaining newer submission evidence; concurrent writes are rejected.
+
+Disaster recovery: `node scripts/recover-backup.mjs <private-backup.json>` validates without writes. An authorized operator can set `NETLIFY_CLI_PATH` to the official installed CLI entrypoint, then run with a new `inquiry-recovery-NAME` store and `--apply`. Run from this app's linked directory. Only empty isolated recovery stores are accepted; the script never targets live/preview stores. All restored objects are read back and compared. If interrupted, discard the incomplete recovery store only with appropriate authorization, or use a new empty name. Inspect recovered records before any separately reviewed deployment switches the application to that store. Core recovery was exercised against isolated test storage; CLI validation was tested on a browser-downloaded synthetic backup. No production disaster restore has been performed.
 
 ## Local checks
 

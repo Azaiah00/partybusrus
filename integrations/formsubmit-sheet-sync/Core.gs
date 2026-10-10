@@ -81,11 +81,13 @@ var FormSubmitSyncCore = (function () {
   function fieldsFrom(data, index) {
     var fields = Object.create(null), presence = Object.create(null);
     Object.keys(ALIASES).forEach(function (key) {
-      var alias = ALIASES[key], hasRaw = own(data, key), hasAlias = own(data, alias);
-      if ((hasRaw && typeof data[key] !== 'string') || (hasAlias && typeof data[alias] !== 'string')) fail('FIELD_TYPE', index);
-      if (key !== alias && hasRaw && hasAlias && data[key] !== data[alias]) fail('FIELD_CONFLICT', index);
-      fields[key] = hasRaw ? data[key] : hasAlias ? data[alias] : '';
-      presence[key] = hasRaw || hasAlias;
+      var alias = ALIASES[key];
+      // FormSubmit's delivered October 8 notification uses underscore labels.
+      var names=[key,alias,alias.replace(/ /g,'_')].filter(function(name,i,all){return all.indexOf(name)===i&&own(data,name);});
+      if(names.some(function(name){return typeof data[name]!=='string';}))fail('FIELD_TYPE',index);
+      if(names.some(function(name){return data[name]!==data[names[0]];}))fail('FIELD_CONFLICT',index);
+      fields[key] = names.length?data[names[0]]:'';
+      presence[key] = names.length>0;
     });
     if (own(data, 'Campaign')) {
       if (typeof data.Campaign !== 'string') fail('FIELD_TYPE', index);

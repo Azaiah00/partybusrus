@@ -1,5 +1,22 @@
 # Release QA — October 9, 2026 (Eastern)
 
+## Five-item follow-through release (current)
+
+Production deploy `6ac9a2786d030c52a7615ef3` supersedes all deployment IDs below. Browser read confirms 12 customers, 19 historical emails, one excluded test, eleven unrecorded outcomes, two inferred groups awaiting owner confirmation, and historical coverage through October 8. One new real inquiry was added from the existing mailbox notification and read back exactly. No customer was contacted; mailbox location was preserved.
+
+- 33 portal tests pass, including capture quota/concurrency/deduplication, cross-window reused references, conservative history matching, underscore field aliases, error privacy, immutable restore, stale writes, empty-store backup recovery, UTC/DST reminders and editing regressions.
+- All 44 existing shared archive parser/Sheet adapter tests pass after adding underscore alias support. The old Sheet integration remains inactive.
+- Local browser: synthetic follow-up save/reopen; agenda inclusion; downloaded ICS inspected (9 AM Eastern / 13:00 UTC on October 12); loaded versions and restored original business fields; actual JSON backup downloaded and independently validated (12 fictional records).
+- Core full-backup recovery was exercised against isolated in-memory storage with exact record comparison, duplicate/malformed rejection, and refusal to restore into a populated store. Operator CLI dry-run was tested using the browser-downloaded backup. No live disaster restore was performed. A production download event timed out during browser automation, so a fresh real production export has not been independently validated.
+- Phone layouts at 390 and 320 pixels have no horizontal overflow. New controls remain visible. Actual phone install/sign-in/calendar import still require the owner's device.
+- Production agenda opens with real upcoming inquiries and honest unrecorded/quoted labels. Fresh production browser logs contain no errors/warnings. Screenshot: `.verify/inquiry-desk-agenda-live-oct09.png`.
+- Both canonical and immutable deploy URLs reject anonymous root, API, direct function, app JS and manifest requests with HTTP 401. Public files contain none of 36 sampled private customer values. Customer evidence and credentials remain outside Git/public assets.
+- Archive capture function is deployed but inactive without a key. No FormSubmit key request or new credential connection was made. The specific approval is still pending. Schedule and live provider import must be verified after activation; current counts do not imply ongoing automatic capture.
+- GSC accessed in Chrome as fredsales519@gmail.com: sitemap Success / 92 discovered; Product correction validation Passed / zero invalid; Breadcrumbs 20 valid / zero invalid; HTTPS 21 / zero non-HTTPS. Indexing report remains processing. Performance currently covers October 5–6: 2 clicks, 57 impressions, 3.5% CTR, position 24.2. Both visible clicks branded. These two days do not prove sustained SEO improvement.
+- GA4 property 555887564 returns Missing permissions under Fred519. No access request sent or permissions changed; original Analytics identity is needed.
+
+Owner confirmations still needed: capture credential access; eleven actual outcomes/amounts and two repeat groups; physical phone installation; correct GA4 identity. These are factual/access constraints, not tasks silently marked complete. Earlier public-site QA below remains applicable because public website assets were not changed by this release.
+
 ## Follow-up audit and fixes
 
 Published production deploy: `6ac990cae9e15df13ffff84f` at https://partybusrus-inquiry-desk.netlify.app/ . Post-release read confirms the production store: 11 customers, 18 historical emails, one excluded test (no preview fixture). Production Add inquiry, Keep editing and Discard changes passed without saving a test record; fresh console log contains no errors/warnings. Post-release anonymous access checks remain HTTP 401. Desktop proof: `.verify/inquiry-desk-qa-fix-desktop.jpg`.

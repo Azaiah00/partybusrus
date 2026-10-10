@@ -1,16 +1,18 @@
 import {summary,sourceClass,STATUSES} from './model.mjs';
+import {upcoming,followUps,reminder,backupPayload} from './workflow.mjs';
 const $ = s => document.querySelector(s);
 let records=[], metadata={}, selected=null, loaded=false, saving=false, dirty=false, view='overview', installPrompt;
 const today=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const dateLabel=v=>v?new Date(v.slice(0,10)+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}):'Not recorded';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=v=>v==null?'Not recorded':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2}).format(v);
+function detailError(text){$('#save-error').textContent=text;$('#save-error').hidden=false;$('#save-error').scrollIntoView({block:'nearest'});}
 function toast(text){$('#toast').textContent=text;$('#toast').hidden=false;setTimeout(()=>{$('#toast').hidden=true;},4500);}
 function safeLink(value){try{const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:null;}catch{return null;}}
-async function api(method='GET',body){
+async function api(method='GET',body,path='/api/desk'){
  const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),20000);
  try {
-  const res=await fetch('/api/desk',{method,cache:'no-store',credentials:'same-origin',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined,signal:controller.signal});
+  const res=await fetch(path,{method,cache:'no-store',credentials:'same-origin',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined,signal:controller.signal});
   if(res.redirected || !res.headers.get('content-type')?.includes('application/json'))throw new Error('Your sign-in may have expired. Reload this page to sign in again.');
   const data=await res.json();if(!res.ok)throw new Error(data.error||'Unable to save. Please try again.');return data;
  }catch(e){if(e.name==='AbortError')throw new Error('The connection timed out. Refresh to check the last saved version before retrying.');throw e;}finally{clearTimeout(timer);}
@@ -30,7 +32,8 @@ function render(){
  const hist=metadata.history;
  $('#snapshot-date').textContent=hist?`Historical emails through ${dateLabel(hist.through)}. ${s.excluded} excluded record${s.excluded===1?'':'s'}.`:'Historical import pending.';
  $('#footer-count').textContent=`${s.emails} historical emails · ${s.customers} customer inquiries`;
- renderCards();renderSources();
+ const capture=metadata.capture||{};$('#capture-state').textContent=capture.state||'Not configured';$('#capture-message').textContent=capture.message||'Automatic capture is not connected. Add new calls and emails manually.';$('#capture-checked').textContent=capture.attemptedAt?'Last capture attempt: '+new Date(capture.attemptedAt).toLocaleString('en-US',{timeZone:'America/New_York'})+' ET':'';
+ renderCards();renderSources();renderAgenda();
 }
 function renderCards(){
  const term=$('#search').value.trim().toLowerCase(),filter=$('#filter').value;
@@ -50,15 +53,17 @@ function renderSources(){
  $('#source-bars').innerHTML=[...counts].sort((a,b)=>b[1]-a[1]).map(([name,count])=>`<div class="source-row"><div><strong>${esc(name)}</strong><span>${count} of ${leads.length}</span></div><div class="bar"><meter min="0" max="${Math.max(1,leads.length)}" value="${count}" aria-label="${esc(name)}: ${count} inquiries">${count}</meter></div></div>`).join('')||'<p class="empty">Sources will appear when inquiries are added.</p>';
 }
 function setView(next){view=next;for(const b of document.querySelectorAll('[data-view]')){b.classList.toggle('active',b.dataset.view===next);if(b.dataset.view===next)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');}
- $('#overview-panel').hidden=next!=='overview';$('#inquiry-section').hidden=next==='sources';$('#sources-section').hidden=next!=='sources';
+ $('#overview-panel').hidden=next!=='overview';$('#inquiry-section').hidden=['sources','agenda'].includes(next);$('#sources-section').hidden=next!=='sources';$('#agenda-section').hidden=next!=='agenda';
  $('#page-title').innerHTML=next==='sources'?'Know where<br>interest starts<span>.</span>':next==='inquiries'?'Every inquiry.<br>A clear next step<span>.</span>':'Your next trip<br>starts here<span>.</span>';
  $('#intro').textContent=next==='sources'?'The source evidence behind your customer inquiries.':next==='inquiries'?'From the first hello to the confirmed booking.':'A clear view of every inquiry and what needs your attention.';
+ if(next==='agenda'){$('#page-title').innerHTML='Your next steps.<br>Your upcoming trips<span>.</span>';$('#intro').textContent='Follow through, one inquiry at a time.';}
  window.scrollTo({top:0,behavior:'instant'});
 }
 function openRecord(id){
  selected=id?structuredClone(records.find(r=>r.id===id)):{id:crypto.randomUUID(),recordType:'Inquiry',channel:'Phone',status:'New',reportedSource:'Unknown',submissions:[]};
  if(!selected)return;
  $('#detail-form').reset();dirty=false;$('#save-error').hidden=true;$('#discard-prompt').hidden=true;
+ $('#save-hint').textContent='Saves securely across your devices.';$('#version-list').replaceChildren();$('#version-details').open=false;$('#restore-prompt').hidden=true;
  $('#detail-title').textContent=id?selected.customer:'Add an inquiry';$('#detail-kicker').textContent=id?`${selected.channel} · ${dateLabel(selected.firstReceived)}`:'PHONE, EMAIL OR TEXT';
  for(const el of $('#detail-form').elements){if(!el.name)continue;if(el.type==='checkbox')el.checked=Boolean(selected[el.name]);else el.value=selected[el.name]??'';}
  $('#contact-actions').replaceChildren();
@@ -104,3 +109,18 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!$('#deta
 $('#today').textContent=new Intl.DateTimeFormat('en-US',{weekday:'long',month:'long',day:'numeric',timeZone:'America/New_York'}).format(new Date()).toUpperCase();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
 load();
+
+function download(data,name,type){const url=URL.createObjectURL(new Blob([data],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function renderAgenda(){
+ const cards=(list,dateKey)=>list.map(r=>`<article class="card"><h3>${esc(r.customer)}</h3><p>${dateLabel(r[dateKey])} · ${esc(r.status||'Outcome not recorded')}</p><div class="card-foot"><span>${esc(r.event||r.channel)}</span><button class="open-card" data-id="${esc(r.id)}">Open inquiry →</button></div></article>`).join('')||'<p class="empty">Nothing scheduled here yet.</p>';
+ $('#agenda-followups').innerHTML=cards(followUps(records,today()),'followUp');$('#agenda-trips').innerHTML=cards(upcoming(records,today()),'tripDate');
+}
+$('#agenda-section').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openRecord(b.dataset.id);});
+$('#export-backup').addEventListener('click',async()=>{const b=$('#export-backup');b.disabled=true;try{const fresh=await api();download(JSON.stringify(backupPayload(fresh),null,2),'inquiry-desk-backup-'+today()+'.json','application/json');toast('Private backup downloaded. Keep this customer file in a secure location.');}catch(e){toast(e.message);}finally{b.disabled=false;}});
+$('#capture-now').addEventListener('click',async()=>{const b=$('#capture-now');b.disabled=true;try{const result=await api('POST',{action:'capture'});await load();$('#capture-state').textContent=result.state;$('#capture-message').textContent=result.message;}catch(e){toast(e.message);}finally{b.disabled=false;}});
+$('#calendar-reminder').addEventListener('click',()=>{try{if(dirty)throw Error('Save the follow-up date before downloading its reminder.');download(reminder(selected),'inquiry-follow-up.ics','text/calendar');$('#save-hint').textContent='Import the downloaded file into your calendar to enable its reminder.';}catch(e){$('#save-error').textContent=e.message;$('#save-error').hidden=false;$('#save-error').scrollIntoView({block:'nearest'});}});
+let restoreVersion=null;
+$('#load-versions').addEventListener('click',async()=>{if(!selected?.revision){detailError('Save this inquiry first.');return;}const b=$('#load-versions'),id=selected.id;b.disabled=true;try{const data=await api('GET',undefined,'/api/desk?action=history&id='+encodeURIComponent(id));if(selected?.id!==id)return;$('#version-list').innerHTML=data.versions.map(r=>`<article class="evidence-entry"><strong>Version ${r.revision}${r.revision===selected.revision?' · current':''}</strong><p>${esc(r.updatedAt)} · ${esc(r.status||'Outcome not recorded')}</p><p>${esc(r.notes||'No notes')}</p>${r.revision<selected.revision?`<button type="button" class="quiet" data-revision="${r.revision}">Review restore</button>`:''}</article>`).join('');}catch(e){if(selected?.id===id)detailError(e.message);}finally{b.disabled=false;}});
+$('#version-list').addEventListener('click',e=>{const b=e.target.closest('[data-revision]');if(!b)return;if(dirty){detailError('Save or discard your current edits before restoring.');return;}restoreVersion=Number(b.dataset.revision);$('#restore-description').textContent=`Replace the business details with version ${restoreVersion}? Current details remain in saved history. Original submission evidence is retained.`;$('#restore-prompt').hidden=false;$('#confirm-restore').focus();});
+$('#cancel-restore').addEventListener('click',()=>{$('#restore-prompt').hidden=true;restoreVersion=null;});
+$('#confirm-restore').addEventListener('click',async()=>{if(saving||dirty||!selected||!restoreVersion)return;const id=selected.id;saving=true;const controls=[...$('#detail-form').elements];controls.forEach(el=>el.disabled=true);try{const result=await api('POST',{action:'restore',id,revision:selected.revision,fromRevision:restoreVersion});records=records.map(r=>r.id===id?result:r);render();$('#detail-dialog').close();openRecord(id);$('#save-hint').textContent='Earlier details restored as a new saved version.';}catch(e){$('#save-error').textContent=e.message;$('#save-error').hidden=false;}finally{saving=false;controls.forEach(el=>el.disabled=false);}});

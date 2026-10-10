@@ -46,7 +46,7 @@ export function summary(records, today) {
     unrecorded: leads.filter(r => !r.status).length,
     excluded: records.length-leads.length,
     review: records.filter(r => r.groupingNeedsReview).length,
-    emails: records.reduce((s,r) => s + (r.submissions?.length ?? 0),0)
+    emails: records.reduce((s,r) => s + (r.submissions?.filter(s=>s.kind!=='archive').length ?? 0),0)
   };
 }
 export function createRecord(input, id, today) {

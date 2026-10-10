@@ -2,4 +2,5 @@
 .netlify
 node_modules/
 lib/deployment.mjs
+lib/formsubmit-core.mjs
 netlify/database/migrations/*_private_import.sql

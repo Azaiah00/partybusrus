@@ -10,6 +10,12 @@ export function documentRepository(store){
   const record=await store.get(versions[0].key,{type:'json'});if(!record)throw Error('Document unavailable');return record;
  }
  return {
+  async history(id){
+   const prefix=`records/${encodeURIComponent(id)}/`;const {blobs}=await store.list({prefix});
+   const versions=blobs.filter(b=>/^\d{10}\.json$/.test(b.key.slice(prefix.length))).sort((a,b)=>b.key.localeCompare(a.key));
+   return Promise.all(versions.slice(0,100).map(b=>store.get(b.key,{type:'json'})));
+  },
+  async snapshot(id,revision){return store.get(key(id,revision),{type:'json'});},
   async readAll(){
    const {blobs}=await store.list({prefix:'records/'});const current=new Map();
    for(const b of blobs){const m=/^records\/([^/]+)\/(\d{10})\.json$/.exec(b.key);if(m&&(!current.has(m[1])||current.get(m[1]).key<b.key))current.set(m[1],b);}
