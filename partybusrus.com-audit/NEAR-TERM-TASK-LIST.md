@@ -1,5 +1,7 @@
 # Party Bus R Us — Current project status and next steps
 
+**October 10 destination correction:** Move the private inquiry hub to Vercel, the website's hosting platform. Migration adapter/build are prepared and 37 portal tests pass. Publishing and data cutover are pending an expired Vercel CLI login refresh; no Vercel hub is live yet. See `inquiry-desk/VERCEL-MIGRATION.md`. The prior Netlify link below is temporary until the protected Vercel replacement is verified.
+
 Updated October 9, 2026 (Eastern). This replaces the obsolete pre-launch checklist. Public website: https://www.partybusrus.com/ . Private hub: https://partybusrus-inquiry-desk.netlify.app/ . Detailed hub QA: `inquiry-desk/QA.md`.
 
 ## Complete and verified

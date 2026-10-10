@@ -1,0 +1,9 @@
+node_modules
+.netlify
+.vercel
+.env*
+tests
+netlify
+lib/deployment.mjs
+QA.md
+README.md
