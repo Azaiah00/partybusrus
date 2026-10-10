@@ -1,0 +1,5 @@
+# Local Netlify folder
+.netlify
+node_modules/
+lib/deployment.mjs
+netlify/database/migrations/*_private_import.sql

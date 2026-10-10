@@ -1,5 +1,9 @@
 .vercel/
 node_modules/
+.netlify/
+# Private historical inquiry import; never publish through static assets or Git.
+inquiry-desk/netlify/database/migrations/*_private_import.sql
+inquiry-desk/lib/deployment.mjs
 .DS_Store
 Thumbs.db
 *.log
