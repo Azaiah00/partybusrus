@@ -1,50 +1,42 @@
-# Party Bus R Us — Near-Term Task List
+# Party Bus R Us — Current project status and next steps
 
-## Before connecting the domain
+Updated October 9, 2026 (Eastern). This replaces the obsolete pre-launch checklist. Public website: https://www.partybusrus.com/ . Private hub: https://partybusrus-inquiry-desk.netlify.app/ . Detailed hub QA: `inquiry-desk/QA.md`.
 
-- [ ] Add `partybusrus.com` and `www.partybusrus.com` to Vercel.
-- [ ] Point apex and `www` DNS to Vercel; choose one canonical host and redirect the other.
-- [ ] Promote V2 to the root URL structure and add permanent `/v2/*` to root redirects.
-- [ ] Confirm all 92+ canonical URLs return the intended V2 page with one 200 response.
-- [ ] Connect quote submissions to the existing Real Estate Advancement Supabase project.
-- [ ] Add server-side spam protection, validation, rate limiting and failure logging to quote submission.
-- [ ] Replace the analytics placeholder with the real GTM/GA4 IDs.
-- [ ] Track quote start, quote completion, validation failure, call, text, WhatsApp and Instagram events.
+## Complete and verified
 
-## First week after launch
+- Website launched on Vercel with working domain/canonical routing. October 9 live checks: all 92 sitemap URLs return HTTP 200 with matching canonicals and no page-level noindex; missing-page check returns 404.
+- Local technical and markup audits: 95 pages, 92 indexable, zero failures/warnings. Live quote, Analytics, configuration, service worker and robots assets match tested local files.
+- Clearer submission emails published. Existing email provider retained; owner confirms real inquiries arrive. No test email is required by the owner. Current quote tests: 23 passing.
+- GA4 stream G-TM8WLPFQC3 configured with consent controls and custom dimensions. Current Analytics tests: 21 passing; public-site cache tests: 3 passing. Previous live campaign receipt verified. This does not establish complete event receipt or completed-call/booking tracking.
+- Search Console URL-prefix property https://www.partybusrus.com/ verified in fredsales519@gmail.com. Sitemap last independently observed October 7: Success, 92 discovered URLs. Discovery is not proof of indexing.
+- Fleet Product/Vehicle schema corrections published; Google validation started October 7. Final Google validation result remains pending verification.
+- Private Inquiry Desk deployed with shared cloud storage, editing, source evidence, search/filters, follow-ups, quote/booking values, test exclusions, and phone installation instructions.
+- Historical import: 18 reviewed emails, 11 customer groups, one excluded owner test. Two inferred groups require review. Source evidence: one ChatGPT referral, ten unknown. Historical coverage ends October 6.
+- Private Google Sheet retained as historical backup. Portal edits do not synchronize back to it.
 
-- [ ] Verify Google Search Console and Bing Webmaster Tools.
-- [ ] Submit the final sitemap and inspect the homepage plus all three regional hubs.
-- [ ] Claim or update Google Business Profile with the confirmed address, 24/7 hours, service areas and primary category.
-- [ ] Configure Bing Places and Apple Business Connect with identical business facts.
-- [ ] Add the new canonical URL to Instagram and every active directory/profile.
-- [ ] Run mobile and desktop PageSpeed tests on the final domain and record LCP, INP and CLS.
-- [ ] Validate homepage, regional and representative service schema using Google Rich Results Test and Schema.org Validator.
+## Next, in priority order
 
-## Two-website alignment
+1. **Automatic portal capture and catch-up.** Connect future website submissions directly to the private desk, preserving reference, source/UTMs, server timestamps and duplicate protection. Reconcile all inquiries after October 6 before claiming the desk is current. Keep provider credentials server-side. The earlier Sheet/Apps Script draft is not installed and should not be activated as a second competing workflow. Direct emails, calls and texts remain manual until separately integrated.
+2. **Owner review of outcomes and groups.** Record real statuses for the ten unknown outcomes, review two inferred repeat groups, and add follow-up dates. One quote amount is recorded; no confirmed booking/revenue evidence has been entered. Never infer “lost” from an old trip date or “booked” from a quote.
+3. **Physical phone sign-in and installation.** Test the actual iPhone/Safari or Android/Chrome home-screen app, opening a record, safe discard, and save. Existing project-owning Netlify login is required; do not remove the access gate to simplify access. Desktop device emulation cannot certify this flow.
+4. **Search Console and GA4 performance review.** Use the existing fredsales519@gmail.com Search Console URL-prefix property to inspect indexing reasons, query/page clicks and impressions, and the pending schema validation. Compare organic visits and inquiry-source evidence over a meaningful period. The current in-app browser lacks that Google identity; setup should not be repeated. Recheck live GA4 CTA/quote event coverage without sending customers messages or treating CTA clicks as successful calls.
+5. **Recovery and operational health.** Add a private export/restore workflow and test recovery. Immutable cloud versions already protect against overwrites; an independently restorable backup and visible automatic-capture health/retry status are still worthwhile additions. Never export customer data into public assets or Git.
 
-- [ ] Update the old website to state that it is operated by the same Party Bus R Us company.
-- [ ] Use the same official address, hours, email and ownership facts on both sites.
-- [ ] Add a visible cross-link from the old site to the new site and retain the new site's link to the old site.
-- [ ] Decide how the old phone number and new phone number should be explained as two valid booking lines for one company.
-- [ ] Avoid copying the new regional pages verbatim to the old website.
-- [ ] Map which keyword themes each website will lead so they reinforce rather than duplicate one another.
+## Useful after capture is reliable
 
-## Authority and GEO/AEO work
+- Follow-up reminders and an upcoming-trip view; define the intended reminder channel before enabling messages.
+- Outcome/source reporting using confirmed bookings and amounts, with explicit unknown-source and unknown-outcome buckets.
+- Duplicate review tools with a reversible merge/split flow; retain original submission evidence.
+- Fresh PageSpeed/Core Web Vitals measurement on representative live pages. Previous public request hit quota; no current score or field-pass claim.
+- Physical Safari, genuine 200% zoom, keyboard and screen-reader coverage beyond the desktop/browser checks performed so far.
+- Verify business profile/citation consistency (Google Business Profile, Bing Places, Apple Business Connect) and Bing Webmaster setup. Use owner-confirmed address, service-area and hours facts; no guessed 24/7 hours.
+- Continue original photography, bus walk-throughs, public review evidence and useful local content. Prioritize pages/query gaps from actual Search Console evidence before expanding the content backlog.
+- Confirm the relationship and contact details of any older business website before changing cross-links or phone-number explanations.
 
-- [ ] Publish a complete Frederick author profile: full name, photo, role, years of experience and LinkedIn URL.
-- [ ] Link every testimonial to its verified public review source where available.
-- [ ] Add primary sources for BYOB/alcohol, CDL, airport, venue and safety statements.
-- [ ] Create a YouTube account and publish original bus walk-throughs, route tips and event-planning videos.
-- [ ] Build consistent citations on Yelp and relevant DMV wedding, event and transportation directories.
-- [ ] Start a review-request workflow after completed trips and respond to every Google review.
-- [ ] Review and update pricing, venue, route and legal content quarterly.
+## Superseded proposals
 
-## Performance and content backlog
+- Do not connect customer submissions to an unrelated Real Estate Advancement Supabase project.
+- Do not recreate GA4 or Search Console, resubmit a successful sitemap repeatedly, or resume the obsolete Sheet capture installation by default.
+- Do not equate form attempts, call-link taps, discovered sitemap URLs or recorded referrers with accepted leads, completed calls, indexed pages, bookings or revenue.
 
-- [ ] Add intrinsic width/height to the remaining legacy images that still lack them.
-- [ ] Create responsive WebP/AVIF variants for service, city, fleet and gallery imagery.
-- [ ] Add a real gallery caption and context layer for each major image.
-- [ ] Add regional-hub links from the most important individual city and service body content, not only navigation/footer areas.
-- [ ] Publish original comparison guides for bus size, wedding shuttle options and event transportation costs.
-- [ ] Add a downloadable wedding shuttle timeline and group route-planning checklist.
+No new recurring automation, customer messaging, call tracking subscription, or database access expansion has been enabled by this audit.

@@ -58,7 +58,7 @@ function setView(next){view=next;for(const b of document.querySelectorAll('[data
 function openRecord(id){
  selected=id?structuredClone(records.find(r=>r.id===id)):{id:crypto.randomUUID(),recordType:'Inquiry',channel:'Phone',status:'New',reportedSource:'Unknown',submissions:[]};
  if(!selected)return;
- $('#detail-form').reset();dirty=false;$('#save-error').hidden=true;
+ $('#detail-form').reset();dirty=false;$('#save-error').hidden=true;$('#discard-prompt').hidden=true;
  $('#detail-title').textContent=id?selected.customer:'Add an inquiry';$('#detail-kicker').textContent=id?`${selected.channel} · ${dateLabel(selected.firstReceived)}`:'PHONE, EMAIL OR TEXT';
  for(const el of $('#detail-form').elements){if(!el.name)continue;if(el.type==='checkbox')el.checked=Boolean(selected[el.name]);else el.value=selected[el.name]??'';}
  $('#contact-actions').replaceChildren();
@@ -73,21 +73,27 @@ function openRecord(id){
  $('#evidence').innerHTML=(selected.submissions||[]).map(s=>`<article class="evidence-entry"><strong>${dateLabel(s.receivedDate)} · ${esc(s.channel)}</strong><dl>${[['Reference',s.reference],['Submitted UTC',s.submittedAt],['Received display',s.receivedDisplay],['Source page',s.sourcePage],['Raw referrer',s.referrer],['UTM source',s.attribution?.utm_source],['UTM medium',s.attribution?.utm_medium],['UTM campaign',s.attribution?.utm_campaign],['UTM term',s.attribution?.utm_term],['UTM content',s.attribution?.utm_content],['Grouping',s.groupingEvidence]].filter(([,v])=>v).map(([k,v])=>`<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}</dl>${s.evidence?`<p>${esc(s.evidence)}</p>`:''}${safeLink(s.mailboxURL)?`<a href="${esc(safeLink(s.mailboxURL))}" target="_blank" rel="noreferrer">Open original email ↗</a>`:''}</article>`).join('')||'<p class="small">No imported email history. This is a manually recorded inquiry.</p>';
  $('#detail-dialog').showModal();$('#detail-form').elements.customer.focus();
 }
-function closeDetail(){if(saving)return;if(dirty&&!confirm('Discard your unsaved changes?'))return;$('#detail-dialog').close();selected=null;dirty=false;}
+function finishClose(){ $('#discard-prompt').hidden=true;$('#detail-dialog').close();selected=null;dirty=false; }
+function closeDetail(){if(saving)return;if(dirty){$('#discard-prompt').hidden=false;$('#keep-editing').focus();return;}finishClose();}
+$('#keep-editing').addEventListener('click',()=>{$('#discard-prompt').hidden=true;$('#detail-form').elements.customer.focus();});
+$('#discard-changes').addEventListener('click',finishClose);
 $('#detail-form').addEventListener('input',()=>{dirty=true;});
 $('#detail-form').addEventListener('submit',async e=>{
  e.preventDefault();if(saving||!selected)return;saving=true;$('#save').disabled=true;$('#save').textContent='Saving…';$('#save-error').hidden=true;
  const data={};for(const el of e.target.elements){if(!el.name)continue;data[el.name]=el.type==='checkbox'?el.checked:['quotedAmount','bookingValue'].includes(el.name)?(el.value.trim()===''?null:Number(el.value)):el.value;}
+ // Keep the visible form identical to the submitted snapshot until it settles.
+ const controls=[...e.target.elements];for(const el of controls)el.disabled=true;
+ e.target.setAttribute('aria-busy','true');$('#discard-prompt').hidden=true;
  try{const result=await api(selected.revision?'PATCH':'POST',{id:selected.id,revision:selected.revision,data});const i=records.findIndex(r=>r.id===result.id);if(i<0)records.push(result);else records[i]=result;dirty=false;$('#detail-dialog').close();selected=null;$('#connection-status').textContent='Saved in the cloud · just now';render();toast('Inquiry saved.');}
  catch(e){$('#save-error').textContent=e.message;$('#save-error').hidden=false;$('#save-error').scrollIntoView({block:'nearest'});}
- finally{saving=false;$('#save').disabled=false;$('#save').textContent='Save inquiry';}
+ finally{saving=false;for(const el of controls)el.disabled=false;e.target.removeAttribute('aria-busy');$('#save').textContent='Save inquiry';}
 });
 $('#detail-dialog').addEventListener('cancel',e=>{e.preventDefault();closeDetail();});$('.close-dialog').addEventListener('click',closeDetail);
 $('#cards').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openRecord(b.dataset.id);});
 $('#add-inquiry').disabled=true;$('#add-inquiry').addEventListener('click',()=>openRecord());$('#refresh').addEventListener('click',load);
 $('#search').addEventListener('input',renderCards);$('#filter').addEventListener('change',renderCards);
 for(const b of document.querySelectorAll('[data-view]'))b.addEventListener('click',()=>setView(b.dataset.view));
-$('#focus-action').addEventListener('click',()=>{$('#filter').value=$('#focus-action').dataset.filter||'customers';setView('inquiries');renderCards();});
+$('#focus-action').addEventListener('click',()=>{$('#search').value='';$('#filter').value=$('#focus-action').dataset.filter||'customers';setView('inquiries');renderCards();});
 $('#install-help').addEventListener('click',()=>$('#help-dialog').showModal());$('#close-help').addEventListener('click',()=>$('#help-dialog').close());
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;$('#native-install').hidden=false;});
 $('#native-install').addEventListener('click',async()=>{if(installPrompt){await installPrompt.prompt();installPrompt=null;$('#native-install').hidden=true;}});

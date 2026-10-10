@@ -1,8 +1,29 @@
 # Release QA — October 9, 2026 (Eastern)
 
+## Follow-up audit and fixes
+
+Published production deploy: `6ac990cae9e15df13ffff84f` at https://partybusrus-inquiry-desk.netlify.app/ . Post-release read confirms the production store: 11 customers, 18 historical emails, one excluded test (no preview fixture). Production Add inquiry, Keep editing and Discard changes passed without saving a test record; fresh console log contains no errors/warnings. Post-release anonymous access checks remain HTTP 401. Desktop proof: `.verify/inquiry-desk-qa-fix-desktop.jpg`.
+
+- Replaced the native discard confirmation with an in-app Keep editing / Discard changes decision. Hosted preview confirmed both paths complete without trapping the browser.
+- Locked form controls while a save is in progress, so last-second typing cannot be silently dropped. Hosted preview visibly showed disabled controls during the request. Failed/conflicting saves unlock fields and retain notes.
+- Review inquiries now clears an unrelated search before showing the selected follow-up/outcome queue.
+- 18 hub tests now pass, including three new editing regressions. Public-site checks also pass: 23 quote tests, 21 Analytics tests and 3 service-worker tests (65 behavior tests total).
+- Local technical and markup audits each pass all 95 pages, 92 indexable, zero failures/warnings. Live public-site read-only audit passes 92 sitemap pages with HTTP 200 and exact canonicals, no page-level noindex, five deployed key assets matching tested source, and a real 404 for an unknown page.
+- Fresh production session successfully exercised navigation, source view, Add inquiry and clean close. Fresh hosted preview `6ac98fa62760ebe766a68872` exercised saving the existing excluded synthetic record, actual reload/readback, keep-editing and discard. No fresh console errors/warnings appeared in these sessions; the earlier unattributed console error was not reproduced.
+- Narrow 320-pixel local form: open, save, reopen, retained notes, visible save footer and zero horizontal overflow (page/dialog 320px; body scroll width 303px). Synthetic test remained excluded from customer totals.
+- Security recheck: all-deploy platform login remains enabled; anonymous root/API/direct function/JS/manifest all HTTP 401. Public file scan again finds none of the 33 sampled private field values.
+- The in-app Google session does not contain the authorized fredsales519@gmail.com identity. No Google ownership or access changes were made. The correct previously verified property is the URL-prefix https://www.partybusrus.com/, not a newly created Domain property. Fresh Search Console report/validation results remain unverified.
+- Replaced the stale pre-launch task list with current status, prioritized capture/catch-up/outcome/phone/reporting work and explicit superseded integrations. See `partybusrus.com-audit/NEAR-TERM-TASK-LIST.md`.
+
+Evidence for this pass: `.verify/live-website-qa-oct09.json`, `.verify/technical-qa-oct09.json`, `.verify/markup-qa-oct09.json`, current gate/release reports and `tests/editing.test.mjs`. Customer records were not changed and no real message/form/call was sent.
+
+The earlier browser interaction gap below is resolved by these fresh checks. Physical-device installation, full cross-browser/accessibility certification, Google report access and automatic capture remain explicit follow-ups. These checks are not a guarantee of universal error-free operation.
+
+## Original release evidence
+
 Production: https://partybusrus-inquiry-desk.netlify.app/
 
-Final deploy: `6ac98833cc2fe40d51476959`. Dedicated site: `1cee1f6f-515a-4374-a1e7-d6c803f0cef6`. Public marketing website unchanged.
+Original release deploy: `6ac98833cc2fe40d51476959` (superseded by the follow-up deploy above). Dedicated site: `1cee1f6f-515a-4374-a1e7-d6c803f0cef6`. Public marketing website unchanged.
 
 ## Verified
 

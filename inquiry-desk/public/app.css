@@ -16,3 +16,4 @@ dialog{overflow:hidden}.dialog-header,.dialog-footer{flex-shrink:0}.dialog-body{
 }
 @media(max-width:720px){dialog{max-width:100%!important}h1{font-size:38px}}
 @media(max-width:380px){.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}.dialog-footer .small{max-width:105px}}
+.discard-prompt{flex-shrink:0;padding:14px 20px;background:#fff1e9;border-top:1px solid #eac2ad;font-size:13px}.discard-prompt p{margin-bottom:10px}.discard-prompt>div{display:flex;gap:10px;flex-wrap:wrap}
